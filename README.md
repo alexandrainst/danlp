@@ -42,8 +42,8 @@ The documentation aims to provide the following:
 Natural Language Processing an active area of research and it consists of many different tasks. The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
 The repository is under development and this is the list of NLP tasks planned to be covered in the repository.
-- [x] [Embedding of text](models/word_embeddings)
-- [x] [Part of speech](models/part_of_speech_tagging)
+- [x] [Embedding of text](docs/models/embeddings.md)
+- [x] [Part of speech](docs/models/part_of_speach_tagging.md)
 - [ ] Named Entity Recognition
 - [ ] Lemmatization
 - [ ] Sentiment Analysis
@@ -59,7 +59,7 @@ Da DaNLP package aloud you to downloading and preprocessing dataset. In the docs
 ## Examples
 To share ideas and inspirations, the DaNLP repository will provide examples and small tutorials to show how and for what NLP in Danish can be used. It will in time also provide stories and learnings from real cases in Danish companies where NLP is applied.
 
-Read about it in the docs [here](/docs/examples). 
+Read about it in the docs [here](/examples/examples.md). 
 
 ## How do I contribute?
 
