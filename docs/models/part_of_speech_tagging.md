@@ -34,13 +34,13 @@ flair_model.predict(sentence)
 print(sentence.to_tagged_string())
 ```
 
-The Jupyter notebook `POS_tagger_exampel.ipynb` ([here](danlp/exampels/POS_tagger_exampel.ipynb)) provides some more getting started examples for both the Polyglot model and the Flair model.
+The Jupyter notebook `POS_tagger_exampel.ipynb` ([here](<https://github.com/alexandrainst/danlp/blob/master/examples/POS_tagger_exampel.ipynb>)) provides some more getting started examples for both the Polyglot model and the Flair model.
 
 ## Training details for Flair Pos tagger
 
 This project provides a trained part of speech tagging model for Danish using the Flair framework from Zalendo.
 
-It is trained using the data from  [Danish UD treebank  ](<https://github.com/UniversalDependencies/UD_Danish-DDT/tree/master>), and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](danlp/models/embeddings.md) .
+It is trained using the data from  [Danish UD treebank  ](<https://github.com/UniversalDependencies/UD_Danish-DDT/tree/master>), and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>) .
 
 The code for training can be found on Flairs GitHub, and the following parameters are set:              learning_rate=1, mini_batch_size=32, max_epochs=150, hidden_size=256.
 
