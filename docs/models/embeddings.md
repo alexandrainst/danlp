@@ -12,7 +12,7 @@ popular NLP frameworks.
 | [wiki.da.swv](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | Wikipedia | 312.956 | Char N-gram | Skipgram | [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
 | forward_embedding backward_embedding | Flair | Wikipedia + Europarl | | Char | LM | [Alexandra Institute](https://alexandra.dk/uk) |
 
-Embeddings is a way of representing text as vectors of floats, and can be calculated both for for words -, sentences - or documents embeddings. There exist different models for training embeddings, and roughly it can be deviated into static and dynamic embeddings. The static is providing a look up of the vector representation for each word in the vocabulary e.g a word2vec model. Another example is the fastText embeddings which uses n-gram characters as units, and therefor is robust to e.g misspellings.   The dynamic embeddings is contextual in the sense that the embeddings of each word is dependent on the sentence they appear in. In that way homonyms get different vector representations. An example of this is the Flair model where the embeddings is taken from a language model learning to predict the next character in a sentence.  But a lot of ways and models exist to create such embeddings, and it is important to think of how the embeddings is trained and of what data it is trained on. For example if a bias (e.g gender bias) occur in the data it will be present in the embeddings as well.  
+Embeddings is a way of representing text as vectors of floats, and can be calculated both for words -, sentences - or documents embeddings. There exist different models for training embeddings, and roughly it can be deviated into static and dynamic embeddings. The static is providing a look up of the vector representation for each word in the vocabulary e.g a word2vec model. Another example is the fastText embeddings which uses n-gram characters as units, and therefor is robust to e.g misspellings.   The dynamic embeddings is contextual in the sense that the embeddings of each word is dependent on the sentence they appear in. In that way homonyms get different vector representations. An example of this is the Flair model where the embeddings is taken from a language model learning to predict the next character in a sentence.  But a lot of ways and models exist to create such embeddings, and it is important to think of how the embeddings is trained and of what data it is trained on. For example if a bias (e.g gender bias) occur in the data it will be present in the embeddings as well.  
 
 ## Using word embeddings for analysis
 
@@ -51,7 +51,7 @@ This repository provides Flair word embeddings trained on Danish data from Wikip
 
 ##### Example of use
 
- The GitHub](<https://github.com/zalandoresearch/flair>)  page for Flair also provides nice tutorials and an easy framework for using other word embeddings as well and concatenate them. In the snippet below you can see how to load the pretrained Danish embeddings and an example of simple use. 
+ The [GitHub](<https://github.com/zalandoresearch/flair>)  page for Flair also provides nice tutorials and an easy framework for using other word embeddings as well and concatenate them. In the snippet below you can see how to load the pretrained Danish embeddings and an example of simple use. 
 
 ```Python
 from danlp.models.embeddings import load_context_embeddings_with_flair
@@ -73,7 +73,7 @@ print('{} entence out of {} is equal'.format(int(sum(sentence2[4].embedding==sen
 ```
 
 
-The trained Flair word embeddings has been used in training the Danish Part of speech model with Flair, check it out [here](<https://github.com/hvingelby/dfa/blob/master/docs/models/part_of_speech_tagging.md>). 
+The trained Flair word embeddings has been used in training the Danish Part of speech model with Flair, check it out [here](danlp/docs/models/part_of_speech). 
 
 
 
