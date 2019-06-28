@@ -5,7 +5,7 @@ Notice the for the wikipedia, it glone a github repository https://github.com/at
 The script is inspired by https://github.com/stefan-it/flair-lms 
 '''
 # list of posible names
-declare -a datasets=("wiki" "euparl" "opensub" "UD_danish")
+declare -a datasets=("wiki" "euparl" "opensub")
 # creat a folder for corpus and navigate to it 
 mkdir -p .corpus && cd .corpus
 
@@ -22,7 +22,7 @@ do
         curl -L -O https://dumps.wikimedia.org/dawiki/latest/dawiki-latest-pages-articles.xml.bz2
         # extract
         echo -e "\e[96 Extract the files\e[0m"
-        python3 WikiExtractor.py -c -b -q 25M -o extracted dawiki-latest-pages-articles.xml.bz2
+        python3 WikiExtractor.py -o extracted -b 25M -c -q dawiki-latest-pages-articles.xml.bz2
         # combine into one file
         find extracted -name '*bz2' \! -exec bzip2 -k -c -d {} \; > dawiki.xml
         # clean for xml tags and rename to txt
@@ -30,7 +30,7 @@ do
         # delete dump and move
         rm "dawiki-latest-pages-articles.xml.bz2"
         cd ..
-        mv wikiextractor/dawiki.txt dawiki.tx
+        mv wikiextractor/dawiki.txt dawiki.txt
         echo -e "The corpus is fetched. The Danish wikipedia is fetch from \e[96mhttps://dumps.wikimedia.org/\e[0m"
             ;;
             
