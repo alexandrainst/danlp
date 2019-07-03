@@ -8,4 +8,4 @@ cache: pip
 install:
   - pip install -r requirements.txt --quiet
 script:
-  - python -m unittest discovercov
+  - python -m unittest discover
