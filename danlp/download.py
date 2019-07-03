@@ -123,7 +123,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
             tmp_dl_file = model_name + ".tmp"
             tmp_file_path = os.path.join(cache_dir, tmp_dl_file)
 
-            _download_file(url, tmp_file_path, expected_size, expected_hash)
+            _download_file(url, tmp_file_path, expected_size, expected_hash, verbose=verbose)
 
             process_func(tmp_file_path, verbose=verbose, clean_up_raw_data=clean_up_raw_data)
 
@@ -154,9 +154,13 @@ def _download_file(url: str, destination: str, expected_size: int, expected_hash
     file_name = os.path.split(destination)[1]
 
     if not os.path.isfile(destination):
-        with TqdmUpTo(unit='B', unit_scale=True, miniters=1) as t:
-            t.set_description("Downloading file {}".format(destination))
-            urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
+        if verbose:
+            with TqdmUpTo(unit='B', unit_scale=True, miniters=1) as t:
+                t.set_description("Downloading file {}".format(destination))
+                urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
+        else:
+            print("Downloading file {}".format(destination))
+            urllib.request.urlretrieve(url, destination)
 
     else:
         if verbose:
