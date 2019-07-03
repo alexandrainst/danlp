@@ -1,10 +1,12 @@
 DaNLP
 ==============
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. It is a collection  of available datasets and models for a a variety of NLP tasks. It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and NLTK as well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 The aim for this project is both to point to the open source tool available in Danish, and to add new models and tools to make NLP in Danish more applicable for everybody and especially for the industry.
+
+[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Build Status](https://travis-ci.org/alexandrainst/danlp.svg?branch=master)](https://travis-ci.org/alexandrainst/danlp)
 
 #### News
 
@@ -39,7 +41,7 @@ The documentation aims to provide the following:
 
 
 ## NLP Models
-Natural Language Processing an active area of research and it consists of many different tasks. The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
+Natural Language Processing is an active area of research and it consists of many different tasks. The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
 The repository is under development and this is the list of NLP tasks planned to be covered in the repository.
 - [x] [Embedding of text](docs/models/embeddings.md)
@@ -54,12 +56,11 @@ If you are interessted in supporting Danish for any specific NLP task you are we
 ## Datasets
 The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available Danish datasets that can be used for commercial purposes.
 
-Da DaNLP package aloud you to downloading and preprocessing dataset. In the docs you can read about the datasets  [here](/docs/datasets.md) .
+The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
 
 ## Examples
-To share ideas and inspirations, the DaNLP repository will provide examples and small tutorials to show how and for what NLP in Danish can be used. It will in time also provide stories and learnings from real cases in Danish companies where NLP is applied.
-
-Read about it in the docs [here](/examples/examples.md). 
+You will find examples and small tutorials [here](/examples/examples.md) that shows how to use NLP in Danish.
+We will also provide some real cases of how NLP is applied in Danish companies.
 
 ## How do I contribute?
 

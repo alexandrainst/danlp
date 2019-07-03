@@ -134,7 +134,7 @@ def word_embeddings_available(pretrained_embedding: str, can_use_subword=False):
             raise ValueError("Pretrained embeddings {} do not exist".format(pretrained_embedding))
 
 
-def _process_embeddings_for_spacy(embedding_file: str, cache_dir: str = '.data', verbose: bool = False):
+def _process_embeddings_for_spacy(embedding_file: str, cache_dir: str = '.data', verbose: bool = False, clean_up_raw_data=True):
     """
     To use pretrained embeddings with spaCy the embeddings need to be stored in
     a specific format. This function converts embeddings saved in the binary
