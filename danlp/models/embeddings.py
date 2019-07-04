@@ -47,7 +47,12 @@ def load_wv_with_spacy(pretrained_embedding: str, cache_dir: str = DEFAULT_CACHE
     import spacy
     word_embeddings_available(pretrained_embedding, can_use_subword=False)  # spaCy does not support subwords
 
-    download_model(pretrained_embedding, cache_dir, _process_embeddings_for_spacy, verbose)
+    bin_file_path = os.path.join(cache_dir, pretrained_embedding+".bin")
+
+    if os.path.isfile(bin_file_path):  # Then we do not need to download the model
+        _process_embeddings_for_spacy(bin_file_path[:-4] + ".tmp")
+    else:
+        download_model(pretrained_embedding, cache_dir, _process_embeddings_for_spacy, verbose=True, file_extension='.spacy')
 
     spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
 
@@ -134,7 +139,7 @@ def word_embeddings_available(pretrained_embedding: str, can_use_subword=False):
             raise ValueError("Pretrained embeddings {} do not exist".format(pretrained_embedding))
 
 
-def _process_embeddings_for_spacy(embedding_file: str, cache_dir: str = '.data', verbose: bool = False, clean_up_raw_data=True):
+def _process_embeddings_for_spacy(tmp_file_path: str, cache_dir: str = '.data', verbose: bool = False, clean_up_raw_data=True):
     """
     To use pretrained embeddings with spaCy the embeddings need to be stored in
     a specific format. This function converts embeddings saved in the binary
@@ -145,24 +150,29 @@ def _process_embeddings_for_spacy(embedding_file: str, cache_dir: str = '.data',
     More information on converting pretrained word embeddings to spaCy models here:
     https://spacy.io/usage/vectors-similarity#custom
 
-    :param str embedding_file: the file name of the embedding binary file
+    :param str tmp_file_path: the file name of the embedding binary file
     :param str cache_dir: the directory for storing cached data
     :param bool verbose:
     """
     from pathlib import Path
     from spacy.cli import init_model
 
-    assert embedding_file[-4:] == '.bin'
-    pretrained_embedding = embedding_file[:-4]
+    bin_file_path = tmp_file_path[:-4] + ".bin"
 
-    vec_file = os.path.join(cache_dir, pretrained_embedding + ".vec")
-    embedding_file_path = os.path.join(cache_dir, embedding_file)
+    if not os.path.isfile(bin_file_path):
+        _process_downloaded_embeddings(tmp_file_path)  # Preprocess to transform to word2vec .bin format
 
-    word_vecs = KeyedVectors.load_word2vec_format(embedding_file_path, binary=True, encoding='utf8')
-    assert_wv_dimensions(word_vecs, pretrained_embedding)
+    assert tmp_file_path[-4:] == '.tmp', "The extension should be .tmp but it was {}".format(tmp_file_path[-4:])
+    assert os.path.isfile(bin_file_path)
+    pretrained_embedding = tmp_file_path[:-4]
+
+    vec_file = pretrained_embedding + ".vec"
+
+    word_vecs = KeyedVectors.load_word2vec_format(bin_file_path, binary=True, encoding='utf8')
+    assert_wv_dimensions(word_vecs, os.path.split(pretrained_embedding)[1])
     word_vecs.save_word2vec_format(vec_file, binary=False)
 
-    spacy_dir = os.path.join(cache_dir, pretrained_embedding+'.spacy')
+    spacy_dir = pretrained_embedding+'.spacy'
     os.makedirs(spacy_dir, exist_ok=True)
 
     if os.path.isabs(spacy_dir):

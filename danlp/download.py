@@ -94,7 +94,7 @@ class TqdmUpTo(tqdm):
 
 
 def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_func: Callable = None,
-                    verbose: bool = False, clean_up_raw_data=True, force_download: bool = False):
+                    verbose: bool = False, clean_up_raw_data=True, force_download: bool = False, file_extension = None):
     """
     :param force_download:
     :param model_name:
@@ -108,7 +108,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
 
     model_info = MODELS[model_name]
 
-    model_file = model_name + model_info['file_extension']
+    model_file = model_name + model_info['file_extension'] if not file_extension else model_name + file_extension
     model_file_path = os.path.join(cache_dir, model_file)
 
     if not os.path.isfile(model_file_path) or force_download:
