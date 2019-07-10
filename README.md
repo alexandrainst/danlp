@@ -17,7 +17,7 @@ The aim for this project is both to point to the open source tool available in D
 This project is currently working on sentiment analysis using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source), looking into weak supervision, a tutorial for using transfer learning with [BERT](https://github.com/google-research/bert),  and soon it will begin to look at how to support SpaCy for Danish. 
 
 ## Get started
-##### Glone and pip instal DaNLP
+##### Instal with pip
 
 The project is build for Python 3.6+. To get started you need to clone the project and install it with pip:
 
@@ -31,15 +31,15 @@ The DaNLP package wraps existing NLP models for Danish, and provides scripts for
 
 Note that the installation of DaNLP does not install other packages used in different task such as Gensim, Spacy or Flair. This is to allow the installation to be as clean as possible and give the user the freedom to chose if for example the word embedding should be loaded with Spacy or Gensim. 
 
-##### Use Docker 
+##### Install with Docker 
 
-This installation option uses Docker and builds an image with all the used packages in this repository. Chose this option if you wants to get started fast without the need to manually install extra packages. 
+This installation option uses Docker and builds an image with all the used packages in this repository. Choose this option if you want to get started fast without the need to manually install extra packages. 
 
-- Start by getting and install Docker CE for your system (Linux, mac or windows):
+- Start by getting and install Docker CE for your system (Linux, OSX or Windows):
   https://docs.docker.com/install/
   Maybe run a "hello world" to ensure it is working properly.
 
-- Clone this repository and navigate to the folder:
+- Clone the DaNLP repository and navigate to the folder:
 
     ```bash
     git clone git@github.com:alexandrainst/danlp.git
@@ -55,19 +55,19 @@ This installation option uses Docker and builds an image with all the used packa
 
 - Create a container for the first time:
 
-  - On Linus and OSX, run: 	
+  - On Linux and OSX, run: 	
 
     ```bash
     docker run -it  --name container_danlp -p 8888:8888 -v $PWD:/root image_danlp
     ```
 
-  - On Windows, change user name and path to project folder and run:
+  - On Windows, change username and path to project folder and run:
 
     ```bash
     docker run -it --name container_danlp -p 8888:8888 --user root -v /c/Users/$YOUR_USERNAME/path/to/project/folder:/root/ image_danlp
     ```
 
-  - On WSL, change user name and path to project folder and run:
+  - On WSL, change username and path to project folder and run:
 
     ```bash
     docker run -it --name container_danlp -p 8888:8888 --user root -v "C:\Users\YOUR_USERNAME\path\to\project\folder":/root/  image_danlp
@@ -87,7 +87,7 @@ This installation option uses Docker and builds an image with all the used packa
      jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
      ```
 
-  - Open the notebook in a browser using `localhost:8888/`  and pass the token.
+  - Open the notebook in a browser using `http://localhost:8888/`  and pass the token.
 
 - You can stop and resume the container by  `docker stop container_danlp` and `docker start -i container_danlp`
 
