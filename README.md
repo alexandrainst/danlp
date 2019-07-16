@@ -1,30 +1,31 @@
-# <img src="docs/imgs/danlp_logo.png"  width="450"  /> 
+# <img align="center" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="450"  /> 
 
-[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![Build Status](https://travis-ci.org/alexandrainst/danlp.svg?branch=master)](https://travis-ci.org/alexandrainst/danlp)
+[![PyPI](https://img.shields.io/pypi/v/danlp.svg)](https://pypi.org/project/danlp/)
+[![Build Status](https://travis-ci.org/alexandrainst/danlp.svg?branch=master)](https://travis-ci.org/alexandrainst/danlp)
+[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. It is a collection  of available datasets and models for a a variety of NLP tasks. It features code examples on how to use the datasets andmodels in popular NLP frameworks such as spaCy and NLTK as well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 The aim for this project is both to point to the open source tool available in Danish, and to add new models and tools to make NLP in Danish more applicable for everybody and especially for the industry.
 
 
+**News**
+- 🎉 DaNLP version 0.0.1 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
 
-#### News
+**Next up**
 
-- DaNLP can now be installed as a pip package. 
-
-#### Next up
-
-This project is currently working on sentiment analysis using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source), looking into weak supervision, a tutorial for using transfer learning with [BERT](https://github.com/google-research/bert),  and soon it will begin to look at how to support SpaCy for Danish. 
+- 🚧 Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+- 🚧 A tutorial for using transfer learning with [BERT](https://github.com/google-research/bert)
+- 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
 ## Get started
 ##### Instal with pip
 
-The project is build for Python 3.6+. To get started you need to clone the project and install it with pip:
+To get started using DaNLP simply install the project with pip:
 
 ```bash
-git clone git@github.com:alexandrainst/danlp.git
-cd danlp
-pip install .
+pip install danlp
 ```
 
 The DaNLP package wraps existing NLP models for Danish, and provides scripts for downloading Danish datasets.
@@ -138,7 +139,7 @@ If you want to contribute to the DaNLP repository and make it better, your help 
 - Create GitHub issues with questions and bug reports
 
 ## Who is behind?
-<img align="right" width="150" src="docs/imgs/alexandra_logo.png">
+<img align="right" width="150" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/alexandra_logo.png">
 
 The DaNLP repository is maintained by the [Alexandra Institute](https://alexandra.dk/uk) which is a Danish non-profit company 
 with a mission to create value, growth and welfare in society. The Alexandra Institute is a member of [GTS](https://gts-net.dk/), 
