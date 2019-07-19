@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/danlp.svg)](https://pypi.org/project/danlp/)
 [![Build Status](https://travis-ci.org/alexandrainst/danlp.svg?branch=master)](https://travis-ci.org/alexandrainst/danlp)
+[![Coverage Status](https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master)](https://coveralls.io/github/alexandrainst/danlp?branch=master)
 [![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 
