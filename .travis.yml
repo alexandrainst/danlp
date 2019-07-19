@@ -6,7 +6,6 @@ before_install:
 - sudo rm -f /etc/boto.cfg
 cache: pip
 install:
-  - travis_wait 30 mvn install
   - pip install coverage --quiet
   - pip install coveralls --quiet
   - pip install -r requirements.txt --quiet
