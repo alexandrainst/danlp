@@ -9,12 +9,11 @@ from danlp.models.pos_taggers import load_pos_tagger_with_flair
 class TestPosTaggers(unittest.TestCase):
     def test_flair_tagger(self):
         # Download model beforehand
-        download_model('flair.pos', DEFAULT_CACHE_DIR, verbose=False)
+        download_model('flair.pos', DEFAULT_CACHE_DIR, verbose=True)
         print("Downloaded the flair model")
 
         # Load the POS tagger using the DaNLP wrapper
         flair_model = load_pos_tagger_with_flair()
-        print("Load Flair model")
 
         # Using the flair POS tagger
         sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen')

@@ -129,7 +129,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
 
         else:
             # The model file will be downloaded directly to the model_file_path
-            _download_file(url, model_file_path, expected_size, expected_hash)
+            _download_file(url, model_file_path, expected_size, expected_hash, verbose=verbose)
 
     else:
         if verbose:
