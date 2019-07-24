@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='danlp',
-    version='0.0.1',
+    version='0.0.2',
     author="Alexandra Institute",
     author_email="dansknlp@alexandra.dk",
     description="DaNLP: NLP in Danish",
