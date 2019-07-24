@@ -47,14 +47,17 @@ def load_wv_with_spacy(pretrained_embedding: str, cache_dir: str = DEFAULT_CACHE
     import spacy
     word_embeddings_available(pretrained_embedding, can_use_subword=False)  # spaCy does not support subwords
 
+    spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
+
+    if os.path.isdir(spacy_model_dir):  # Return spaCy model if the spaCy model dir exists
+        return spacy.load(spacy_model_dir)
+
     bin_file_path = os.path.join(cache_dir, pretrained_embedding+".bin")
 
     if os.path.isfile(bin_file_path):  # Then we do not need to download the model
         _process_embeddings_for_spacy(bin_file_path[:-4] + ".tmp")
     else:
         download_model(pretrained_embedding, cache_dir, _process_embeddings_for_spacy, verbose=True, file_extension='.spacy')
-
-    spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
 
     return spacy.load(spacy_model_dir)
 
