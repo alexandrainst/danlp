@@ -1,17 +1,23 @@
-from distutils.core import setup
+import os
 from setuptools import setup, find_packages
+
+root = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(root, "danlp", "about.py"), encoding="utf8") as f:
+    about = {}
+    exec(f.read(), about)
 
 setup(
     name='danlp',
-    version='0.0.2',
-    author="Alexandra Institute",
-    author_email="dansknlp@alexandra.dk",
-    description="DaNLP: NLP in Danish",
+    description=about['__summary__'],
+    author=about["__author__"],
+    author_email=about["__email__"],
+    version=about["__version__"],
+    url=about["__url__"],
+    license=about["__license__"],
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=['tqdm'],
-    license='BSD 3-Clause License',
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3 :: Only",
