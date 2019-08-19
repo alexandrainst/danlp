@@ -12,7 +12,7 @@ The aim for this project is both to point to the open source tool available in D
 
 
 **News**
-- 🎉 DaNLP version 0.0.1 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
+- 🎉 DaNLP version 0.0.2 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
 
 **Next up**
 
@@ -21,97 +21,40 @@ The aim for this project is both to point to the open source tool available in D
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
 ## Get started
-##### Instal with pip
+To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
+will not install all NLP libraries. If you to try out the models in DaNLP you can use the Docker images
+that has all the NLP libraries installed.
 
+### Install with pip
 To get started using DaNLP simply install the project with pip:
 
 ```bash
 pip install danlp
 ```
 
-The DaNLP package wraps existing NLP models for Danish, and provides scripts for downloading Danish datasets.
+Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
+This is allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings
+with either spaCy or Gensim.
 
-Note that the installation of DaNLP does not install other packages used in different task such as Gensim, Spacy or Flair. This is to allow the installation to be as clean as possible and give the user the freedom to chose if for example the word embedding should be loaded with Spacy or Gensim. 
-
-##### Install with Docker 
-
-This installation option uses Docker and builds an image with all the used packages in this repository. Choose this option if you want to get started fast without the need to manually install extra packages. 
-
-- Start by getting and install Docker CE for your system (Linux, OSX or Windows):
-  https://docs.docker.com/install/
-  Maybe run a "hello world" to ensure it is working properly.
-
-- Clone the DaNLP repository and navigate to the folder:
-
-    ```bash
-    git clone git@github.com:alexandrainst/danlp.git
-    cd danlp
-    ```
-
-- Create the Docker image (which you only need to do once), run: 
-
-  ```bash
-  docker build -t image_danlp . 
-  ```
-
-
-- Create a container for the first time:
-
-  - On Linux and OSX, run: 	
-
-    ```bash
-    docker run -it  --name container_danlp -p 8888:8888 -v $PWD:/root image_danlp
-    ```
-
-  - On Windows, change username and path to project folder and run:
-
-    ```bash
-    docker run -it --name container_danlp -p 8888:8888 --user root -v /c/Users/$YOUR_USERNAME/path/to/project/folder:/root/ image_danlp
-    ```
-
-  - On WSL, change username and path to project folder and run:
-
-    ```bash
-    docker run -it --name container_danlp -p 8888:8888 --user root -v "C:\Users\YOUR_USERNAME\path\to\project\folder":/root/  image_danlp
-    ```
-
-- Inside the container, install the DaNLP package:
-
-  ```bash
-  install danlp . 
-  ```
-
-- Now you can are ready to run python3 scripts and commands or use Jupyter notebook to run the code examples.
-
-   - To use Jupyter Notebook, run:
-
-     ```docker
-     jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
-     ```
-
-  - Open the notebook in a browser using `http://localhost:8888/`  and pass the token.
-
-- You can stop and resume the container by  `docker stop container_danlp` and `docker start -i container_danlp`
-
-
-
-## Docs 
-
-The documentation aims to provide the following:
-
-- Overview for each task regarding what is available in Danish in open source preferable with benchmark results
-
-- Introduction and examples of how to run the code and use NLP for the Danish Languages and in time real case stories 
-
-- Explanation and training details for models trained and datasets created in this project
-
+### Install with Docker 
+To quickly get started with DaNLP to try out the models you can use our Docker image.
+To start a ipython session simply run:
+```python
+docker run -it --rm alexandrainst/danlp ipython
+```
+If you want to run a `<script.py>` in you current working directory you can run:
+```bash
+docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp python <script.py>
+```
+You can also quickly get started with one of our [notebooks](/examples) using our docker image.
   ​                   
 
 
 ## NLP Models
-Natural Language Processing is an active area of research and it consists of many different tasks. The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
+Natural Language Processing is an active area of research and it consists of many different tasks. 
+The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
-The repository is under development and this is the list of NLP tasks planned to be covered in the repository.
+The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
 - [x] [Embedding of text](docs/models/embeddings.md)
 - [x] [Part of speech](docs/models/part_of_speach_tagging.md)
 - [ ] Named Entity Recognition
@@ -119,15 +62,16 @@ The repository is under development and this is the list of NLP tasks planned to
 - [ ] Sentiment Analysis
 - [ ] Coreference resolution
 
-If you are interessted in supporting Danish for any specific NLP task you are welcome to get in contact with us.
+If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
 ## Datasets
-The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available Danish datasets that can be used for commercial purposes.
+The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available 
+Danish datasets that can be used for commercial purposes.
 
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
 
 ## Examples
-You will find examples and small tutorials [here](/examples/examples.md) that shows how to use NLP in Danish.
+You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish.
 We will also provide some real cases of how NLP is applied in Danish companies.
 
 ## How do I contribute?
