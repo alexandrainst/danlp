@@ -34,7 +34,7 @@ flair_model.predict(sentence)
 print(sentence.to_tagged_string())
 ```
 
-The Jupyter notebook `POS_tagger_exampel.ipynb` ([here](<https://github.com/alexandrainst/danlp/blob/master/examples/POS_tagger_exampel.ipynb>)) provides some more getting started examples for both the Polyglot model and the Flair model.
+The Jupyter notebook `POS_tagger_example.ipynb` ([here](<https://github.com/alexandrainst/danlp/blob/master/examples/POS_tagger_example.ipynb>)) provides some more getting started examples for both the Polyglot model and the Flair model.
 
 ## Training details for Flair Pos tagger
 

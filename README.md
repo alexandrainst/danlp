@@ -12,7 +12,8 @@ The aim for this project is both to point to the open source tool available in D
 
 
 **News**
-- 🎉 DaNLP version 0.0.2 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
+- 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
+- 🔖 DaNLP version 0.0.2 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
 
 **Next up**
 
@@ -39,7 +40,7 @@ with either spaCy or Gensim.
 ### Install with Docker 
 To quickly get started with DaNLP to try out the models you can use our Docker image.
 To start a ipython session simply run:
-```python
+```bash
 docker run -it --rm alexandrainst/danlp ipython
 ```
 If you want to run a `<script.py>` in you current working directory you can run:

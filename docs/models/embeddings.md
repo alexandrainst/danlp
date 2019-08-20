@@ -20,7 +20,7 @@ Word embeddings are essentially a representation of a word in a n-dimensional sp
 
 This snippet shows how to automatically download and load pretrained word embeddings e.g. trained on the CoNLL17 dataset.
 ```python
-from load_embeddings import load_wv_with_gensim, load_wv_with_spacy
+from danlp.models.embeddings  import load_wv_with_gensim, load_wv_with_spacy
 
 # Load with gensim
 word_embeddings = load_wv_with_gensim('connl.da.wv')
