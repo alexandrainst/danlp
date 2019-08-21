@@ -47,7 +47,7 @@ If you want to run a `<script.py>` in you current working directory you can run:
 ```bash
 docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp python <script.py>
 ```
-You can also quickly get started with one of our [notebooks](/examples) using our docker image.
+You can also quickly get started with one of our [notebooks](/examples).
   ​                   
 
 
