@@ -18,7 +18,7 @@ Without any Danish trainings data at the moment, there is a wordlist approach op
 
 ##### Cross-lingual transfer example
 
-An example of utilizing an dataset in another language to be able to make predicts on Danish without seeing Danish training data is shown in this [notebok](). It is using multilingual embeddings from [LASER](<https://github.com/facebookresearch/LASER>) (Language-Agnostic SEntence Representations). Note that this is not evaluate on any Danish data, and the performance is therefore unknown. But a few examples in the notebook is shown.
+An example of utilizing an dataset in another language to be able to make predicts on Danish without seeing Danish training data is shown in this [notebok](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>). It is using multilingual embeddings from [LASER](<https://github.com/facebookresearch/LASER>) (Language-Agnostic SEntence Representations). Note that this is not evaluate on any Danish data, and the performance is therefore unknown. But a few examples in the notebook is shown.
 
 
 

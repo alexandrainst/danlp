@@ -10,14 +10,16 @@ DaNLP is a repository for Natural Language Processing resources for the Danish L
 
 The aim for this project is both to point to the open source tool available in Danish, and to add new models and tools to make NLP in Danish more applicable for everybody and especially for the industry.
 
-
 **News**
+
+- :performing_arts: [Notebook](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>) tutorial for ​Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+
 - 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
 - 🔖 DaNLP version 0.0.2 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
 
 **Next up**
 
-- 🚧 Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+- 🚧 Name Entity Recognitions dataset based on [UD Danish Treebank](<https://github.com/UniversalDependencies/UD_Danish-DDT>)
 - 🚧 A tutorial for using transfer learning with [BERT](https://github.com/google-research/bert)
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
