@@ -2,14 +2,14 @@ import unittest
 
 from flair.data import Sentence
 
-from danlp.download import download_model, DEFAULT_CACHE_DIR
+from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 from danlp.models.pos_taggers import load_pos_tagger_with_flair
 
 
 class TestPosTaggers(unittest.TestCase):
     def test_flair_tagger(self):
         # Download model beforehand
-        download_model('flair.pos', DEFAULT_CACHE_DIR, verbose=True)
+        download_model('flair.pos', DEFAULT_CACHE_DIR, process_func=_unzip_process_func, verbose=True)
         print("Downloaded the flair model")
 
         # Load the POS tagger using the DaNLP wrapper

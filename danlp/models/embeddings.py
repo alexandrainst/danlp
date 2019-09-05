@@ -2,7 +2,7 @@ import os
 
 from gensim.models.keyedvectors import KeyedVectors
 
-from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR
+from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 
 AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'connl.da.wv', 'news.da.wv']
 AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv']
@@ -120,11 +120,11 @@ def load_context_embeddings_with_flair(direction = 'bi', word_embeddings = True,
         embeddings.append(fasttext_embedding)
 
     if direction == 'bi' or direction == 'fwd':
-        fwd_weight_path = download_model('flair.fwd', cache_dir, verbose=verbose)
+        fwd_weight_path = download_model('flair.fwd', cache_dir, verbose=verbose, process_func=_unzip_process_func)
         embeddings.append(FlairEmbeddings(fwd_weight_path))
 
     if direction == 'bi' or direction == 'bwd':
-        bwd_weight_path = download_model('flair.bwd', cache_dir, verbose=verbose)
+        bwd_weight_path = download_model('flair.bwd', cache_dir, verbose=verbose, process_func=_unzip_process_func)
         embeddings.append(FlairEmbeddings(bwd_weight_path))
 
     if len(embeddings) == 1:
@@ -267,21 +267,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, clean_up_raw_data: bool =
         os.remove(new_vec_file)
 
     elif pretrained_embedding == 'wiki.da.swv':
-        from zipfile import ZipFile
-        import random
-        import string
-        import shutil
-
-        if verbose:
-            print("Unzipping raw {} embeddings".format(pretrained_embedding))
-
-        with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
-
-            tmp_path = os.path.join(cache_dir, ''.join(random.choice(string.ascii_lowercase) for i in range(6)))  # To not have name conflicts
-            outpath = zip_file.extract("wiki.da.bin", path=tmp_path)
-
-            os.rename(outpath, bin_file_path)
-            shutil.rmtree(tmp_path)
+        _unzip_process_func(tmp_file_path, clean_up_raw_data, verbose, file_in_zip='wiki.da.bin')
 
     elif pretrained_embedding == 'cc.da.swv':
         import gzip

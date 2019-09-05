@@ -1,4 +1,4 @@
-from danlp.download import download_model, DEFAULT_CACHE_DIR
+from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 
 
 def load_pos_tagger_with_flair(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
@@ -10,7 +10,7 @@ def load_pos_tagger_with_flair(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
     from flair.models import SequenceTagger
 
-    model_weight_path = download_model('flair.pos', cache_dir, verbose=verbose)
+    model_weight_path = download_model('flair.pos', cache_dir, process_func=_unzip_process_func, verbose=verbose)
 
     # using the flair model
     flair_model = SequenceTagger.load(model_weight_path)

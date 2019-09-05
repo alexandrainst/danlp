@@ -1,10 +1,10 @@
-from tqdm import tqdm
-from pathlib import Path
 import hashlib
 import os
 import urllib
-
+from pathlib import Path
 from typing import Callable
+
+from tqdm import tqdm
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
@@ -59,23 +59,23 @@ MODELS = {
 
     # CONTEXTUAL EMBEDDINGS
     'flair.fwd': {
-        'url': 'https://nextcloud.alexandra.dk/index.php/s/oYreE92iLW4Bj4D/download',
-        'md5_checksum': 'a2141e29c401543e5aa6e45c3ce69d62',
-        'size': 19974935,
+        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.fwd.zip',
+        'md5_checksum': '8697e286048a4aa30acc62995397a0c8',
+        'size': 18548086,
         'file_extension': '.pt'
     },
     'flair.bwd': {
-        'url': 'https://nextcloud.alexandra.dk/index.php/s/DYeJxpk3Efwnknj/download',
-        'md5_checksum': '888fdbc1283dbb9419e96d93da7ea57b',
-        'size': 19974935,
+        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.bwd.zip',
+        'md5_checksum': '11549f1dc28f92a7c37bf511b023b1f1',
+        'size': 18551173,
         'file_extension': '.pt'
     },
 
     # POS MODELS
     'flair.pos': {
-        'url': 'https://nextcloud.alexandra.dk/index.php/s/gos5i3DgkZGNYjE/download',
-        'md5_checksum': '913cb7956d49d7f0b3b3827608086ac4',
-        'size': 476407374, 
+        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.pos.zip',
+        'md5_checksum': 'b9892d4c1c654503dff7e0094834d6ed',
+        'size': 426404955,
         'file_extension': '.pt'
     }
 }
@@ -168,3 +168,40 @@ def _download_file(url: str, destination: str, expected_size: int, expected_hash
 
     assert _check_file(destination) == (expected_size, expected_hash), \
         "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
+
+
+def _unzip_process_func(tmp_file_path: str, clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip=None):
+    """
+    Simple process function for processing models
+    that only needs to be unzipped after download.
+
+    :param tmp_file_path: The path to the downloaded raw file
+    :param clean_up_raw_data:
+    :param verbose:
+    :param file_in_zip: Name of the model file in the zip, if the zip contains more than one file
+    """
+    from zipfile import ZipFile
+    import random, shutil, string
+
+    cache_dir = os.path.split(tmp_file_path)[0]
+    tmp_filename = os.path.split(tmp_file_path)[1]
+    model_name = tmp_filename[:-4]
+
+    full_path = os.path.join(cache_dir, model_name) + MODELS[model_name]['file_extension']
+
+    if verbose:
+        print("Unzipping raw {} embeddings".format(model_name))
+
+    with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
+        tmp_path = os.path.join(cache_dir, ''.join(random.choice(string.ascii_lowercase) for i in range(6)))  # To not have name conflicts
+
+        if not file_in_zip:
+            file_list = zip_file.namelist()
+            assert len(file_list) == 1, "Error. The zip should only contain a single file."
+
+            file_in_zip = file_list[0]
+
+        outpath = zip_file.extract(file_in_zip, path=tmp_path)
+
+        os.rename(outpath, full_path)
+        shutil.rmtree(tmp_path)
