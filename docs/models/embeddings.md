@@ -73,7 +73,7 @@ print('{} entence out of {} is equal'.format(int(sum(sentence2[4].embedding==sen
 ```
 
 
-The trained Flair word embeddings has been used in training the Danish Part of speech model with Flair, check it out [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/part_of_speech_tagging.md>). 
+The trained Flair word embeddings has been used in training the Danish Part of speech model with Flair, check it out [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>). 
 
 
 

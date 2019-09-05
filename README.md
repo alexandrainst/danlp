@@ -57,10 +57,10 @@ The DaNLP repository provides an overview of Danish models for some of the most 
 
 The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
 - [x] [Embedding of text](docs/models/embeddings.md)
-- [x] [Part of speech](docs/models/part_of_speach_tagging.md)
-- [ ] Named Entity Recognition
-- [ ] Lemmatization
+- [x] [Part of speech](docs/models/pos.md)
+- [x] [Named Entity Recognition](docs/models/ner.md)
 - [ ] Sentiment Analysis
+- [ ] Lemmatization
 - [ ] Coreference resolution
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
