@@ -13,3 +13,6 @@ script:
   - coverage run -m unittest discover
 after_success:
   coveralls
+notifications:
+  webhooks:
+    https://outlook.office.com/webhook/f20b87b7-f448-44d4-bea7-16940ecab89c@4bda23cd-4a87-419b-a47d-7673130b2884/TravisCI/cf372cc23b314687b9bc0af55d04fdaf/0203c45a-9118-4fe4-b3d1-e5c20fac8b9c
