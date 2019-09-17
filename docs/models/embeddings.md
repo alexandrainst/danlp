@@ -1,7 +1,7 @@
 Pretrained Danish embeddings
 ============================
 This repository keeps a list of pretrained word embeddings publicly available in Danish. The `download_embeddings.py`
-and `load_embeddings.py` provides functions for downloading the wordembeddings as well as prepare them for use in 
+and `load_embeddings.py` provides functions for downloading the embeddings as well as prepare them for use in 
 popular NLP frameworks.
 
 | Name | Model | Data | Vocab | Unit | Task  | Pretrainer |
@@ -12,11 +12,29 @@ popular NLP frameworks.
 | [wiki.da.swv](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | Wikipedia | 312.956 | Char N-gram | Skipgram | [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
 | forward_embedding backward_embedding | Flair | Wikipedia + Europarl | | Char | LM | [Alexandra Institute](https://alexandra.dk/uk) |
 
-Embeddings is a way of representing text as vectors of floats, and can be calculated both for words -, sentences - or documents embeddings. There exist different models for training embeddings, and roughly it can be deviated into static and dynamic embeddings. The static is providing a look up of the vector representation for each word in the vocabulary e.g a word2vec model. Another example is the fastText embeddings which uses n-gram characters as units, and therefor is robust to e.g misspellings.   The dynamic embeddings is contextual in the sense that the embeddings of each word is dependent on the sentence they appear in. In that way homonyms get different vector representations. An example of this is the Flair model where the embeddings is taken from a language model learning to predict the next character in a sentence.  But a lot of ways and models exist to create such embeddings, and it is important to think of how the embeddings is trained and of what data it is trained on. For example if a bias (e.g gender bias) occur in the data it will be present in the embeddings as well.  
+Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
+words, sentences or documents.
+The methods for training embeddings, can roughly be categorized into static embeddings and dynamic embeddings.
+
+#### Static embeddings
+Static word embeddings contains a large vocabulary of words and each word has a vector representation associated.
+To get a representation of a word is simply a look-up in the vocabulary to get the associated vector. An example of this
+type of embeddings is word2vec [(Mikolov et al. 2013)](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf).
+Relying on a vocabulary of words can result in out-of-vocabulary words. To cope with this fastText [(Bojanowski et al. 2017)](https://aclweb.org/anthology/Q17-1010)
+uses subword units that constructs a word embedding from the character n-gram embeddings occurring in the word.
+
+#### Dynamic embeddings
+Dynamic embeddings are contextual in the sense that the representations are dependent on the sentence they appear in.
+This way homonyms get different vector representations. An example of dynamic embeddings is the Flair embeddings [(Akbik et al. 2018)](https://aclanthology.coli.uni-saarland.de/papers/C18-1139/c18-1139)
+where the embeddings are trained with the task of language modelling ie. learning to predict 
+the next character in a sentence.
 
 ## Using word embeddings for analysis
 
-Word embeddings are essentially a representation of a word in a n-dimensional space. Having a vector representation of a word enables us to find distances between words. In `load_embeddings.py` we have provided functions to download pretrained word embeddings and load them with the two popular NLP frameworks [spaCy](https://spacy.io/) and [Gensim](https://radimrehurek.com/gensim/).
+Word embeddings are essentially a representation of a word in a n-dimensional space.
+Having a vector representation of a word enables us to find distances between words.
+In `load_embeddings.py` we have provided functions to download pretrained word embeddings and load them with
+the two popular NLP frameworks [spaCy](https://spacy.io/) and [Gensim](https://radimrehurek.com/gensim/).
 
 This snippet shows how to automatically download and load pretrained word embeddings e.g. trained on the CoNLL17 dataset.
 ```python
@@ -43,17 +61,16 @@ word_embeddings = load_wv_with_spacy('connl.da.wv')
 
 ```
 
-#### Flair contextual embeddings and Flair framework
+## Pretrained Flair embeddings
+Thus repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl
+both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
 
-##### Training details
+The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequence_length=250`, `mini_batch_size=50`, 
+`max_epochs=5`
 
-This repository provides Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. Have a look at Flairs own [GitHub](<https://github.com/zalandoresearch/flair>) page to get the code for how it is trained. The hyperparameter are set as follows: hidden_size=1032, nlayers=1, sequence_length=250,  mini_batch_size=50, max_epochs=5
+In the snippet below you can see how to load the pretrained Danish embeddings and an example of simple use. 
 
-##### Example of use
-
- The [GitHub](<https://github.com/zalandoresearch/flair>)  page for Flair also provides nice tutorials and an easy framework for using other word embeddings as well and concatenate them. In the snippet below you can see how to load the pretrained Danish embeddings and an example of simple use. 
-
-```Python
+```python
 from danlp.models.embeddings import load_context_embeddings_with_flair
 from flair.data import Sentence
 
@@ -67,9 +84,8 @@ stacked_embeddings.embed(sentence1)
 stacked_embeddings.embed(sentence1)
 
 # Show that it is contextual in the sense 'bank' has different embedding after context
-print('{} entence out of {} is equal'.format(int(sum(sentence2[4].embedding==sentence1[2].embedding)), len(sentence1[2].embedding)))
+print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==sentence1[2].embedding)), len(sentence1[2].embedding)))
 # 52 ud af 2364
-
 ```
 
 
@@ -80,10 +96,11 @@ The trained Flair word embeddings has been used in training the Danish Part of s
 ## 📈 Benchmarks
 
 To evaluate word embeddings it is common to do intrinsic evaluations to directly test for syntactic or 
-semantic relationships between words. The WordSimilarity-353 [4] dataset contains word pairs 
-annotated with a similarity score (1-10) and calculating the correlation between the word embedding similarity and the
-similarity score gives an indication of how well the word embeddings captures relationships between words. The dataset 
-has been [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
+semantic relationships between words. The WordSimilarity-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf)
+contains word pairs annotated with a similarity score (1-10) and calculating the correlation between 
+the word embedding similarity and the similarity score gives an indication of how well the word embeddings
+captures relationships between words. The dataset has been 
+[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
 
 | Model | Spearman's rho | OOV |
 | ------:|:----------------:|:----------:|
@@ -92,14 +109,9 @@ has been [translated to Danish](https://github.com/fnielsen/dasem/tree/master/da
 | connl.da.wv | 0.5243 | 5.01% |
 | news.da.wv | 0.4961 | 5.6% |
 
-## References
-
-[1] Mikolov et al. (2013). [Distributed Representations of Words and Phrasesand their Compositionality](). NeurIPS'13
-
-[2] Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov (2016), [Enriching Word Vectors with Subword Information](). ACL
-
-[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
-
-[4] Finkelstein et al. [Placing search in context: The con-cept revisited]()
-
-
+## 🎓 References
+- Thomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado and Jeffrey Dean. 2013. [Distributed Representations of Words and Phrasesand their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf). In **NeurIPS**.
+- Piotr Bojanowski, Edouard Grave, Armand Joulin and Tomas Mikolov. 2017. [Enriching Word Vectors with Subword Information](https://aclweb.org/anthology/Q17-1010). In **ACL**.
+- Rico Sennrich, Barry Haddow and Alexandra Birch. 2016. [Neural Machine Translation of Rare Words with Subword Units](https://aclweb.org/anthology/P16-1162). In **ACL**.
+- Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
+- Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://aclanthology.coli.uni-saarland.de/papers/C18-1139/c18-1139). In **COLING**.
