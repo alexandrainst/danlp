@@ -1,5 +1,9 @@
 import hashlib
+import inspect
 import os
+import random
+import shutil
+import string
 import urllib
 from pathlib import Path
 from typing import Callable
@@ -7,6 +11,8 @@ from typing import Callable
 from tqdm import tqdm
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
+
+DANLP_S3_URL = 'https://danlp.s3.eu-central-1.amazonaws.com'
 
 # The naming convention of the word embedding are on the form <dataset>.<lang>.<type>
 # The <type> can be subword vectors=swv or word vectors=wv
@@ -59,13 +65,13 @@ MODELS = {
 
     # CONTEXTUAL EMBEDDINGS
     'flair.fwd': {
-        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.fwd.zip',
+        'url': DANLP_S3_URL+'/models/flair.fwd.zip',
         'md5_checksum': '8697e286048a4aa30acc62995397a0c8',
         'size': 18548086,
         'file_extension': '.pt'
     },
     'flair.bwd': {
-        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.bwd.zip',
+        'url': DANLP_S3_URL+'/models/flair.bwd.zip',
         'md5_checksum': '11549f1dc28f92a7c37bf511b023b1f1',
         'size': 18551173,
         'file_extension': '.pt'
@@ -73,10 +79,26 @@ MODELS = {
 
     # POS MODELS
     'flair.pos': {
-        'url': 'https://danlp.s3.eu-central-1.amazonaws.com/models/flair.pos.zip',
+        'url': DANLP_S3_URL + '/models/flair.pos.zip',
         'md5_checksum': 'b9892d4c1c654503dff7e0094834d6ed',
         'size': 426404955,
         'file_extension': '.pt'
+    }
+}
+
+DATASETS = {
+    'ddt': {
+        'url': DANLP_S3_URL + '/datasets/ddt.zip',
+        'md5_checksum': '4d91c0246bef73ad8eba54b67047da14',
+        'size': 1205920,
+        'file_extension': '.conllu'
+    },
+
+    'wikiann.ner': {
+        'url': DANLP_S3_URL + '/datasets/??',
+        'md5_checksum': '',
+        'size': 0,
+        'file_extension': '.conllu'
     }
 }
 
@@ -87,15 +109,48 @@ class TqdmUpTo(tqdm):
     Read more here:
     https://github.com/tqdm/tqdm#hooks-and-callbacks
     """
+
     def update_to(self, b=1, bsize=1, tsize=None):
         if tsize is not None:
             self.total = tsize
         self.update(b * bsize - self.n)  # will also set self.n = b * bsize
 
 
-def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_func: Callable = None,
-                    verbose: bool = False, clean_up_raw_data=True, force_download: bool = False, file_extension = None):
+def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
+                     process_func: Callable = None, verbose: bool = False):
     """
+
+    :param verbose:
+    :param dataset:
+    :param cache_dir:
+    :param process_func:
+    :return:
+    """
+    if dataset not in DATASETS:
+        raise ValueError("The dataset {} do not exist".format(dataset))
+
+    dataset_dir = os.path.join(cache_dir, dataset)
+    dataset_info = DATASETS[dataset]
+    dataset_info['name'] = dataset
+
+    if not os.path.isdir(dataset_dir):  # Then dataset has not been downloaded
+        os.makedirs(dataset_dir, exist_ok=True)
+
+        file_path = os.path.join(cache_dir, dataset)
+
+        _download_and_process(dataset_info, process_func, file_path, verbose)
+
+    else:
+        if verbose:
+            print("Dataset {} exists in {}".format(dataset, dataset_dir))
+
+    return dataset_dir
+
+
+def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_func: Callable = None,
+                   verbose: bool = False, clean_up_raw_data=True, force_download: bool = False, file_extension=None):
+    """
+    :param file_extension:
     :param force_download:
     :param model_name:
     :param process_func:
@@ -107,6 +162,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
         raise ValueError("The model {} do not exist".format(model_name))
 
     model_info = MODELS[model_name]
+    model_info['name'] = model_name
 
     model_file = model_name + model_info['file_extension'] if not file_extension else model_name + file_extension
     model_file_path = os.path.join(cache_dir, model_file)
@@ -114,28 +170,14 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
     if not os.path.isfile(model_file_path) or force_download:
         os.makedirs(cache_dir, exist_ok=True)
 
-        url = model_info['url']
-        expected_size = model_info['size']
-        expected_hash = model_info['md5_checksum']
-
-        if process_func is not None:
-            # A temporary file is downloaded which will be processed by the process func
-            tmp_dl_file = model_name + ".tmp"
-            tmp_file_path = os.path.join(cache_dir, tmp_dl_file)
-
-            _download_file(url, tmp_file_path, expected_size, expected_hash, verbose=verbose)
-
-            process_func(tmp_file_path, verbose=verbose, clean_up_raw_data=clean_up_raw_data)
-
-        else:
-            # The model file will be downloaded directly to the model_file_path
-            _download_file(url, model_file_path, expected_size, expected_hash, verbose=verbose)
+        _download_and_process(model_info, process_func, model_file_path, verbose)
 
     else:
         if verbose:
             print("Model {} exists in {}".format(model_name, model_file_path))
 
     return model_file_path
+
 
 def _check_file(fname):
     """
@@ -146,12 +188,59 @@ def _check_file(fname):
     """
     size = os.path.getsize(fname)
     with open(fname, "rb") as f:
-        hash_nb = hashlib.md5(f.read(2**20)).hexdigest()
+        hash_nb = hashlib.md5(f.read(2 ** 20)).hexdigest()
     return size, hash_nb
 
 
-def _download_file(url: str, destination: str, expected_size: int, expected_hash: str, verbose: bool = False):
+def _check_process_func(process_func: Callable):
+    """
+    Checks that a process function takes the correct arguments
+
+    :param process_func:
+    """
+    function_args = inspect.getfullargspec(process_func).args
+    expected_args = ['tmp_file_path', 'meta_info', 'cache_dir', 'clean_up_raw_data', 'verbose']
+
+    assert function_args[:len(expected_args)] == expected_args, "{} does not have the correct arguments".format(process_func)
+
+
+def _download_and_process(meta_info: dict, process_func: Callable, single_file_path, verbose):
+    """
+
+    :param meta_info:
+    :param process_func:
+    :param single_file_path:
+    :param verbose:
+    """
+    if process_func is not None:
+
+        _check_process_func(process_func)
+
+        letters = string.ascii_lowercase
+        random_string = ''.join(random.choice(letters) for i in range(12))
+        tmp_file_path = "/tmp/{}.tmp".format(random_string)
+
+        _download_file(meta_info, tmp_file_path, verbose=verbose)
+
+        process_func(tmp_file_path, meta_info, verbose=verbose, clean_up_raw_data=True)
+
+    else:
+        # The model file will be downloaded directly to the single_file_path
+        _download_file(meta_info, single_file_path, verbose=verbose)
+
+
+def _download_file(meta_info: dict, destination: str, verbose: bool = False):
+    """
+
+    :param meta_info:
+    :param destination:
+    :param verbose:
+    """
     file_name = os.path.split(destination)[1]
+
+    expected_size = meta_info['size']
+    expected_hash = meta_info['md5_checksum']
+    url = meta_info['url']
 
     if not os.path.isfile(destination):
         if verbose:
@@ -170,7 +259,8 @@ def _download_file(url: str, destination: str, expected_size: int, expected_hash
         "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
 
 
-def _unzip_process_func(tmp_file_path: str, clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip=None):
+def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
+                        clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip: str = None):
     """
     Simple process function for processing models
     that only needs to be unzipped after download.
@@ -181,27 +271,36 @@ def _unzip_process_func(tmp_file_path: str, clean_up_raw_data: bool = True, verb
     :param file_in_zip: Name of the model file in the zip, if the zip contains more than one file
     """
     from zipfile import ZipFile
-    import random, shutil, string
 
-    cache_dir = os.path.split(tmp_file_path)[0]
-    tmp_filename = os.path.split(tmp_file_path)[1]
-    model_name = tmp_filename[:-4]
+    model_name = meta_info['name']
 
-    full_path = os.path.join(cache_dir, model_name) + MODELS[model_name]['file_extension']
+    full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
 
     if verbose:
         print("Unzipping raw {} embeddings".format(model_name))
 
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
-        tmp_path = os.path.join(cache_dir, ''.join(random.choice(string.ascii_lowercase) for i in range(6)))  # To not have name conflicts
 
-        if not file_in_zip:
-            file_list = zip_file.namelist()
-            assert len(file_list) == 1, "Error. The zip should only contain a single file."
+        file_list = zip_file.namelist()
 
-            file_in_zip = file_list[0]
+        if len(file_list) == 1:
+            _extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
 
-        outpath = zip_file.extract(file_in_zip, path=tmp_path)
+        elif file_in_zip:
+            _extract_single_file_from_zip(cache_dir, file_in_zip, full_path, zip_file)
 
-        os.rename(outpath, full_path)
-        shutil.rmtree(tmp_path)
+        else:  # Extract all the files to the name of the model/dataset
+            destination = os.path.join(cache_dir, meta_info['name'])
+            zip_file.extractall(path=destination)
+
+
+def _extract_single_file_from_zip(cache_dir: str, file_in_zip: str, full_path, zip_file):
+    # To not have name conflicts
+    tmp_path = os.path.join(cache_dir, ''.join(random.choice(string.ascii_lowercase) for i in range(6)))
+
+    outpath = zip_file.extract(file_in_zip, path=tmp_path)
+    os.rename(outpath, full_path)
+
+    shutil.rmtree(tmp_path)
+
+
