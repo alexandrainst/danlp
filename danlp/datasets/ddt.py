@@ -1,5 +1,7 @@
 import os
 
+
+
 from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func, DATASETS
 
 
@@ -84,3 +86,36 @@ class DDT:
                     token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter", "")
 
         return corpus
+
+    def load_with_spacy(self):
+        """
+        Converts the conllu files to json in the spaCy format.
+
+        Not using jsonl because of:
+        https://github.com/explosion/spaCy/issues/3523
+        :return:
+        """
+        import srsly
+        from spacy.cli.converters import conllu2json
+        from spacy.gold import GoldCorpus
+        from spacy.gold import Path
+
+        for part in ['train', 'dev', 'test']:
+            conll_path = os.path.join(self.dataset_dir, '{}.{}{}'.format(self.dataset_name, part, self.file_extension))
+            json_path = os.path.join(self.dataset_dir, "ddt.{}.json".format(part))
+
+            if not os.path.isfile(json_path):  # Convert the conllu files to json
+                with open(conll_path, 'r') as file:
+                    file_as_string = file.read()
+                    file_as_string = file_as_string.replace("name=", "").replace("|SpaceAfter", "")
+                    file_as_json = conllu2json(file_as_string)
+
+                    srsly.write_json(json_path, file_as_json)
+
+        train_json_path = os.path.join(self.dataset_dir, "ddt.train.json")
+        dev_json_path = os.path.join(self.dataset_dir, "ddt.dev.json")
+
+        assert os.path.isfile(train_json_path)
+        assert os.path.isfile(dev_json_path)
+
+        return GoldCorpus(Path(train_json_path), Path(dev_json_path))
