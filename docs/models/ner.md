@@ -8,11 +8,11 @@ This repository keeps a list of pretrained NER models publicly available in Dani
 | [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC |
 | Multilingual BERT |  | [MIPT](https://mipt.ru/english/) |
 
-
-
-## Get started
-
 ## 📈 Benchmarks
+The benchmarks has been performed on the test part of the
+[Danish Dependency Treebank](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank).
+The treebank is annotated by the Alexandra Institute with the **LOC**, **ORG** and **PER** entity tags.
+
 
 | Model | LOC | ORG | PER | AVG |
 |-------|-----|-----|-----|-----|
