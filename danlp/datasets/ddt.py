@@ -50,7 +50,7 @@ class DDT:
         return parts[0]
 
 
-    def load_ner_with_flair(self, predefined_splits: bool = False):
+    def load_with_flair(self, predefined_splits: bool = False):
         """
         This function is inspired by the "Reading Your Own Sequence Labeling Dataset" from Flairs tutorial
         on reading corpora:
@@ -82,6 +82,19 @@ class DDT:
 
             for sentence in dataset.sentences:
                 for token in sentence.tokens:
-                    token.tags['ner'].value = token.tags['ner'].value.split("=")[1]
+                    token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter","")
+
+                    if token.tags['ner'].value == u'<unk>':
+                        print("HEY")
+                    elif token.tags['ner'].value == u'<START>':
+                        print("HE")
+                    elif token.tags['ner'].value == '<START>':
+                        print("HE")
 
         return corpus
+
+if __name__ == '__main__':
+    ddt = DDT()
+    corp = ddt.load_with_flair()
+
+    print("test")

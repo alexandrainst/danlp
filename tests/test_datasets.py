@@ -3,7 +3,6 @@ import unittest
 from pyconll.unit import Conll
 
 from danlp.datasets.ddt import DDT
-from danlp.datasets.ner import load_ner_as_conllu, load_ner_with_flair
 
 
 class TestNerDatasets(unittest.TestCase):
@@ -26,7 +25,15 @@ class TestNerDatasets(unittest.TestCase):
         full_dataset = ddt.load_as_conllu(predefined_splits=False)
         self.assertEqual(len(full_dataset), train_len+dev_len+test_len)
 
-        flair_corpus = ddt.load_ner_with_flair()
+        flair_corpus = ddt.load_with_flair()
         flair_lens = [len(flair_corpus.train), len(flair_corpus.dev), len(flair_corpus.test)]
         self.assertEqual(flair_lens, [train_len, dev_len, test_len])
+
+        ner_tags = flair_corpus.make_tag_dictionary('ner').idx2item
+        asserted_ner_tags = [
+            b'B-ORG', b'B-PER', b'B-LOC',
+            b'I-ORG', b'I-PER', b'I-LOC',
+            b'O', b'<START>', b'<STOP>', b'<unk>'
+        ]
+        self.assertCountEqual(ner_tags, asserted_ner_tags)
 
