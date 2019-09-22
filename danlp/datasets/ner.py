@@ -61,9 +61,48 @@ def load_ner_as_conllu(dataset: str, predefined_splits: bool = False, cache_dir:
     return parts[0]
 
 
+def load_ner_with_flair(dataset: str, predefined_splits: bool = False, cache_dir: str = DEFAULT_CACHE_DIR):
+    """
+    This function is inspired by the "Reading Your Own Sequence Labeling Dataset" from Flairs tutorial
+    on reading corpora:
+
+    https://github.com/zalandoresearch/flair/blob/master/resources/docs/TUTORIAL_6_CORPUS.md
+
+    :param dataset:
+    :param predefined_splits:
+    :param cache_dir:
+    :return: ColumnCorpus
+    """
+    assert dataset in AVAILABLE_NER_DATASETS, "Only " + ", ".join(AVAILABLE_NER_DATASETS) + " datasets are available"
+
+    from flair.data import Corpus
+    from flair.datasets import ColumnCorpus
+
+    download_dataset(dataset, process_func=_unzip_process_func)
+
+    columns = {1: 'text', 3: 'pos', 9: 'ner'}
+
+    # this is the folder in which train, test and dev files reside
+    data_folder = os.path.join(cache_dir, dataset)
+
+    # init a corpus using column format, data folder and the names of the train, dev and test files
+    corpus: Corpus = ColumnCorpus(data_folder, columns,
+                                  train_file='ddt.train.conllu',
+                                  test_file='ddt.test.conllu',
+                                  dev_file='ddt.dev.conllu')
+    parts = ['train', 'dev', 'test']
+    for part in parts:
+        dataset = corpus.__getattribute__(part)
+
+        for sentence in dataset.sentences:
+            for token in sentence.tokens:
+                token.tags['ner'].value = token.tags['ner'].value.split("=")[1]
+
+    return corpus
+
+
 def _any_part_exist(dfs: list):
     for df in dfs:
         if df is not None:
             return True
     return False
-
