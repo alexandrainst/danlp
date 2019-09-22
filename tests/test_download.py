@@ -1,6 +1,7 @@
 import unittest
 from typing import Callable
 
+from danlp.datasets.wiki_ann import _wikiann_process_func
 from danlp.download import MODELS, download_model, DATASETS, download_dataset, _unzip_process_func, _check_process_func
 from danlp.models.embeddings import _process_downloaded_embeddings, _process_embeddings_for_spacy
 
@@ -29,7 +30,8 @@ class TestDownload(unittest.TestCase):
         process_functions = [
             _process_downloaded_embeddings,
             _process_embeddings_for_spacy,
-            _unzip_process_func
+            _unzip_process_func,
+            _wikiann_process_func
         ]
 
         for proc_func in process_functions:

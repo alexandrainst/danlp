@@ -1,6 +1,6 @@
 import os
 
-from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func
+from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func, DATASETS
 
 
 def _any_part_exist(parts: list):
@@ -18,6 +18,7 @@ class DDT:
 
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'ddt'
+        self.file_extension = DATASETS[self.dataset_name]['file_extension']
         self.dataset_dir = download_dataset('ddt', process_func=_unzip_process_func, cache_dir=cache_dir)
 
     def load_as_conllu(self, predefined_splits: bool = False):
@@ -30,11 +31,9 @@ class DDT:
         """
         import pyconll
 
-        file_extension = 'conllu'
-
         parts = [None, None, None]  # Placeholder list to put predefined parts of dataset [train, dev, test]
         for i, part in enumerate(['train', 'dev', 'test']):
-            file_name = "{}.{}.{}".format(self.dataset_name, part, file_extension)
+            file_name = "{}.{}{}".format(self.dataset_name, part, self.file_extension)
             file_path = os.path.join(self.dataset_dir, file_name)
 
             parts[i] = pyconll.load_from_file(file_path)
@@ -71,9 +70,9 @@ class DDT:
 
         # init a corpus using column format, data folder and the names of the train, dev and test files
         corpus: Corpus = ColumnCorpus(self.dataset_dir, columns,
-                                      train_file='ddt.train.conllu',
-                                      test_file='ddt.test.conllu',
-                                      dev_file='ddt.dev.conllu')
+                                      train_file='{}.{}{}'.format(self.dataset_name, 'train', self.file_extension),
+                                      test_file='{}.{}{}'.format(self.dataset_name, 'test', self.file_extension),
+                                      dev_file='{}.{}{}'.format(self.dataset_name, 'dev', self.file_extension))
 
         # Remove the `name=` from `name=B-PER` to only use the `B-PER` tag
         parts = ['train', 'dev', 'test']
@@ -82,19 +81,6 @@ class DDT:
 
             for sentence in dataset.sentences:
                 for token in sentence.tokens:
-                    token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter","")
-
-                    if token.tags['ner'].value == u'<unk>':
-                        print("HEY")
-                    elif token.tags['ner'].value == u'<START>':
-                        print("HE")
-                    elif token.tags['ner'].value == '<START>':
-                        print("HE")
+                    token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter", "")
 
         return corpus
-
-if __name__ == '__main__':
-    ddt = DDT()
-    corp = ddt.load_with_flair()
-
-    print("test")

@@ -1,14 +1,14 @@
 import hashlib
 import inspect
 import os
-import random
 import shutil
-import string
 import urllib
 from pathlib import Path
 from typing import Callable
 
 from tqdm import tqdm
+
+from danlp.utils import random_string
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
@@ -93,12 +93,11 @@ DATASETS = {
         'size': 1205299,
         'file_extension': '.conllu'
     },
-
-    'wikiann.ner': {
-        'url': DANLP_S3_URL + '/datasets/??',
-        'md5_checksum': '',
-        'size': 0,
-        'file_extension': '.conllu'
+    'wikiann': {
+        'url': 'https://blender04.cs.rpi.edu/~panx2/wikiann/data/da.tar.gz',
+        'md5_checksum': 'e23d0866111f9980bbc7421ee3124deb',
+        'size': 4458532,
+        'file_extension': '.iob'
     }
 }
 
@@ -216,9 +215,7 @@ def _download_and_process(meta_info: dict, process_func: Callable, single_file_p
 
         _check_process_func(process_func)
 
-        letters = string.ascii_lowercase
-        random_string = ''.join(random.choice(letters) for i in range(12))
-        tmp_file_path = "/tmp/{}.tmp".format(random_string)
+        tmp_file_path = "/tmp/{}.tmp".format(random_string())
 
         _download_file(meta_info, tmp_file_path, verbose=verbose)
 
@@ -296,7 +293,8 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
 
 def _extract_single_file_from_zip(cache_dir: str, file_in_zip: str, full_path, zip_file):
     # To not have name conflicts
-    tmp_path = os.path.join(cache_dir, ''.join(random.choice(string.ascii_lowercase) for i in range(6)))
+
+    tmp_path = os.path.join(cache_dir, ''.join(random_string()))
 
     outpath = zip_file.extract(file_in_zip, path=tmp_path)
     os.rename(outpath, full_path)
