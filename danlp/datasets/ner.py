@@ -4,10 +4,6 @@ from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_f
 
 AVAILABLE_NER_DATASETS = ['wikiann', 'ddt']
 
-# TODO: Load it as a corpus for flair
-# TODO: Make a pull request to flair similar to this:
-# https://github.com/zalandoresearch/flair/issues/383
-
 # TODO: Load it as jsonlines with spacy
 
 
@@ -67,6 +63,9 @@ def load_ner_with_flair(dataset: str, predefined_splits: bool = False, cache_dir
     on reading corpora:
 
     https://github.com/zalandoresearch/flair/blob/master/resources/docs/TUTORIAL_6_CORPUS.md
+
+    TODO: Make a pull request to flair similar to this:
+    https://github.com/zalandoresearch/flair/issues/383
 
     :param dataset:
     :param predefined_splits:

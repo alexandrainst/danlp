@@ -89,8 +89,8 @@ MODELS = {
 DATASETS = {
     'ddt': {
         'url': DANLP_S3_URL + '/datasets/ddt.zip',
-        'md5_checksum': '4d91c0246bef73ad8eba54b67047da14',
-        'size': 1205920,
+        'md5_checksum': '7bdd5d4f43dd9c4de35a48ea58f950ca',
+        'size': 1205299,
         'file_extension': '.conllu'
     },
 
