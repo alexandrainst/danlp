@@ -1,1 +1,1 @@
-from .ner import *
+from .ddt import *
