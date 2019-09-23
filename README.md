@@ -12,13 +12,11 @@ The aim for this project is both to point to the open source tool available in D
 
 
 **News**
+- ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank)
 - 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
-- 🔖 DaNLP version 0.0.2 has been [released](https://github.com/alexandrainst/danlp/releases) and you can now install it from [PyPI](https://pypi.org/project/danlp/)
 
 **Next up**
-
 - 🚧 Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
-- 🚧 A tutorial for using transfer learning with [BERT](https://github.com/google-research/bert)
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
 ## Get started
