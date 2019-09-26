@@ -48,10 +48,6 @@ print(sentence.to_tagged_string())
 
 
 
-## Applications ideas
-
-Part of speech tagging has several applications. The distributions of part of speech tags can characterize a text, and it can for example be used as surface features, indicating how many word of each tags are present in the text. Knowing the tags is also relevant if you want to find the lemma of a word. An idea for use could also concern text augmentation, where you want to make small permutation to you text. This could be done by finding a token with a certain part of speech tag, eg. noun, and then find and shift a similar noun using e.g a word2vec model. In that way the structure of the sentence is preserved. 
-
 
 
 

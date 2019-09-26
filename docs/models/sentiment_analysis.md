@@ -7,10 +7,12 @@ In the litterateur, an often used approach is to take user reviews, for example 
 This project is working towards to contribute with such an annotated dataset, and to support the DaNLP package with a sentiment classifier. 
 As in general in this project, the docs will also focus on what is avalible in Danish, benchmark results and good pratices.  
 
-### Construction of a new dataset  
-The NoRec project in Norway  have constructed a dataset for sentiment analysis based on reviews from many  news organizations in Norway, read more about in the [paper](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf). The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders. So if you manage a site containing user reviews for example movie reviews and would like to contribute then please contact us.  
+## Construction of a new dataset  in process
 
-### Avalible on Danish 
+The NoRec project in Norway  have constructed a dataset for sentiment analysis based on reviews from many  news organizations in Norway, read more about in Valledal et a. 2017. The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders. So if you manage a site containing user reviews for example movie reviews and would like to contribute then please contact us.  
+
+## Available on Danish 
+
 Without any Danish trainings data at the moment, there is a wordlist approach open source, and then this project provide an example of how to utilize an English dataset to get a classifier that can be used on Danish text. 
 
 ##### Wordlist based approach 
@@ -18,7 +20,14 @@ Without any Danish trainings data at the moment, there is a wordlist approach op
 
 ##### Cross-lingual transfer example
 
-An example of utilizing an dataset in another language to be able to make predicts on Danish without seeing Danish training data is shown in this [notebok](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>). It is using multilingual embeddings from [LASER](<https://github.com/facebookresearch/LASER>) (Language-Agnostic SEntence Representations). Note that this is not evaluate on any Danish data, and the performance is therefore unknown. But a few examples in the notebook is shown.
+An example of utilizing an dataset in another language to be able to make predicts on Danish without seeing Danish training data is shown in this [notebok](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>). It is using multilingual embeddings from Artetxe et al. 2019 called [LASER](<https://github.com/facebookresearch/LASER>) (Language-Agnostic SEntence Representations). Note that this is not evaluate on any Danish data, and the performance is therefore unknown. But a few examples in the notebook is shown.
 
 
 
+## 🎓 References 
+
+Artetxe, Mikel, and Holger Schwenk. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond.](<https://arxiv.org/pdf/1812.10464.pdf>) *Transactions of the Association for Computational Linguistics* 7 (2019): 597-610.
+
+Velldal, E., Øvrelid, L., Bergem, E. A., Stadsnes, C., Touileb, S., & Jørgensen, F. [ NoReC: The Norwegian Review Corpus.](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf) *arXiv preprint arXiv:1710.05370*. (2017)
+
+ 
