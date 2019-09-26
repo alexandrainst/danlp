@@ -10,13 +10,18 @@ DaNLP is a repository for Natural Language Processing resources for the Danish L
 
 The aim for this project is both to point to the open source tool available in Danish, and to add new models and tools to make NLP in Danish more applicable for everybody and especially for the industry.
 
-
 **News**
+
 - ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank)
+
+- :performing_arts: [Notebook](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>) tutorial for ​Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+
 - 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
 
 **Next up**
-- 🚧 Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+
+- 🚧 Models trained on the new annotated Name Entity Recognitions dataset based on [UD Danish Treebank](<https://github.com/UniversalDependencies/UD_Danish-DDT>)
+- 🚧 A tutorial for using transfer learning with [BERT](https://github.com/google-research/bert)
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
 ## Get started
@@ -64,8 +69,7 @@ The repository is under development and this is the list of NLP tasks we have co
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
 ## Datasets
-The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available 
-Danish datasets that can be used for commercial purposes.
+The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available Danish datasets that can be used for commercial purposes.
 
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
 
