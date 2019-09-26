@@ -34,7 +34,7 @@ MODELS = {
         'size': 1221429539,
         'file_extension': '.bin'
     },
-    'connl.da.wv': {
+    'conll17.da.wv': {
         'url': 'http://vectors.nlpl.eu/repository/11/38.zip',
         'vocab_size': 1655870,
         'dimensions': 100,

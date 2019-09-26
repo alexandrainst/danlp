@@ -6,7 +6,7 @@ popular NLP frameworks.
 
 | Name | Model | Data | Vocab | Unit | Task  | Pretrainer |
 |------|-------|------|:-----:|------|-------|---------------|
-| [connl.da.wv](http://vectors.nlpl.eu/repository/#) | word2vec | [Danish CoNLL17](http://universaldependencies.org/conll17/) | 1.655.886 | Word | Skipgram | [University of Oslo](https://www.mn.uio.no/ifi/english/) |
+| [conll17.da.wv](http://vectors.nlpl.eu/repository/#) | word2vec | [Danish CoNLL17](http://universaldependencies.org/conll17/) | 1.655.886 | Word | Skipgram | [University of Oslo](https://www.mn.uio.no/ifi/english/) |
 | [news.da.wv](https://loar.kb.dk/handle/1902/329) | word2vec | OCR Newspapers 1880-2005 | 2.404.836 | Word | Skipgram | [Det Kgl. Bibliotek](http://www.kb.dk) |
 | [cc.da.swv](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | CC + Wiki | 2.000.000 | Char N-gram | Skipgram |  [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
 | [wiki.da.swv](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | Wikipedia | 312.956 | Char N-gram | Skipgram | [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
@@ -41,7 +41,7 @@ This snippet shows how to automatically download and load pretrained word embedd
 from danlp.models.embeddings  import load_wv_with_gensim, load_wv_with_spacy
 
 # Load with gensim
-word_embeddings = load_wv_with_gensim('connl.da.wv')
+word_embeddings = load_wv_with_gensim('conll17.da.wv')
 
 word_embeddings.most_similar(positive=['københavn', 'england'], negative=['danmark'], topn=1)
 # [('london', 0.7156291604042053)]
@@ -57,7 +57,7 @@ word_embeddings.similarity('københavn', 'esbjerg')
 
 
 # Load with spacy
-word_embeddings = load_wv_with_spacy('connl.da.wv')
+word_embeddings = load_wv_with_spacy('conll17.da.wv')
 
 ```
 
@@ -106,7 +106,7 @@ captures relationships between words. The dataset has been
 | ------:|:----------------:|:----------:|
 | cc.da.wv | **0.5917** | 0% |
 | wiki.da.wv | 0.5851 | 5.01% |
-| connl.da.wv | 0.5243 | 5.01% |
+| conll17.da.wv | 0.5243 | 5.01% |
 | news.da.wv | 0.4961 | 5.6% |
 
 ## 🎓 References

@@ -4,7 +4,7 @@ from gensim.models.keyedvectors import KeyedVectors
 
 from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 
-AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'connl.da.wv', 'news.da.wv']
+AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'conll17.da.wv', 'news.da.wv']
 AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv']
 
 
@@ -14,7 +14,7 @@ def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, 
     Available wordembeddings:
     - wiki.da.wv
     - cc.da.wv
-    - connl.da.wv
+    - conll17.da.wv
     - news.da.wv
     - wiki.da.swv
     - cc.da.swv
@@ -233,7 +233,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
 
         os.remove(vec_file_path)  # Clean up the vec file
 
-    elif pretrained_embedding == 'connl.da.wv':
+    elif pretrained_embedding == 'conll17.da.wv':
         from zipfile import ZipFile
         if verbose:
             print("Unzipping raw {} embeddings".format(pretrained_embedding))
