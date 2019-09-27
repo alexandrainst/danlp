@@ -1,12 +1,28 @@
 <h1 align="center">
-    <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
-</h1> 
-<p aligh="center>
-<a href="https://pypi.org/project/danlp/"><img src="https://img.shields.io/pypi/v/danlp.svg"></a>
-<a href="https://travis-ci.org/alexandrainst/danlp"><img src="https://travis-ci.org/alexandrainst/danlp.svg?branch=master"></a>
-<a href="https://coveralls.io/github/alexandrainst/danlp?branch=master"><img src="https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master"></a>
-<a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg"></a>
+  <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
+</h1>
+ 
+<p align="center>
+  <a href="https://pypi.org/project/danlp/"><img src="https://img.shields.io/pypi/v/danlp.svg"></a>
+  <a href="https://travis-ci.org/alexandrainst/danlp"><img src="https://travis-ci.org/alexandrainst/danlp.svg?branch=master"></a>
+  <a href="https://coveralls.io/github/alexandrainst/danlp?branch=master"><img src="https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master"></a>
+  <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg"></a>
 </p>
+
+<div align="center">
+  <h3>
+    <a href="https://github.com/alexandrainst/danlp/tree/master/docs/models">
+      Models
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md">
+      Datasets
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/tree/master/examples">
+      Examples
+    </a>
+  </h3>
 
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
 It is a collection  of available datasets and models for a a variety of NLP tasks.
