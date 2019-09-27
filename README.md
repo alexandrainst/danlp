@@ -1,27 +1,28 @@
-# <img align="center" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="450"  /> 
+<h1 align="center">
+    <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
+</h1> 
+<p aligh="center>
+<a href="https://pypi.org/project/danlp/"><img src="https://img.shields.io/pypi/v/danlp.svg"></a>
+<a href="https://travis-ci.org/alexandrainst/danlp"><img src="https://travis-ci.org/alexandrainst/danlp.svg?branch=master"></a>
+<a href="https://coveralls.io/github/alexandrainst/danlp?branch=master"><img src="https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master"></a>
+<a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg"></a>
+</p>
 
-[![PyPI](https://img.shields.io/pypi/v/danlp.svg)](https://pypi.org/project/danlp/)
-[![Build Status](https://travis-ci.org/alexandrainst/danlp.svg?branch=master)](https://travis-ci.org/alexandrainst/danlp)
-[![Coverage Status](https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master)](https://coveralls.io/github/alexandrainst/danlp?branch=master)
-[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-
-
-DaNLP is a repository for Natural Language Processing resources for the Danish Language. It is a collection  of available datasets and models for a a variety of NLP tasks. It features code examples on how to use the datasets andmodels in popular NLP frameworks such as spaCy and NLTK as well as Deep Learning frameworks such as PyTorch and TensorFlow.
-
-The aim for this project is both to point to the open source tool available in Danish, and to add new models and tools to make NLP in Danish more applicable for everybody and especially for the industry.
+DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
+It is a collection  of available datasets and models for a a variety of NLP tasks.
+It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and NLTK as 
+well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 **News**
 
-- ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank)
-
-- :performing_arts: [Notebook](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>) tutorial for ​Sentiment analysis models using zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
-
+- ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](docs/datasets.md#danish-dependency-treebank)
+- :performing_arts: [Notebook](examples/example_zero_shot_sentiment.ipynb) tutorial for ​Sentiment analysis models using 
+  zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
 - 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
 
 **Next up**
 
-- 🚧 Models trained on the new annotated Name Entity Recognitions dataset based on [UD Danish Treebank](<https://github.com/UniversalDependencies/UD_Danish-DDT>)
-- 🚧 A tutorial for using transfer learning with [BERT](https://github.com/google-research/bert)
+- 🚧 Models trained on the new annotated [Danish NER dataset](docs/datasets.md#danish-dependency-treebank)
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
 ## Get started
@@ -62,8 +63,7 @@ The repository is under development and this is the list of NLP tasks we have co
 - [x] [Embedding of text](docs/models/embeddings.md)
 - [x] [Part of speech](docs/models/pos.md)
 - [x] [Named Entity Recognition](docs/models/ner.md)
-- [ ] Sentiment Analysis
-- [ ] Lemmatization
+- [x] [Sentiment Analysis](docs/sentiment_analysis.md)
 - [ ] Coreference resolution
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.

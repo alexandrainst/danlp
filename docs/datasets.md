@@ -40,16 +40,6 @@ contains word pairs annotated with a similarity score (1-10). It is common to us
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been 
 [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen.
 
-### Get started
-
-A bash script is provided to download and extracted the plain text files. As an example if you want the European parliament corpus, run:
-
-``` bash
-bash fetch_corpus.sh --euparl
-```
-In the moment, the following options are supported:  `--euparl`, `--wiki` and `--opensub`. Notice that the option for Wikipedia, clones a [GitHub repository](<https://github.com/attardi/wikiextractor>) to extracted the Wikipedia dump. 
-
-
 ## 🎓 References
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
 - Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
