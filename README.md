@@ -2,12 +2,12 @@
   <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
 </h1>
  
-<p align="center>
+<div align="center>
   <a href="https://pypi.org/project/danlp/"><img src="https://img.shields.io/pypi/v/danlp.svg"></a>
   <a href="https://travis-ci.org/alexandrainst/danlp"><img src="https://travis-ci.org/alexandrainst/danlp.svg?branch=master"></a>
   <a href="https://coveralls.io/github/alexandrainst/danlp?branch=master"><img src="https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master"></a>
   <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg"></a>
-</p>
+</div>
 
 <div align="center">
   <h3>
@@ -23,6 +23,7 @@
       Examples
     </a>
   </h3>
+</div>
 
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
 It is a collection  of available datasets and models for a a variety of NLP tasks.
