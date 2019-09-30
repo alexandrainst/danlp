@@ -98,6 +98,12 @@ DATASETS = {
         'md5_checksum': 'e23d0866111f9980bbc7421ee3124deb',
         'size': 4458532,
         'file_extension': '.iob'
+    },
+    'wordsim353.da': {
+        'url': 'https://raw.githubusercontent.com/fnielsen/dasem/master/dasem/data/wordsim353-da/combined.csv',
+        'md5_checksum': '7ac76acba4af2d90c04136bc6b227e54',
+        'size': 12772,
+        'file_extension': '.csv'
     }
 }
 
@@ -222,8 +228,8 @@ def _download_and_process(meta_info: dict, process_func: Callable, single_file_p
         process_func(tmp_file_path, meta_info, verbose=verbose, clean_up_raw_data=True)
 
     else:
-        # The model file will be downloaded directly to the single_file_path
-        _download_file(meta_info, single_file_path, verbose=verbose)
+        single_file = meta_info['name'] + meta_info['file_extension']
+        _download_file(meta_info, os.path.join(single_file_path, single_file), verbose=verbose)
 
 
 def _download_file(meta_info: dict, destination: str, verbose: bool = False):

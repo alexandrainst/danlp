@@ -6,6 +6,7 @@ from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
 from danlp.datasets import DDT, WikiAnn, DATASETS
+from danlp.datasets.word_sim import WordSim353Da
 
 
 class TestNerDatasets(unittest.TestCase):
@@ -72,3 +73,9 @@ class TestNerDatasets(unittest.TestCase):
 
         shutil.rmtree(wikiann.dataset_dir)
 
+    def test_wordsim353(self):
+        ws353 = WordSim353Da()
+        df = ws353.load_with_pandas()
+
+        self.assertEqual(len(df), 353)
+        self.assertListEqual(list(df.columns), ['da1', 'da2', 'Human (mean)'])
