@@ -1,38 +1,76 @@
 import os
-import string
 
+from sklearn.model_selection import train_test_split
 from danlp.download import download_dataset, DEFAULT_CACHE_DIR, DATASETS
-from danlp.utils import random_string
 
 
 class WikiAnn:
-
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'wikiann'
         self.file_extension = DATASETS[self.dataset_name]['file_extension']
 
         self.dataset_dir = download_dataset(self.dataset_name, process_func=_wikiann_process_func, cache_dir=cache_dir)
 
-    def load_ner_with_flair(self, predefined_splits: bool = False):
-
+    def load_with_flair(self, predefined_splits: bool = False):
         from flair.data import Corpus
         from flair.datasets import ColumnCorpus
 
-        columns = {1: 'text', 2: 'ner'}
+        columns = {0: 'text', 3: 'ner'}
 
         # init a corpus using column format, data folder and the names of the train, dev and test files
-        corpus: Corpus = ColumnCorpus(self.dataset_dir, columns,
-                                      train_file=self.dataset_name+self.file_extension)
+        corpus: Corpus = ColumnCorpus(self.dataset_dir, columns, train_file=self.dataset_name + self.file_extension)
         return corpus
+
+    def load_with_spacy(self):
+        """
+        This function will convert the CoNLL02/03 format to json format for spaCy.
+        As the function will return a spacy.gold.GoldCorpus which needs a dev set
+        this function also splits the dataset into a 70/30 split as is done by
+        Pan et al. (2017).
+
+        - Pan et al. (2017): https://aclweb.org/anthology/P17-1178
+        :return:
+        """
+        import srsly
+        from spacy.cli.converters import conll_ner2json
+        from spacy.gold import GoldCorpus
+        from spacy.gold import Path
+
+        conll_path = os.path.join(self.dataset_dir, self.dataset_name + self.file_extension)
+        dev_json_path = os.path.join(self.dataset_dir, self.dataset_name + "dev.json")
+        train_json_path = os.path.join(self.dataset_dir, self.dataset_name + "train.json")
+
+        if not os.path.isfile(dev_json_path) or not os.path.isfile(train_json_path):
+            # Convert the conll ner files to json
+            with open(conll_path, 'r') as file:
+                file_as_string = file.read()
+                file_as_json = conll_ner2json(file_as_string)
+
+                all_sents = file_as_json[0]['paragraphs'][0]['sentences']
+                train_sents, dev_sents = train_test_split(all_sents, test_size=0.3, random_state=42)
+
+                train_json = [{'id': 0, 'paragraphs': [{'sentences': train_sents}]}]
+                dev_json = [{'id': 0, 'paragraphs': [{'sentences': dev_sents}]}]
+
+                srsly.write_json(train_json_path, train_json)
+                srsly.write_json(dev_json_path, dev_json)
+
+        assert os.path.isfile(train_json_path) and os.path.isfile(train_json_path)
+
+        return GoldCorpus(Path(train_json_path), Path(dev_json_path))
 
 
 def _convert_wikiann_to_iob(org_file, dest_file):
     """
-    # sent_id = 0
-    # text = Peter sagde hej
-    1	Peter   B-PER
-    2   sagde   O
-    3   hej 0
+    Converts the original WikiANN format to a CoNLL02/03 format.
+    However as the WikiANN dataset do not contain any marking of
+    what sentences belongs to a document we omit using the line
+
+    -DOCSTART- -X- O O
+
+    As used in the CoNLL02/03 format. This format is known in
+    spaCy as the CoNLL 2003 NER format.
+
     :param org_file:
     :param dest_file:
     """
@@ -45,18 +83,9 @@ def _convert_wikiann_to_iob(org_file, dest_file):
         for line in file:
             if line == "\n":  # End of sentence
                 assert len(sent_tokens) == len(sent_tags)
-                reassembly = ' '.join(sent_tokens).replace(' , ', ',').replace(' .', '.').replace(' !', '!')
-                reassembly = reassembly.replace(' ?', '?').replace(' : ', ': ').replace(' \'', '\'')
 
-                sentences.append({
-                    'id': sentence_counter,
-                    'text': reassembly,
-                    'tokens': sent_tokens,
-                    'tags': sent_tags
-                })
-
+                sentences.append({'tokens': sent_tokens, 'tags': sent_tags})
                 sent_tokens, sent_tags = [], []
-
                 sentence_counter += 1
                 continue
 
@@ -87,13 +116,9 @@ def _convert_wikiann_to_iob(org_file, dest_file):
         # Write to new file
         with open(dest_file, 'w') as destination_file:
             for sent in sentences:
-                string = "# sent_id = {}\n#text = {}\n".format(sent['id'], sent['text'])
                 tok_lines = zip(sent['tokens'], sent['tags'])
-                lines = [ "{}\t{}\t{}".format(i,tok,tag) for i, (tok, tag) in enumerate(tok_lines)]
-                string += "\n".join(lines)
-                string += "\n\n"
-
-                destination_file.write(string)
+                lines = ["{} _ _ {}".format(tok, tag) for i, (tok, tag) in enumerate(tok_lines)]
+                destination_file.write("\n".join(lines) + "\n\n")
 
 
 def _wikiann_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
