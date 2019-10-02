@@ -32,10 +32,10 @@ well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 **News**
 
+- 🎉 Version 0.0.3 has been [released](https://github.com/alexandrainst/danlp/releases) with loading functions for Danish NER datasets
 - ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](docs/datasets.md#danish-dependency-treebank)
 - :performing_arts: [Notebook](examples/example_zero_shot_sentiment.ipynb) tutorial for ​Sentiment analysis models using 
   zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
-- 🐋 Docker images with all NLP libraries used by DaNLP is available on [DockerHub](https://hub.docker.com/r/alexandrainst/danlp)  
 
 **Next up**
 
