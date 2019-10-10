@@ -26,7 +26,7 @@
 </div>
 
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
-It is a collection  of available datasets and models for a a variety of NLP tasks.
+It is a collection  of available datasets and models for a variety of NLP tasks.
 It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and NLTK as 
 well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
