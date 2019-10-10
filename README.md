@@ -44,7 +44,7 @@ well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 ## Get started
 To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
-will not install all NLP libraries. If you to try out the models in DaNLP you can use the Docker images
+will not install all NLP libraries. If you want to try out the models in DaNLP you can use the Docker images
 that has all the NLP libraries installed.
 
 ### Install with pip
@@ -55,16 +55,16 @@ pip install danlp
 ```
 
 Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
-This is allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings
+This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings
 with either spaCy or Gensim.
 
 ### Install with Docker 
-To quickly get started with DaNLP to try out the models you can use our Docker image.
+To quickly get started with DaNLP and to try out the models you can use our Docker image.
 To start a ipython session simply run:
 ```bash
 docker run -it --rm alexandrainst/danlp ipython
 ```
-If you want to run a `<script.py>` in you current working directory you can run:
+If you want to run a `<script.py>` in your current working directory you can run:
 ```bash
 docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp python <script.py>
 ```
@@ -86,7 +86,7 @@ The repository is under development and this is the list of NLP tasks we have co
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
 ## Datasets
-The number of datasets in the Danish is limited. The DaNLP repository provides and overview of the available Danish datasets that can be used for commercial purposes.
+The number of datasets in the Danish is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
 
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
 
@@ -99,7 +99,7 @@ We will also provide some real cases of how NLP is applied in Danish companies.
 If you want to contribute to the DaNLP repository and make it better, your help is very welcome. You can contribute to the project in many ways:
 
 - Help us write good tutorials on Danish NLP use-cases
-- Contribute with you own pretrained NLP models or datasets in Danish
+- Contribute with your own pretrained NLP models or datasets in Danish
 - Notify us of other Danish NLP resources
 - Create GitHub issues with questions and bug reports
 
