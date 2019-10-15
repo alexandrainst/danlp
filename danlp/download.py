@@ -87,9 +87,9 @@ MODELS = {
     
     # NER MODELS
     'flair.ner': {
-        'url': DANLP_S3_URL + '/models/flair_ner.zip',
-        'md5_checksum': ?,
-        'size': ?,
+        'url': DANLP_S3_URL + '/models/flair.ner.zip',
+        'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
+        'size': 419047115,
         'file_extension': '.pt'
     }
 }
