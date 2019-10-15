@@ -105,7 +105,7 @@ print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==s
 
 
 
-## :wrench: ​Pretrained Flair embeddings
+## :wrench: ​Training details for Flair embeddings
 
 Thus repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
 
