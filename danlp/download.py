@@ -83,6 +83,14 @@ MODELS = {
         'md5_checksum': 'b9892d4c1c654503dff7e0094834d6ed',
         'size': 426404955,
         'file_extension': '.pt'
+    },
+    
+    # NER MODELS
+    'flair.ner': {
+        'url': DANLP_S3_URL + '/models/flair_ner.zip',
+        'md5_checksum': ?,
+        'size': ?,
+        'file_extension': '.pt'
     }
 }
 
