@@ -59,7 +59,7 @@ pip install danlp
 ```
 
 Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
-This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: ` Pip install flair`, `pip install spacy ` or/and `pip install gensim `.
+This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `.
 
 ### Install with Docker 
 To quickly get started with DaNLP and to try out the models you can use our Docker image.
