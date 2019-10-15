@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
 </h1>
- 
+
 <div align="center">
   <a href="https://pypi.org/project/danlp/"><img src="https://img.shields.io/pypi/v/danlp.svg"></a>
   <a href="https://travis-ci.org/alexandrainst/danlp"><img src="https://travis-ci.org/alexandrainst/danlp.svg?branch=master"></a>
@@ -24,25 +24,29 @@
     </a>
   </h3>
 </div>
-
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
 It is a collection  of available datasets and models for a variety of NLP tasks.
-It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and NLTK as 
-well as Deep Learning frameworks such as PyTorch and TensorFlow.
+It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 **News**
 
+- :mag_right: Name Entity Recognition model trained using Flair is added , [se here](docs/models/ner.md)
+
 - 🎉 Version 0.0.3 has been [released](https://github.com/alexandrainst/danlp/releases) with loading functions for Danish NER datasets
+
 - ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](docs/datasets.md#danish-dependency-treebank)
-- :performing_arts: [Notebook](examples/example_zero_shot_sentiment.ipynb) tutorial for ​Sentiment analysis models using 
-  zero-shot transfer learning from [LASER](https://github.com/facebookresearch/LASER/tree/master/source)
+
+  
 
 **Next up**
 
-- 🚧 Models trained on the new annotated [Danish NER dataset](docs/datasets.md#danish-dependency-treebank)
+- 🚧 Improved models trained on the new annotated [Danish NER dataset](docs/datasets.md#danish-dependency-treebank)
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
 
+
+
 ## Get started
+
 To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
 will not install all NLP libraries. If you want to try out the models in DaNLP you can use the Docker images
 that has all the NLP libraries installed.
@@ -55,8 +59,7 @@ pip install danlp
 ```
 
 Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
-This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings
-with either spaCy or Gensim.
+This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: ` Pip install flair`, `pip install spacy ` or/and `pip install gensim `.
 
 ### Install with Docker 
 To quickly get started with DaNLP and to try out the models you can use our Docker image.
@@ -91,8 +94,7 @@ The number of datasets in the Danish is limited. The DaNLP repository provides a
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
 
 ## Examples
-You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish.
-We will also provide some real cases of how NLP is applied in Danish companies.
+You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
 
 ## How do I contribute?
 
@@ -111,4 +113,4 @@ with a mission to create value, growth and welfare in society. The Alexandra Ins
 a network of independent Danish research and technology organisations.
 
 The work on this repository is part the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
-allocated to the Alexandra Insitute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020.
+allocated to the Alexandra Insitute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). 
