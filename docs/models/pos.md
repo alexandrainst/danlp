@@ -21,7 +21,27 @@ The reported test accuracy is  on 96.45%. In the meantime, the
 ![](../imgs/postag_eksempel.gif)
 
 
-## Training details for Flair PoS tagger
+
+## :hatching_chick: Get started using Part of speech tagging
+
+Below is a small snippet for getting started with the Flair part of speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
+
+```python
+from danlp.models.pos_taggers import load_pos_tagger_with_flair
+from flair.data import Sentence
+
+# Load the POS tagger using the DaNLP wrapper
+flair_model = load_pos_tagger_with_flair()
+
+# Using the flair POS tagger
+sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
+flair_model.predict(sentence) 
+print(sentence.to_tagged_string())
+```
+
+
+
+## :wrench: Training details for Flair PoS tagger
 
 This project provides a trained part of speech tagging model for Danish using the Flair framework from Zalando.
 
@@ -39,22 +59,6 @@ Notice, Flair report in Akbij et. al 2018 an accuracy on 97.84 ± 0.01 for the E
 which the Danish result is rather close to.
 
 
-## Get started using Part of speech tagging
-
-Below is a small snippet for getting started with the Flair part of speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
-
-```python
-from danlp.models.pos_taggers import load_pos_tagger_with_flair
-from flair.data import Sentence
-
-# Load the POS tagger using the DaNLP wrapper
-flair_model = load_pos_tagger_with_flair()
-
-# Using the flair POS tagger
-sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
-flair_model.predict(sentence) 
-print(sentence.to_tagged_string())
-```
 
 ## 🎓 References 
 - Rami Al-Rfou, Bryan Perozzi, and Steven Skiena. 2013. [Polyglot: Distributed Word Representations for Multilingual NLP](https://www.aclweb.org/anthology/W13-3520). In **CoNLL**.

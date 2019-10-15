@@ -8,18 +8,16 @@ for example the [IMDB dataset](http://ai.stanford.edu/~amaas/data/sentiment/), w
 pairs with a small text paragraph and a rating. Such ratings can be used as a proxy for the sentiment in the text. 
 
 This project is working towards to contribute with such an annotated dataset, and to support the DaNLP package with
-a sentiment classifier. As in general in this project, the docs will also focus on what is available in Danish, 
-benchmark results and good practices.  
+a sentiment classifier. 
 
-## Construction of a new dataset  in process
+## **:construction_worker:** Construction of a new dataset  in process
 The NoRec project in Norway  have constructed a dataset for sentiment analysis based on reviews from many
 Norwegian news organizations, read more about in [Velldal et al. (2017)](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf).
 The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders.
 So if you manage a site containing user reviews for example movie reviews and would like to contribute then please contact us.  
 
 ## Available on Danish 
-Without any Danish trainings data at the moment, there is a word list approach open source, and then this project 
-provide an example of how to utilize an English dataset to get a classifier that can be used on Danish text. 
+Without any Danish trainings data at the moment, there is a word list approach open source, and then this project provided an example of how to utilize an English dataset to get a classifier that can be used on Danish text. 
 
 ##### Wordlist based approach 
 [AFINN](https://github.com/fnielsen/afinn/blob/master/LICENSE) is a classifier based on a word list with 
@@ -34,6 +32,8 @@ It uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf
 [LASER](<https://github.com/facebookresearch/LASER>)(Language-Agnostic SEntence Representations).
 Note that this is not evaluated on any Danish data, and the performance is therefore unknown however a few examples 
 is shown in the notebook.
+
+
 
 ## 🎓 References 
 - Mikel Artetxe, and Holger Schwenk. 2019. 

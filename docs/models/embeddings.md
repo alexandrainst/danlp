@@ -29,14 +29,34 @@ This way homonyms get different vector representations. An example of dynamic em
 where the embeddings are trained with the task of language modelling ie. learning to predict 
 the next character in a sentence.
 
-## Using word embeddings for analysis
+
+
+## 📈 Benchmarks
+
+To evaluate word embeddings it is common to do intrinsic evaluations to directly test for syntactic or 
+semantic relationships between words. The WordSimilarity-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf)
+contains word pairs annotated with a similarity score (1-10) and calculating the correlation between 
+the word embedding similarity and the similarity score gives an indication of how well the word embeddings
+captures relationships between words. The dataset has been 
+[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
+
+|       Model | Spearman's rho |  OOV  |
+| ----------: | :------------: | :---: |
+|    cc.da.wv |   **0.5917**   |  0%   |
+|  wiki.da.wv |     0.5851     | 5.01% |
+| connl.da.wv |     0.5243     | 5.01% |
+|  news.da.wv |     0.4961     | 5.6%  |
+
+
+
+## :hatching_chick:Get started using word embeddings
 
 Word embeddings are essentially a representation of a word in a n-dimensional space.
 Having a vector representation of a word enables us to find distances between words.
 In `load_embeddings.py` we have provided functions to download pretrained word embeddings and load them with
 the two popular NLP frameworks [spaCy](https://spacy.io/) and [Gensim](https://radimrehurek.com/gensim/).
 
-This snippet shows how to automatically download and load pretrained word embeddings e.g. trained on the CoNLL17 dataset.
+This snippet shows how to automatically download and load pretrained static word embeddings e.g. trained on the CoNLL17 dataset, and it show some analysis  the embeddings can be used for: 
 ```python
 from danlp.models.embeddings  import load_wv_with_gensim, load_wv_with_spacy
 
@@ -61,14 +81,9 @@ word_embeddings = load_wv_with_spacy('connl.da.wv')
 
 ```
 
-## Pretrained Flair embeddings
-Thus repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl
-both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
 
-The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequence_length=250`, `mini_batch_size=50`, 
-`max_epochs=5`
 
-In the snippet below you can see how to load the pretrained Danish embeddings and an example of simple use. 
+In the snippet below you can see how to load the pretrained flair embeddings and an example of simple use. 
 
 ```python
 from danlp.models.embeddings import load_context_embeddings_with_flair
@@ -89,27 +104,23 @@ print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==s
 ```
 
 
-The trained Flair word embeddings has been used in training the Danish Part of speech model with Flair, check it out [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>). 
+
+## :wrench: ​Pretrained Flair embeddings
+
+Thus repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
+
+The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequence_length=250`, `mini_batch_size=50`, 
+`max_epochs=5`
+
+
+The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](docs/models/pos.md) and [ner](docs/models/ner.md) . 
 
 
 
-## 📈 Benchmarks
 
-To evaluate word embeddings it is common to do intrinsic evaluations to directly test for syntactic or 
-semantic relationships between words. The WordSimilarity-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf)
-contains word pairs annotated with a similarity score (1-10) and calculating the correlation between 
-the word embedding similarity and the similarity score gives an indication of how well the word embeddings
-captures relationships between words. The dataset has been 
-[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
-
-| Model | Spearman's rho | OOV |
-| ------:|:----------------:|:----------:|
-| cc.da.wv | **0.5917** | 0% |
-| wiki.da.wv | 0.5851 | 5.01% |
-| connl.da.wv | 0.5243 | 5.01% |
-| news.da.wv | 0.4961 | 5.6% |
 
 ## 🎓 References
+
 - Thomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado and Jeffrey Dean. 2013. [Distributed Representations of Words and Phrasesand their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf). In **NeurIPS**.
 - Piotr Bojanowski, Edouard Grave, Armand Joulin and Tomas Mikolov. 2017. [Enriching Word Vectors with Subword Information](https://aclweb.org/anthology/Q17-1010). In **ACL**.
 - Rico Sennrich, Barry Haddow and Alexandra Birch. 2016. [Neural Machine Translation of Rare Words with Subword Units](https://aclweb.org/anthology/P16-1162). In **ACL**.
