@@ -83,7 +83,7 @@ The repository is under development and this is the list of NLP tasks we have co
 - [x] [Embedding of text](docs/models/embeddings.md)
 - [x] [Part of speech](docs/models/pos.md)
 - [x] [Named Entity Recognition](docs/models/ner.md)
-- [x] [Sentiment Analysis](docs/sentiment_analysis.md)
+- [x] [Sentiment Analysis](docs/models/sentiment_analysis.md)
 - [ ] Coreference resolution
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
