@@ -94,6 +94,8 @@ MODELS = {
     }
 }
 
+from danlp.datasets.urls.opus_urls import OPUS_MONO_DA
+
 DATASETS = {
     'ddt': {
         'url': DANLP_S3_URL + '/datasets/ddt.zip',
@@ -106,8 +108,9 @@ DATASETS = {
         'md5_checksum': 'e23d0866111f9980bbc7421ee3124deb',
         'size': 4458532,
         'file_extension': '.iob'
-    }
+    },
 }
+DATASETS.update(OPUS_MONO_DA['corpuses'])
 
 
 class TqdmUpTo(tqdm):
