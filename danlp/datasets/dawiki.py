@@ -14,6 +14,13 @@ class DA_WIKI():
     def _download(self):
         subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)))
 
+    def _load(self):
+        with open(os.path.join(self.cache_dir,"dawiki","dawiki.txt")) as txtfile:
+            data = txtfile.read()
+        return data
+
 dawiki = DA_WIKI(verbose=True)
 
 dawiki._download()
+
+print(dawiki._load()[0:100])
