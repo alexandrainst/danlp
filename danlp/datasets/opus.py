@@ -39,12 +39,23 @@ class OPUS():
     """
 
     def __init__(self, corpuses: list = [], cache_dir: str = DEFAULT_CACHE_DIR, verbose: bool = False):
+        """
+        :param corpuses: Corpuses to download.
+        """
+
         assert(type(corpuses) is list), "parameter corpuses is of type {} - must be list".format(type(corpuses))
         self.cache_dir = cache_dir
         self.verbose = verbose
-        for corp in corpuses:
+
+        if not corpuses:
+            # download all opus corpuses
+            corpuses_to_download = self.valid_corpuses()
+        else:
+            corpuses_to_download = corpuses
+
+        for corp in corpuses_to_download:
             assert(corp in OPUS_MONO_DA['corpuses']), "{} not a valid corpus".format(corp)
-        self.corpuses = corpuses
+        self.corpuses = corpuses_to_download
 
     def _download(self):
         for corp in self.corpuses:
@@ -68,6 +79,7 @@ class OPUS():
         return "\n".join(all_txt)
 
     def load_as_txt(self, corpuses: list = []):
+        """Loads, and downloads if necessary, corpuses as raw text files"""
         self._download()
         return self._load(corpuses)
 
