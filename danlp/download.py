@@ -109,6 +109,12 @@ DATASETS = {
         'size': 4458532,
         'file_extension': '.iob'
     },
+    'dawiki' : {
+        'url' : 'https://dumps.wikimedia.org/dawiki/20191020/dawiki-20191020-pages-articles.xml.bz2',
+        'md5_checksum' :' 728d5bedcaef9bc7123a514e11bce6b8',
+        'size' : 1428032296,
+        'file_extension' : '.txt'
+        }
 }
 DATASETS.update(OPUS_MONO_DA['corpuses'])
 
