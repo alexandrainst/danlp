@@ -52,17 +52,24 @@ class OPUS():
                     process_func=_opus_process_func, cache_dir=self.cache_dir,
                     verbose = self.verbose)
 
-    def _load(self):
+    def _load(self, corpuses: list = []):
         """Load corpuses into memory"""
+
+        if not corpuses:
+            #empty argument
+            corpuses_to_load = self.corpuses
+        else:
+            corpuses_to_load = corpuses
+
         all_txt = []
-        for corp in self.corpuses:
+        for corp in corpuses_to_load:
             with open(os.path.join(self.cache_dir,corp,"{}.txt".format(corp))) as txtfile:
                 all_txt.append(txtfile.read())
         return "\n".join(all_txt)
 
-    def load_as_txt(self):
+    def load_as_txt(self, corpuses: list = []):
         self._download()
-        return self._load()
+        return self._load(corpuses)
 
     def valid_corpuses(self):
         """
