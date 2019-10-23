@@ -60,6 +60,10 @@ class OPUS():
                 all_txt.append(txtfile.read())
         return "\n".join(all_txt)
 
+    def load_as_txt(self):
+        self._download()
+        return self._load()
+
     def valid_corpuses(self):
         """
         Returns list of valid corpus elements to pass to the OPUS class
@@ -84,20 +88,6 @@ def _opus_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEF
         raise Exception("Trying to download data with unknown compression \
         format via {}".format(meta_info['url']))
     os.remove(tmp_file_path)
-
-opus = OPUS()
-corpuses = opus.valid_corpuses()
-
-#opus = OPUS(corpuses,verbose=True)
-opus = OPUS(["DGT","GNOME"])
-
-opus._download()
-print(opus._load())
-
-
-
-
-
 
 
 
