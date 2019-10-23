@@ -15,6 +15,7 @@ class DA_WIKI():
         if self.verbose:
             subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)))
         else:
+            # run script silent
             subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)), stdout=open(os.devnull, 'wb'))
 
     def _load(self):
