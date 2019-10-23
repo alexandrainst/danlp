@@ -255,14 +255,15 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     expected_size = meta_info['size']
     expected_hash = meta_info['md5_checksum']
     url = meta_info['url']
+    corpus_name = meta_info['name']
 
     if not os.path.isfile(destination):
         if verbose:
             with TqdmUpTo(unit='B', unit_scale=True, miniters=1) as t:
-                t.set_description("Downloading file {}".format(destination))
+                t.set_description("Downloading corpus {}".format(corpus_name))
                 urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
         else:
-            print("Downloading file {}".format(destination))
+            print("Downloading corpus {}".format(corpus_name))
             urllib.request.urlretrieve(url, destination)
 
     else:
