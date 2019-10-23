@@ -12,15 +12,16 @@ class DA_WIKI():
         self.verbose = verbose
 
     def _download(self):
-        subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)))
+        if self.verbose:
+            subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)))
+        else:
+            subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)), stdout=open(os.devnull, 'wb'))
 
     def _load(self):
         with open(os.path.join(self.cache_dir,"dawiki","dawiki.txt")) as txtfile:
             data = txtfile.read()
         return data
 
-dawiki = DA_WIKI(verbose=True)
-
-dawiki._download()
-
-print(dawiki._load()[0:100])
+    def load_as_txt(self):
+        self._download()
+        return self._load()
