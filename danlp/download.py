@@ -94,6 +94,8 @@ MODELS = {
     }
 }
 
+from danlp.datasets.urls.opus_urls import OPUS_MONO_DA
+
 DATASETS = {
     'ddt': {
         'url': DANLP_S3_URL + '/datasets/ddt.zip',
@@ -106,8 +108,15 @@ DATASETS = {
         'md5_checksum': 'e23d0866111f9980bbc7421ee3124deb',
         'size': 4458532,
         'file_extension': '.iob'
-    }
+    },
+    'dawiki' : {
+        'url' : 'https://dumps.wikimedia.org/dawiki/20191020/dawiki-20191020-pages-articles.xml.bz2',
+        'md5_checksum' :' 728d5bedcaef9bc7123a514e11bce6b8',
+        'size' : 1428032296,
+        'file_extension' : '.txt'
+        }
 }
+DATASETS.update(OPUS_MONO_DA['corpuses'])
 
 
 class TqdmUpTo(tqdm):
@@ -246,14 +255,15 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     expected_size = meta_info['size']
     expected_hash = meta_info['md5_checksum']
     url = meta_info['url']
+    corpus_name = meta_info['name']
 
     if not os.path.isfile(destination):
         if verbose:
             with TqdmUpTo(unit='B', unit_scale=True, miniters=1) as t:
-                t.set_description("Downloading file {}".format(destination))
+                t.set_description("Downloading corpus {}".format(corpus_name))
                 urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
         else:
-            print("Downloading file {}".format(destination))
+            print("Downloading corpus {}".format(corpus_name))
             urllib.request.urlretrieve(url, destination)
 
     else:
