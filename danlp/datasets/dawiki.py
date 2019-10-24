@@ -2,7 +2,6 @@ import os
 import subprocess
 import shlex
 
-from danlp.datasets.urls.opus_urls import OPUS_MONO_DA
 from danlp.download import download_dataset, DEFAULT_CACHE_DIR
 
 class DA_WIKI():
