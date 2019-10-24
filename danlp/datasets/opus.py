@@ -1,5 +1,5 @@
 import os
-from danlp.datasets.urls.opus_urls import OPUS_MONO_DA
+from ..opus_urls import OPUS_MONO_DA
 from danlp.download import download_dataset, DEFAULT_CACHE_DIR
 import re
 
