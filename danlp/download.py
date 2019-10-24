@@ -94,7 +94,7 @@ MODELS = {
     }
 }
 
-from danlp.datasets.urls.opus_urls import OPUS_MONO_DA
+from .opus_urls import OPUS_MONO_DA
 
 DATASETS = {
     'ddt': {
