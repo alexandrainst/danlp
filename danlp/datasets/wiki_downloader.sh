@@ -1,9 +1,8 @@
-#! /bin/sh -
+#!/bin/sh
 
 # This shell script download and extracts a dump of the danish wikipedia site.
 # Notice that the script uses WikiExtractor (https://github.com/attardi/wikiextractor).
 # The script is inspired by https://github.com/stefan-it/flair-lms 
-
 cache_dir=$1
 
 FILE="$1/dawiki/dawiki.txt"
@@ -24,16 +23,26 @@ else
     # download
     curl -L -O https://dumps.wikimedia.org/dawiki/20191020/dawiki-20191020-pages-articles.xml.bz2
 
+
+    # make chemsum test
+    if [ "$OSTYPE" == "darwin" ]; then
+    	CHECKSUM=$(head -c $((2**20)) dawiki-20191020-pages-articles.xml.bz2 | md5)
+    elif [ "$OSTYPE" == "linux-gnu" ]; then 	
+    	CHECKSUM="$(head -c $((2**20)) dawiki-20191020-pages-articles.xml.bz2 | md5sum | cut -d' ' -f1)"
+    else
+	echo "Unsupported OS"
+	exit 1
+    fi 
+
+    if [ "$CHECKSUM" != "728d5bedcaef9bc7123a514e11bce6b8" ]; then
+	echo "CHECKSUM failed - try again";
+	echo "Remove .danlp/dawiki folder and try again."
+        exit 1
+    fi
+
     # extract
     echo "Extracting files with WikiExtractor..."
     python3 WikiExtractor.py -o extracted -b 25M -c -q dawiki-20191020-pages-articles.xml.bz2
-
-    # make chemsum test
-    CHECKSUM=$(head -c $((2**20)) dawiki-20191020-pages-articles.xml.bz2 | md5)
-    if [ "$CHECKSUM" != "728d5bedcaef9bc7123a514e11bce6b8" ]; then
-        echo "CHECKSUM failed - try again";
-        exit 1
-    fi
 
     # combine into one file
     find extracted -name '*bz2' \! -exec bzip2 -k -c -d {} \; > dawiki.xml
