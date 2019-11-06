@@ -18,6 +18,7 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=['tqdm', 'pyconll'],
+    scripts=['danlp/datasets/wiki_downloader.sh'],
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3 :: Only",

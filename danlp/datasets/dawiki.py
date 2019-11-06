@@ -12,10 +12,10 @@ class DA_WIKI():
 
     def _download(self):
         if self.verbose:
-            subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)))
+            subprocess.call('bash wiki_downloader.sh {}'.format(self.cache_dir), shell=True)
         else:
             # run script silent
-            subprocess.call(shlex.split('./wiki_downloader.sh {}'.format(self.cache_dir)), stdout=open(os.devnull, 'wb'))
+            subprocess.call('bash wiki_downloader.sh {}'.format(self.cache_dir), shell=True, stdout=open(os.devnull, 'wb'))
 
     def _load(self):
         with open(os.path.join(self.cache_dir,"dawiki","dawiki.txt")) as txtfile:
