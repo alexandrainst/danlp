@@ -25,9 +25,9 @@ else
 
 
     # make chemsum test
-    if [ "$OSTYPE" == "darwin" ]; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
     	CHECKSUM=$(head -c $((2**20)) dawiki-20191020-pages-articles.xml.bz2 | md5)
-    elif [ "$OSTYPE" == "linux-gnu" ]; then 	
+    elif [[ "$OSTYPE" == "linux-gnu" ]]; then 	
     	CHECKSUM="$(head -c $((2**20)) dawiki-20191020-pages-articles.xml.bz2 | md5sum | cut -d' ' -f1)"
     else
 	echo "Unsupported OS"
