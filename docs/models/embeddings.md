@@ -10,7 +10,7 @@ popular NLP frameworks.
 | [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329) | word2vec | - | 2,404,836 | Word | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329) | ✔️ |
 | [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | - | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
 | [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | - | 312,956 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
-| [SketchEngine]() | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ❌ |
+| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ❌ |
 | flair | Flair | - | | Char | LM | |  ✔️ |
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
@@ -34,21 +34,22 @@ the next character in a sentence.
 
 ## 📈 Benchmarks
 
-To evaluate word embeddings it is common to do intrinsic evaluations to directly test for syntactic or 
-semantic relationships between words. The WordSimilarity-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf)
-contains word pairs annotated with a similarity score (1-10) and calculating the correlation between 
-the word embedding similarity and the similarity score gives an indication of how well the word embeddings
-captures relationships between words. The dataset has been 
-[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
+To evaluate word embeddings it is common to do intrinsic evaluations to 
+directly test for syntactic or semantic relationships between words. The 
+[Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-similarity-dataset)
+and [WordSim-353](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#wordsim-353)
+contains word pairs annotated with a similarity score. Calculating the
+correlation between the word embedding similarity and the similarity score
+gives and indication of how well the word embeddings captures relationships 
+between words.
 
-|       Model | Spearman's rho |  OOV  |
-| ----------: | :------------: | :---: |
-|    cc.da.wv |   **0.5917**   |  0%   |
-|  wiki.da.wv |     0.5851     | 5.01% |
-| connl.da.wv |     0.5243     | 5.01% |
-|  news.da.wv |     0.4961     | 5.6%  |
-
-
+| Model              | WS353-ρ |  WS353-OOV  |  DSD-ρ    |  DSD-OOV  |
+|--------------------|--------|----------|-----------|-----------|
+| wiki.da.wv         | **0.639** |  0.85%   |  0.205 |  1.01%   |
+| cc.da.wv           | 0.533   |  1.70%   | **0.313** |  0.00% |
+| conll17.da.wv      | 0.549   |  1.70%   | 0.150  | 0.00% |
+| news.da.wv         | 0.541   |  4.25%   | 0.306  | 0.00% |
+| sketchengine.da.wv | 0.626   |  0.85%   | 0.197  | 0.00% |
 
 ## 🐣 Get started using word embeddings
 
