@@ -2,9 +2,9 @@
 # https://github.com/explosion/spaCy/blob/master/spacy/about.py
 
 __title__ = "danlp"
-__version__ = "0.0.2"
+__version__ = "0.0.4"
 __summary__ = "DaNLP: NLP in Danish"
 __author__ = "Alexandra Institute"
 __email__ = "dansknlp@alexandra.dk"
 __license__ = "BSD 3-Clause License"
-__url__ = "https://danlp.alexandra.dk/"
+__url__ = "https://github.com/alexandrainst/danlp/"

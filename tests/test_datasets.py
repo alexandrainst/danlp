@@ -59,9 +59,9 @@ class TestNerDatasets(unittest.TestCase):
 
         wikiann = WikiAnn()
 
-        corpus = wikiann.load_ner_with_flair()
+        corpus = wikiann.load_with_flair()
 
-        self.assertEqual([len(corpus.train), len(corpus.test)], [21, 3])
+        self.assertEqual([len(corpus.train), len(corpus.dev), len(corpus.test)], [21, 2, 3])
 
         ner_tags = corpus.make_tag_dictionary('ner').idx2item
         asserted_ner_tags = [
@@ -70,6 +70,13 @@ class TestNerDatasets(unittest.TestCase):
             b'O', b'<START>', b'<STOP>', b'<unk>'
         ]
         self.assertCountEqual(ner_tags, asserted_ner_tags)
+
+        spacy_gold = wikiann.load_with_spacy()
+        self.assertIsInstance(spacy_gold, GoldCorpus)
+
+        num_train_sents = len(list(spacy_gold.train_tuples)[0][1])
+        num_dev_sents = len(list(spacy_gold.dev_tuples)[0][1])
+        self.assertEqual(num_dev_sents + num_train_sents, 26)
 
         shutil.rmtree(wikiann.dataset_dir)
 
