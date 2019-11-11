@@ -50,6 +50,20 @@ MODELS = {
         'md5_checksum': 'e0766f997e04dddf65aec5e2691bf36d',
         'file_extension': '.bin'
     },
+    'sketchengine.da.wv': {
+        'url': 'https://embeddings.sketchengine.co.uk/static/models/lc/datenten14_5.vec',
+        'dimensions': 100,
+        'vocab_size': 2360830,
+        'size': 2053148194,
+        'md5_checksum': '80cced3e135274d2815f55ca2a7eafcd',
+        'file_extension': '.bin'
+    },
+    'sketchengine.da.swv': {
+        'url': 'https://embeddings.sketchengine.co.uk/static/models/lc/datenten14_5.bin',
+        'size': 2739302263,
+        'md5_checksum': '7387bfa5be6fbf525734b617e3d547de',
+        'file_extension': '.bin'
+    },
     'wiki.da.swv': {
         'url': 'https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.da.zip',
         'md5_checksum': '86e7875d880dc1f4d3e7600a6ce4952d',
@@ -111,6 +125,12 @@ DATASETS = {
         'url': 'https://raw.githubusercontent.com/fnielsen/dasem/master/dasem/data/wordsim353-da/combined.csv',
         'md5_checksum': '7ac76acba4af2d90c04136bc6b227e54',
         'size': 12772,
+        'file_extension': '.csv'
+    },
+    'dsd': {
+        'url': 'https://raw.githubusercontent.com/kuhumcst/Danish-Similarity-Dataset/master/gold_sims_da.csv',
+        'md5_checksum': '5e7dad9e6c8c32aa9dd17830bed5e0f6',
+        'size': 3489,
         'file_extension': '.csv'
     }
 }

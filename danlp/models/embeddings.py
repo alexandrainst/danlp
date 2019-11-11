@@ -2,13 +2,18 @@ import os
 
 from gensim.models.keyedvectors import KeyedVectors
 
-from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, _unzip_process_func
+from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, \
+    _unzip_process_func
 
-AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'conll17.da.wv', 'news.da.wv']
-AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv']
+AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'conll17.da.wv',
+                        'news.da.wv', 'sketchengine.da.wv']
+
+AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv',
+                                'sketchengine.da.swv']
 
 
-def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, verbose: bool = False):
+def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR,
+                        verbose: bool = False):
     """
 
     Available wordembeddings:
@@ -16,16 +21,21 @@ def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, 
     - cc.da.wv
     - conll17.da.wv
     - news.da.wv
+    - sketchengine.da.wv
+
+    Available subwordembeddings:
     - wiki.da.swv
     - cc.da.swv
+    - sketchengine.da.swv
 
     :param pretrained_embedding:
     :param cache_dir: the directory for storing cached data
     :param verbose:
     :return: KeyedVectors or FastTextKeyedVectors
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=True)  # TODO: Fix the subword thing for fasttext
-    download_model(pretrained_embedding, cache_dir, _process_downloaded_embeddings, verbose=verbose)
+    word_embeddings_available(pretrained_embedding, can_use_subword=True)
+    download_model(pretrained_embedding, cache_dir,
+                   _process_downloaded_embeddings, verbose=verbose)
     wv_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
 
     if pretrained_embedding.split(".")[-1] == 'wv':
@@ -36,34 +46,41 @@ def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, 
         return load_facebook_vectors(wv_path)
 
 
-def load_wv_with_spacy(pretrained_embedding: str, cache_dir: str = DEFAULT_CACHE_DIR, verbose=False):
+def load_wv_with_spacy(pretrained_embedding: str,
+                       cache_dir: str = DEFAULT_CACHE_DIR, verbose=False):
     """
-
     :param str pretrained_embedding:
     :param str cache_dir: the directory for storing cached data
     :param bool verbose:
     :return
     """
     import spacy
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)  # spaCy does not support subwords
+
+    # spaCy does not support subwords
+    word_embeddings_available(pretrained_embedding, can_use_subword=False)
 
     spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
 
-    if os.path.isdir(spacy_model_dir):  # Return spaCy model if the spaCy model dir exists
+    if os.path.isdir(spacy_model_dir):
+        # Return spaCy model if spaCy model dir exists
         return spacy.load(spacy_model_dir)
 
     bin_file_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
 
-    if os.path.isfile(bin_file_path):  # Then we do not need to download the model
+    if os.path.isfile(bin_file_path):
+        # Then we do not need to download the model
         _process_embeddings_for_spacy(bin_file_path[:-4] + ".tmp")
     else:
-        download_model(pretrained_embedding, cache_dir, _process_embeddings_for_spacy, verbose=True,
+        download_model(pretrained_embedding, cache_dir,
+                       _process_embeddings_for_spacy, verbose=True,
                        file_extension='.spacy')
 
     return spacy.load(spacy_model_dir)
 
 
-def load_keras_embedding_layer(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, verbose=False, **kwargs):
+def load_keras_embedding_layer(pretrained_embedding: str,
+                               cache_dir=DEFAULT_CACHE_DIR, verbose=False,
+                               **kwargs):
     """
 
     :param pretrained_embedding:
@@ -81,12 +98,14 @@ def load_keras_embedding_layer(pretrained_embedding: str, cache_dir=DEFAULT_CACH
     if not 'trainable' in kwargs:
         kwargs['trainable'] = False
 
-    embedding_layer = Embedding(vocab_size, wv.vector_size, weights=wv.vectors, **kwargs)
+    embedding_layer = Embedding(vocab_size, wv.vector_size, weights=wv.vectors,
+                                **kwargs)
 
     return embedding_layer, wv.index2word
 
 
-def load_pytorch_embedding_layer(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+def load_pytorch_embedding_layer(pretrained_embedding: str,
+                                 cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
 
     :param pretrained_embedding:
@@ -97,16 +116,17 @@ def load_pytorch_embedding_layer(pretrained_embedding: str, cache_dir=DEFAULT_CA
     import torch
     from torch.nn import Embedding
 
-    word_vectors = load_wv_with_gensim(pretrained_embedding, cache_dir=cache_dir, verbose=verbose)
+    word_vectors = load_wv_with_gensim(pretrained_embedding,
+                                       cache_dir=cache_dir, verbose=verbose)
     weights = torch.FloatTensor(word_vectors.vectors)
 
     return Embedding.from_pretrained(weights), word_vectors.index2word
 
 
-def load_context_embeddings_with_flair(direction='bi', word_embeddings=True, cache_dir=DEFAULT_CACHE_DIR,
+def load_context_embeddings_with_flair(direction='bi', word_embeddings=True,
+                                       cache_dir=DEFAULT_CACHE_DIR,
                                        verbose=False):
     """
-
     :param bidirectional:
     :param cache_dir:
     :param verbose:
@@ -122,11 +142,15 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=True, cac
         embeddings.append(fasttext_embedding)
 
     if direction == 'bi' or direction == 'fwd':
-        fwd_weight_path = download_model('flair.fwd', cache_dir, verbose=verbose, process_func=_unzip_process_func)
+        fwd_weight_path = download_model('flair.fwd', cache_dir,
+                                         verbose=verbose,
+                                         process_func=_unzip_process_func)
         embeddings.append(FlairEmbeddings(fwd_weight_path))
 
     if direction == 'bi' or direction == 'bwd':
-        bwd_weight_path = download_model('flair.bwd', cache_dir, verbose=verbose, process_func=_unzip_process_func)
+        bwd_weight_path = download_model('flair.bwd', cache_dir,
+                                         verbose=verbose,
+                                         process_func=_unzip_process_func)
         embeddings.append(FlairEmbeddings(bwd_weight_path))
 
     if len(embeddings) == 1:
@@ -135,17 +159,22 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=True, cac
     return StackedEmbeddings(embeddings=embeddings)
 
 
-def word_embeddings_available(pretrained_embedding: str, can_use_subword=False):
+def word_embeddings_available(pretrained_embedding: str,
+                              can_use_subword=False):
     if not can_use_subword and pretrained_embedding in AVAILABLE_SUBWORD_EMBEDDINGS:
-        raise ValueError("The framework does not support the use of subword pretrained embeddings")
+        raise ValueError(
+            "The framework does not support the use of subword pretrained embeddings")
 
     if pretrained_embedding not in AVAILABLE_EMBEDDINGS:
         if pretrained_embedding not in AVAILABLE_SUBWORD_EMBEDDINGS:
-            raise ValueError("Pretrained embeddings {} do not exist".format(pretrained_embedding))
+            raise ValueError("Pretrained embeddings {} do not exist".format(
+                pretrained_embedding))
 
 
-def _process_embeddings_for_spacy(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
-                                  clean_up_raw_data: bool = True, verbose: bool = False):
+def _process_embeddings_for_spacy(tmp_file_path: str, meta_info: dict,
+                                  cache_dir: str = DEFAULT_CACHE_DIR,
+                                  clean_up_raw_data: bool = True,
+                                  verbose: bool = False):
     """
     To use pretrained embeddings with spaCy the embeddings need to be stored in
     a specific format. This function converts embeddings saved in the binary
@@ -167,12 +196,15 @@ def _process_embeddings_for_spacy(tmp_file_path: str, meta_info: dict, cache_dir
 
     bin_file_path = os.path.join(cache_dir, embeddings + ".bin")
 
-    if not os.path.isfile(bin_file_path):  # Preprocess to transform to word2vec .bin format
-        _process_downloaded_embeddings(tmp_file_path, meta_info, cache_dir, clean_up_raw_data, verbose)
+    if not os.path.isfile(
+            bin_file_path):  # Preprocess to transform to word2vec .bin format
+        _process_downloaded_embeddings(tmp_file_path, meta_info, cache_dir,
+                                       clean_up_raw_data, verbose)
 
     vec_file = embeddings + ".vec"
 
-    word_vecs = KeyedVectors.load_word2vec_format(bin_file_path, binary=True, encoding='utf8')
+    word_vecs = KeyedVectors.load_word2vec_format(bin_file_path, binary=True,
+                                                  encoding='utf8')
     assert_wv_dimensions(word_vecs, embeddings)
     word_vecs.save_word2vec_format(vec_file, binary=False)
 
@@ -189,8 +221,10 @@ def _process_embeddings_for_spacy(tmp_file_path: str, meta_info: dict, cache_dir
     os.remove(vec_file)  # Clean up the vec file
 
 
-def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
-                                   clean_up_raw_data: bool = True, verbose: bool = False):
+def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
+                                   cache_dir: str = DEFAULT_CACHE_DIR,
+                                   clean_up_raw_data: bool = True,
+                                   verbose: bool = False):
     """
 
     :param str tmp_file_path:
@@ -203,12 +237,36 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
 
     if pretrained_embedding in ['news.da.wv', 'wiki.da.wv']:
         if verbose:
-            print("Converting {} embeddings to binary file format".format(pretrained_embedding))
-        word_vecs = KeyedVectors.load_word2vec_format(tmp_file_path, binary=False, encoding='utf8')
+            print("Converting {} embeddings to binary file format".format(
+                pretrained_embedding))
+        word_vecs = KeyedVectors.load_word2vec_format(tmp_file_path,
+                                                      binary=False,
+                                                      encoding='utf8')
 
         assert_wv_dimensions(word_vecs, pretrained_embedding)
 
         word_vecs.save_word2vec_format(bin_file_path, binary=True)
+
+    elif pretrained_embedding == 'sketchengine.da.wv':
+        new_vec_file = os.path.join(cache_dir, "vecs.txt")
+
+        if verbose:
+            print("Cleaning raw {} embeddings".format(pretrained_embedding))
+        with open(tmp_file_path, 'r', errors='replace') as fin, open(new_vec_file, 'w') as fout:
+            for line_no, line in enumerate(fin, 1):
+                if line_no == 1:
+                    fout.write("2360830 100\n")
+                elif len(line.split()) <= 101:
+                    fout.write(line)
+
+        word_vecs = KeyedVectors.load_word2vec_format(new_vec_file, binary=False, encoding='utf8')
+
+        assert_wv_dimensions(word_vecs, pretrained_embedding)
+
+        word_vecs.save_word2vec_format(bin_file_path, binary=True)
+
+        os.remove(new_vec_file)  # Clean up the vec file
+
 
     elif pretrained_embedding == 'cc.da.wv':
         # Then it is a .gz file with a vec file inside
@@ -218,14 +276,19 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
         vec_file_path = os.path.join(cache_dir, pretrained_embedding + ".vec")
         bin_file_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
         if verbose:
-            print("Decompressing raw {} embeddings".format(pretrained_embedding))
+            print(
+                "Decompressing raw {} embeddings".format(pretrained_embedding))
 
-        with gzip.open(tmp_file_path, 'rb') as fin, open(vec_file_path, 'wb') as fout:
+        with gzip.open(tmp_file_path, 'rb') as fin, open(vec_file_path,
+                                                         'wb') as fout:
             shutil.copyfileobj(fin, fout)
 
         if verbose:
-            print("Converting {} embeddings to binary file format".format(pretrained_embedding))
-        word_vecs = KeyedVectors.load_word2vec_format(vec_file_path, binary=False, encoding='utf8')
+            print("Converting {} embeddings to binary file format".format(
+                pretrained_embedding))
+        word_vecs = KeyedVectors.load_word2vec_format(vec_file_path,
+                                                      binary=False,
+                                                      encoding='utf8')
 
         assert_wv_dimensions(word_vecs, pretrained_embedding)
 
@@ -238,25 +301,31 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
         if verbose:
             print("Unzipping raw {} embeddings".format(pretrained_embedding))
 
-        with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
+        with ZipFile(tmp_file_path,
+                     'r') as zip_file:  # Extract files to cache_dir
             zip_file.extract("model.txt", path=cache_dir)
 
         org_vec_file = os.path.join(cache_dir, "model.txt")
         new_vec_file = os.path.join(cache_dir, "vecs.txt")
-        ignored_lines = [138311, 260795, 550419, 638295, 727953, 851036, 865375, 878971, 1065332, 1135069, 1171719,
+        ignored_lines = [138311, 260795, 550419, 638295, 727953, 851036,
+                         865375, 878971, 1065332, 1135069, 1171719,
                          1331355, 1418396, 1463952, 1505510, 1587133]
 
         if verbose:
             print("Cleaning raw {} embeddings".format(pretrained_embedding))
-        with open(org_vec_file, 'r', errors='replace') as fin, open(new_vec_file, 'w') as fout:
+        with open(org_vec_file, 'r', errors='replace') as fin, open(
+                new_vec_file, 'w') as fout:
             for line_no, line in enumerate(fin, 1):
                 if line_no == 1:
                     fout.write("1655870 100\n")
                 elif line_no not in ignored_lines:
                     fout.write(line)
         if verbose:
-            print("Converting {} embeddings to binary file format".format(pretrained_embedding))
-        word_vecs = KeyedVectors.load_word2vec_format(new_vec_file, binary=False, encoding='utf8')
+            print("Converting {} embeddings to binary file format".format(
+                pretrained_embedding))
+        word_vecs = KeyedVectors.load_word2vec_format(new_vec_file,
+                                                      binary=False,
+                                                      encoding='utf8')
 
         assert_wv_dimensions(word_vecs, pretrained_embedding)
 
@@ -267,7 +336,8 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
         os.remove(new_vec_file)
 
     elif pretrained_embedding == 'wiki.da.swv':
-        _unzip_process_func(tmp_file_path, clean_up_raw_data, verbose, file_in_zip='wiki.da.bin')
+        _unzip_process_func(tmp_file_path, clean_up_raw_data, verbose,
+                            file_in_zip='wiki.da.bin')
 
     elif pretrained_embedding == 'cc.da.swv':
         import gzip
@@ -275,13 +345,23 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict, cache_di
 
         bin_file_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
         if verbose:
-            print("Decompressing raw {} embeddings".format(pretrained_embedding))
+            print(
+                "Decompressing raw {} embeddings".format(pretrained_embedding))
 
-        with gzip.open(tmp_file_path, 'rb') as fin, open(bin_file_path, 'wb') as fout:
+        with gzip.open(tmp_file_path, 'rb') as fin, open(bin_file_path,
+                                                         'wb') as fout:
             shutil.copyfileobj(fin, fout)
 
+    elif pretrained_embedding == 'sketchengine.da.swv':
+        import shutil
+        bin_file_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
+
+        shutil.copy(tmp_file_path, bin_file_path)
+
     else:
-        raise NotImplementedError('There is not yet implemented any preprocessing for {}'.format(pretrained_embedding))
+        raise NotImplementedError(
+            'There is not yet implemented any preprocessing for {}'.format(
+                pretrained_embedding))
 
     if clean_up_raw_data:
         os.remove(tmp_file_path)
@@ -298,7 +378,10 @@ def assert_wv_dimensions(wv: KeyedVectors, pretrained_embedding: str):
     vocab_size = MODELS[pretrained_embedding]['vocab_size']
     embedding_dimensions = MODELS[pretrained_embedding]['dimensions']
 
-    assert len(
-        wv.vocab) == vocab_size, "Wrong vocabulary size, has the file been corrupted? Loaded vocab size: {}".format(
-        len(wv.vocab))
-    assert wv.vector_size == embedding_dimensions, "Wrong embedding dimensions, has the file been corrupted?"
+    vocab_err_msg = "Wrong vocabulary size, has the file been corrupted? " \
+                "Loaded vocab size: {}".format(len(wv.vocab))
+
+    dim_err_msg = "Wrong embedding dimensions, has the file been corrupted?"
+
+    assert len(wv.vocab) == vocab_size, vocab_err_msg
+    assert wv.vector_size == embedding_dimensions, dim_err_msg
