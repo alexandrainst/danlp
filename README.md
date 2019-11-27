@@ -30,12 +30,7 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 **News**
 
-- :mag_right: Name Entity Recognition model trained using Flair is added , [se here](docs/models/ner.md)
-
-- 🎉 Version 0.0.3 has been [released](https://github.com/alexandrainst/danlp/releases) with loading functions for Danish NER datasets
-
-- ✨ The Danish Dependency Treebank has been annotated with NER tags. You can use DaNLP [to load it](docs/datasets.md#danish-dependency-treebank)
-
+- 🎉 Version 0.0.5 has been [released](https://github.com/alexandrainst/danlp/releases) with the new Danish Similarity Dataset
   
 
 **Next up**
