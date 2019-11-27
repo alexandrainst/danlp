@@ -10,7 +10,7 @@ popular NLP frameworks.
 | [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329) | word2vec | - | 2,404,836 | Word | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329) | ✔️ |
 | [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | - | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
 | [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | - | 312,956 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
-| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ❌ |
+| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔ |
 | flair | Flair | - | | Char | LM | |  ✔️ |
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
@@ -31,7 +31,6 @@ where the embeddings are trained with the task of language modelling ie. learnin
 the next character in a sentence.
 
 
-
 ## 📈 Benchmarks
 
 To evaluate word embeddings it is common to do intrinsic evaluations to 
@@ -43,13 +42,13 @@ correlation between the word embedding similarity and the similarity score
 gives and indication of how well the word embeddings captures relationships 
 between words.
 
-| Model              | WS353-ρ |  WS353-OOV  |  DSD-ρ    |  DSD-OOV  |
+| Model              |   DSD-ρ    |  DSD-OOV  | WS353-ρ |  WS353-OOV  |
 |--------------------|--------|----------|-----------|-----------|
-| wiki.da.wv         | **0.639** |  0.85%   |  0.205 |  1.01%   |
-| cc.da.wv           | 0.533   |  1.70%   | **0.313** |  0.00% |
-| conll17.da.wv      | 0.549   |  1.70%   | 0.150  | 0.00% |
-| news.da.wv         | 0.541   |  4.25%   | 0.306  | 0.00% |
-| sketchengine.da.wv | 0.626   |  0.85%   | 0.197  | 0.00% |
+| wiki.da.wv         | 0.205 |  1.01%   | **0.639** |  0.85% |
+| cc.da.wv           | **0.313** |  0.00% | 0.533   |  1.70%   |
+| conll17.da.wv      | 0.150  | 0.00% | 0.549   |  1.70%   |
+| news.da.wv         | 0.306  | 0.00% | 0.541   |  4.25%   |
+| sketchengine.da.wv | 0.197  | 0.00% | 0.626   |  0.85%   |
 
 ## 🐣 Get started using word embeddings
 
