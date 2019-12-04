@@ -1,6 +1,6 @@
 Sentiment Analysis
 ============================
-This project is working on improving sentiment analysis on Danish. An general example of sentiment analysis is 
+This project is working on improving sentiment analysis on Danish. A general example of sentiment analysis is 
 to predict if a sentence or text paragraph has a positive or negative tone.
 
 In the litterateur, an often used approach is to take user reviews, 
