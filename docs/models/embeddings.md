@@ -4,13 +4,14 @@ This repository keeps a list of pretrained word embeddings publicly available in
 and `load_embeddings.py` provides functions for downloading the embeddings as well as prepare them for use in 
 popular NLP frameworks.
 
-| Name | Model | Data | Vocab | Unit | Task  | Pretrainer |
-|------|-------|------|:-----:|------|-------|---------------|
-| [connl.da.wv](http://vectors.nlpl.eu/repository/#) | word2vec | [Danish CoNLL17](http://universaldependencies.org/conll17/) | 1.655.886 | Word | Skipgram | [University of Oslo](https://www.mn.uio.no/ifi/english/) |
-| [news.da.wv](https://loar.kb.dk/handle/1902/329) | word2vec | OCR Newspapers 1880-2005 | 2.404.836 | Word | Skipgram | [Det Kgl. Bibliotek](http://www.kb.dk) |
-| [cc.da.swv](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | CC + Wiki | 2.000.000 | Char N-gram | Skipgram |  [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
-| [wiki.da.swv](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | Wikipedia | 312.956 | Char N-gram | Skipgram | [Facebook AI Research](https://research.fb.com/category/facebook-ai-research/) |
-| forward_embedding backward_embedding | Flair | Wikipedia + Europarl | | Char | LM | [Alexandra Institute](https://alexandra.dk/uk) |
+| Name | Model | Tokens | Vocab | Unit | Task  | License | DaNLP |
+|------|-------|--------|:-----:|------|-------|---------|-------|
+| [CoNLL2017](http://vectors.nlpl.eu/repository/#) | word2vec | 1.6B | 1,655,886 | Word | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔️ |
+| [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329) | word2vec | - | 2,404,836 | Word | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329) | ✔️ |
+| [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | - | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
+| [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | - | 312,956 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
+| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔ |
+| flair | Flair | - | | Char | LM | |  ✔️ |
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
 words, sentences or documents.
@@ -30,26 +31,26 @@ where the embeddings are trained with the task of language modelling ie. learnin
 the next character in a sentence.
 
 
-
 ## 📈 Benchmarks
 
-To evaluate word embeddings it is common to do intrinsic evaluations to directly test for syntactic or 
-semantic relationships between words. The WordSimilarity-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf)
-contains word pairs annotated with a similarity score (1-10) and calculating the correlation between 
-the word embedding similarity and the similarity score gives an indication of how well the word embeddings
-captures relationships between words. The dataset has been 
-[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen. 
+To evaluate word embeddings it is common to do intrinsic evaluations to 
+directly test for syntactic or semantic relationships between words. The 
+[Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-similarity-dataset)
+and [WordSim-353](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#wordsim-353)
+contains word pairs annotated with a similarity score. Calculating the
+correlation between the word embedding similarity and the similarity score
+gives and indication of how well the word embeddings captures relationships 
+between words.
 
-|       Model | Spearman's rho |  OOV  |
-| ----------: | :------------: | :---: |
-|    cc.da.wv |   **0.5917**   |  0%   |
-|  wiki.da.wv |     0.5851     | 5.01% |
-| connl.da.wv |     0.5243     | 5.01% |
-|  news.da.wv |     0.4961     | 5.6%  |
+| Model              |   DSD-ρ    |  DSD-OOV  | WS353-ρ |  WS353-OOV  |
+|--------------------|--------|----------|-----------|-----------|
+| wiki.da.wv         | 0.205 |  1.01%   | **0.639** |  0.85% |
+| cc.da.wv           | **0.313** |  0.00% | 0.533   |  1.70%   |
+| conll17.da.wv      | 0.150  | 0.00% | 0.549   |  1.70%   |
+| news.da.wv         | 0.306  | 0.00% | 0.541   |  4.25%   |
+| sketchengine.da.wv | 0.197  | 0.00% | 0.626   |  0.85%   |
 
-
-
-## :hatching_chick:Get started using word embeddings
+## 🐣 Get started using word embeddings
 
 Word embeddings are essentially a representation of a word in a n-dimensional space.
 Having a vector representation of a word enables us to find distances between words.
@@ -61,7 +62,7 @@ This snippet shows how to automatically download and load pretrained static word
 from danlp.models.embeddings  import load_wv_with_gensim, load_wv_with_spacy
 
 # Load with gensim
-word_embeddings = load_wv_with_gensim('connl.da.wv')
+word_embeddings = load_wv_with_gensim('conll17.da.wv')
 
 word_embeddings.most_similar(positive=['københavn', 'england'], negative=['danmark'], topn=1)
 # [('london', 0.7156291604042053)]
@@ -77,7 +78,7 @@ word_embeddings.similarity('københavn', 'esbjerg')
 
 
 # Load with spacy
-word_embeddings = load_wv_with_spacy('connl.da.wv')
+word_embeddings = load_wv_with_spacy('conll17.da.wv')
 
 ```
 
@@ -105,7 +106,7 @@ print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==s
 
 
 
-## :wrench: ​Training details for Flair embeddings
+## 🔧 Training details for Flair embeddings
 
 Thus repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
 
@@ -114,9 +115,6 @@ The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequenc
 
 
 The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](docs/models/pos.md) and [ner](docs/models/ner.md) . 
-
-
-
 
 
 ## 🎓 References

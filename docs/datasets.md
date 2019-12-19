@@ -12,6 +12,9 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Danish Dependency Treebank](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
 | [WordSim-353](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ❌ |
+| [WordSim-353](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ | 
+| [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ | 
+
 
 #### Danish Dependency Treebank
 The DDT dataset (Buch-Kromann et al. 2003) has annotations for dependency parsing, POS and NER.
@@ -104,6 +107,11 @@ The WordSim-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il
 contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been
 [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen.
+
+#### Danish Similarity Dataset
+The [Danish Similarity Dataset](https://github.com/kuhumcst/Danish-Similarity-Dataset) 
+consists of 99 word pairs annotated by 38 annotators with a similarity score (1-6).
+It is constructed with frequently used Danish words.
 
 ## 🎓 References
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.

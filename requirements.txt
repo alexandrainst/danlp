@@ -4,4 +4,5 @@ spacy==2.1.4
 gensim==3.7.3
 flair==0.4.2
 pyconll==2.1.1
+pandas==0.25.1
 srsly
