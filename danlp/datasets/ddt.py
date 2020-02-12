@@ -1,6 +1,6 @@
 import os
 
-
+import pyconll
 
 from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func, DATASETS
 
@@ -15,9 +15,11 @@ def _any_part_exist(parts: list):
 class DDT:
     """
     The DDT dataset has been annotated with NER tags in the IOB2 format.
+    The dataset is downloaded in CoNLL-U format, but with this class
+    it can be converted to spaCy format or a simple NER format
+    similar to the CoNLL 2003 NER format.
 
     """
-
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'ddt'
         self.file_extension = DATASETS[self.dataset_name]['file_extension']
@@ -31,7 +33,6 @@ class DDT:
                 or a tuple of (train, dev, test) pyconll.Conll
                 depending on predefined_split
         """
-        import pyconll
 
         parts = [None, None, None]  # Placeholder list to put predefined parts of dataset [train, dev, test]
         for i, part in enumerate(['train', 'dev', 'test']):
@@ -48,6 +49,27 @@ class DDT:
         parts[0].extend(parts[1])
         parts[0].extend(parts[2])
 
+        return parts[0]
+
+    def load_as_simple_ner(self, predefined_splits: bool = False):
+        conllu_parts = self.load_as_conllu(predefined_splits)
+
+        if not predefined_splits:
+            conllu_parts = [conllu_parts]
+
+        parts = []
+        for conllu_part in conllu_parts:
+            part_sentences = []
+            part_entities = []
+
+            for sent in conllu_part:
+                part_sentences.append([token.form for token in sent._tokens])
+                part_entities.append([token.misc['name'].pop() for token in sent._tokens])
+
+            parts.append([part_sentences, part_entities])
+
+        if predefined_splits:
+            return parts
         return parts[0]
 
 
@@ -71,7 +93,7 @@ class DDT:
         columns = {1: 'text', 3: 'pos', 9: 'ner'}
 
         # init a corpus using column format, data folder and the names of the train, dev and test files
-        corpus: Corpus = ColumnCorpus(self.dataset_dir, columns,
+        corpus: Corpus = ColumnCorpus(self.dataset_dir, columns, comment_symbol='#',
                                       train_file='{}.{}{}'.format(self.dataset_name, 'train', self.file_extension),
                                       test_file='{}.{}{}'.format(self.dataset_name, 'test', self.file_extension),
                                       dev_file='{}.{}{}'.format(self.dataset_name, 'dev', self.file_extension))
@@ -83,7 +105,8 @@ class DDT:
 
             for sentence in dataset.sentences:
                 for token in sentence.tokens:
-                    token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter", "")
+                    if 'ner' in token.tags:
+                        token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter", "")
 
         return corpus
 
