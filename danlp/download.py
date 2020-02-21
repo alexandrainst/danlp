@@ -94,8 +94,8 @@ MODELS = {
     # POS MODELS
     'flair.pos': {
         'url': DANLP_S3_URL + '/models/flair.pos.zip',
-        'md5_checksum': 'b9892d4c1c654503dff7e0094834d6ed',
-        'size': 426404955,
+        'md5_checksum': '627321171ecf4f7933b5e10602a60cbe',
+        'size': 424727006,
         'file_extension': '.pt'
     },
     
@@ -334,5 +334,3 @@ def _extract_single_file_from_zip(cache_dir: str, file_in_zip: str, full_path, z
     os.rename(outpath, full_path)
 
     shutil.rmtree(tmp_path)
-
-
