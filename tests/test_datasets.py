@@ -66,7 +66,13 @@ class TestNerDatasets(unittest.TestCase):
     def test_ddt_dataset_with_spacy(self):
         ddt = DDT()  # Load dataset
         corpus = ddt.load_with_spacy()
+
+        num_sents_train = 0
+        for paragraph in [paragraph[1] for paragraph in list(corpus.train_tuples)]:
+            num_sents_train += len(paragraph)
+
         self.assertIsInstance(corpus, GoldCorpus)
+        self.assertEqual(self.train_len, num_sents_train)
 
     def test_wikiann_dataset(self):
         # Change to a sample of the full wikiann to ease test computation

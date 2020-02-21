@@ -130,7 +130,7 @@ class DDT:
             if not os.path.isfile(json_path):  # Convert the conllu files to json
                 with open(conll_path, 'r') as file:
                     file_as_string = file.read()
-                    file_as_string = file_as_string.replace("name=", "").replace("|SpaceAfter", "")
+                    file_as_string = file_as_string.replace("name=", "").replace("|SpaceAfter=No", "")
                     file_as_json = conllu2json(file_as_string)
 
                     srsly.write_json(json_path, file_as_json)
