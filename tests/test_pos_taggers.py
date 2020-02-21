@@ -10,8 +10,8 @@ class TestPosTaggers(unittest.TestCase):
     def test_flair_tagger(self):
         pass
         # Download model beforehand
-        #download_model('flair.pos', DEFAULT_CACHE_DIR, process_func=_unzip_process_func, verbose=True)
-        #print("Downloaded the flair model")
+        download_model('flair.pos', DEFAULT_CACHE_DIR, process_func=_unzip_process_func, verbose=True)
+        print("Downloaded the flair model")
 
         # Load the POS tagger using the DaNLP wrapper
         flair_model = load_pos_tagger_with_flair()
