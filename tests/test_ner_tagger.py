@@ -3,7 +3,7 @@ import unittest
 from flair.data import Sentence
 
 from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
-from danlp.models.ner_taggers import load_ner_tagger_with_flair
+from danlp.models import load_ner_tagger_with_flair
 
 
 class TestNerTaggers(unittest.TestCase):

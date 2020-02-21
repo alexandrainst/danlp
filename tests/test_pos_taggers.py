@@ -8,7 +8,6 @@ from danlp.models.pos_taggers import load_pos_tagger_with_flair
 
 class TestPosTaggers(unittest.TestCase):
     def test_flair_tagger(self):
-        pass
         # Download model beforehand
         download_model('flair.pos', DEFAULT_CACHE_DIR, process_func=_unzip_process_func, verbose=True)
         print("Downloaded the flair model")

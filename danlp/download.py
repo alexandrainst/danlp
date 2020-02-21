@@ -105,6 +105,14 @@ MODELS = {
         'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
         'size': 419047115,
         'file_extension': '.pt'
+    },
+
+    # NER MODELS
+    'spacy': {
+        'url': DANLP_S3_URL + '/models/spacy.zip',
+        'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
+        'size': 419047115,
+        'file_extension': ''
     }
 }
 
@@ -200,7 +208,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
     model_file = model_name + model_info['file_extension'] if not file_extension else model_name + file_extension
     model_file_path = os.path.join(cache_dir, model_file)
 
-    if not os.path.isfile(model_file_path) or force_download:
+    if not os.path.exists(model_file_path) or force_download:
         os.makedirs(cache_dir, exist_ok=True)
 
         _download_and_process(model_info, process_func, model_file_path, verbose)
