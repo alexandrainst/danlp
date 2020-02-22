@@ -110,8 +110,8 @@ MODELS = {
     # NER MODELS
     'spacy': {
         'url': DANLP_S3_URL + '/models/spacy.zip',
-        'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
-        'size': 419047115,
+        'md5_checksum': '43de8cadab206234537b04a4cca24e71',
+        'size': 1261762677,
         'file_extension': ''
     }
 }
