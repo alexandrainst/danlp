@@ -33,8 +33,7 @@ The table below has the achieved F1 score on the test set:
 
 | Model | LOC | ORG | PER | AVG |
 |-------|-----|-----|-----|-----|
-| Multilingual BERT | 78.49 | 73.23 | 89.39 | **80.37** |
-| flair | 86.02 | 61.61 | 93.11 | 80.24 |
+| flair | 84.82 | 62.95 | 93.15 | 81.78 |
 | daner | 61.38 | 27.55 | 70.05 | 52.99 |
 | Polyglot | 58.33 | 25.40 | 20.69 | 34.81 |
 
@@ -45,11 +44,11 @@ The table below has the achieved F1 score on the test set:
 Below is a small snippet for getting started with the Flair name entity recognition tagger trained by Alexandra Institute. More examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page, and the NER tagger is also integrated direct in the flair framework.
 
 ```python
-from danlp.models.ner_taggers import load_ner_tagger_with_flair
+from danlp.models.ner_taggers import load_flair_ner_model
 from flair.data import Sentence
 
 # Load the NER tagger using the DaNLP wrapper
-flair_model = load_ner_tagger_with_flair()
+flair_model = load_flair_ner_model()
 
 # Using the flair NER tagger
 sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
@@ -69,8 +68,6 @@ The code for training can be found on Flairs GitHub, and the following parameter
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
 
 The accuracy reported is from from the test set provided by DDT on a single run.
-
-
 
 
 

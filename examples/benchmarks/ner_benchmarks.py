@@ -1,7 +1,9 @@
 import time
 
+from flair.data import Sentence, Token
+
 from danlp.datasets import DDT
-from danlp.models import load_spacy_model
+from danlp.models import load_spacy_model, load_flair_ner_model
 
 from seqeval.metrics import classification_report
 
@@ -87,6 +89,33 @@ def benchmark_spacy_mdl():
                                 digits=4))
 
 
+def benchmark_flair_mdl():
+    tagger = load_flair_ner_model()
+
+    start = time.time()
+
+    flair_sentences = []
+    for i, sentence in enumerate(sentences_tokens):
+        flair_sentence = Sentence()
+
+        for token_txt in sentence:
+            flair_sentence.add_token(Token(token_txt))
+        flair_sentences.append(flair_sentence)
+
+    tagger.predict(flair_sentences, verbose=True)
+    predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
+
+    print("Made predictions on {} sentences and {} tokens in {}s".format(
+        num_sentences, num_tokens, time.time() - start)
+    )
+
+    assert len(predictions) == num_sentences
+
+    print(classification_report(sentences_entities, remove_miscs(predictions),
+                                    digits=4))
+
+
 if __name__ == '__main__':
-    benchmark_spacy_mdl()
     benchmark_polyglot_mdl()
+    benchmark_spacy_mdl()
+    benchmark_flair_mdl()

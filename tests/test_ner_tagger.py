@@ -3,7 +3,7 @@ import unittest
 from flair.data import Sentence
 
 from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
-from danlp.models import load_ner_tagger_with_flair
+from danlp.models import load_flair_ner_model
 
 
 class TestNerTaggers(unittest.TestCase):
@@ -13,7 +13,7 @@ class TestNerTaggers(unittest.TestCase):
         print("Downloaded the flair model")
 
         # Load the NER tagger using the DaNLP wrapper
-        flair_model = load_ner_tagger_with_flair()
+        flair_model = load_flair_ner_model()
 
         # Using the flair POS tagger
         sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen')
