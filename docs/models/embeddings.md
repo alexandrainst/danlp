@@ -11,6 +11,7 @@ popular NLP frameworks.
 | [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | - | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
 | [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | - | 312,956 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
 | [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔ |
+| [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec | | 178,649 | Word | CBOW | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔ |
 | flair | Flair | - | | Char | LM | |  ✔️ |
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
@@ -49,6 +50,7 @@ between words.
 | conll17.da.wv      | 0.150  | 0.00% | 0.549   |  1.70%   |
 | news.da.wv         | 0.306  | 0.00% | 0.541   |  4.25%   |
 | sketchengine.da.wv | 0.197  | 0.00% | 0.626   |  0.85%   |
+| dslreddit.da.wv    | 0.198  | 0.00% | 0.443   |  1.98%   |
 
 ## 🐣 Get started using word embeddings
 

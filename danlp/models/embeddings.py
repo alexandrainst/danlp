@@ -1,4 +1,6 @@
 import os
+from tempfile import TemporaryDirectory
+from time import sleep
 
 from gensim.models.keyedvectors import KeyedVectors
 
@@ -6,7 +8,7 @@ from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, \
     _unzip_process_func
 
 AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'conll17.da.wv',
-                        'news.da.wv', 'sketchengine.da.wv']
+                        'news.da.wv', 'sketchengine.da.wv', 'dslreddit.da.wv']
 
 AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv',
                                 'sketchengine.da.swv']
@@ -335,6 +337,9 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
         os.remove(org_vec_file)
         os.remove(new_vec_file)
 
+    elif pretrained_embedding == 'dslreddit.da.wv':
+        _process_dslreddit(tmp_file_path, cache_dir)
+
     elif pretrained_embedding == 'wiki.da.swv':
         _unzip_process_func(tmp_file_path, clean_up_raw_data, verbose,
                             file_in_zip='wiki.da.bin')
@@ -367,6 +372,25 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
         os.remove(tmp_file_path)
 
 
+def _process_dslreddit(tmp_file_path: str, cache_dir: str,
+                       embedding_name: str = "dslreddit.da.wv"):
+    from zipfile import ZipFile
+
+    tmp_dir = TemporaryDirectory()
+    with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
+        zip_file.extractall(path=tmp_dir.name)
+
+    tmp_wv_path = os.path.join(tmp_dir.name, "word2vec_dsl_sentences_reddit_sentences_300_cbow_negative.kv")
+
+    word_vecs = KeyedVectors.load(tmp_wv_path, mmap='r')
+    assert_wv_dimensions(word_vecs, embedding_name)
+
+    bin_file_path = os.path.join(cache_dir, embedding_name + ".bin")
+
+    word_vecs.save_word2vec_format(bin_file_path, binary=True)
+    tmp_dir.cleanup()
+
+
 def assert_wv_dimensions(wv: KeyedVectors, pretrained_embedding: str):
     """
     This functions will check the dimensions of some wordembeddings wv,
@@ -385,3 +409,6 @@ def assert_wv_dimensions(wv: KeyedVectors, pretrained_embedding: str):
 
     assert len(wv.vocab) == vocab_size, vocab_err_msg
     assert wv.vector_size == embedding_dimensions, dim_err_msg
+
+if __name__ == '__main__':
+    _process_dslreddit('/home/alexandra/Downloads/word2vec_dsl_sentences_reddit_sentences_300_cbow_negative.zip', '/home/alexandra/.danlp')

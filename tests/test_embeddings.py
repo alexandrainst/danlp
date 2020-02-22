@@ -22,8 +22,13 @@ class TestEmbeddings(unittest.TestCase):
 
         AVAILABLE_EMBEDDINGS.append('wiki.da.small.wv')
 
-        # Lets download the model and unzip it
-        download_model('wiki.da.small.wv', process_func=_unzip_process_func)
+        self.embeddings_for_testing = [
+            'wiki.da.small.wv',
+            'dslreddit.da.wv'
+        ]
+        # Lets download the models and unzip it
+        for emb in self.embeddings_for_testing:
+            download_model(emb, process_func=_unzip_process_func)
 
     def test_embeddings_with_spacy(self):
         with self.assertRaises(ValueError):
@@ -36,11 +41,10 @@ class TestEmbeddings(unittest.TestCase):
             self.assertTrue(token.has_vector)
 
     def test_embeddings_with_gensim(self):
-        embeddings = load_wv_with_gensim('wiki.da.small.wv')
+        for emb in self.embeddings_for_testing:
+            embeddings = load_wv_with_gensim(emb)
+            self.assertEqual(MODELS[emb]['vocab_size'], len(embeddings.vocab))
 
-        most_similar = embeddings.most_similar(positive=['københavn', 'england'], negative=['danmark'], topn=1)
-
-        self.assertEqual(most_similar[0], ('london', 0.5180857181549072))
 
     def test_embeddings_with_flair(self):
         from flair.data import Sentence

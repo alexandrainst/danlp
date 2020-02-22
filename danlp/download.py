@@ -50,6 +50,14 @@ MODELS = {
         'md5_checksum': 'e0766f997e04dddf65aec5e2691bf36d',
         'file_extension': '.bin'
     },
+    'dslreddit.da.wv': {
+        'url': 'https://ndownloader.figshare.com/files/15111116',
+        'file_extension': '.bin',
+        'dimensions': 300,
+        'vocab_size': 178649,
+        'size': 202980709,
+        'md5_checksum': '6846134374cfae008a32f62dea5ed8bf',
+    },
     'sketchengine.da.wv': {
         'url': 'https://embeddings.sketchengine.co.uk/static/models/lc/datenten14_5.vec',
         'dimensions': 100,
