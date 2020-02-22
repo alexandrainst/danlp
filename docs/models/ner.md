@@ -2,20 +2,33 @@ Named Entity Recognition
 ===============
 This repository keeps a list of pretrained NER models publicly available in Danish.
 
-| Model | Paper | Trained by | Tags |
-|------|-------|------------|------|
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | [Al-Rfou et al. (2014)](https://arxiv.org/abs/1410.3791) | Polyglot | PER, ORG, LOC|
-| [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC |
-| [flair](<https://github.com/zalandoresearch/flair>) | [Akbik et al. 2018](<https://www.aclweb.org/anthology/C18-1139/>) | Alexandra Instittut | PER, ORG, LOC |
-| Multilingual BERT |  | [MIPT](https://mipt.ru/english/) ||
+| Model | Train Data | Trained by | Tags | DaNLP |
+|-------|-------|------------|------|-------|
+| [Flair](<https://github.com/zalandoresearch/flair>) | DaNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
+| Multilingual-BERT | DaNE+NorNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
+| Danish-BERT | DaNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
+| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ | 
+| [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
+#### Multilingual-BERT
+Google released the Multilingual BERT. We have.
 
+You can download the weights for the finetuned NER model directly here:
+Or you can load the model through the DaNLP as a pytorch model in the transformers framework.
+
+#### Flair
+The Flair model 
+
+#### Danish Bert
+The NER model is trained on top of the Danish BERT provided by BotXO.
 
 ## 📈 Benchmarks
 
 The benchmarks has been performed on the test part of the
-[Danish Dependency Treebank](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank).
-The treebank is annotated by the Alexandra Institute with the **LOC**, **ORG** and **PER** entity tags. Below is the achieved F1 score on the test set:
+[DaNE](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank) dataset.
+We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited 
+practical use.
+The table below has the achieved F1 score on the test set:
 
 
 | Model | LOC | ORG | PER | AVG |
