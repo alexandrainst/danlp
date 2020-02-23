@@ -1,6 +1,6 @@
 import os
+import random
 
-from sklearn.model_selection import train_test_split
 from danlp.download import download_dataset, DEFAULT_CACHE_DIR, DATASETS
 
 
@@ -44,10 +44,18 @@ class WikiAnn:
             # Convert the conll ner files to json
             with open(conll_path, 'r') as file:
                 file_as_string = file.read()
-                file_as_json = conll_ner2json(file_as_string)
+                # n_sents=0 means we do not group the sentences into documents
+                file_as_json = conll_ner2json(file_as_string, n_sents=0,
+                                              no_print=True)
 
                 all_sents = file_as_json[0]['paragraphs'][0]['sentences']
-                train_sents, dev_sents = train_test_split(all_sents, test_size=0.3, random_state=42)
+
+                random.seed(42)
+                random.shuffle(all_sents)
+
+                train_size = round(len(all_sents) * 0.7)
+                train_sents = all_sents[:train_size]
+                dev_sents = all_sents[train_size:]
 
                 train_json = [{'id': 0, 'paragraphs': [{'sentences': train_sents}]}]
                 dev_json = [{'id': 0, 'paragraphs': [{'sentences': dev_sents}]}]

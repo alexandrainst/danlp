@@ -1,5 +1,6 @@
 import shutil
 import unittest
+from collections import defaultdict
 
 from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
@@ -30,6 +31,22 @@ class TestNerDatasets(unittest.TestCase):
         full_dataset = self.ddt.load_as_conllu(predefined_splits=False)
         self.assertEqual(len(full_dataset), self.train_len + self.dev_len + self.test_len)
 
+    def test_ddt_simple_ner(self):
+        train, dev, test = self.ddt.load_as_simple_ner(predefined_splits=True)
+
+        self.assertEqual([len(train[0]), len(dev[0]), len(test[0])], [self.train_len, self.dev_len, self.test_len])
+
+        all_sentences, all_entities = self.ddt.load_as_simple_ner(predefined_splits=False)
+        self.assertEqual(len(all_sentences), self.train_len + self.dev_len + self.test_len)
+
+        data = defaultdict(int)
+        for entities in train[1]:
+            for entity in entities:
+                if "B" in entity:
+                    data[entity[2:]] += 1
+        self.assertDictEqual(data, {'ORG': 802, 'LOC': 945, 'PER': 1249,
+                                    'MISC': 1007})
+
     def test_ddt_dataset_with_flair(self):
         flair_corpus = self.ddt.load_with_flair()
 
@@ -40,8 +57,8 @@ class TestNerDatasets(unittest.TestCase):
 
         ner_tags = flair_corpus.make_tag_dictionary('ner').idx2item
         asserted_ner_tags = [
-            b'B-ORG', b'B-PER', b'B-LOC',
-            b'I-ORG', b'I-PER', b'I-LOC',
+            b'B-ORG', b'B-PER', b'B-LOC', b'B-MISC',
+            b'I-ORG', b'I-PER', b'I-LOC', b'I-MISC',
             b'O', b'<START>', b'<STOP>', b'<unk>'
         ]
         self.assertCountEqual(ner_tags, asserted_ner_tags)
@@ -49,7 +66,13 @@ class TestNerDatasets(unittest.TestCase):
     def test_ddt_dataset_with_spacy(self):
         ddt = DDT()  # Load dataset
         corpus = ddt.load_with_spacy()
+
+        num_sents_train = 0
+        for paragraph in [paragraph[1] for paragraph in list(corpus.train_tuples)]:
+            num_sents_train += len(paragraph)
+
         self.assertIsInstance(corpus, GoldCorpus)
+        self.assertEqual(self.train_len, num_sents_train)
 
     def test_wikiann_dataset(self):
         # Change to a sample of the full wikiann to ease test computation

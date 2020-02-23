@@ -2,26 +2,38 @@ Named Entity Recognition
 ===============
 This repository keeps a list of pretrained NER models publicly available in Danish.
 
-| Model | Paper | Trained by | Tags |
-|------|-------|------------|------|
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | [Al-Rfou et al. (2014)](https://arxiv.org/abs/1410.3791) | Polyglot | PER, ORG, LOC|
-| [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC |
-| [flair](<https://github.com/zalandoresearch/flair>) | [Akbik et al. 2018](<https://www.aclweb.org/anthology/C18-1139/>) | Alexandra Instittut | PER, ORG, LOC |
-| Multilingual BERT |  | [MIPT](https://mipt.ru/english/) ||
+| Model | Train Data | Trained by | Tags | DaNLP |
+|-------|-------|------------|------|-------|
+| [Flair](<https://github.com/zalandoresearch/flair>) | DaNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
+| Multilingual-BERT | DaNE+NorNE | The Alexandra Institute | PER, ORG, LOC | ❌ |
+| Danish-BERT | DaNE | The Alexandra Institute | PER, ORG, LOC | ❌ |
+| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ | 
+| [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
+#### Multilingual-BERT
+Google released the Multilingual BERT. We have.
 
+You can download the weights for the finetuned NER model directly here:
+Or you can load the model through the DaNLP as a pytorch model in the transformers framework.
+
+#### Flair
+The Flair model 
+
+#### Danish Bert
+The NER model is trained on top of the Danish BERT provided by BotXO.
 
 ## 📈 Benchmarks
 
 The benchmarks has been performed on the test part of the
-[Danish Dependency Treebank](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank).
-The treebank is annotated by the Alexandra Institute with the **LOC**, **ORG** and **PER** entity tags. Below is the achieved F1 score on the test set:
+[DaNE](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-dependency-treebank) dataset.
+We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited 
+practical use.
+The table below has the achieved F1 score on the test set:
 
 
 | Model | LOC | ORG | PER | AVG |
 |-------|-----|-----|-----|-----|
-| Multilingual BERT | 78.49 | 73.23 | 89.39 | **80.37** |
-| flair | 86.02 | 61.61 | 93.11 | 80.24 |
+| flair | 84.82 | 62.95 | 93.15 | 81.78 |
 | daner | 61.38 | 27.55 | 70.05 | 52.99 |
 | Polyglot | 58.33 | 25.40 | 20.69 | 34.81 |
 
@@ -32,11 +44,11 @@ The treebank is annotated by the Alexandra Institute with the **LOC**, **ORG** a
 Below is a small snippet for getting started with the Flair name entity recognition tagger trained by Alexandra Institute. More examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page, and the NER tagger is also integrated direct in the flair framework.
 
 ```python
-from danlp.models.ner_taggers import load_ner_tagger_with_flair
+from danlp.models.ner_taggers import load_flair_ner_model
 from flair.data import Sentence
 
 # Load the NER tagger using the DaNLP wrapper
-flair_model = load_ner_tagger_with_flair()
+flair_model = load_flair_ner_model()
 
 # Using the flair NER tagger
 sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
@@ -56,8 +68,6 @@ The code for training can be found on Flairs GitHub, and the following parameter
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
 
 The accuracy reported is from from the test set provided by DDT on a single run.
-
-
 
 
 

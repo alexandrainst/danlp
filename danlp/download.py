@@ -102,8 +102,8 @@ MODELS = {
     # POS MODELS
     'flair.pos': {
         'url': DANLP_S3_URL + '/models/flair.pos.zip',
-        'md5_checksum': 'b9892d4c1c654503dff7e0094834d6ed',
-        'size': 426404955,
+        'md5_checksum': '627321171ecf4f7933b5e10602a60cbe',
+        'size': 424727006,
         'file_extension': '.pt'
     },
     
@@ -113,14 +113,22 @@ MODELS = {
         'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
         'size': 419047115,
         'file_extension': '.pt'
+    },
+
+    # NER MODELS
+    'spacy': {
+        'url': DANLP_S3_URL + '/models/spacy.zip',
+        'md5_checksum': '43de8cadab206234537b04a4cca24e71',
+        'size': 1261762677,
+        'file_extension': ''
     }
 }
 
 DATASETS = {
     'ddt': {
         'url': DANLP_S3_URL + '/datasets/ddt.zip',
-        'md5_checksum': '7bdd5d4f43dd9c4de35a48ea58f950ca',
-        'size': 1205299,
+        'md5_checksum': 'b087c3a525f1cdc868b3f0a2e437a04d',
+        'size': 1209710,
         'file_extension': '.conllu'
     },
     'wikiann': {
@@ -208,7 +216,7 @@ def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_
     model_file = model_name + model_info['file_extension'] if not file_extension else model_name + file_extension
     model_file_path = os.path.join(cache_dir, model_file)
 
-    if not os.path.isfile(model_file_path) or force_download:
+    if not os.path.exists(model_file_path) or force_download:
         os.makedirs(cache_dir, exist_ok=True)
 
         _download_and_process(model_info, process_func, model_file_path, verbose)
@@ -342,5 +350,3 @@ def _extract_single_file_from_zip(cache_dir: str, file_in_zip: str, full_path, z
     os.rename(outpath, full_path)
 
     shutil.rmtree(tmp_path)
-
-
