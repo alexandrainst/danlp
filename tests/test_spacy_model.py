@@ -20,18 +20,16 @@ class TestSpacyModel(unittest.TestCase):
     def test_predictions(self):
 
         nlp = load_spacy_model()
-        some_text = "jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen"
+        some_text = "Jeg gik en tur med Lars"
         doc = nlp(some_text)
 
-        self.assertEqual(str(doc.ents[0]), 'Jens-Peter E. Hansen')
+        self.assertEqual(str(doc.ents[0]), 'Lars')
         self.assertTrue(doc.is_parsed)
         self.assertTrue(doc.is_nered)
         self.assertTrue(doc.is_tagged)
 
         predicted_pos_tags = [token.tag_ for token in doc]
-        asserted_pos_tags = ['PRON', 'VERB', 'ADP', 'DET', 'NOUN', 'ADP',
-                             'AUX', 'ADJ', 'ADV', 'ADP', 'PROPN', 'PROPN',
-                             'PROPN']
+        asserted_pos_tags = ['PRON', 'VERB', 'DET', 'NOUN', 'ADP', 'PROPN']
 
         self.assertListEqual(predicted_pos_tags, asserted_pos_tags)
 
