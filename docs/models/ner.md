@@ -5,8 +5,8 @@ This repository keeps a list of pretrained NER models publicly available in Dani
 | Model | Train Data | Trained by | Tags | DaNLP |
 |-------|-------|------------|------|-------|
 | [Flair](<https://github.com/zalandoresearch/flair>) | DaNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
-| Multilingual-BERT | DaNE+NorNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
-| Danish-BERT | DaNE | The Alexandra Institute | PER, ORG, LOC | ✔️ |
+| Multilingual-BERT | DaNE+NorNE | The Alexandra Institute | PER, ORG, LOC | ❌ |
+| Danish-BERT | DaNE | The Alexandra Institute | PER, ORG, LOC | ❌ |
 | [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ | 
 | [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
