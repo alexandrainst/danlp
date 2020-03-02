@@ -5,6 +5,7 @@ import shutil
 import urllib
 from pathlib import Path
 from typing import Callable
+from tempfile import NamedTemporaryFile
 
 from tqdm import tqdm
 
@@ -265,7 +266,7 @@ def _download_and_process(meta_info: dict, process_func: Callable, single_file_p
 
         _check_process_func(process_func)
 
-        tmp_file_path = "/tmp/{}.tmp".format(random_string())
+        tmp_file_path = NamedTemporaryFile().name
 
         _download_file(meta_info, tmp_file_path, verbose=verbose)
 
