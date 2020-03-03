@@ -30,13 +30,12 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 **News**
 
-- 🎉 Version 0.0.5 has been [released](https://github.com/alexandrainst/danlp/releases) with the new Danish Similarity Dataset
+- 🎉 Version 0.0.6 has been [released](https://github.com/alexandrainst/danlp/releases) with a spaCy model.
   
 
 **Next up**
 
-- 🚧 Improved models trained on the new annotated [Danish NER dataset](docs/datasets.md#danish-dependency-treebank)
-- 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework
+- 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework. Follow the progress in spaCy [issue #3056](https://github.com/explosion/spaCy/issues/3056)
 
 
 
