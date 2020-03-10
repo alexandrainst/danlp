@@ -32,7 +32,7 @@ it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf
 | Name                                                         | Created by          | Size      | Licence      | Tags                                                      | Domain                                      | DaNLP |
 | ------------------------------------------------------------ | ------------------- | --------- | ------------ | --------------------------------------------------------- | ------------------------------------------- | ----- |
 | Twitter_sentiment                                            | Alexandra Institute | Test: 400 | BSD 3-Clause | [positive, neutral, negative] and [objective, subjective] | SoMe (twiiter)                              |       |
-| [Europarl_sentiment](<https://github.com/fnielsen/europarl-da-sentiment>) | Finn Årup Nielsen   | Test: 184 | open         | integer score: -5 to 5                                    | EuroParl corpus                             |       |
+| [Europarl_sentiment](<https://github.com/fnielsen/europarl-da-sentiment>) | Finn Årup Nielsen   | Test: 184 | open         | integer score: -5 to 5                                    | EuroParl corpus                             | ✔️     |
 | [lcc-_sentiment](<https://github.com/fnielsen/lcc-sentiment>) | Finn Årup Nielsen   | Test: 499 | CC           | integer score: -5 to 5                                    | Web , news (The Leipzig Corpora Collection) |       |
 
 
@@ -41,10 +41,10 @@ it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf
 
 The benchmark is made by  grouping the relevant models scores and relevant datasets scores into the there classes defined as follows: a score of zero to be neutral, a positive score to be positive and a negative score to be negative. 
 
-| **Model** / dataset | Twitter_sentiment                                            | Europarl_sentiment                                           | lcc-_sentiment                                               |
+| **Model** / dataset | Twitter_sentiment                                            | Europarl_sentiment                                           | lcc_sentiment                                                |
 | ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Afinn               | **Accuracy**:  0.5  **F1-scores**: Negative: 0.58,  Neutral: 0.31 Positive: 0.51 | **Accuracy**:  0.68  **F1-scores**: Negative: 0.62,  Neutral: 0.71 Positive: 0.70 | **Accuracy**:  0.66  **F1-scores**: Negative: 0.47,  Neutral: 0.73 Positive: 0.62 |
-| SentidaV2           | **Accuracy**:  0.51  **F1-scores**: Negative: 0.62,  Neutral:  0.0, Positive: 0.51 | **Accuracy**:  0.49  **F1-scores**: Negative: 0.56,  Neutral: 0.25, Positive: 0.58 | **Accuracy**:  0.38  **F1-scores**: Negative: 0.51,  Neutral: 0.08, Positive: 0.49 |
+| Afinn               | **Accuracy**:  0.53  **F1-scores**: Negative: 0.60,  Neutral: 0.35, Positive: 0.55 | **Accuracy**:  0.68  **F1-scores**: Negative: 0.62,  Neutral: 0.71 Positive: 0.70 | **Accuracy**:  0.66  **F1-scores**: Negative: 0.47,  Neutral: 0.73 Positive: 0.62 |
+| SentidaV2           | **Accuracy**:  0.52  **F1-scores**: Negative: 0.63,  Neutral:  0.0, Positive: 0.51 | **Accuracy**:  0.49  **F1-scores**: Negative: 0.56,  Neutral: 0.25, Positive: 0.58 | **Accuracy**:  0.38  **F1-scores**: Negative: 0.51,  Neutral: 0.08, Positive: 0.49 |
 |                     |                                                              |                                                              |                                                              |
 
 
