@@ -125,8 +125,8 @@ class TestNerDatasets(unittest.TestCase):
         self.assertEqual(len(df), 184)
         
     def test_lccsentiment(self):
-        eusent = lccSent()
-        df = eusent.load_with_pandas()
+        sent = LccSent()
+        df = sent.load_with_pandas()
         self.assertEqual(len(df), 499)
         
         
