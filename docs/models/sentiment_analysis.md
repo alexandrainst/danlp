@@ -57,7 +57,9 @@ In the example folder is there a script to run some of the evaluation.
 | SentidaV2           | **Accuracy**:  0.52  **F1-scores**: Negative: 0.63,  Neutral:  0.0, Positive: 0.51 | **Accuracy**:  0.49  **F1-scores**: Negative: 0.56,  Neutral: 0.25, Positive: 0.58 | **Accuracy**:  0.38  **F1-scores**: Negative: 0.51,  Neutral: 0.08, Positive: 0.49 |
 |                     |                                                              |                                                              |                                                              |
 
+#### Extern evaluation
 
+The creators behind Sentida found it to preform better than Afinn on a binary task on a corpus from trustpilot, see there paper [Lauridsen et al. 2019](<https://tidsskrift.dk/lwo/article/view/115711>) 
 
 ## 🎓 References 
 - Mikel Artetxe, and Holger Schwenk. 2019. 
@@ -65,6 +67,8 @@ In the example folder is there a script to run some of the evaluation.
   In **TACL**.
   
 - Erik Velldal, Lilja Øvrelid, Eivind Alexander Bergem, Cathrine Stadsnes, Samia Touileb and Fredrik Jørgensen. 2018.[NoReC: The Norwegian Review Corpus.](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf) In **LREC**.
+  
+- Lauridsen et al. 2019. [SENTIDA: A New Tool for Sentiment Analyse in Danish](<https://tidsskrift.dk/lwo/article/view/115711>)
   
   
 
