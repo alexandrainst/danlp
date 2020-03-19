@@ -20,7 +20,7 @@ The NoRec project in Norway  have constructed a dataset for sentiment analysis b
 | [AFINN](https://github.com/fnielsen/afinn)         | Wordlist | BSD                        | Finn Årup Nielsen        | Score (integers), {minus: negative, zero: neutral, plus: positive} |
 | [SentidaV2](<https://github.com/esbenkc/emma>)[^1] | Wordlist | (**!**) Non commercial[^2] | Søren Orm and Esben Kran | Score (real numbers) {minus: negative, zero: neutral, plus: positive} |
 
-[1] : The sentida tool have a first version in R: <https://github.com/Guscode/Sentida>
+[1] : The sentida tool have a first version in R: <https://github.com/Guscode/Sentida>, and they report benchmark result in the paper  [Lauridsen et al. 2019](<https://tidsskrift.dk/lwo/article/view/115711>) 
 
 [2] : The documentation requires to contact the authors
 
@@ -56,10 +56,6 @@ In the example folder is there a script to run some of the evaluation.
 | Afinn               | **Accuracy**:  0.53  **F1-scores**: Negative: 0.60,  Neutral: 0.35, Positive: 0.55 | **Accuracy**:  0.68  **F1-scores**: Negative: 0.62,  Neutral: 0.71 Positive: 0.70 | **Accuracy**:  0.66  **F1-scores**: Negative: 0.47,  Neutral: 0.73 Positive: 0.62 |
 | SentidaV2           | **Accuracy**:  0.52  **F1-scores**: Negative: 0.63,  Neutral:  0.0, Positive: 0.51 | **Accuracy**:  0.49  **F1-scores**: Negative: 0.56,  Neutral: 0.25, Positive: 0.58 | **Accuracy**:  0.38  **F1-scores**: Negative: 0.51,  Neutral: 0.08, Positive: 0.49 |
 |                     |                                                              |                                                              |                                                              |
-
-#### Extern evaluation
-
-The creators behind Sentida found it to preform better than Afinn on a binary task on a corpus from trustpilot, see there paper [Lauridsen et al. 2019](<https://tidsskrift.dk/lwo/article/view/115711>) 
 
 ## 🎓 References 
 - Mikel Artetxe, and Holger Schwenk. 2019. 
