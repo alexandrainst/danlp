@@ -6,7 +6,7 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroParlSent, LccSent
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment, LccSentiment
 from danlp.datasets.word_sim import WordSim353Da
 
 
@@ -120,12 +120,12 @@ class TestNerDatasets(unittest.TestCase):
         self.assertEqual(len(dsd.words()), 197)
         
     def test_europarlsentiment(self):
-        eusent = EuroParlSent()
+        eusent = EuroparlSentiment()
         df = eusent.load_with_pandas()
         self.assertEqual(len(df), 184)
         
     def test_lccsentiment(self):
-        sent = LccSent()
+        sent = LccSentiment()
         df = sent.load_with_pandas()
         self.assertEqual(len(df), 499)
         
