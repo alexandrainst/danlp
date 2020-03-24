@@ -8,22 +8,35 @@
   <a href="https://coveralls.io/github/alexandrainst/danlp?branch=master"><img src="https://coveralls.io/repos/github/alexandrainst/danlp/badge.svg?branch=master"></a>
   <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203-blue.svg"></a>
 </div>
-
 <div align="center">
-  <h3>
-    <a href="https://github.com/alexandrainst/danlp/tree/master/docs/models">
-      Models
+  <h5>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md">
+      Named Entity Recognition
+      </a>
+      <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md">
+      Part of Speech
     </a>
     <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md">
+      Sentiment Analysis
+    </a>
+      <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md">
+      Embeddings
+      </a>
+  </h5>
+    <h5>
+   	 <a href="https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md">
       Datasets
-    </a>
-    <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/tree/master/examples">
+   	 </a>
+      <span> | </span>
+   	 <a href="https://github.com/alexandrainst/danlp/tree/master/examples">
       Examples
-    </a>
-  </h3>
+   	 </a>
+  </h5>
 </div>
+
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
 It is a collection  of available datasets and models for a variety of NLP tasks.
 It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow.
@@ -74,11 +87,11 @@ Natural Language Processing is an active area of research and it consists of man
 The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
 The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
-- [x] [Embedding of text](docs/models/embeddings.md)
-- [x] [Part of speech](docs/models/pos.md)
-- [x] [Named Entity Recognition](docs/models/ner.md)
-- [x] [Sentiment Analysis](docs/models/sentiment_analysis.md)
-- [ ] Coreference resolution
+-  [Embedding of text](docs/models/embeddings.md)
+-  [Part of speech](docs/models/pos.md)
+-  [Named Entity Recognition](docs/models/ner.md)
+-  [Sentiment Analysis](docs/models/sentiment_analysis.md)
+-  Coreference resolution
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
@@ -107,4 +120,4 @@ with a mission to create value, growth and welfare in society. The Alexandra Ins
 a network of independent Danish research and technology organisations.
 
 The work on this repository is part the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
-allocated to the Alexandra Insitute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). 
+allocated to the Alexandra Insitute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). ````
