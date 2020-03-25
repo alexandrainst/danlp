@@ -2,17 +2,19 @@ Datasets
 ========
 This section keeps a list of Danish NLP datasets publicly available. 
 
-| Dataset | Task | Words | Sents | License | DaNLP | 
+| Dataset | Task | Words | Sents | License | DaNLP |
 |---------|------|-------|-------|---------|-----------------|
-| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation | 206,700,000 | 30,178,452 |[None](http://opus.nlpl.eu/OpenSubtitles2018.php) | ❌ | 
+| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation | 206,700,000 | 30,178,452 |[None](http://opus.nlpl.eu/OpenSubtitles2018.php) | ❌ |
 | [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php) | Translation | 208,175,843 | 8,650,537 | - | ❌ |
-| [EuroParl7](http://opus.nlpl.eu/Europarl.php) | Translation | 47,761,381 | 2,323,099	 | [None](http://www.statmt.org/europarl/) | ❌ |
+| [Europarl7](http://www.statmt.org/europarl/) | Translation | 47,761,381 | 2,323,099	 | [None](http://www.statmt.org/europarl/) | ❌ |
 | [ParaCrawl5](https://paracrawl.eu/) | Translation | - | - | [CC0](https://paracrawl.eu/releases.html) | ❌ |
 | [WikiANN](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wikiann)| NER | 832.901 | 95.924 |[ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)| ✔️ |
 | [DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
+| [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
+| [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) | Sentiment | 3.359 | 184 | None | ✔️ |
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
-| [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ | 
-| [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ | 
+| [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
+| [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 
 #### Danish Dependency Treebank (DaNE)
 The DDT dataset (Buch-Kromann et al. 2003) has annotations for dependency parsing and POS. 
@@ -51,15 +53,43 @@ flair_corpus = wikiann.load_with_flair()
 The WordSim-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf) 
 contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations 
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been 
-[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Aarup Nielsen.
+[translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Årup Nielsen.
 
 #### Danish Similarity Dataset
 The [Danish Similarity Dataset](https://github.com/kuhumcst/Danish-Similarity-Dataset) 
 consists of 99 word pairs annotated by 38 annotators with a similarity score (1-6).
 It is constructed with frequently used Danish words.
 
+#### Europarl Sentiment
+The [Europarl Sentiment](https://github.com/fnielsen/europarl-da-sentiment) dataset contains sentences from 
+the [Europarl](http://www.statmt.org/europarl/) corpus which has been annotated manually by Finn Årup Nielsen.
+Each sentence has been annotated the polarity of the sentiment as an polarity score from -5 to 5. 
+The score can be converted to positive (>0), neutral (=0) and negative (<0). 
+The dataset can be loaded with the DaNLP package:
+```python
+from danlp.datasets import EuroparlSentiment
+eurosent = EuroparlSentiment()
+
+df = eurosent.load_with_pandas()
+```
+
+#### LCC Sentiment
+The [LCC Sentiment](https://github.com/fnielsen/lcc-sentiment) dataset contains sentences from Leipzig Copora Collection [(Quasthoff et al. 2006)](https://www.aclweb.org/anthology/L06-1396/) 
+which has been manually annotated by Finn Årup Nielsen.  
+Each sentence has been annotated the polarity of the sentiment as an polarity score from -5 to 5.
+The score can be converted to positive (>0), neutral (=0) and negative (<0).
+The dataset can be loaded with the DaNLP package:
+```python
+from danlp.datasets import LccSentiment
+lccsent = LccSentiment()
+
+df = lccsent.load_with_pandas()
+```
+
+
 ## 🎓 References
 - Matthias T. Buch-Kromann, Line Mikkelsen, and Stine Kern Lynge. 2003. "Danish dependency treebank". In **TLT**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. DaNE: A Named Entity Resource for Danish. In **LREC**.
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
 - Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
+- Uwe Quasthoff, Matthias Richter and Christian Biemann. 2006. [Corpus Portal for Search in Monolingual Corpora](https://www.aclweb.org/anthology/L06-1396/). In **LREC**.

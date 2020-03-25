@@ -149,7 +149,32 @@ DATASETS = {
         'md5_checksum': '5e7dad9e6c8c32aa9dd17830bed5e0f6',
         'size': 3489,
         'file_extension': '.csv'
-    }
+        },
+    # SENTIMENT EVALUATION
+    'europarl.sentiment': {
+        'url': 'https://raw.githubusercontent.com/fnielsen/europarl-da-sentiment/master/europarl-da-sentiment.csv',
+        'md5_checksum': 'eb12513f04ead1dc0b455e738bf8d831',
+        'size': 3620027,
+        'file_extension': '.csv'
+    },
+    'lcc1.sentiment': {
+        'url': 'https://raw.githubusercontent.com/fnielsen/lcc-sentiment/master/dan_mixed_2014_10K-sentences.csv',
+        'md5_checksum': 'd1b19d2aa53b4d598ffd8ca35750dd43',
+        'size': 1202967,
+        'file_extension': '.csv'
+    },
+    'lcc2.sentiment': {
+        'url': 'https://raw.githubusercontent.com/fnielsen/lcc-sentiment/master/dan_newscrawl_2011_10K-sentences.csv',
+        'md5_checksum': '4a311472bad5b934c45015d2359dfce6',
+        'size': 1386727,
+        'file_extension': '.csv'
+    },
+    'twitter_sentiment': {
+        'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
+        'md5_checksum': '22349f2807e75d79b92a314432d3b50a',
+        'size': 2402,
+        'file_extension': '.zip'
+    },
 }
 
 
@@ -302,7 +327,7 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     else:
         if verbose:
             print("The file {} exists here: {}".format(file_name, destination))
-
+            
     assert _check_file(destination) == (expected_size, expected_hash), \
         "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
 
