@@ -2,65 +2,89 @@ Part of Speech Tagging
 ======================
 This section is concerned with public available Part of Speech taggers in Danish. 
 
-| Source code | Paper | Trained by | Tags | Accuracy |
-|-------|-------|-------|-------|-------|
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | [Al-Rfou et al. (2013)](<http://www.aclweb.org/anthology/W13-3520>) | Polyglot | 12/17* |  |
-| [Flair](<https://github.com/zalandoresearch/flair>) | [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>) | Alexandra Instittut | 17  Universal part of speech | 97,14% |
+| Model                                                        | Train Data | License | Trained by | Tags | DaNLP |
+|-------|-------|-------|-------|-------|-------|
+| [Polyglot](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#polyglot) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot | 17  Universal part of speech | ❌ |
+| [Flair](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#flair>) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | BSD3 | Alexandra Instittut | 17  Universal part of speech | ✔️ |
+| [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | BSD3 | Alexandra Instittut | 17  Universal part of speech | ✔️ |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
 `ADJ`: Adjective, `ADP`: Adposition , `ADV`: Adverb, `AUX`: Auxiliary verb, `CONJ`: Coordinating conjunction, `DET`: Determiner, `INTJ`: Interjection, `NOUN`: Noun, `NUM`: Numeral, `PART`: Particle `PRON`: Pronoun `PROPN`: Proper noun `PUNCT`: Punctuation `SCONJ`: Subordinating conjunction `SYM`: Symbol `VERB`: Verb `X`: Other
 
-*The polyglot model by [Al-Rfou et al. (2013)](https://www.aclweb.org/anthology/W13-3520), is trained and 
-tested on 12 universal part of speech tags originating from
-[Petrov et al. (2012)](http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf).
-The reported test accuracy is  on 96.45%. In the meantime, the 
-[documentation](<https://polyglot.readthedocs.io/en/latest/POS.html>) report that the model recognizes the
-17 universal part of speech tags.
+A medium blog using Part of Speech tagging on Danish, can be found  [here](<https://medium.com/danlp/i-klasse-med-kierkegaard-eller-historien-om-det-fede-ved-at-en-computer-kan-finde-ordklasser-189774695f3b>).
 
 ![](../imgs/postag_eksempel.gif)
+
+##### :wrench:Flair
+
+This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
+
+The code for training can be found on Flairs GitHub, and the following parameters are set:
+`learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
+
+##### :wrench:SpaCy
+
+The SpaCy model. 
+
+##### Polyglot
+
+Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/latest/POS.html>), and in the original paper [Al-Rfou et al. (2013)](https://www.aclweb.org/anthology/W13-3520). 
+
+## 📈 Benchmarks
+
+F1 scores is reported below and can be reproduced using `pos_benchmarks.py` in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder, where the details score from each class is calculated.
+
+| Model    | Micro-F1   |
+| -------- | ---------- |
+| Polyglot | 0.7380     |
+| Flair    | **0.9667** |
+| SpaCy    | 0.9550     |
 
 
 
 ## :hatching_chick: Get started using Part of speech tagging
 
-Below is a small snippet for getting started with the Flair part of speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
+Below is a small snippet for getting started with the Flair  Part of Speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
 
 ```python
-from danlp.models.pos_taggers import load_pos_tagger_with_flair
+from danlp.models.pos_taggers import load_flair_pos_model
 from flair.data import Sentence
 
 # Load the POS tagger using the DaNLP wrapper
-flair_model = load_pos_tagger_with_flair()
+tagger = load_flair_pos_model()
 
 # Using the flair POS tagger
 sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
-flair_model.predict(sentence) 
+tagger.predict(sentence, use_tokenizer=True) 
 print(sentence.to_tagged_string())
+
+# Example
+'''Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Jens-Peter <PROPN> E. <PROPN> Hansen <PROPN>'''
 ```
 
+Small getting started snippet for using the Spacy pos tagger:
+```python
+from danlp.models import load_spacy_model
 
+#Load the POS tagger using the DaNLP wrapper
+nlp = load_spacy_model()
 
-## :wrench: Training details for Flair PoS tagger
+# Using the spaCy POS tagger
+doc = nlp('Jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen')
+pred=''
+for token in doc:
+    pred += '{} <{}> '.format(token.text, token.pos_)
+print(pred)
 
-This project provides a trained part of speech tagging model for Danish using the Flair framework from Zalando.
-
-It is trained using the data from 
-[Danish Dependency Treebank (DDT)](https://github.com/UniversalDependencies/UD_Danish-DDT/tree/master),
-and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data 
-from Wikipedia and EuroParl corpus,
-see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
-
-The code for training can be found on Flairs GitHub, and the following parameters are set:
-`learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
-
-The accuracy reported is from from the test set provided by DDT on a single run.
-Notice, Flair report in Akbij et. al 2018 an accuracy on 97.84 ± 0.01 for the English POS tagger,
-which the Danish result is rather close to.
+# Example
+''' Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Jens-Peter <PROPN> E. <PROPN> Hansen <PROPN> '''
+```
 
 
 
 ## 🎓 References 
 - Rami Al-Rfou, Bryan Perozzi, and Steven Skiena. 2013. [Polyglot: Distributed Word Representations for Multilingual NLP](https://www.aclweb.org/anthology/W13-3520). In **CoNLL**.
 - Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://alanakbik.github.io/papers/coling2018.pdf). In **COLING**.
-- Slav Petrov, Dipanjan Das, and Ryan McDonald. 2012 [A Universal Part-Of-Speech Tagset](http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf)." In **LREC**.
+
+  

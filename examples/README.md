@@ -23,3 +23,7 @@ installation and run it.
 
 - Benchmark script for sentiment classification on [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment)  and [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) using the tools [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) and [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) where the scores are converted to three class problem in `sentiment_benchmarks.py`
 
+- Benchmark script of [Part of Speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spcay, flair and polyglot model is benchmarked `pos_benchmarks.py`
+
+  
+

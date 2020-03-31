@@ -1,7 +1,7 @@
 from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 
 
-def load_pos_tagger_with_flair(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+def load_flair_pos_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
 
     :param cache_dir:
