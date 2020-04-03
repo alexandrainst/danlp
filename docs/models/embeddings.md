@@ -10,9 +10,9 @@ popular NLP frameworks.
 | [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329) | word2vec | - | 2,404,836 | Word | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329) | ✔️ |
 | [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | - | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
 | [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)| fastText | - | 312,956 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️ |
-| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔ |
-| [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec | | 178,649 | Word | CBOW | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔ |
-| flair | Flair | - | | Char | LM | |  ✔️ |
+| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔️ |
+| [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec | | 178,649 | Word | CBOW | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔️ |
+| flair | Flair | - | | Char | LM | MIT |  ✔️ |
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
 words, sentences or documents.
