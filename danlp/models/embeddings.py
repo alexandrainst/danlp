@@ -71,7 +71,9 @@ def load_wv_with_spacy(pretrained_embedding: str,
 
     if os.path.isfile(bin_file_path):
         # Then we do not need to download the model
-        _process_embeddings_for_spacy(bin_file_path[:-4] + ".tmp")
+        model_info = MODELS[pretrained_embedding]
+        model_info['name'] = pretrained_embedding
+        _process_embeddings_for_spacy(bin_file_path[:-4] + ".tmp", model_info)
     else:
         download_model(pretrained_embedding, cache_dir,
                        _process_embeddings_for_spacy, verbose=True,
