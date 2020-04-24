@@ -65,7 +65,7 @@ for token in doc:
     
 ```
 
-![](../imgs/ling_feat.png)
+![](/imgs/ling_feat.png)
 
 **Visualizing the dependency tree:**
 
@@ -77,7 +77,7 @@ displacy.serve(doc, style='dep')
 
 
 
-![](../imgs/dep.png)
+![](/imgs/dep.png)
 
 ## :hatching_chick: Start ​training you own text classification model
 
@@ -89,7 +89,7 @@ As an example we will use a small dataset for sentiment classification on twitte
 
 Imagine you have the data in a e.g csv format and have it split in development and training part.  Our  twitter data have  (in time of creating this snippet)  973 training examples and 400 evaluation examples, with the following labels : 'positive' marked by 0, 'neutral' marked by 1, and 'negative' by 2. Loaded with pandas dataFrame it look like this:  
 
-![](../imgs/data_head.png)
+![](/imgs/data_head.png)
 
 It need to be convert into the format expected by spaCy for training the model, which can be done as follows:
 
@@ -135,7 +135,7 @@ prepare_data(df_dev, 'eval_dev.json')
 
 The data now look like this cuted snippet:
 
-![](../imgs/snippet_json.png)
+![](/imgs/snippet_json.png)
 
 **Ensure you have the models and embeddings download**
 
