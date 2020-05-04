@@ -116,13 +116,26 @@ MODELS = {
         'file_extension': '.pt'
     },
 
-    # NER MODELS
+    # SPacy MODELS
     'spacy': {
         'url': DANLP_S3_URL + '/models/spacy.zip',
         'md5_checksum': '43de8cadab206234537b04a4cca24e71',
         'size': 1261762677,
         'file_extension': ''
-    }
+    },
+    # BERT models
+    'bert.emotion': {
+        'url': DANLP_S3_URL + '/models/bert.emotion.zip',
+        'md5_checksum': '832214e9362b12372bedbbc8e819ea9d',
+        'size': 410902634,
+        'file_extension': ''
+    },
+    'bert.noemotion': {
+        'url': DANLP_S3_URL + '/models/bert.noemotion.zip',
+        'md5_checksum': 'e5ad6ebc0cfb3cd65677aa524c75b8c9',
+        'size': 410883271,
+        'file_extension': ''
+    },
 }
 
 DATASETS = {
