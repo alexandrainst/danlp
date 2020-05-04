@@ -11,7 +11,7 @@ Two sentiment analysis tools currently exist in Danish.
 | Model                                              | Type     | License                    | Trained by               | Tags                                                         |
 | -------------------------------------------------- | -------- | -------------------------- | ------------------------ | ------------------------------------------------------------ |
 | [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen | Score (integers) |
-| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Søren Orm and Esben Kran | Score (continuous) |
+| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Score (continuous) |
 
 #### AFINN
 The [AFINN](https://github.com/fnielsen/afinn) tool [(Nielsen 2011)](https://arxiv.org/abs/1103.2903) uses a lexicon based approach for sentiment analysis.
@@ -19,9 +19,8 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 
 
 #### Sentida
-The [Sentida](https://github.com/esbenkc/emma) tool [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
-uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value, where <0 are negative, =0 are neutral and >0 are positive.
-It exists in two versions, and in these documentations we consider the version two.
+The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
+uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value, where <0 are negative, =0 are neutral and >0 are positive. There exist to versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this  second version. 
 
 
 ## 📈 Benchmarks 
@@ -62,4 +61,3 @@ it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf
 - Erik Velldal, Lilja Øvrelid, Eivind Alexander Bergem, Cathrine Stadsnes, Samia Touileb and Fredrik Jørgensen. 2018. [NoReC: The Norwegian Review Corpus.](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf) In **LREC**.
 - Gustav Aarup Lauridsen, Jacob Aarup Dalsgaard and Lars Kjartan Bacher Svendsen. 2019. [SENTIDA: A New Tool for Sentiment Analysis in Danish](https://tidsskrift.dk/lwo/article/view/115711). In **Sprogvidenskabeligt Studentertidsskrift**.
 - Finn Årup Nielsen. 2011. [A new ANEW: evaluation of a word list for sentiment analysis in microblogs](https://arxiv.org/abs/1103.2903). In **CEUR Workshop Proceedings**.
- 
