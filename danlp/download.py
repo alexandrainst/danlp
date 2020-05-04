@@ -116,6 +116,13 @@ MODELS = {
         'file_extension': '.pt'
     },
 
+    'bert.ner': {
+        'url': DANLP_S3_URL + '/models/bert.ner.zip',
+        'md5_checksum': '',
+        'size': 2,
+        'file_extension': ''
+    },
+
     # NER MODELS
     'spacy': {
         'url': DANLP_S3_URL + '/models/spacy.zip',
