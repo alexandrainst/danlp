@@ -118,8 +118,8 @@ MODELS = {
 
     'bert.ner': {
         'url': DANLP_S3_URL + '/models/bert.ner.zip',
-        'md5_checksum': '',
-        'size': 2,
+        'md5_checksum': '8929acefcbc4b2819d0ee88fa1a79011',
+        'size': 1138686784,
         'file_extension': ''
     },
 
