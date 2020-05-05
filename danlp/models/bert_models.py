@@ -53,4 +53,8 @@ class BertEmotion:
                 return reject
             else:
                 return predict_emotion()
-    
+
+            
+def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    # wrapper function to ensure that all models in danlp is loaded in a similar way
+    return  BertEmotion(cache_dir, verbose)

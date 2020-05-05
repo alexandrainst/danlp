@@ -1,6 +1,6 @@
 import unittest
 
-from danlp.models import BertEmotion
+from danlp.models import load_bert_emotion_model
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -22,7 +22,7 @@ class TestBertEmotion(unittest.TestCase):
             
     def test_predictions(self):
         print('test prdiction')
-        model = BertEmotion()
+        model = load_bert_emotion_model()
         self.assertTrue(model.predict_if_emotion('bilen er flot')=='Emotional')
         self.assertTrue(model.predict_if_emotion('bilen er rød')=='No emotion')
         self.assertTrue(model.predict('jeg er meget glad idag')=='Glæde/Sindsro')
