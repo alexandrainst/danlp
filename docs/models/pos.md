@@ -25,7 +25,7 @@ The code for training can be found on Flairs GitHub, and the following parameter
 
 ##### :wrench:SpaCy
 
-The SpaCy model. 
+Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) 
 
 ##### Polyglot
 
