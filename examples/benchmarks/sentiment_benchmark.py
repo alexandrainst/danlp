@@ -11,6 +11,7 @@ The script benchmark the following models where scores are converted into a thre
            Requirements:
                - afinn
     - SentidaV2:
+           Sentida is converted to three class probelm by fitting a treshold for neutral on manualt annotated twitter corpus.
            The script downloadsfilles from sentida github and place them in cache folder
            Requirement:
                - Pandas
@@ -74,6 +75,15 @@ def to_label(score):
         return 'negativ'
     else:
         return 'positiv'
+    
+def to_label_sentida(score):
+    # the treshold of 0.4 is fitted on a manuelt annotated twitter corpus for sentiment on 1327 exampels
+    if score > 0.4:
+        return 'positiv'
+    if score < -0.4:
+        return 'negativ'
+    else:
+        return 'neutral'
 
 
 def afinn_benchmark(datasets):
@@ -128,7 +138,7 @@ def sentida_benchmark(datasets):
 
 
 
-        df['pred'] = df.text.map(sentida_score).map(to_label)
+        df['pred'] = df.text.map(sentida_score).map(to_label_sentida)
         df['valence'] = df['valence'].map(to_label)
 
         report(df['valence'], df['pred'], 'SentidaV2', dataset)

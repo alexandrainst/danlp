@@ -20,29 +20,34 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 
 #### Sentida
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
-uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value, where <0 are negative, =0 are neutral and >0 are positive. There exist to versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this  second version. 
+uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist to versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this  second version. 
 
 
 ## 📈 Benchmarks 
-The benchmark is made by grouping the relevant models scores and relevant datasets scores 
-into the there classes defined as follows: a score of zero to be neutral, a positive score to be positive and a negative score to be negative. 
+The benchmark is made by converting the relevant models scores and relevant datasets scores 
+into the there classes 'positive', 'neutral' and 'negative'.
 
 The tools are benchmarked on the following datasets:
 
-- [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) contains 184 sentences from the proceedings of the European Parliament annotated with a sentiment score from -5 to 5 by Finn Årup Nielsen.
-- [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) contains 499 sentences from news and web pages annotated with sentiment -5 to 5 by Finn Årup Nielsen.
+- [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) contains 499 sentences from the proceedings of the European Parliament annotated with a sentiment score from -5 to 5 by Finn Årup Nielsen.
+- [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) contains 184 sentences from news and web pages annotated with sentiment -5 to 5 by Finn Årup Nielsen.
+
+A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afinn model is done in the following way: a score of zero to be "neutral", a positive score to be "positive" and a negative score to be "negative". 
+
+An conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative'  and scores between to be neutral. 
 
 The script for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/sentiment_benchmark.py).
-In the table we consider only the accuracy, but to get the scores per class we refer to our benchmark script.
+In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
 
 | Tool | Europarl Sentiment | LCC Sentiment |
 | ---- | ------------------ | ------------- |
-| AFINN | **0.68**  | **0.66** |
-| Sentida | 0.49 | 0.38 |
+| AFINN | **0.68** (0.68) | **0.66** (0.61) |
+| Sentida | 0.67 (0.65) | 0.58 (0.55) |
 
 ## **👷** Construction of a new dataset  in process
-The NoReC corpus [(Velldal et al. 2018)](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf) 
-is a dataset for sentiment analysis in Norwegian based on reviews from many Norwegian news organizations.
+This project is in the process of creating a manual annotating dataset to use in training of new sentiment analysis models. The dataset will be open source and is therefore using data from varied source such as twitter and [europarl data](<http://www.statmt.org/europarl/>). 
+
+Another approach is to use a "silver" annotated corpus e.g. by using user-reviews and ratings. An example os this is The NoReC corpus [(Velldal et al. 2018)](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf)  which is a dataset for sentiment analysis in Norwegian based on reviews from many Norwegian news organizations.
 The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders.
 So if you manage a site containing user reviews for example movie reviews and would like to contribute then please contact us.
 
