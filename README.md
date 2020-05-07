@@ -43,7 +43,7 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 **News**
 
-- 🎉 Version 0.0.6 has been [released](https://github.com/alexandrainst/danlp/releases) with a spaCy model.
+- 🎉 Version 0.0.7 has been [released](https://github.com/alexandrainst/danlp/releases) with a finetuned BERT models.
   
 
 **Next up**
