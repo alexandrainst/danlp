@@ -4,4 +4,5 @@ gensim==3.8.1
 flair==0.4.5
 pyconll==2.2.1
 pandas==1.0.1
+transformers==2.3.0
 srsly
