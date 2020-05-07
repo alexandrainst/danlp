@@ -48,7 +48,7 @@ F1 scores is reported below and can be reproduced using `pos_benchmarks.py` in t
 Below is a small snippet for getting started with the Flair  Part of Speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
 
 ```python
-from danlp.models.pos_taggers import load_flair_pos_model
+from danlp.models import load_flair_pos_model
 from flair.data import Sentence
 
 # Load the POS tagger using the DaNLP wrapper
