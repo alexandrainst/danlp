@@ -1,13 +1,13 @@
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
-from transformers import BertTokenizer, BertForSequenceClassification
+
 import os
 
 class BertEmotion:
     '''
     The class load both a BERT model to classify if emotion or not in the text, and a BERT model to regonizes eight emotions
     '''
-    
+    from transformers import BertTokenizer, BertForSequenceClassification
 
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
         # download the model or load the model path
