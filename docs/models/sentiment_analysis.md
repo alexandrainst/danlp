@@ -1,19 +1,25 @@
 Sentiment Analysis
 ============================
 
-Sentiment analysis refers to identifying an emotion or opinion in a text.
-The following focuses on the polarity of a sentence i.e. the tone of positive, neutral or negative.
-In this repository we provide an overview of available sentiment analysis models and dataset for Danish. 
+Sentiment analysis is a broad term for a set of tasks with the purpose of identifying an emotion or opinion in a text.
 
-In Danish there is so-far no open source annotated training set. 
-Two sentiment analysis tools currently exist in Danish. 
+In this repository we provide an overview of open sentiment analysis models and dataset for Danish. 
 
-| Model                                              | Type     | License                    | Trained by               | Tags                                                         |
-| -------------------------------------------------- | -------- | -------------------------- | ------------------------ | ------------------------------------------------------------ |
-| [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen | Score (integers) |
-| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Score (continuous) |
+| Model                                                        | Model    | License                                                      | Trained by                                                | Dimension | Tags                                                         | DaNLP |
+| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | --------- | ------------------------------------------------------------ | ----- |
+| [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity  | Score (integers)                                             | ❌     |
+| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity  | Score (continuous)                                           | ❌     |
+| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#Bert Emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions  | Glæde/sindsro, Forventning/Interrese, Tillid/accept,  Overasket/målløs, Vrede/irritation, Foragt/modvilje, Sorg/trist, Frygt/bekymring, No emotion | ✔️     |
+
+#### Under development
+
+- A training set, and models for polarity classification (in three class: positive, negative, neutral)
+- A training set, and models for subjectivity/objectivity classification
+
+
 
 #### AFINN
+
 The [AFINN](https://github.com/fnielsen/afinn) tool [(Nielsen 2011)](https://arxiv.org/abs/1103.2903) uses a lexicon based approach for sentiment analysis.
 The tool scores texts with an integer where scores <0 are negative, =0 are neutral and >0 are positive. 
 
@@ -22,8 +28,14 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
 uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist to versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this  second version. 
 
+#### :wrench:Bert Emotion
 
-## 📈 Benchmarks 
+The emotion classifier is developed in an collaboration with Danmarks Radio, which has granted access to a set of social media data.  The data has been manual annotated first to distinguished between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The model is finetuned using the transformer implementation from [huggingface](<https://github.com/huggingface/transformers>) and a pretrained Danish BERT model trained by [BotXo](<https://github.com/botxo/nordic_bert>). The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. However a small test set on twitter data will soon be available. 
+
+
+## 📈 Benchmarks  
+##### Benchmark of polarity classification
+
 The benchmark is made by converting the relevant models scores and relevant datasets scores 
 into the there classes 'positive', 'neutral' and 'negative'.
 
@@ -44,8 +56,32 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 | AFINN | **0.68** (0.68) | **0.66** (0.61) |
 | Sentida | 0.67 (0.65) | 0.58 (0.55) |
 
+
+
+## :hatching_chick: Getting started 
+
+ Below is a small snippet for getting started using the Bert Emotion model:
+
+```python
+from danlp.models import load_bert_emotion_model
+classifier = load_bert_emotion_model()
+
+# using the classifier
+classifier.predict('bilen er flot')
+''''No emotion''''
+classifier.predict('jeg ejer en rød bil og det er en god bil')
+''''Tillid/Accept''''
+classifier.predict('jeg ejer en rød bil men den er gået i stykker')
+''''Sorg/trist''''
+```
+
+
+
+ 
+
 ## **👷** Construction of a new dataset  in process
-This project is in the process of creating a manual annotating dataset to use in training of new sentiment analysis models. The dataset will be open source and is therefore using data from varied source such as twitter and [europarl data](<http://www.statmt.org/europarl/>). 
+
+This project is in the process of creating a manual annotating dataset to use in training of new sentiment analysis models. The dataset will be open source and therefore it is using data from varied source such as twitter and [europarl data](<http://www.statmt.org/europarl/>). 
 
 Another approach is to use a "silver" annotated corpus e.g. by using user-reviews and ratings. An example os this is The NoReC corpus [(Velldal et al. 2018)](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf)  which is a dataset for sentiment analysis in Norwegian based on reviews from many Norwegian news organizations.
 The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders.
