@@ -9,7 +9,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Europarl7](http://www.statmt.org/europarl/) | Translation | 47,761,381 | 2,323,099	 | [None](http://www.statmt.org/europarl/) | ❌ |
 | [ParaCrawl5](https://paracrawl.eu/) | Translation | - | - | [CC0](https://paracrawl.eu/releases.html) | ❌ |
 | [WikiANN](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wikiann)| NER | 832.901 | 95.924 |[ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)| ✔️ |
-| [DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
+| [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
 | [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
 | [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) | Sentiment | 3.359 | 184 | None | ✔️ |
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
@@ -17,7 +17,10 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 
 #### Danish Dependency Treebank (DaNE)
-The DDT dataset (Buch-Kromann et al. 2003) has annotations for dependency parsing and POS. 
+The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
+conversion of the Danish Dependency Treebank (Buch-Kromann et
+al. 2003) based on texts from Parole (Britt, 1998).
+UD-DDT has annotations for dependency parsing and POS. 
 The dataset was annotated with Named Entities for **PER**, **ORG** and **LOC** 
 by the Alexandra Institute in the DaNE dataset (Hvingelby et al. 2020).
 To read more about how the dataset was annotated with POS and DEP tags we refer to the
@@ -88,6 +91,8 @@ df = lccsent.load_with_pandas()
 
 
 ## 🎓 References
+- Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. “Universal Dependencies for Danish”. TLT14, 2015.
+- Keson, Britt (1998). Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus. Technical report, DSL
 - Matthias T. Buch-Kromann, Line Mikkelsen, and Stine Kern Lynge. 2003. "Danish dependency treebank". In **TLT**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. DaNE: A Named Entity Resource for Danish. In **LREC**.
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
