@@ -2,7 +2,7 @@
 
 SpaCy is an industrial friendly open source framework for doing NLP, and you can read more about it on their [homesite](https://spacy.io/) or [gitHub](https://github.com/explosion/spaCy).
 
-This project supports a Danish spaCy model that can easily be downloaded with the DaNLP package. 
+This project supports a Danish spaCy model that can easily be loaded with the DaNLP package. 
 
 Supporting Danish directly in the spaCy framework is under development and the progress can be followed here [issue #3056](https://github.com/explosion/spaCy/issues/3056). 
 
