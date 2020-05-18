@@ -1,29 +1,29 @@
 # SpaCy model in Danish 
 
-spaCy is an industrial friendly open source framework for doing NLP, and you can read more about it on there [homesite](https://spacy.io/) or [gitHub](https://github.com/explosion/spaCy).
+SpaCy is an industrial friendly open source framework for doing NLP, and you can read more about it on their [homesite](https://spacy.io/) or [gitHub](https://github.com/explosion/spaCy).
 
-This project support a Danish spaCy model that can easily be loaded with the DaNLP package. 
+This project supports a Danish spaCy model that can easily be loaded with the DaNLP package. 
 
-Supporting Danish directly in the spaCy framework is under development  and the progress can be follow here [issue #3056](https://github.com/explosion/spaCy/issues/3056). 
+Supporting Danish directly in the spaCy framework is under development and the progress can be followed here [issue #3056](https://github.com/explosion/spaCy/issues/3056). 
 
-Note that the two model is not the same, e.g. the spaCy model in DaNLP performers better on Name Entity Recognition due to more training data.  However the extra training data is not open source and can therefore not be included in the spaCy framework itself as it contravenes the guidelines. 
+Note that the two models are not the same, e.g. the spaCy model in DaNLP performers better on Named Entity Recognition due to more training data.  However the extra training data is not open source and can therefore not be included in the spaCy framework itself, as it contravenes the guidelines. 
 
 The spaCy model comes with **tokenization**, **dependency parsing**, **part of speech tagging** , **word vectors** and **name entity recognition**. 
 
-The model is trained on the [Danish Dependency Treebansk (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>), and with additional data for NER  which originates from News article form a collaboration with InfoMedia. 
+The model is trained on the [Danish Dependency Treebansk (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
 
-For comparison to other models and additional information of the tasks, check out the task individual pages for [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) , [word embedding](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>) and [name entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>).
+For comparison to other models and additional information of the tasks, check out the task individual pages for [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) , [word embeddings](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>) and [named entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>).
 
-#### Performance on spaCy Model
+#### Performance on spaCy model
 
 The following lists the  performance scores of the spaCy model provided in DaNLP pakage. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
 
 | Task                    | Measures | Scores |
 | ----------------------- | -------- | :----- |
-| Dependence parsing      | uas      | 81.63  |
-| Dependence parsing      | las      | 77.22  |
+| Dependency parsing      | uas      | 81.63  |
+| Dependency parsing      | las      | 77.22  |
 | Part of speech tags     | accuracy | 96.40  |
-| Name entity recognition | f1       | 80.50  |
+| Named entity recognition| f1       | 80.50  |
 |                         |          |        |
 
 
@@ -32,7 +32,7 @@ The following lists the  performance scores of the spaCy model provided in DaNLP
 
 ## :hatching_chick: Getting started with the spaCy model
 
-Below is some small snippets to get started using the spaCy model within the DaNLP package. More information about using spaCy can be found on spaCy own [page](https://spacy.io/).  
+Below is some small snippets to get started using the spaCy model within the DaNLP package. More information about using spaCy can be found on spaCy's own [page](https://spacy.io/).  
 
 **First load the libraries and the model**
 
@@ -42,14 +42,14 @@ from danlp.models import load_spacy_model
 from spacy.gold import docs_to_json
 from spacy import displacy
 
-#Downoad and load the spacy model using the daNLP wrapper fuction
+#Download and load the spaCy model using the DaNLP wrapper fuction
 nlp = load_spacy_model()
 ```
 
 **Use the model to determined linguistic features**
 
 ```python
-# Construkt the text to a container "Doc" obejct
+# Construct the text to a container "Doc" object
 doc = nlp("Spacy er et godt værtøj,og det virker på dansk")
 
 # prepare some pretty printing
@@ -70,7 +70,7 @@ for token in doc:
 **Visualizing the dependency tree:**
 
 ```python
-# the spacy framework provides a nice visualizatio tool!
+# the spaCy framework provides a nice visualizatio tool!
 # This is run in a terminal, but if run in jupyter use instead display.render 
 displacy.serve(doc, style='dep')
 ```
@@ -81,17 +81,17 @@ displacy.serve(doc, style='dep')
 
 ## :hatching_chick: Start ​training you own text classification model
 
-The spaCy framework provide and easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
+The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 
-As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development at will be added in the daNLP package when ready, and the spacy model will be updated with the classification model as well.  
+As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  
 
  **The first thing is to convert the annotated data into a data format readable by spaCy**
 
-Imagine you have the data in a e.g csv format and have it split in development and training part.  Our  twitter data have  (in time of creating this snippet)  973 training examples and 400 evaluation examples, with the following labels : 'positive' marked by 0, 'neutral' marked by 1, and 'negative' by 2. Loaded with pandas dataFrame it look like this:  
+Imagine you have the data in an e.g csv format and have it split in development and training part. Our twitter data has (in time of creating this snippet)  973 training examples and 400 evaluation examples, with the following labels : 'positive' marked by 0, 'neutral' marked by 1, and 'negative' marked by 2. Loaded with pandas dataFrame it looks like this:  
 
 ![](/imgs/data_head.png)
 
-It need to be convert into the format expected by spaCy for training the model, which can be done as follows:
+It needs to be converted into the format expected by spaCy for training the model, which can be done as follows:
 
 ```python
 #import libaries
@@ -100,7 +100,7 @@ import pandas as pd
 from danlp.models import load_spacy_model
 from spacy.gold import docs_to_json
 
-# load the spacy model 
+# load the spaCy model 
 nlp = load_spacy_model()
 nlp.disable_pipes(*nlp.pipe_names)
 sentencizer = nlp.create_pipe("sentencizer")
@@ -133,13 +133,13 @@ prepare_data(df_dev, 'eval_dev.json')
 
 ```
 
-The data now look like this cuted snippet:
+The data now looks like this cutted snippet:
 
 ![](/imgs/snippet_json.png)
 
-**Ensure you have the models and embeddings download**
+**Ensure you have the models and embeddings downloaded**
 
-The spacy model and the embeddings most be download. If you have done so it can be done by running the following commands. It will by default be placed in the cache directory of danlp, eg. "/home/USERNAME/.danlp/".
+The spaCy model and the embeddings most be downloaded. If you have done so it can be done by running the following commands. It will by default be placed in the cache directory of DaNLP, eg. "/home/USERNAME/.danlp/".
 
 ```python
 from danlp.models import load_spacy_model
@@ -156,7 +156,7 @@ word_embeddings = load_wv_with_spacy('cc.da.wv')
 
 **Now train the model through the terminal**
 
-Now train the model thought the terminal by pointing to the path of  the desired output directory, the converted trainings data, the converted development data, the base model and the embedding. The specify that the trainings pipe.  See more parameter setting [here](https://spacy.io/api/cli#train) . 
+Now train the model throught the terminal by pointing to the path of the desired output directory, the converted training data, the converted development data, the base model and the embedding. The specify that the trainings pipe.  See more parameter setting [here](https://spacy.io/api/cli#train) . 
 
 ```
 python -m spacy train da spacy_sent train.json test.json  -b '/home/USERNAME/.danlp/spacy' -v '/home/USERNAME/.danlp/cc.da.wv.spacy' --pipeline textcat
