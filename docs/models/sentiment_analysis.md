@@ -9,7 +9,7 @@ In this repository we provide an overview of open sentiment analysis models and 
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | --------- | ------------------------------------------------------------ | ----- |
 | [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity  | Score (integers)                                             | ❌     |
 | [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity  | Score (continuous)                                           | ❌     |
-| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions  | Glæde/sindsro, Forventning/Interrese, Tillid/accept,  Overasket/målløs, Vrede/irritation, Foragt/modvilje, Sorg/trist, Frygt/bekymring, No emotion | ✔️     |
+| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions  | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
 
 #### Under development
 
@@ -26,11 +26,11 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 
 #### Sentida
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
-uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist to versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this  second version. 
+uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist two versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this second version. 
 
 #### :wrench:Bert Emotion
 
-The emotion classifier is developed in an collaboration with Danmarks Radio, which has granted access to a set of social media data.  The data has been manual annotated first to distinguished between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The model is finetuned using the transformer implementation from [huggingface](<https://github.com/huggingface/transformers>) and a pretrained Danish BERT model trained by [BotXo](<https://github.com/botxo/nordic_bert>). The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. However a small test set on twitter data will soon be available. 
+The emotion classifier is developed in a collaboration with Danmarks Radio, which has granted access to a set of social media data. The data has been manual annotated first to distinguish between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The model is finetuned using the transformer implementation from [huggingface](<https://github.com/huggingface/transformers>) and a pretrained Danish BERT model trained by [BotXo](<https://github.com/botxo/nordic_bert>). The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. However a small test set on twitter data will soon be available. 
 
 
 ## 📈 Benchmarks  
@@ -46,7 +46,7 @@ The tools are benchmarked on the following datasets:
 
 A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afinn model is done in the following way: a score of zero to be "neutral", a positive score to be "positive" and a negative score to be "negative". 
 
-An conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative'  and scores between to be neutral. 
+A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. 
 
 The script for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/sentiment_benchmark.py).
 In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
