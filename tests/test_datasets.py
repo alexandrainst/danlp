@@ -1,6 +1,7 @@
 import shutil
 import unittest
 from collections import defaultdict
+from tempfile import NamedTemporaryFile
 
 from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
@@ -8,6 +9,7 @@ from spacy.gold import GoldCorpus
 
 from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment, LccSentiment
 from danlp.datasets.word_sim import WordSim353Da
+from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
 
 class TestNerDatasets(unittest.TestCase):
@@ -18,6 +20,26 @@ class TestNerDatasets(unittest.TestCase):
         self.test_len = 565
 
         self.ddt = DDT()  # Load dataset
+
+    def test_write_and_read_simple_ner_dataset(self):
+        sentences = [
+            ["Jeg", "gik", "en", "tur", "i", "København"],
+            ["Alexandra", "Instituttet", "arbejder", "med", "NLP"]
+        ]
+
+        entities = [
+            ["O", "O", "O", "O", "O", "B-LOC"],
+            ["B-ORG", "I-ORG", "O", "O", "O"]
+        ]
+        tmp_file = NamedTemporaryFile().name
+        write_simple_ner_dataset(sentences, entities, tmp_file)
+
+        loaded_sents, loaded_ents = read_simple_ner_dataset(tmp_file)
+
+        self.assertEqual(sentences, loaded_sents)
+        self.assertEqual(entities, loaded_ents)
+
+
 
     def test_ddt_dataset(self):
         train, dev, test = self.ddt.load_as_conllu(predefined_splits=True)
@@ -103,6 +125,7 @@ class TestNerDatasets(unittest.TestCase):
 
         shutil.rmtree(wikiann.dataset_dir)
 
+class TestSimilarityDatasets(unittest.TestCase):
     def test_wordsim353(self):
         ws353 = WordSim353Da()
         df = ws353.load_with_pandas()
@@ -118,7 +141,8 @@ class TestNerDatasets(unittest.TestCase):
         self.assertEqual(len(df), 99)
         self.assertListEqual(list(df.columns), ['word1', 'word2', 'similarity'])
         self.assertEqual(len(dsd.words()), 197)
-        
+
+class TestSentimentDatasets(unittest.TestCase):
     def test_europarlsentiment(self):
         eusent = EuroparlSentiment()
         df = eusent.load_with_pandas()
@@ -128,6 +152,4 @@ class TestNerDatasets(unittest.TestCase):
         sent = LccSentiment()
         df = sent.load_with_pandas()
         self.assertEqual(len(df), 499)
-        
-        
-        
+
