@@ -1,4 +1,6 @@
 import os
+from typing import Union, List
+
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
@@ -8,7 +10,8 @@ class BertNer:
     Bert NER model
     """
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
-        from transformers import AutoModelForTokenClassification, AutoTokenizer
+        from transformers import AutoModelForTokenClassification
+        from transformers import AutoTokenizer
 
         # download the model or load the model path
         weights_path = download_model('bert.ner', cache_dir,
@@ -21,18 +24,62 @@ class BertNer:
         self.model = AutoModelForTokenClassification.from_pretrained(weights_path)
         self.tokenizer = AutoTokenizer.from_pretrained(weights_path)
 
-    def predict(self, text):
+    def predict(self, text: Union[str, List[str]]):
+        """
+        Predict NER labels from raw text or tokenized text. If the text is
+        a raw string this method will return the string tokenized with
+        BERTs subword tokens.
+
+        E.g. "varme vafler" will become ["varme", "va", "##fler"]
+
+        :param text: Can either be a raw text or a list of tokens
+        :return: The tokenized text and the predicted labels
+        """
         import torch
-        # Bit of a hack to get the tokens with the special tokens
-        tokens = self.tokenizer.tokenize(
-            self.tokenizer.decode(self.tokenizer.encode(text)))
-        inputs = self.tokenizer.encode(text, return_tensors="pt")
 
-        outputs = self.model(inputs)[0]
-        predictions = torch.argmax(outputs, dim=2)
+        if isinstance(text, str):
+            # Bit of a hack to get the tokens with the special tokens
+            tokens = self.tokenizer.tokenize(self.tokenizer.decode(self.tokenizer.encode(text)))
+            inputs = self.tokenizer.encode(text, return_tensors="pt")
+            outputs = self.model(inputs)[0]
+            predictions = torch.argmax(outputs, dim=2)
+            predictions = [self.label_list[label] for label in
+                           predictions[0].tolist()]
 
-        return [self.label_list[label] for label in predictions[0].tolist()]
+            return tokens[1:-1], predictions[1:-1]  # Remove special tokens
 
+        if isinstance(text, list):
+            # Tokenize each word into the subword tokenization that BERT
+            # uses. E.g. this tokenized text:
+            #     tokens: ['Varme', 'vafler', 'og', 'friske', 'jordbær']
+            # will get the following subword tokens and token_mask
+            #     subwords: ['varme', 'va', '##fler', 'og', 'friske', 'jordbær']
+            #     tokens_mask: [1, 1, 1, 0, 1, 1, 1, 1]
+            tokens = []
+            tokens_mask = [1]
+            for word in text:
+                word_tokens = self.tokenizer.tokenize(word)
+                tokens.extend(word_tokens)
+                tokens_mask.extend([1]+[0]*(len(word_tokens)-1))
+            tokens_mask.extend([1])
+
+            inputs = self.tokenizer.encode(tokens, return_tensors="pt")
+            assert inputs.shape[1] == len(tokens_mask)
+
+            outputs = self.model(inputs)[0]
+
+            predictions = torch.argmax(outputs, dim=2)
+
+            # Mask the predictions so we only get the labels for the
+            # pre-tokenized text
+            predictions = [prediction for prediction, mask in zip(predictions[0].tolist(), tokens_mask) if mask]
+            predictions = predictions[1:-1]  # Remove special tokens
+            assert len(predictions) == len(text)
+
+            # Map prediction ids to labels
+            predictions = [self.label_list[label] for label in predictions]
+
+            return text, predictions
 
 class BertEmotion:
     """
@@ -99,3 +146,13 @@ def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
 
     return BertEmotion(cache_dir, verbose)
+
+
+def load_bert_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+
+    :param cache_dir:
+    :param verbose:
+    :return:
+    """
+    return BertNer(cache_dir, verbose)

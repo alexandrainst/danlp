@@ -3,7 +3,8 @@ import time
 from flair.data import Sentence, Token
 
 from danlp.datasets import DDT
-from danlp.models import load_spacy_model, load_flair_ner_model
+from danlp.models import load_spacy_model, load_flair_ner_model, \
+    load_bert_ner_model
 
 from seqeval.metrics import classification_report
 
@@ -21,7 +22,7 @@ def remove_miscs(se: list):
     ]
 
 
-# Load the DaNe data
+# Load the DaNE data
 _, _, test = DDT().load_as_simple_ner(predefined_splits=True)
 sentences_tokens, sentences_entities = test
 
@@ -105,17 +106,32 @@ def benchmark_flair_mdl():
     tagger.predict(flair_sentences, verbose=True)
     predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
 
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-        num_sentences, num_tokens, time.time() - start)
-    )
+    print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
 
     assert len(predictions) == num_sentences
 
-    print(classification_report(sentences_entities, remove_miscs(predictions),
-                                    digits=4))
+    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
+
+
+def benchmark_bert_mdl():
+    bert = load_bert_ner_model()
+
+    start = time.time()
+
+    predictions = []
+    for i, sentence in enumerate(sentences_tokens):
+        _, pred_ents = bert.predict(sentence)
+        predictions.append(pred_ents)
+
+    print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
+
+    assert len(predictions) == num_sentences
+
+    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
 
 
 if __name__ == '__main__':
     benchmark_polyglot_mdl()
     benchmark_spacy_mdl()
     benchmark_flair_mdl()
+    benchmark_bert_mdl()

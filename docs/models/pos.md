@@ -2,10 +2,10 @@ Part of Speech Tagging
 ======================
 This section is concerned with public available Part of Speech taggers in Danish. 
 
-| Model                                                        | Train Data | License | Trained by | Tags | DaNLP |
+| Model | Train Data | License | Trained by | Tags | DaNLP |
 |-------|-------|-------|-------|-------|-------|
 | [Polyglot](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#polyglot) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot | 17  Universal part of speech | ❌ |
-| [Flair](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#flair>) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
+| [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#flair) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
 | [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
