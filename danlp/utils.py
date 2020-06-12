@@ -1,4 +1,6 @@
+import os
 import random
+import shutil
 import string
 from typing import Union
 
@@ -60,3 +62,14 @@ def write_simple_ner_dataset(sentences: list, entitites: list, file_path: str):
                 f.write("{} {}\n".format(s, e))
 
             f.write("\n")
+
+
+def extract_single_file_from_zip(cache_dir: str, file_in_zip: str, dest_full_path, zip_file):
+    # To not have name conflicts
+
+    tmp_path = os.path.join(cache_dir, ''.join(random_string()))
+
+    outpath = zip_file.extract(file_in_zip, path=tmp_path)
+    os.rename(outpath, dest_full_path)
+
+    shutil.rmtree(tmp_path)
