@@ -9,7 +9,7 @@ from tempfile import NamedTemporaryFile
 
 from tqdm import tqdm
 
-from danlp.utils import random_string
+from danlp.utils import extract_single_file_from_zip
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
@@ -189,11 +189,11 @@ DATASETS = {
         'size': 1386727,
         'file_extension': '.csv'
     },
-    'twitter_sentiment': {
+    'twitter.sentiment': {
         'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
-        'md5_checksum': '22349f2807e75d79b92a314432d3b50a',
-        'size': 2402,
-        'file_extension': '.zip'
+        'md5_checksum': 'b12633e3f55b69e7a6981ff0017c01e5', 
+        'size': 17365, 
+        'file_extension': '.csv'
     },
 }
 
@@ -212,7 +212,7 @@ class TqdmUpTo(tqdm):
 
 
 def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
-                     process_func: Callable = None, verbose: bool = False):
+                     process_func: Callable = None, verbose: bool = False, force = False):
     """
 
     :param verbose:
@@ -228,7 +228,7 @@ def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
     dataset_info = DATASETS[dataset]
     dataset_info['name'] = dataset
 
-    if not os.path.isdir(dataset_dir):  # Then dataset has not been downloaded
+    if not os.path.isdir(dataset_dir) or force==True:  # Then dataset has not been downloaded
         os.makedirs(dataset_dir, exist_ok=True)
 
         file_path = os.path.join(cache_dir, dataset)
@@ -377,22 +377,11 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
         file_list = zip_file.namelist()
 
         if len(file_list) == 1:
-            _extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
+            extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
 
         elif file_in_zip:
-            _extract_single_file_from_zip(cache_dir, file_in_zip, full_path, zip_file)
+            extract_single_file_from_zip(cache_dir, file_in_zip, full_path, zip_file)
 
         else:  # Extract all the files to the name of the model/dataset
             destination = os.path.join(cache_dir, meta_info['name'])
             zip_file.extractall(path=destination)
-
-
-def _extract_single_file_from_zip(cache_dir: str, file_in_zip: str, full_path, zip_file):
-    # To not have name conflicts
-
-    tmp_path = os.path.join(cache_dir, ''.join(random_string()))
-
-    outpath = zip_file.extract(file_in_zip, path=tmp_path)
-    os.rename(outpath, full_path)
-
-    shutil.rmtree(tmp_path)
