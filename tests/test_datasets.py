@@ -153,10 +153,5 @@ class TestSentimentDatasets(unittest.TestCase):
         df = sent.load_with_pandas()
         self.assertEqual(len(df), 499)
        
-    def test_twittersentiment(self):
-        sent = TwitterSent()
-        df_test, df_train = sent.load_with_pandas()
-        self.assertListEqual(list(df_train.columns), ['twitterid', 'polarity', 'sub/obj', 'text'])
-        self.assertListEqual(list(df_test.columns), ['twitterid', 'polarity', 'sub/obj', 'text'])
        
 
