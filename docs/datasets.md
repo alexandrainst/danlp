@@ -15,7 +15,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
 | [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 | [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
-| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter Sentiment) | Sentiment | - | train: 1215, test: 512 | MIT | ✔️ |
+| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter-Sentiment) | Sentiment | - | train: 1215, test: 512 | MIT | ✔️ |
 
 #### Danish Dependency Treebank (DaNE)
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
