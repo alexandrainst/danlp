@@ -191,8 +191,8 @@ DATASETS = {
     },
     'twitter.sentiment': {
         'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
-        'md5_checksum': 'fdea0c07ffd79a9190bbbf79d6ae11de',
-        'size': 6828,
+        'md5_checksum': 'b12633e3f55b69e7a6981ff0017c01e5', 
+        'size': 17365, 
         'file_extension': '.csv'
     },
 }
@@ -212,7 +212,7 @@ class TqdmUpTo(tqdm):
 
 
 def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
-                     process_func: Callable = None, verbose: bool = False):
+                     process_func: Callable = None, verbose: bool = False, force = False):
     """
 
     :param verbose:
@@ -228,7 +228,7 @@ def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
     dataset_info = DATASETS[dataset]
     dataset_info['name'] = dataset
 
-    if not os.path.isdir(dataset_dir):  # Then dataset has not been downloaded
+    if not os.path.isdir(dataset_dir) or force==True:  # Then dataset has not been downloaded
         os.makedirs(dataset_dir, exist_ok=True)
 
         file_path = os.path.join(cache_dir, dataset)

@@ -15,6 +15,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
 | [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 | [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
+| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter Sentiment) | Sentiment | - | train: 1215, test: 512 | MIT | ✔️ |
 
 #### Danish Dependency Treebank (DaNE)
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
@@ -26,6 +27,7 @@ by the Alexandra Institute in the DaNE dataset (Hvingelby et al. 2020).
 To read more about how the dataset was annotated with POS and DEP tags we refer to the
 [Universal Dependencies](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) page.
 The dataset can be loaded with the DaNLP package:
+
 ```python
 from danlp.datasets import DDT
 ddt = DDT()
@@ -63,12 +65,31 @@ The [Danish Similarity Dataset](https://github.com/kuhumcst/Danish-Similarity-Da
 consists of 99 word pairs annotated by 38 annotators with a similarity score (1-6).
 It is constructed with frequently used Danish words.
 
+#### Twitter Sentiment
+
+The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: ['subjective' , 'objective'] and ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actually tweet text one need a Twitter development account and to generate the sets of login keys. The then dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
+
+``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```|
+
+ ```python
+from danlp.datasets import TwitterSent
+twitSent = TwitterSent()
+
+df_test, df_train = twitSent.load_with_pandas()
+ ```
+
+The dataset can also be downloaded directly with the labels and tweet id:
+
+[Download TwitterSent](https://danlp.s3.eu-central-1.amazonaws.com/datasets/twitter.sentiment.zip) 
+
 #### Europarl Sentiment
+
 The [Europarl Sentiment](https://github.com/fnielsen/europarl-da-sentiment) dataset contains sentences from 
 the [Europarl](http://www.statmt.org/europarl/) corpus which has been annotated manually by Finn Årup Nielsen.
 Each sentence has been annotated the polarity of the sentiment as an polarity score from -5 to 5. 
 The score can be converted to positive (>0), neutral (=0) and negative (<0). 
 The dataset can be loaded with the DaNLP package:
+
 ```python
 from danlp.datasets import EuroparlSentiment
 eurosent = EuroparlSentiment()

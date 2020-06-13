@@ -53,15 +53,16 @@ class LccSentiment:
     
 class TwitterSent:
     
-    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
+    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR, force: bool =False):
         self.dataset_name = 'twitter.sentiment'
         #self.file_extension = DATASETS[self.dataset_name]['file_extension']
-        
-        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func)
+
+        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func, force=force)
         self.file_path = os.path.join(self.dataset_dir, self.dataset_name + '.csv')
         
     def load_with_pandas(self):
-       return pd.read_csv(self.file_path, sep=',', encoding='utf-8')
+        df=pd.read_csv(self.file_path, sep=',', encoding='utf-8')
+        return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
 
 
 def lookup_tweets(tweet_ids, api):
@@ -82,7 +83,7 @@ def lookup_tweets(tweet_ids, api):
 def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
                                cache_dir: str = DEFAULT_CACHE_DIR,
                                clean_up_raw_data: bool = True,
-                               verbose: bool = False):
+                               verbose: bool = True):
     from zipfile import ZipFile
 
     twitter_api = construct_twitter_api_connection()
@@ -106,12 +107,11 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
                                 meta_info['name'] + meta_info[
                                     'file_extension'])
 
-    resulting_df = resulting_df.drop(columns='Unnamed: 0')
     resulting_df.to_csv(dataset_path, index=False)
-
+    
     if verbose:
         print("Downloaded {} out of {} tweets".format(len(full_t), len(twitter_ids)))
-
+ 
 
 def construct_twitter_api_connection():
     if not('TWITTER_CONSUMER_KEY' in os.environ
