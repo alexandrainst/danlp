@@ -11,13 +11,17 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [WikiANN](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wikiann)| NER | 832.901 | 95.924 |[ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)| ✔️ |
 | [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
 | [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
-| [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) | Sentiment | 3.359 | 184 | None | ✔️ |
+| [Europarl Sentiment1](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment1) | Sentiment | 3.359 | 184 | None | ✔️ |
+| [Europarl Sentiment2](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2) | sentiment |  | 957 | None | ✔️ |
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
 | [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 | [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 | [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter-Sentiment) | Sentiment | - | train: 1215, test: 512 | MIT | ✔️ |
 
+It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
+
 #### Danish Dependency Treebank (DaNE)
+
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
 conversion of the Danish Dependency Treebank (Buch-Kromann et
 al. 2003) based on texts from Parole (Britt, 1998).
@@ -67,7 +71,7 @@ It is constructed with frequently used Danish words.
 
 #### Twitter Sentiment
 
-The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: ['subjective' , 'objective'] and ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actually tweet text one need a Twitter development account and to generate the sets of login keys. The then dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
+The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actually tweet text one need a Twitter development account and to generate the sets of login keys. The then dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
 ``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```|
 
@@ -82,22 +86,37 @@ The dataset can also be downloaded directly with the labels and tweet id:
 
 [Download TwitterSent](https://danlp.s3.eu-central-1.amazonaws.com/datasets/twitter.sentiment.zip) 
 
-#### Europarl Sentiment
+#### Europarl Sentiment1
 
-The [Europarl Sentiment](https://github.com/fnielsen/europarl-da-sentiment) dataset contains sentences from 
+The [Europarl Sentiment1](https://github.com/fnielsen/europarl-da-sentiment) dataset contains sentences from 
 the [Europarl](http://www.statmt.org/europarl/) corpus which has been annotated manually by Finn Årup Nielsen.
 Each sentence has been annotated the polarity of the sentiment as an polarity score from -5 to 5. 
 The score can be converted to positive (>0), neutral (=0) and negative (<0). 
 The dataset can be loaded with the DaNLP package:
 
 ```python
-from danlp.datasets import EuroparlSentiment
-eurosent = EuroparlSentiment()
+from danlp.datasets import EuroparlSentiment1
+eurosent = EuroparlSentiment1()
 
 df = eurosent.load_with_pandas()
 ```
 
+#### Europarl Sentiment2
+
+The dataset consist of  957 manually annotation by Alexandra institute on sentences from Eruroparl. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. 
+The dataset can be loaded with the DaNLP package:
+
+```python
+from danlp.datasets import EuroparlSentiment2
+eurosent = EuroparlSentiment2()
+
+df = eurosent.load_with_pandas()
+```
+
+#### 
+
 #### LCC Sentiment
+
 The [LCC Sentiment](https://github.com/fnielsen/lcc-sentiment) dataset contains sentences from Leipzig Copora Collection [(Quasthoff et al. 2006)](https://www.aclweb.org/anthology/L06-1396/) 
 which has been manually annotated by Finn Årup Nielsen.  
 Each sentence has been annotated the polarity of the sentiment as an polarity score from -5 to 5.

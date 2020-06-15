@@ -4,13 +4,13 @@ import pandas as pd
 import tweepy
 from tweepy import TweepError
 
-from danlp.download import DATASETS, download_dataset, DEFAULT_CACHE_DIR
+from danlp.download import DATASETS, download_dataset, DEFAULT_CACHE_DIR, _unzip_process_func
 
 
-class EuroparlSentiment:
+class EuroparlSentiment1:
     
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
-        self.dataset_name = 'europarl.sentiment'
+        self.dataset_name = 'europarl.sentiment1'
         self.file_extension = DATASETS[self.dataset_name]['file_extension']
 
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir)
@@ -23,6 +23,19 @@ class EuroparlSentiment:
 
         df = df[['valence', 'text']].dropna()
         return df.drop_duplicates()
+
+class EuroparlSentiment2:
+    
+    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
+        self.dataset_name = 'europarl.sentiment2'
+
+        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_unzip_process_func)
+        self.file_path = os.path.join(self.dataset_dir, self.dataset_name,self.dataset_name + '.csv')
+        
+    def load_with_pandas(self):
+        
+        return pd.read_csv(self.file_path, sep=',', encoding='utf-8')
+        
 
 
 class LccSentiment:

@@ -16,12 +16,16 @@ installation and run it.
 -  Tutorial of applying zero shot transfer learning to train a sentiment 
    classifier that can be applied on Danish text in a Jupyter notebook:
    `example_zero_shot_sentiment.ipynb`
--  Benchmark scripts for word embeddings in `wordembeddings_benchmarks.py`
+   
+- Benchmark scripts for word embeddings in `wordembeddings_benchmarks.py`
+
 -  Benchmark scripts on the
    [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) 
    NER dataset in `ner_benchmarks.py`
 
-- Benchmark script for sentiment classification on [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment)  and [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) using the tools [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) and [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) where the scores are converted to three class problem in `sentiment_benchmarks.py`
+- Benchmark script for sentiment classification on [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment)  and [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) using the tools [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) and [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) where the scores are converted to three class problem. It also includes benchmark of [BERT Tone (polarity)](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone)  `sentiment_benchmarks.py`
+
+- `sentiment_benchmarks_twitter.py` show evaluation on a small twitter dataset for both polarity and subjective/objective classification
 
 - Benchmark script of [Part of Speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spcay, flair and polyglot model is benchmarked `pos_benchmarks.py`
 

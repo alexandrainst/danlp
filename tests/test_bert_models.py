@@ -40,8 +40,9 @@ class TestBertTone(unittest.TestCase):
 
     def test_predictions(self):
         model = load_bert_tone_model()
-        self.assertEqual(model.predict('han er 12 år'),['objektive', 'neutral'])
-        self.assertEqual(model.predict('han gør det godt'),['subjektive', 'positive'])
+        self.assertEqual(model.predict('han er 12 år', polarity=False),{'analytic': 'objective', 'polarity': None})
+        self.assertEqual(model.predict('han gør det godt', analytic=False),{'analytic': None, 'polarity': 'positive'})
+        self.assertEqual(model.predict('Det er super dårligt'),{'analytic': 'subjective', 'polarity': 'negative'})
   
 
 

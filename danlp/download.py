@@ -183,7 +183,7 @@ DATASETS = {
         'file_extension': '.csv'
         },
     # SENTIMENT EVALUATION
-    'europarl.sentiment': {
+    'europarl.sentiment1': {
         'url': 'https://raw.githubusercontent.com/fnielsen/europarl-da-sentiment/master/europarl-da-sentiment.csv',
         'md5_checksum': 'eb12513f04ead1dc0b455e738bf8d831',
         'size': 3620027,
@@ -205,6 +205,12 @@ DATASETS = {
         'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
         'md5_checksum': 'b12633e3f55b69e7a6981ff0017c01e5', 
         'size': 17365, 
+        'file_extension': '.csv'
+    },
+    'europarl.sentiment2': {
+        'url': DANLP_S3_URL + '/datasets/europarl.sentiment2.zip',
+        'md5_checksum': 'f7664ae27bfc32413ac6c31bf264b4f5', 
+        'size': 51737, 
         'file_extension': '.csv'
     },
 }

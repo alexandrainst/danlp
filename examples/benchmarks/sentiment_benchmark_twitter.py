@@ -1,6 +1,12 @@
 """
-Evaluation script for sentiment analyis
+Evaluation script for sentiment analyis on TWITTER DATA
+This script requires an acount for TWITTER DEVLOPMENT API and that following the keys are set as envoriment variable:
+TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET|
+
+
 **The scripts downloads scrips from a GitHub, and it is last tested on 24-03-2020**
+
+The script test both polarity (positive, negative and neutral) and analytic (objective, subjective)
 
 The script benchmark on the following dataset where scores are converted into a three class problem: positiv, neutral, negative:
     - Europarl_sentiment
@@ -19,11 +25,11 @@ The script benchmark the following models where scores are converted into a thre
                - Pandas
                - NumPy
                - NLTK
-                      
+                       
  
 """
 
-from danlp.datasets import EuroparlSentiment1, LccSentiment
+from danlp.datasets import TwitterSent
 from danlp. models import load_bert_tone_model
 from afinn import Afinn
 import numpy as np
@@ -32,6 +38,11 @@ import os
 import urllib
 from pathlib import Path
 import sys
+
+## Load teh witter data
+twitSent = TwitterSent()
+df_val, _ = twitSent.load_with_pandas()
+
 
 def f1_class(k, true, pred):
     tp = np.sum(np.logical_and(pred == k, true == k))
@@ -69,46 +80,34 @@ def report(true, pred, modelname, dataname):
     data_b.append([acc, avg, wei, '', ''])
     print()
     print( tabulate.tabulate(data_b, headers=headers_b, colalign=aligns_b), '\n')
-
-
+    
+    
 def to_label(score):
     if score == 0:
         return 'neutral'
     if score < 0:
-        return 'negative'
+        return 'negativ'
     else:
-        return 'positive'
+        return 'positiv'
     
 def to_label_sentida(score):
     # the treshold of 0.4 is fitted on a manuelt annotated twitter corpus for sentiment on 1327 exampels
     if score > 0.4:
-        return 'positive'
+        return 'positiv'
     if score < -0.4:
-        return 'negative'
+        return 'negativ'
     else:
         return 'neutral'
-
-
-def afinn_benchmark(datasets):
-    afinn = Afinn(language='da', emoticons=True)
     
-    for dataset in datasets:
-        if dataset == 'euparlsent':
-            data = EuroparlSentiment1()
-        if dataset == 'lccsent':
-            data = LccSentiment()
+    
+def afinn_benchmark():
+    afinn = Afinn(language='da', emoticons=True)
+    df_val['afinn'] = df_val.text.map(afinn.score).map(to_label)
 
-        df = data.load_with_pandas()
-
-
-
-        df['pred'] = df.text.map(afinn.score).map(to_label)
-        df['valence'] = df['valence'].map(to_label)
-
-        report(df['valence'], df['pred'], 'Afinn', dataset)
+    report(df_val['polarity'], df_val['afinn'], 'Afinn', "twitter_sentiment(val)")
         
         
-def sentida_benchmark(datasets):
+def sentida_benchmark():
     "The scripts download from github from sentindaV2 and place it in cache folder"
     DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
     print(os.getcwd())
@@ -129,43 +128,45 @@ def sentida_benchmark(datasets):
     sys.stdout = sys.__stdout__
     
     def sentida_score(sent):
-        return sentidaV2(sent, output ='total')
-    
-    for dataset in datasets:
-        if dataset == 'euparlsent':
-            data = EuroparlSentiment1()
-        if dataset == 'lccsent':
-            data = LccSentiment()
-
-        df = data.load_with_pandas()
-
-
-
-        df['pred'] = df.text.map(sentida_score).map(to_label_sentida)
-        df['valence'] = df['valence'].map(to_label)
-
-        report(df['valence'], df['pred'], 'SentidaV2', dataset)
+        return sentidaV2(sent, output ='total')        
         
-def bert_sent_benchmark(datasets):
-    model = load_bert_tone_model()
-    
-    for dataset in datasets:
-        if dataset == 'euparlsent':
-            data = EuroparlSentiment1()
-        if dataset == 'lccsent':
-            data = LccSentiment()
+    df_val['sentida'] = df_val.text.map(sentida_score).map(to_label_sentida)
 
-        df = data.load_with_pandas()
-
-
-        df['valence'] = df['valence'].map(to_label)
-        # predict with bert sentiment 
-        df['pred'] = df.text.map(lambda x: model.predict(x, analytic=False)['polarity'])
+    report(df_val['polarity'], df_val['sentida'], 'SentidaV2', "twitter_sentiment(val)")
         
-
-        report(df['valence'], df['pred'], 'BERT_Tone (polarity)', dataset)
-
+        
+def bert_sent_benchmark():
+    model = load_bert_tone_model()       
+        
+    preds = df_val.text.map(lambda x: model.predict(x))
+    spellings_map = {'subjective': 'subjektivt', 'objective': 'objektivt', 'positive': 'positiv', 'negative': 'negativ', 'neutral': 'neutral'}
+    df_val['bert_ana'] = preds.map(lambda x: spellings_map[x['analytic']])
+    df_val['bert_pol'] = preds.map(lambda x: spellings_map[x['polarity']])
+    
+    report(df_val['polarity'], df_val['bert_pol'], 'BERT_Tone (polarity)',  "twitter_sentiment(val)")    
+    report(df_val['sub/obj'], df_val['bert_ana'], 'BERT_Tone (sub/obj)',  "twitter_sentiment(val)")      
+        
+        
+        
 if __name__ == '__main__':
-    sentida_benchmark(['euparlsent','lccsent'])
-    afinn_benchmark(['euparlsent','lccsent'])
-    bert_sent_benchmark(['euparlsent','lccsent'])
+    sentida_benchmark()
+    afinn_benchmark()
+    bert_sent_benchmark()        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    

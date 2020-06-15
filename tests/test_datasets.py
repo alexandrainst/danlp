@@ -7,7 +7,7 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment, LccSentiment, TwitterSent
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -143,10 +143,16 @@ class TestSimilarityDatasets(unittest.TestCase):
         self.assertEqual(len(dsd.words()), 197)
 
 class TestSentimentDatasets(unittest.TestCase):
-    def test_europarlsentiment(self):
-        eusent = EuroparlSentiment()
+    def test_europarlsentiment1(self):
+        eusent = EuroparlSentiment1()
         df = eusent.load_with_pandas()
         self.assertEqual(len(df), 184)
+        
+    def test_europarlsentiment2(self):
+        eusent = EuroparlSentiment2()
+        df = eusent.load_with_pandas()
+        self.assertEqual(len(df), 957)
+        self.assertListEqual(list(df.columns), ['text', 'sub/obj', 'polarity'])
         
     def test_lccsentiment(self):
         sent = LccSentiment()

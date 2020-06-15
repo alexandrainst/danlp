@@ -157,7 +157,7 @@ class BertTone:
         self.tokenizer_pol = BertTokenizer.from_pretrained(path_pol)
         self.model_pol = BertForSequenceClassification.from_pretrained(path_pol)
     
-    def predict(self, sentence: str):
+    def predict(self, sentence: str, polarity: bool = True, analytic: bool = True):
         
         def clean(sentence):
             sentence=re.sub(r'http[^\s]+', '', sentence)
@@ -169,18 +169,23 @@ class BertTone:
 
         
         sentence = clean(str(sentence))
-        # predict subjective
-        input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-        pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
-        labels= ['objektive','subjektive']
-        sub = labels[pred]
-        # predict polarity
-        input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-        pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
-        labels= ['positive', 'neutral', 'negative']
-        pol = labels[pred]
+        predDict = {'analytic': None, 'polarity': None }
         
-        return [sub,pol]
+        # predict subjective
+        if analytic:
+            input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            labels= ['objective','subjective']
+            predDict['analytic']=labels[pred]
+        
+        # predict polarity
+        if polarity:
+            input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            labels= ['positive', 'neutral', 'negative']
+            predDict['polarity']=labels[pred]
+        
+        return predDict
             
             
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
