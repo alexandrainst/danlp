@@ -43,10 +43,12 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 **News**
 
-- 🎉 Version 0.0.7 has been [released](https://github.com/alexandrainst/danlp/releases) with a finetuned BERT models.
+- 🎉 Version 0.0.8 has been [released](https://github.com/alexandrainst/danlp/releases) with small annotated datasets with sentiment on data from Twitter and Europarl, BERT tone model in a first version is also implemented, and support function to download tweets based on ID is provided.  
   
 
 **Next up**
+
+- A synthetic test set in attempt to access fairness in sentiment models  
 
 - 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework. Follow the progress in spaCy [issue #3056](https://github.com/explosion/spaCy/issues/3056)
 
