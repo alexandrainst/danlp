@@ -5,16 +5,12 @@ Sentiment analysis is a broad term for a set of tasks with the purpose of identi
 
 In this repository we provide an overview of open sentiment analysis models and dataset for Danish. 
 
-| Model                                                        | Model    | License                                                      | Trained by                                                | Dimension | Tags                                                         | DaNLP |
-| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | --------- | ------------------------------------------------------------ | ----- |
-| [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity  | Score (integers)                                             | ❌     |
-| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity  | Score (continuous)                                           | ❌     |
-| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions  | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
-
-#### Under development
-
-- A training set, and models for polarity classification (in three class: positive, negative, neutral)
-- A training set, and models for subjectivity/objectivity classification
+| Model                                                        | Model    | License                                                      | Trained by                                                | Dimension          | Tags                                                         | DaNLP |
+| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | ------------------ | ------------------------------------------------------------ | ----- |
+| [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity           | Score (integers)                                             | ❌     |
+| [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity           | Score (continuous)                                           | ❌     |
+| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions           | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
+| [Bert Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔️     |
 
 
 
@@ -31,34 +27,6 @@ uses a lexicon based approach to sentiment analysis. The tool scores texts with 
 #### :wrench:Bert Emotion
 
 The emotion classifier is developed in a collaboration with Danmarks Radio, which has granted access to a set of social media data. The data has been manual annotated first to distinguish between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The model is finetuned using the transformer implementation from [huggingface](<https://github.com/huggingface/transformers>) and a pretrained Danish BERT model trained by [BotXo](<https://github.com/botxo/nordic_bert>). The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. However a small test set on twitter data will soon be available. 
-
-
-## 📈 Benchmarks  
-##### Benchmark of polarity classification
-
-The benchmark is made by converting the relevant models scores and relevant datasets scores 
-into the there classes 'positive', 'neutral' and 'negative'.
-
-The tools are benchmarked on the following datasets:
-
-- [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) contains 499 sentences from the proceedings of the European Parliament annotated with a sentiment score from -5 to 5 by Finn Årup Nielsen.
-- [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) contains 184 sentences from news and web pages annotated with sentiment -5 to 5 by Finn Årup Nielsen.
-
-A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afinn model is done in the following way: a score of zero to be "neutral", a positive score to be "positive" and a negative score to be "negative". 
-
-A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. 
-
-The script for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/sentiment_benchmark.py).
-In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
-
-| Tool | Europarl Sentiment | LCC Sentiment |
-| ---- | ------------------ | ------------- |
-| AFINN | **0.68** (0.68) | **0.66** (0.61) |
-| Sentida | 0.67 (0.65) | 0.58 (0.55) |
-
-
-
-## :hatching_chick: Getting started 
 
  Below is a small snippet for getting started using the Bert Emotion model:
 
@@ -77,7 +45,66 @@ classifier.predict('jeg ejer en rød bil men den er gået i stykker')
 
 
 
- 
+#### :wrench:Bert Tone
+
+The tone analyzer consists of two BERT classification models, and the first is recognizing the following tags positive, neutral and negative and the  second model  the tags are subjective and objective. This is a first version of the models, and work should be done to improve performance. Both models is finetuned using the transformer implementation from [huggingface](<https://github.com/huggingface/transformers>) and a pretrained Danish BERT model trained by [BotXo](<https://github.com/botxo/nordic_bert>). The data used is manually annotated data from Twitter Sentiment (train part)([see here](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#twitter-sentiment) ) and EuroParl sentiment 2 ([se here](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
+
+ Below is a small snippet for getting started using the Bert Tone model:
+
+```python
+from danlp.models import load_bert_emotion_model
+classifier = load_bert_tone_model()
+
+# using the classifier
+classifier..predict('Analysen viser, at økonomien bliver forfærdelig dårlig', )
+'''{'analytic': 'objektive', 'polarity': 'negative'}''' 
+classifier.predict('Jeg tror alligvel, det bliver godt')
+'''{'analytic': 'subjektive', 'polarity': 'positive'}'''
+```
+
+
+
+
+
+
+## 📈 Benchmarks  
+##### Benchmark of polarity classification
+
+The benchmark is made by converting the relevant models scores and relevant datasets scores 
+into the there classes 'positive', 'neutral' and 'negative'.
+
+The tools are benchmarked on the following datasets:
+
+- [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) contains 499 sentences from the proceedings of the European Parliament annotated with a sentiment score from -5 to 5 by Finn Årup Nielsen.
+- [Europarl Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment) contains 184 sentences from news and web pages annotated with sentiment -5 to 5 by Finn Årup Nielsen.
+- [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#twitter-sentiment) contains annotations for polarity (positive, neutral, negative) and annotations for analytic (subjective, objective) made by Alexandra Institute. 512 examples of the dataset are defined for evaluation. 
+
+A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afinn model is done in the following way: a score of zero to be "neutral", a positive score to be "positive" and a negative score to be "negative". 
+
+A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. 
+
+The scripts for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/). There is one for the europarl sentiment and LCC sentiment data and another one for the twitter sentiment. This is due to the fact that downloading the twitter data requires login to a twitter API account. The scores below for the twitter data is reported for all the data, but if tweets are delete in the mean time on twitter, not all tweets can be downloaded. 
+In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
+
+| Tool/Model | Europarl Sentiment | LCC Sentiment | Twitter Sentiment (Polarity) |
+| ---- | ------------------ | ------------- | ---- |
+| AFINN | 0.68 (0.68) | 0.66 (0.61) | 0.48 (0.46) |
+| Sentida | 0.67 (0.65) | 0.58 (0.55) | 0.44 (0.44) |
+| Bert Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73**(0.70) |
+
+**Benchmark of subjective versus objective classification**
+
+The data for benchmark is: 
+
+- [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#twitter-sentiment) contains annotations for polarity (positive, neutral, negative) and annotations for analytic (subjective, objective) made by Alexandra Institute. 512 examples of the dataset are defined for evaluation. 
+
+The script for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/) and it provides more detailed scores. Below is accuracy and macro-f1 reported:
+
+| Model                               | Twitter sentiment (analytic) |
+| ----------------------------------- | ---------------------------- |
+| Bert Tone (analytic, version 0.0.1) | 0.90 (0.77)                  |
+
+
 
 ## **👷** Construction of a new dataset  in process
 

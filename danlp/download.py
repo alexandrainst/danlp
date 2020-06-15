@@ -130,7 +130,7 @@ MODELS = {
         'file_extension': ''
     },
 
-    # BERT models
+    # BERT sentiment models
     'bert.emotion': {
         'url': DANLP_S3_URL + '/models/bert.emotion.zip',
         'md5_checksum': '832214e9362b12372bedbbc8e819ea9d',
@@ -141,6 +141,18 @@ MODELS = {
         'url': DANLP_S3_URL + '/models/bert.noemotion.zip',
         'md5_checksum': 'e5ad6ebc0cfb3cd65677aa524c75b8c9',
         'size': 410883271,
+        'file_extension': ''
+    },
+    'bert.subjective': {
+        'url': DANLP_S3_URL + '/models/bert.sub.v0.0.1.zip',
+        'md5_checksum': 'b713a8ec70ca4e8269d7a66a1cda2366',
+        'size': 410882683,
+        'file_extension': ''
+    },
+    'bert.polarity': {
+        'url': DANLP_S3_URL + '/models/bert.pol.v0.0.1.zip',
+        'md5_checksum': 'bb0940fba75b39795332105bb2bc2af1',
+        'size': 410888897,
         'file_extension': ''
     },
 }
@@ -171,7 +183,7 @@ DATASETS = {
         'file_extension': '.csv'
         },
     # SENTIMENT EVALUATION
-    'europarl.sentiment': {
+    'europarl.sentiment1': {
         'url': 'https://raw.githubusercontent.com/fnielsen/europarl-da-sentiment/master/europarl-da-sentiment.csv',
         'md5_checksum': 'eb12513f04ead1dc0b455e738bf8d831',
         'size': 3620027,
@@ -193,6 +205,12 @@ DATASETS = {
         'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
         'md5_checksum': 'b12633e3f55b69e7a6981ff0017c01e5', 
         'size': 17365, 
+        'file_extension': '.csv'
+    },
+    'europarl.sentiment2': {
+        'url': DANLP_S3_URL + '/datasets/europarl.sentiment2.zip',
+        'md5_checksum': 'f7664ae27bfc32413ac6c31bf264b4f5', 
+        'size': 51737, 
         'file_extension': '.csv'
     },
 }

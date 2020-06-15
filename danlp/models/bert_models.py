@@ -1,4 +1,4 @@
-import os
+import os, re
 from typing import Union, List
 
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
@@ -135,6 +135,58 @@ class BertEmotion:
             else:
                 return predict_emotion()
 
+class BertTone:
+    '''
+    The class load both a BERT model to classify boteh the tone of [subjective or objective] and the tone og [positive, neutral , negativ]
+    returns: [label_subjective, label_polarity]
+    '''
+    
+
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        from transformers import BertTokenizer, BertForSequenceClassification
+         
+        
+        # download the model or load the model path
+        path_sub = download_model('bert.subjective', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        path_sub = os.path.join(path_sub,'bert.sub.v0.0.1')
+        path_pol = download_model('bert.polarity', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        path_pol = os.path.join(path_pol,'bert.pol.v0.0.1')
+        
+        self.tokenizer_sub = BertTokenizer.from_pretrained(path_sub)
+        self.model_sub = BertForSequenceClassification.from_pretrained(path_sub)
+        self.tokenizer_pol = BertTokenizer.from_pretrained(path_pol)
+        self.model_pol = BertForSequenceClassification.from_pretrained(path_pol)
+    
+    def predict(self, sentence: str, polarity: bool = True, analytic: bool = True):
+        
+        def clean(sentence):
+            sentence=re.sub(r'http[^\s]+', '', sentence)
+            sentence = re.sub(r'\n', '',sentence)
+            sentence = re.sub(r'\t', '',sentence)
+            sentence = re.sub(r'@', '',sentence)
+            sentence = re.sub(r'#', '',sentence)
+            return sentence
+
+        
+        sentence = clean(str(sentence))
+        predDict = {'analytic': None, 'polarity': None }
+        
+        # predict subjective
+        if analytic:
+            input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            labels= ['objective','subjective']
+            predDict['analytic']=labels[pred]
+        
+        # predict polarity
+        if polarity:
+            input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            labels= ['positive', 'neutral', 'negative']
+            predDict['polarity']=labels[pred]
+        
+        return predDict
+            
             
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
@@ -147,10 +199,22 @@ def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
 
     return BertEmotion(cache_dir, verbose)
 
+def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Wrapper function to ensure that all models in danlp are
+    loaded in a similar way
+    :param cache_dir:
+    :param verbose:
+    :return:
+    """
+
+    return BertTone(cache_dir, verbose)
+
 
 def load_bert_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
-
+    Wrapper function to ensure that all models in danlp are
+    loaded in a similar way
     :param cache_dir:
     :param verbose:
     :return:
