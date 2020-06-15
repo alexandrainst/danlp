@@ -12,11 +12,11 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
 | [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
 | [Europarl Sentiment1](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment1) | Sentiment | 3.359 | 184 | None | ✔️ |
-| [Europarl Sentiment2](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2) | sentiment |  | 957 | None | ✔️ |
+| [Europarl Sentiment2](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2) | sentiment |  | 957 | CC BY-SA 4.0 | ✔️ |
 | [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
 | [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
 | [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
-| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter-Sentiment) | Sentiment | - | train: 1215, test: 512 | MIT | ✔️ |
+| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter-Sentiment) | Sentiment | - | train: 1215, test: 512 | Twitter privacy policy applies | ✔️ |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
