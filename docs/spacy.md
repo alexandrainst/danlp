@@ -4,7 +4,7 @@ SpaCy is an industrial friendly open source framework for doing NLP, and you can
 
 This project supports a Danish spaCy model that can easily be loaded with the DaNLP package. 
 
-Supporting Danish directly in the spaCy framework is under development and the progress can be followed here [issue #3056](https://github.com/explosion/spaCy/issues/3056). 
+Support for Danish directly in the spaCy framework is realeased under [spacy 2.3](https://explosion.ai/blog/spacy-v2-3)
 
 Note that the two models are not the same, e.g. the spaCy model in DaNLP performers better on Named Entity Recognition due to more training data.  However the extra training data is not open source and can therefore not be included in the spaCy framework itself, as it contravenes the guidelines. 
 
