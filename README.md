@@ -42,15 +42,16 @@ It is a collection  of available datasets and models for a variety of NLP tasks.
 It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 **News**
+- 🚧 Support for Danish in the [spaCy]( https://spacy.io/models/da) new 2.3 version. The progress for supporting spaCy can be seen here [issue #3056](https://github.com/explosion/spaCy/issues/3056). The spacy model is trained using DaNE and DDT [datasets](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) - Read more about using spacy through danlp [here](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md)  
 
 - 🎉 Version 0.0.8 has been [released](https://github.com/alexandrainst/danlp/releases) with small annotated datasets with sentiment on data from Twitter and Europarl, BERT tone model in a first version is also implemented, and support function to download tweets based on ID is provided.  
   
 
 **Next up**
 
-- A synthetic test set in attempt to access fairness in sentiment models  
+- :traffic_light: A synthetic test set in attempt to access fairness in sentiment models  
 
-- 🚧 Support for Danish in the [spaCy](https://github.com/explosion/spaCy) framework. Follow the progress in spaCy [issue #3056](https://github.com/explosion/spaCy/issues/3056)
+- :paw_prints: Spacy models for sentiment trained using hard distill from BERT
 
 
 
