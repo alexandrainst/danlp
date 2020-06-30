@@ -13,7 +13,7 @@ from danlp.utils import extract_single_file_from_zip
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
-DANLP_S3_URL = 'https://danlp.s3.eu-central-1.amazonaws.com'
+DANLP_STORAGE_URL = 'https://danlp.alexandra.dk/304bd159d5de'
 
 # The naming convention of the word embedding are on the form <dataset>.<lang>.<type>
 # The <type> can be subword vectors=swv or word vectors=wv
@@ -88,13 +88,13 @@ MODELS = {
 
     # CONTEXTUAL EMBEDDINGS
     'flair.fwd': {
-        'url': DANLP_S3_URL+'/models/flair.fwd.zip',
+        'url': DANLP_STORAGE_URL+'/models/flair.fwd.zip',
         'md5_checksum': '8697e286048a4aa30acc62995397a0c8',
         'size': 18548086,
         'file_extension': '.pt'
     },
     'flair.bwd': {
-        'url': DANLP_S3_URL+'/models/flair.bwd.zip',
+        'url': DANLP_STORAGE_URL+'/models/flair.bwd.zip',
         'md5_checksum': '11549f1dc28f92a7c37bf511b023b1f1',
         'size': 18551173,
         'file_extension': '.pt'
@@ -102,7 +102,7 @@ MODELS = {
 
     # POS MODELS
     'flair.pos': {
-        'url': DANLP_S3_URL + '/models/flair.pos.zip',
+        'url': DANLP_STORAGE_URL + '/models/flair.pos.zip',
         'md5_checksum': '627321171ecf4f7933b5e10602a60cbe',
         'size': 424727006,
         'file_extension': '.pt'
@@ -110,13 +110,13 @@ MODELS = {
     
     # NER MODELS
     'flair.ner': {
-        'url': DANLP_S3_URL + '/models/flair.ner.zip',
+        'url': DANLP_STORAGE_URL + '/models/flair_ner.zip',
         'md5_checksum': 'a1cf475659d1cf3a0f5eae5377f7027e',
         'size': 419047115,
         'file_extension': '.pt'
     },
     'bert.ner': {
-        'url': DANLP_S3_URL + '/models/bert.ner.zip',
+        'url': DANLP_STORAGE_URL + '/models/bert.ner.zip',
         'md5_checksum': '8929acefcbc4b2819d0ee88fa1a79011',
         'size': 1138686784,
         'file_extension': ''
@@ -124,7 +124,7 @@ MODELS = {
 
     # Spacy MODELS
     'spacy': {
-        'url': DANLP_S3_URL + '/models/spacy.zip',
+        'url': DANLP_STORAGE_URL + '/models/spacy.zip',
         'md5_checksum': '43de8cadab206234537b04a4cca24e71',
         'size': 1261762677,
         'file_extension': ''
@@ -132,25 +132,25 @@ MODELS = {
 
     # BERT sentiment models
     'bert.emotion': {
-        'url': DANLP_S3_URL + '/models/bert.emotion.zip',
+        'url': DANLP_STORAGE_URL + '/models/bert.emotion.zip',
         'md5_checksum': '832214e9362b12372bedbbc8e819ea9d',
         'size': 410902634,
         'file_extension': ''
     },
     'bert.noemotion': {
-        'url': DANLP_S3_URL + '/models/bert.noemotion.zip',
+        'url': DANLP_STORAGE_URL + '/models/bert.noemotion.zip',
         'md5_checksum': 'e5ad6ebc0cfb3cd65677aa524c75b8c9',
         'size': 410883271,
         'file_extension': ''
     },
     'bert.subjective': {
-        'url': DANLP_S3_URL + '/models/bert.sub.v0.0.1.zip',
+        'url': DANLP_STORAGE_URL + '/models/bert.sub.v0.0.1.zip',
         'md5_checksum': 'b713a8ec70ca4e8269d7a66a1cda2366',
         'size': 410882683,
         'file_extension': ''
     },
     'bert.polarity': {
-        'url': DANLP_S3_URL + '/models/bert.pol.v0.0.1.zip',
+        'url': DANLP_STORAGE_URL + '/models/bert.pol.v0.0.1.zip',
         'md5_checksum': 'bb0940fba75b39795332105bb2bc2af1',
         'size': 410888897,
         'file_extension': ''
@@ -159,7 +159,7 @@ MODELS = {
 
 DATASETS = {
     'ddt': {
-        'url': DANLP_S3_URL + '/datasets/ddt.zip',
+        'url': DANLP_STORAGE_URL + '/datasets/ddt.zip',
         'md5_checksum': 'b087c3a525f1cdc868b3f0a2e437a04d',
         'size': 1209710,
         'file_extension': '.conllu'
@@ -202,13 +202,13 @@ DATASETS = {
         'file_extension': '.csv'
     },
     'twitter.sentiment': {
-        'url': DANLP_S3_URL + '/datasets/twitter.sentiment.zip',
+        'url': DANLP_STORAGE_URL + '/datasets/twitter.sentiment.zip',
         'md5_checksum': 'b12633e3f55b69e7a6981ff0017c01e5', 
         'size': 17365, 
         'file_extension': '.csv'
     },
     'europarl.sentiment2': {
-        'url': DANLP_S3_URL + '/datasets/europarl.sentiment2.zip',
+        'url': DANLP_STORAGE_URL + '/datasets/europarl.sentiment2.zip',
         'md5_checksum': 'f7664ae27bfc32413ac6c31bf264b4f5', 
         'size': 51737, 
         'file_extension': '.csv'
