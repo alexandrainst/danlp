@@ -369,9 +369,8 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     assert _check_file(destination) == (expected_size, expected_hash), \
         "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
 
-
 def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
-                        clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip: str = None):
+                        clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip: str = None, singel: bool=False):
     """
     Simple process function for processing models
     that only needs to be unzipped after download.
@@ -382,19 +381,19 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
     :param file_in_zip: Name of the model file in the zip, if the zip contains more than one file
     """
     from zipfile import ZipFile
-
+    
     model_name = meta_info['name']
 
     full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
 
     if verbose:
-        print("Unzipping raw {} embeddings".format(model_name))
+        print("Unzipping {} ".format(model_name))
 
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
 
         file_list = zip_file.namelist()
 
-        if len(file_list) == 1:
+        if singel:
             extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
 
         elif file_in_zip:
@@ -403,3 +402,6 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
         else:  # Extract all the files to the name of the model/dataset
             destination = os.path.join(cache_dir, meta_info['name'])
             zip_file.extractall(path=destination)
+
+            
+            

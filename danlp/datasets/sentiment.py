@@ -1,9 +1,9 @@
 import os
 
 import pandas as pd
-import tweepy
-from tweepy import TweepError
 
+#from tweepy import TweepError
+import sys
 from danlp.download import DATASETS, download_dataset, DEFAULT_CACHE_DIR, _unzip_process_func
 
 
@@ -28,9 +28,9 @@ class EuroparlSentiment2:
     
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'europarl.sentiment2'
-
+        self.singel=True
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_unzip_process_func)
-        self.file_path = os.path.join(self.dataset_dir, self.dataset_name,self.dataset_name + '.csv')
+        self.file_path = os.path.join(cache_dir,self.dataset_name, self.dataset_name + '.csv')
         
     def load_with_pandas(self):
         
@@ -68,17 +68,17 @@ class TwitterSent:
     
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR, force: bool =False):
         self.dataset_name = 'twitter.sentiment'
-        #self.file_extension = DATASETS[self.dataset_name]['file_extension']
 
-        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func, force=force)
-        self.file_path = os.path.join(self.dataset_dir, self.dataset_name + '.csv')
-        
+        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func)
+        self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
+
     def load_with_pandas(self):
         df=pd.read_csv(self.file_path, sep=',', encoding='utf-8')
         return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
 
 
 def lookup_tweets(tweet_ids, api):
+    import tweepy
     full_tweets = []
     tweet_count = len(tweet_ids)
     try:
@@ -100,23 +100,26 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
     from zipfile import ZipFile
 
     twitter_api = construct_twitter_api_connection()
+    
+    model_name = meta_info['name']
+    full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
 
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
-        ids_file_path = zip_file.extract('twitter.sentiment.csv',
-                                         path=os.path.join(cache_dir,
-                                                           meta_info['name']))
-
-    df = pd.read_csv(ids_file_path)
+        file_list = zip_file.namelist()
+        extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
+    file_path = os.path.join(cache_dir, 'twitter.sentiment' + '.csv')
+    df = pd.read_csv(file_path)
 
     twitter_ids = list(df['twitterid'])
-
+    
     full_t = lookup_tweets(twitter_ids, twitter_api)
     tweet_texts = [[tweet.id, tweet.full_text] for tweet in full_t]
     tweet_ids, t_texts = list(zip(*tweet_texts))
     tweet_texts_df = pd.DataFrame({'twitterid': tweet_ids, 'text': t_texts})
 
     resulting_df = pd.merge(df, tweet_texts_df)
-    dataset_path = os.path.join(cache_dir, meta_info['name'],
+
+    dataset_path = os.path.join(cache_dir,
                                 meta_info['name'] + meta_info[
                                     'file_extension'])
 
@@ -131,7 +134,7 @@ def construct_twitter_api_connection():
            and 'TWITTER_CONSUMER_SECRET' in os.environ
            and 'TWITTER_ACCESS_TOKEN' in os.environ
            and 'TWITTER_ACCESS_SECRET' in os.environ):
-        exit("The Twitter API keys was not found."
+        sys.exit("The Twitter API keys was not found."
               "\nTo download tweets you need to set the following environment "
               "variables: \n- 'TWITTER_CONSUMER_KEY'\n- 'TWITTER_CONSUMER_SECRET'"
               "\n- 'TWITTER_ACCESS_TOKEN'\n- 'TWITTER_ACCESS_SECRET' "
@@ -149,7 +152,7 @@ def construct_twitter_api_connection():
 
     try:
         api.verify_credentials()
-    except TweepError:
-        exit("Could not establish connection to the Twitter API, have you provieded the correct keys?")
+    except twe<epy.TweepError:
+        sys.exit("Could not establish connection to the Twitter API, have you provieded the correct keys?")
 
     return api
