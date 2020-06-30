@@ -86,7 +86,7 @@ class TestEmbeddings(unittest.TestCase):
         # However we can get an embedding because of subword units
         self.assertEqual(fasttext_embeddings['institutmedarbejdskontrakt'].size, 100)
 
+#     omitting the test of embeddings temporary due to the small test embeddings is changes storage locations
+# if __name__ == '__main__':
 
-if __name__ == '__main__':
-    #omitting the test of embeddings temporary due to the small test embeddings is changes storage locations
-    #unittest.main()
+#     unittest.main()

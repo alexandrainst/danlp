@@ -209,8 +209,8 @@ DATASETS = {
     },
     'europarl.sentiment2': {
         'url': DANLP_STORAGE_URL + '/datasets/europarl.sentiment2.zip',
-        'md5_checksum': 'f7664ae27bfc32413ac6c31bf264b4f5', 
-        'size': 51737, 
+        'md5_checksum': 'fa7cfc829867a00dba74d917c78df294', 
+        'size': 51545, 
         'file_extension': '.csv'
     },
 }
