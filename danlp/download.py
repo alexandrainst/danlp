@@ -393,7 +393,7 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
 
         file_list = zip_file.namelist()
 
-        if singel:
+        if singel or len(file_list) == 1:
             extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
 
         elif file_in_zip:
