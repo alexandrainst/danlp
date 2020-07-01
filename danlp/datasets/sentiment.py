@@ -1,11 +1,10 @@
 import os
 
 import pandas as pd
-
-#from tweepy import TweepError
+import tweepy
 import sys
 from danlp.download import DATASETS, download_dataset, DEFAULT_CACHE_DIR, _unzip_process_func
-
+from danlp.utils import extract_single_file_from_zip
 
 class EuroparlSentiment1:
     
@@ -28,9 +27,8 @@ class EuroparlSentiment2:
     
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'europarl.sentiment2'
-        self.singel=True
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_unzip_process_func)
-        self.file_path = os.path.join(cache_dir,self.dataset_name, self.dataset_name + '.csv')
+        self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
         
     def load_with_pandas(self):
         

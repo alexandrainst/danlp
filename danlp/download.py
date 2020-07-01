@@ -383,17 +383,20 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
     from zipfile import ZipFile
     
     model_name = meta_info['name']
-
+    
+    
     full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
 
+    
     if verbose:
         print("Unzipping {} ".format(model_name))
 
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
+        
 
         file_list = zip_file.namelist()
 
-        if singel or len(file_list) == 1:
+        if len(file_list) == 1:
             extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
 
         elif file_in_zip:
