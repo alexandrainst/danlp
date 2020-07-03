@@ -18,14 +18,56 @@ A medium blog using Part of Speech tagging on Danish, can be found  [here](<http
 
 ##### :wrench:Flair
 
-This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
+This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
 
 The code for training can be found on Flairs GitHub, and the following parameters are set:
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
 
+The flair pos tagger can be used by loading  it with the  `load_flair_pos_model` method. Please note the the text should be tokenized before hand, this can for example be done using spacy. 
+
+```python
+from danlp.models import load_flair_pos_model
+from flair.data import Sentence
+
+# Load the POS tagger using the DaNLP wrapper
+tagger = load_flair_pos_model()
+
+# Using the flair POS tagger
+sentence = Sentence('Jeg hopper på en bil , som er rød sammen med Niels .') 
+tagger.predict(sentence, use_tokenizer=False) 
+print(sentence.to_tagged_string())
+
+# Example
+'''Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> , <PUNCT> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Niels <PROPN> . <PUNCT>
+'''
+
+```
+
+
+
 ##### :wrench:SpaCy
 
-Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) 
+Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the the data [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) . 
+
+Below is a small getting started snippet for using the Spacy pos tagger:
+
+```python
+from danlp.models import load_spacy_model
+
+#Load the POS tagger using the DaNLP wrapper
+nlp = load_spacy_model()
+
+# Using the spaCy POS tagger
+doc = nlp('Jeg hopper på en bil, som er rød sammen med Niels.')
+pred=''
+for token in doc:
+    pred += '{} <{}> '.format(token.text, token.pos_)
+print(pred)
+
+# Example
+''' Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> , <PUNCT> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Niels <PROPN> . <PUNCT> 
+ '''
+```
 
 ##### Polyglot
 
@@ -40,46 +82,6 @@ F1 scores is reported below and can be reproduced using `pos_benchmarks.py` in t
 | Polyglot | 0.7380     |
 | Flair    | **0.9667** |
 | SpaCy    | 0.9550     |
-
-
-
-## :hatching_chick: Get started using Part of speech tagging
-
-Below is a small snippet for getting started with the Flair  Part of Speech tagger trained by Alexandra Institute, but more examples can be found on [Flair](<https://github.com/zalandoresearch/flair>) GitHub page. 
-
-```python
-from danlp.models import load_flair_pos_model
-from flair.data import Sentence
-
-# Load the POS tagger using the DaNLP wrapper
-tagger = load_flair_pos_model()
-
-# Using the flair POS tagger
-sentence = Sentence('jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen') 
-tagger.predict(sentence, use_tokenizer=True) 
-print(sentence.to_tagged_string())
-
-# Example
-'''Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Jens-Peter <PROPN> E. <PROPN> Hansen <PROPN>'''
-```
-
-Small getting started snippet for using the Spacy pos tagger:
-```python
-from danlp.models import load_spacy_model
-
-#Load the POS tagger using the DaNLP wrapper
-nlp = load_spacy_model()
-
-# Using the spaCy POS tagger
-doc = nlp('Jeg hopper på en bil som er rød sammen med Jens-Peter E. Hansen')
-pred=''
-for token in doc:
-    pred += '{} <{}> '.format(token.text, token.pos_)
-print(pred)
-
-# Example
-''' Jeg <PRON> hopper <VERB> på <ADP> en <DET> bil <NOUN> som <ADP> er <AUX> rød <ADJ> sammen <ADV> med <ADP> Jens-Peter <PROPN> E. <PROPN> Hansen <PROPN> '''
-```
 
 
 
