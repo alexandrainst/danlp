@@ -1,6 +1,6 @@
 import os, re
 from typing import Union, List
-
+import tensorflow as tf
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
@@ -89,7 +89,7 @@ class BertEmotion:
 
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
         from transformers import BertTokenizer, BertForSequenceClassification
-
+        
         # download the model or load the model path
         path_emotion = download_model('bert.emotion', cache_dir,
                                        process_func=_unzip_process_func,
@@ -107,17 +107,19 @@ class BertEmotion:
         self.model = BertForSequenceClassification.from_pretrained(path_emotion)
         
         # load the class names mapping
-        self.catagories = {5: 'Foragt/Modvilje', 2: 'Forventning/Interrese',
-                           0: 'Glæde/Sindsro', 3: 'Overasket/Målløs',
-                           1: 'Tillid/Accept',
-                           4: 'Vrede/Irritation', 6: 'Sorg/trist',
-                           7: 'Frygt/Bekymret'}
+        self.catagories = { 0: 'Glæde/Sindsro',1: 'Tillid/Accept', 2: 'Forventning/Interrese',
+              3: 'Overasket/Målløs',4: 'Vrede/Irritation', 5: 'Foragt/Modvilje', 6: 'Sorg/trist',7: 'Frygt/Bekymret'}
+
+        self.labels_no = {1: 'No emotion', 0: 'Emotional'}
+    
+    def _classes(self):
+        return list(self.catagories.values()), list(self.labels_no.values())
     
     def predict_if_emotion(self, sentence):
-        labels = {1: 'No emotion', 0: 'Emotional'}
+        
         input1 = self.tokenizer_rejct.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
         pred = self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
-        return labels[pred]
+        return self.labels_no[pred]
     
     def predict(self, sentence: str, no_emotion=False):
 
@@ -134,18 +136,34 @@ class BertEmotion:
                 return reject
             else:
                 return predict_emotion()
+            
+    def predict_proba(self, sentence: str, no_emotion=False):
+        proba=[]
+            
+        # which emotion        
+        input1 = self.tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+        pred = (self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
+        proba.append(tf.nn.softmax(pred)[0].numpy())
+        
+                
+        # emotion or no emotion
+        if no_emotion:
+            input1 = self.tokenizer_rejct.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = (self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
+            proba.append(tf.nn.softmax(pred)[0].numpy())
+
+        return proba 
 
 class BertTone:
     '''
     The class load both a BERT model to classify boteh the tone of [subjective or objective] and the tone og [positive, neutral , negativ]
     returns: [label_subjective, label_polarity]
     '''
-    
+   
 
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+
         from transformers import BertTokenizer, BertForSequenceClassification
-         
-        
         # download the model or load the model path
         path_sub = download_model('bert.subjective', cache_dir, process_func=_unzip_process_func,verbose=verbose)
         path_sub = os.path.join(path_sub,'bert.sub.v0.0.1')
@@ -156,37 +174,58 @@ class BertTone:
         self.model_sub = BertForSequenceClassification.from_pretrained(path_sub)
         self.tokenizer_pol = BertTokenizer.from_pretrained(path_pol)
         self.model_pol = BertForSequenceClassification.from_pretrained(path_pol)
+        
+        self.classes_pol= ['positive', 'neutral', 'negative']
+        self.classes_sub= ['objective','subjective'] 
+            
+    def _clean(self, sentence):
+        sentence=re.sub(r'http[^\s]+', '', sentence)
+        sentence = re.sub(r'\n', '',sentence)
+        sentence = re.sub(r'\t', '',sentence)
+        sentence = re.sub(r'@', '',sentence)
+        sentence = re.sub(r'#', '',sentence)
+        return sentence
+
+    def _classes(self):
+        return self.classes_pol, self.classes_sub
     
     def predict(self, sentence: str, polarity: bool = True, analytic: bool = True):
-        
-        def clean(sentence):
-            sentence=re.sub(r'http[^\s]+', '', sentence)
-            sentence = re.sub(r'\n', '',sentence)
-            sentence = re.sub(r'\t', '',sentence)
-            sentence = re.sub(r'@', '',sentence)
-            sentence = re.sub(r'#', '',sentence)
-            return sentence
 
         
-        sentence = clean(str(sentence))
+        sentence = self._clean(str(sentence))
         predDict = {'analytic': None, 'polarity': None }
         
         # predict subjective
         if analytic:
             input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
             pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
-            labels= ['objective','subjective']
-            predDict['analytic']=labels[pred]
+            predDict['analytic']=self.classes_sub[pred]
         
         # predict polarity
         if polarity:
             input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
-            labels= ['positive', 'neutral', 'negative']
-            predDict['polarity']=labels[pred]
+            pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item() 
+            predDict['polarity']=self.classes_pol[pred]
         
         return predDict
+    
+    def predict_proba(self, sentence: str, polarity: bool = True, analytic: bool = True):
+        proba=[]
+        sentence = self._clean(str(sentence))
+        
+        # predict polarity
+        if polarity:
+            input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = (self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
+            proba.append(tf.nn.softmax(pred)[0].numpy())
             
+        # predict subjective
+        if analytic:          
+            input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            pred = (self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
+            proba.append(tf.nn.softmax(pred)[0].numpy())
+
+        return proba    
             
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """

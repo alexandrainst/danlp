@@ -41,6 +41,10 @@ classifier.predict('jeg ejer en rød bil og det er en god bil')
 ''''Tillid/Accept''''
 classifier.predict('jeg ejer en rød bil men den er gået i stykker')
 ''''Sorg/trist''''
+
+# Get probabilities and matching clases names
+classifier.predict_proba('jeg ejer en rød bil men den er gået i stykker', no_emotion=False)
+classifier._classes()
 ```
 
 
@@ -52,14 +56,18 @@ The tone analyzer consists of two BERT classification models, and the first is r
  Below is a small snippet for getting started using the Bert Tone model:
 
 ```python
-from danlp.models import load_bert_emotion_model
+from danlp.models import load_bert_tone_model
 classifier = load_bert_tone_model()
 
 # using the classifier
-classifier..predict('Analysen viser, at økonomien bliver forfærdelig dårlig', )
+classifier.predict('Analysen viser, at økonomien bliver forfærdelig dårlig')
 '''{'analytic': 'objektive', 'polarity': 'negative'}''' 
 classifier.predict('Jeg tror alligvel, det bliver godt')
 '''{'analytic': 'subjektive', 'polarity': 'positive'}'''
+
+# Get probabilities and matching clases names
+classifier.predict_proba('Analysen viser, at økonomien bliver forfærdelig dårlig')
+classifier._clases()
 ```
 
 
