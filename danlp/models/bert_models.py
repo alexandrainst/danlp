@@ -1,8 +1,8 @@
 import os, re
 from typing import Union, List
-import tensorflow as tf
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
+import torch
 
 
 class BertNer:
@@ -35,8 +35,7 @@ class BertNer:
         :param text: Can either be a raw text or a list of tokens
         :return: The tokenized text and the predicted labels
         """
-        import torch
-
+        
         if isinstance(text, str):
             # Bit of a hack to get the tokens with the special tokens
             tokens = self.tokenizer.tokenize(self.tokenizer.decode(self.tokenizer.encode(text)))
@@ -142,15 +141,15 @@ class BertEmotion:
             
         # which emotion        
         input1 = self.tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-        pred = (self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
-        proba.append(tf.nn.softmax(pred)[0].numpy())
+        pred = (self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
+        proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
         
                 
         # emotion or no emotion
         if no_emotion:
             input1 = self.tokenizer_rejct.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
-            proba.append(tf.nn.softmax(pred)[0].numpy())
+            pred = (self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba 
 
@@ -216,14 +215,14 @@ class BertTone:
         # predict polarity
         if polarity:
             input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
-            proba.append(tf.nn.softmax(pred)[0].numpy())
+            pred = (self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
             
         # predict subjective
         if analytic:          
             input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].detach().numpy())
-            proba.append(tf.nn.softmax(pred)[0].numpy())
+            pred = (self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids']))
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba    
             
