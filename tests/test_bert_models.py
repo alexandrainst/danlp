@@ -24,6 +24,10 @@ class TestBertEmotion(unittest.TestCase):
         self.assertTrue(model.predict_if_emotion('bilen er flot')=='Emotional')
         self.assertTrue(model.predict_if_emotion('bilen er rød')=='No emotion')
         self.assertTrue(model.predict('jeg er meget glad idag')=='Glæde/Sindsro')
+        self.assertTrue(len(model.predict_proba('jeg er meget glad idag')[0])==8)
+        self.assertTrue(len(model.predict_proba('jeg er meget glad idag', no_emotion=True)[1])==2)
+        self.assertEqual(model._classes()[0], ['Glæde/Sindsro','Tillid/Accept','Forventning/Interrese','Overasket/Målløs','Vrede/Irritation','Foragt/Modvilje','Sorg/trist','Frygt/Bekymret'])
+        self.assertEqual(model._classes()[1], ['No emotion', 'Emotional'])
 
 class TestBertTone(unittest.TestCase):
     def test_download(self):
@@ -43,7 +47,8 @@ class TestBertTone(unittest.TestCase):
         self.assertEqual(model.predict('han er 12 år', polarity=False),{'analytic': 'objective', 'polarity': None})
         self.assertEqual(model.predict('han gør det godt', analytic=False),{'analytic': None, 'polarity': 'positive'})
         self.assertEqual(model.predict('Det er super dårligt'),{'analytic': 'subjective', 'polarity': 'negative'})
-  
+        self.assertEqual(model._classes()[0],  ['positive', 'neutral', 'negative'])
+        self.assertTrue(len(model.predict_proba('jeg er meget glad idag', polarity=False)[0][0])==2)
 
 
 class TestBertNer(unittest.TestCase):
