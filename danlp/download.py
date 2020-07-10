@@ -232,7 +232,6 @@ class TqdmUpTo(tqdm):
 def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
                      process_func: Callable = None, verbose: bool = False, force = False):
     """
-
     :param verbose:
     :param dataset:
     :param cache_dir:
@@ -308,7 +307,6 @@ def _check_file(fname):
 def _check_process_func(process_func: Callable):
     """
     Checks that a process function takes the correct arguments
-
     :param process_func:
     """
     function_args = inspect.getfullargspec(process_func).args
@@ -319,7 +317,6 @@ def _check_process_func(process_func: Callable):
 
 def _download_and_process(meta_info: dict, process_func: Callable, single_file_path, verbose):
     """
-
     :param meta_info:
     :param process_func:
     :param single_file_path:
@@ -342,7 +339,6 @@ def _download_and_process(meta_info: dict, process_func: Callable, single_file_p
 
 def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     """
-
     :param meta_info:
     :param destination:
     :param verbose:
@@ -374,7 +370,6 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
     """
     Simple process function for processing models
     that only needs to be unzipped after download.
-
     :param tmp_file_path: The path to the downloaded raw file
     :param clean_up_raw_data:
     :param verbose:
@@ -405,6 +400,3 @@ def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DE
         else:  # Extract all the files to the name of the model/dataset
             destination = os.path.join(cache_dir, meta_info['name'])
             zip_file.extractall(path=destination)
-
-            
-            
