@@ -50,7 +50,7 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 **Next up**
 
-- :traffic_light: A synthetic test set in attempt to access fairness in sentiment models  
+- :traffic_light: An attempt to access fairness in sentiment models  through a synthetic test will be added as an example in a Jupyter notebook  
 
 - :paw_prints: Spacy models for sentiment trained using hard distill from BERT
 
@@ -66,11 +66,23 @@ that has all the NLP libraries installed.
 To get started using DaNLP simply install the project with pip:
 
 ```bash
-pip install danlp
+pip install danlp 
 ```
 
 Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
 This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `.
+
+### Install from source
+
+If you want to be able to use the latest developments before they are realized in a new pip package, or you want to modify the code your self, then clone this repo and install from source. 
+
+```
+git clone https://github.com/alexandrainst/danlp.git
+cd danlp
+pip install . 
+```
+
+if you have clone it before use ``git pull`` to get newest version instead of clone.  
 
 ### Install with Docker 
 To quickly get started with DaNLP and to try out the models you can use our Docker image.
@@ -98,6 +110,8 @@ The repository is under development and this is the list of NLP tasks we have co
 -  Coreference resolution
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
+
+We do also recommend to check out this awesome [list](https://github.com/fnielsen/awesome-danish) of Danish NLP stuff from Finn Årup Nielsen. 
 
 ## Datasets
 The number of datasets in the Danish is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
