@@ -48,7 +48,7 @@ class TestBertTone(unittest.TestCase):
         self.assertEqual(model.predict('han gør det godt', analytic=False),{'analytic': None, 'polarity': 'positive'})
         self.assertEqual(model.predict('Det er super dårligt'),{'analytic': 'subjective', 'polarity': 'negative'})
         self.assertEqual(model._classes()[0],  ['positive', 'neutral', 'negative'])
-        self.assertTrue(len(model.predict_proba('jeg er meget glad idag', polarity=False)[0][0])==2)
+        self.assertTrue(len(model.predict_proba('jeg er meget glad idag', polarity=False)[0])==2)
 
 
 class TestBertNer(unittest.TestCase):
