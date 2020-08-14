@@ -3,7 +3,7 @@ from typing import Union, List
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 import torch
-
+import warnings
 
 class BertNer:
     """
@@ -99,7 +99,7 @@ class BertEmotion:
                                        verbose=verbose)
         path_reject = os.path.join(path_reject,'bert.noemotion')
         # load the models
-        self.tokenizer_rejct = BertTokenizer.from_pretrained(path_reject)
+        self.tokenizer_reject = BertTokenizer.from_pretrained(path_reject)
         self.model_reject = BertForSequenceClassification.from_pretrained(path_reject)
         
         self.tokenizer = BertTokenizer.from_pretrained(path_emotion)
@@ -110,21 +110,35 @@ class BertEmotion:
               3: 'Overasket/Målløs',4: 'Vrede/Irritation', 5: 'Foragt/Modvilje', 6: 'Sorg/trist',7: 'Frygt/Bekymret'}
 
         self.labels_no = {1: 'No emotion', 0: 'Emotional'}
+        
+        # save embbeding dim, to later ensure the sequenze is no longer the embeddings 
+        self.max_length = self.model.bert.embeddings.position_embeddings.num_embeddings
+        self.max_length_reject = self.model_reject.bert.embeddings.position_embeddings.num_embeddings
+
     
     def _classes(self):
         return list(self.catagories.values()), list(self.labels_no.values())
     
+    def _get_pred(self, tokenizer, model, max_lenght, sentence):
+        input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
+                                                max_length=max_lenght, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in input1:
+            warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
+        pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
+
+        return pred
+    
     def predict_if_emotion(self, sentence):
         
-        input1 = self.tokenizer_rejct.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-        pred = self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+        pred=self._get_pred(self.tokenizer_reject, self.model_reject, self.max_length_reject, sentence)
+        pred = pred.argmax().item()
         return self.labels_no[pred]
     
     def predict(self, sentence: str, no_emotion=False):
 
         def predict_emotion():
-            input1 = self.tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item() 
+            pred=self._get_pred(self.tokenizer, self.model, self.max_length, sentence)
+            pred = pred.argmax().item() 
             return self.catagories[pred]
         
         if no_emotion:
@@ -136,19 +150,18 @@ class BertEmotion:
             else:
                 return predict_emotion()
             
-    def predict_proba(self, sentence: str, no_emotion=False):
+    def predict_proba(self, sentence: str, emotions=True, no_emotion=True):
         proba=[]
             
-        # which emotion        
-        input1 = self.tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-        pred = (self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
-        proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
+        # which emotion   
+        if emotions:
+            pred=self._get_pred(self.tokenizer, self.model, self.max_length, sentence)
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
         
                 
         # emotion or no emotion
         if no_emotion:
-            input1 = self.tokenizer_rejct.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_reject(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
+            pred=self._get_pred(self.tokenizer_reject, self.model_reject, self.max_length_reject, sentence)
             proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba 
@@ -176,7 +189,12 @@ class BertTone:
         
         self.classes_pol= ['positive', 'neutral', 'negative']
         self.classes_sub= ['objective','subjective'] 
-            
+        
+        # save embbeding dim, to later ensure the sequenze is no longer the embeddings 
+        self.max_length_sub = self.model_sub.bert.embeddings.position_embeddings.num_embeddings
+        self.max_length_pol = self.model_pol.bert.embeddings.position_embeddings.num_embeddings
+
+        
     def _clean(self, sentence):
         sentence=re.sub(r'http[^\s]+', '', sentence)
         sentence = re.sub(r'\n', '',sentence)
@@ -188,6 +206,15 @@ class BertTone:
     def _classes(self):
         return self.classes_pol, self.classes_sub
     
+    def _get_pred(self, tokenizer, model, max_lenght, sentence):
+        input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
+                                                max_length=max_lenght, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in input1:
+            warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
+        pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
+
+        return pred
+    
     def predict(self, sentence: str, polarity: bool = True, analytic: bool = True):
 
         
@@ -196,14 +223,18 @@ class BertTone:
         
         # predict subjective
         if analytic:
-            input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            #input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            #pred = self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item()
+            pred=self._get_pred(self.tokenizer_sub, self.model_sub, self.max_length_sub, sentence)
+            pred = pred.argmax().item()
             predDict['analytic']=self.classes_sub[pred]
         
         # predict polarity
         if polarity:
-            input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item() 
+            pred=self._get_pred(self.tokenizer_pol, self.model_pol, self.max_length_pol, sentence)
+            pred = pred.argmax().item()
+            #input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
+            #pred = self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0].argmax().item() 
             predDict['polarity']=self.classes_pol[pred]
         
         return predDict
@@ -214,17 +245,26 @@ class BertTone:
         
         # predict polarity
         if polarity:
-            input1 = self.tokenizer_pol.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_pol(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0])
+            pred=self._get_pred(self.tokenizer_pol, self.model_pol, self.max_length_pol, sentence)
             proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
-            
+        
         # predict subjective
-        if analytic:          
-            input1 = self.tokenizer_sub.encode_plus(sentence, add_special_tokens=True, return_tensors='pt')
-            pred = (self.model_sub(input1['input_ids'], token_type_ids=input1['token_type_ids']))
+        if analytic:  
+            pred=self._get_pred(self.tokenizer_sub, self.model_sub, self.max_length_sub, sentence)
             proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba    
+
+def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Wrapper function to ensure that all models in danlp are
+    loaded in a similar way
+    :param cache_dir:
+    :param verbose:
+    :return:
+    """
+
+    return BertTone(cache_dir, verbose)   
             
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
