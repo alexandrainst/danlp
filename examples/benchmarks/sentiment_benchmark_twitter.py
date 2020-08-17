@@ -148,7 +148,7 @@ def bert_sent_benchmark():
     report(df_val['sub/obj'], df_val['bert_ana'], 'BERT_Tone (sub/obj)',  "twitter_sentiment(val)")      
         
 def spacy_benchmark():
-    nlpS = load_spacy_model(textcat='sentiment')
+    nlpS = load_spacy_model(textcat='sentiment', vectorError=True)
     
     # predict with spacy sentiment 
     def predict(x):

@@ -169,7 +169,7 @@ def bert_sent_benchmark(datasets):
 
 def spacy_sent_benchmark(datasets):
     
-    nlpS = load_spacy_model(textcat='sentiment')
+    nlpS = load_spacy_model(textcat='sentiment', vectorError=True)
    
     for dataset in datasets:
         if dataset == 'euparlsent':
