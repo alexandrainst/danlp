@@ -168,9 +168,9 @@ def bert_sent_benchmark(datasets):
         report(df['valence'], df['pred'], 'BERT_Tone (polarity)', dataset)
 
 def spacy_sent_benchmark(datasets):
-
-    nlpS = load_spacy_model(textcat='sentiment')
     
+    nlpS = load_spacy_model(textcat='sentiment')
+   
     for dataset in datasets:
         if dataset == 'euparlsent':
             data = EuroparlSentiment1()
@@ -192,10 +192,10 @@ def spacy_sent_benchmark(datasets):
         df['pred'] = df.text.map(lambda x: predict(x))
         
 
-        report(df['valence'], df['pred'], 'BERT_Tone (polarity)', dataset)
+        report(df['valence'], df['pred'], 'Spacy sentiment (polarity)', dataset)
         
 if __name__ == '__main__':
-    #sentida_benchmark(['euparlsent','lccsent'])
-    #afinn_benchmark(['euparlsent','lccsent'])
-    #bert_sent_benchmark(['euparlsent','lccsent'])
+    sentida_benchmark(['euparlsent','lccsent'])
+    afinn_benchmark(['euparlsent','lccsent'])
+    bert_sent_benchmark(['euparlsent','lccsent'])
     spacy_sent_benchmark(['euparlsent','lccsent'])
