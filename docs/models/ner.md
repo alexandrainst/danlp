@@ -10,9 +10,9 @@ and made available through the DaNLP library.
 
 | Model | Train Data | Maintainer | Tags | DaNLP |
 |-------|-------|------------|------|-------|
-| [BERT](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#bert) | [DaNE]() | Alexandra Institute | PER, ORG, LOC | ✔ |
-| [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#flair) | [DaNE]() | Alexandra Institute | PER, ORG, LOC | ✔️ |
-| [spaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#spacy) | [DaNE]() | Alexandra Institute | PER, ORG, LOC | ✔ |
+| [BERT](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#bert) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
+| [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#flair) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔️ |
+| [spaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#spacy) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
 | [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ | 
 | [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
