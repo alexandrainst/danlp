@@ -41,7 +41,7 @@ It is a collection  of available datasets and models for a variety of NLP tasks.
 It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow.
 
 **News**
-
+- :paw_prints: A first version of a Spacy models for sentiment trained using hard distill from BERT is added to the repo, read about it in the [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md)
 - :hotel: :broken_heart:  Version 0.0.9 has been [released](https://github.com/alexandrainst/danlp/releases) with an update of storage host for models and dataset hosted by danlp - this means older pip version support for downloading models and dataset from danlp host is broken. 
 - 🚧 Support for Danish in the [spaCy]( https://spacy.io/models/da) new 2.3 version. The progress for supporting spaCy can be seen here [issue #3056](https://github.com/explosion/spaCy/issues/3056). The spacy model is trained using DaNE and DDT [datasets](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) - Read more about using spacy through danlp [here](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md)  
 
@@ -52,7 +52,7 @@ It features code examples on how to use the datasets and models in popular NLP f
 
 - :traffic_light: An attempt to access fairness in sentiment models  through a synthetic test will be added as an example in a Jupyter notebook  
 
-- :paw_prints: Spacy models for sentiment trained using hard distill from BERT
+- :paw_prints: Improving spaCy ner model using hard distil of Bert Ner
 
 
 
