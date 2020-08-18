@@ -9,7 +9,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Europarl7](http://www.statmt.org/europarl/) | Translation | 47,761,381 | 2,323,099	 | [None](http://www.statmt.org/europarl/) | ❌ |
 | [ParaCrawl5](https://paracrawl.eu/) | Translation | - | - | [CC0](https://paracrawl.eu/releases.html) | ❌ |
 | [WikiANN](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wikiann)| NER | 832.901 | 95.924 |[ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)| ✔️ |
-| [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
+| [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
 | [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
 | [Europarl Sentiment1](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment1) | Sentiment | 3.359 | 184 | None | ✔️ |
 | [Europarl Sentiment2](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2) | sentiment |  | 957 | CC BY-SA 4.0 | ✔️ |
