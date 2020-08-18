@@ -30,7 +30,7 @@ The script benchmark the following models where scores are converted into a thre
 """
 
 from danlp.datasets import TwitterSent
-from danlp. models import load_bert_tone_model
+from danlp.models import load_bert_tone_model, load_spacy_model
 from afinn import Afinn
 import numpy as np
 import tabulate
@@ -38,6 +38,7 @@ import os
 import urllib
 from pathlib import Path
 import sys
+import operator
 
 ## Load teh witter data
 twitSent = TwitterSent()
@@ -146,12 +147,23 @@ def bert_sent_benchmark():
     report(df_val['polarity'], df_val['bert_pol'], 'BERT_Tone (polarity)',  "twitter_sentiment(val)")    
     report(df_val['sub/obj'], df_val['bert_ana'], 'BERT_Tone (sub/obj)',  "twitter_sentiment(val)")      
         
-        
+def spacy_benchmark():
+    nlpS = load_spacy_model(textcat='sentiment', vectorError=True)
+    
+    # predict with spacy sentiment 
+    def predict(x):
+        doc = nlpS(x)
+        return max(doc.cats.items(), key=operator.itemgetter(1))[0]
+    
+    df_val['spacy'] = df_val.text.map(lambda x: predict(x))
+
+    report(df_val['polarity'], df_val['spacy'], 'Spacy', "twitter_sentiment(val)")        
         
 if __name__ == '__main__':
     sentida_benchmark()
     afinn_benchmark()
-    bert_sent_benchmark()        
+    bert_sent_benchmark()
+    spacy_benchmark()
         
         
         

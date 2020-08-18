@@ -11,6 +11,7 @@ In this repository we provide an overview of open sentiment analysis models and 
 | [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity           | Score (continuous)                                           | ❌     |
 | [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions           | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
 | [Bert Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔️     |
+| [SpaCy Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchspacy-sentiment) (beta) | spaCy    | MIT                                                          | Alexandra Institute                                       | Polarity           | 'postive', 'neutral', 'negative'                             | ✔️     |
 
 
 
@@ -72,6 +73,31 @@ classifier._clases()
 
 
 
+#### :wrench: SpaCy Sentiment
+
+SpaCy sentiment is a text classification model trained using spacy built in command line interface. It uses the CoNLL2017 word vectors, read about it [here](https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md) .
+
+The model is trained using hard distil of the [Bert Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) - Meaning,  the Bert Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
+
+It is a first version. 
+
+Read more about using the Danish spaCy model [here](https://github.com/alexandrainst/danlp/blob/Add_spacy_sentiment/docs/spacy.md)  
+
+Below is a small snippet for getting started using the spaCy sentiment model. Currently the danlp packages provide both a spaCy model which do not provide any classes in the textcat module (so it is empty for you to train from scratch), and the sentiment spacy model which have pretrained the classes 'positiv', 'neutral' and 'negative'. Notice it is possible with the spacy command line interface to continue training of the sentiment classes, or add new tags. 
+
+```python
+from danlp.models import load_spacy_model
+# load the model
+nlp = load_spacy_model(textcat='sentiment') # if you got an error saying da.vectors not found, try setting vectorError=True - it is an temp fix
+
+# use the model for prediction
+doc = nlp("Vi er glade for spacy!")
+max(doc.cats.items(), key=operator.itemgetter(1))[0]
+'''positiv'''
+```
+
+
+
 
 
 
@@ -98,7 +124,8 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 | ---- | ------------------ | ------------- | ---- |
 | AFINN | 0.68 (0.68) | 0.66 (0.61) | 0.48 (0.46) |
 | Sentida | 0.67 (0.65) | 0.58 (0.55) | 0.44 (0.44) |
-| Bert Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73**(0.70) |
+| Bert Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73** (0.70) |
+| spaCy sentiment (version 0.0.1) | 0.74 (0.73) | 0.66 (0.61) | 0.66 (0.60) |
 
 **Benchmark of subjective versus objective classification**
 

@@ -129,6 +129,12 @@ MODELS = {
         'size': 1261762677,
         'file_extension': ''
     },
+    'spacy.sentiment': {
+        'url': DANLP_STORAGE_URL + '/models/spacy.sentiment.zip',
+        'md5_checksum': 'bfe1fcd4a821b3dcc1a23a36497cc6c8',
+        'size': 752316341,
+        'file_extension': ''
+    },
 
     # BERT sentiment models
     'bert.emotion': {
