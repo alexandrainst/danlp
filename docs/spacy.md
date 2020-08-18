@@ -14,6 +14,8 @@ The model is trained on the [Danish Dependency Treebansk (DaNe)](<https://github
 
 For comparison to other models and additional information of the tasks, check out the task individual pages for [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) , [word embeddings](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>) and [named entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>).
 
+The danlp github also provide a version of the spaCy model which contains a sentiment classifier, read more about it in the sentiment analysis [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
+
 #### Performance on spaCy model
 
 The following lists the  performance scores of the spaCy model provided in DaNLP pakage. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
@@ -83,7 +85,7 @@ displacy.serve(doc, style='dep')
 
 The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 
-As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  
+As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  A first verison of  a spacy model with a sentiment classifier can be load with the danlp wrapper, read more about it in the sentiment analysis [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
 
  **The first thing is to convert the annotated data into a data format readable by spaCy**
 

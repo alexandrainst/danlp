@@ -162,7 +162,8 @@ def spacy_benchmark():
 if __name__ == '__main__':
     sentida_benchmark()
     afinn_benchmark()
-    bert_sent_benchmark()        
+    bert_sent_benchmark()
+    spacy_benchmark()
         
         
         
