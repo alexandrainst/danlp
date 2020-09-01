@@ -49,7 +49,7 @@ class TestEmbeddings(unittest.TestCase):
     def test_embeddings_with_flair(self):
         from flair.data import Sentence
 
-        embs = load_context_embeddings_with_flair()
+        embs = load_context_embeddings_with_flair(word_embeddings='wiki.da.wv')
 
         sentence1 = Sentence('Han fik bank')
         sentence2 = Sentence('Han fik en ny bank')

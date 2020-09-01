@@ -93,7 +93,8 @@ from danlp.models.embeddings import load_context_embeddings_with_flair
 from flair.data import Sentence
 
 # Use the wrapper from DaNLP to download and load embeddings with Flair
-stacked_embeddings = load_context_embeddings_with_flair()
+# You can combine it with on of the static emebdings
+stacked_embeddings = load_context_embeddings_with_flair(word_embeddings='wiki.da.wv')
 
 # Embed two different sentences
 sentence1 = Sentence('Han fik bank')

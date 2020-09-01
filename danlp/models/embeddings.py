@@ -127,7 +127,7 @@ def load_pytorch_embedding_layer(pretrained_embedding: str,
     return Embedding.from_pretrained(weights), word_vectors.index2word
 
 
-def load_context_embeddings_with_flair(direction='bi', word_embeddings=True,
+def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
                                        cache_dir=DEFAULT_CACHE_DIR,
                                        verbose=False):
     """
@@ -141,8 +141,13 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=True,
 
     embeddings = []
 
-    if word_embeddings:
-        fasttext_embedding = WordEmbeddings('da')
+    if word_embeddings is not None:
+        word_embeddings_available(word_embeddings, can_use_subword=False)
+        download_model(word_embeddings, cache_dir,
+                   _process_downloaded_embeddings, verbose=verbose)
+        wv_path = os.path.join(cache_dir, word_embeddings + ".bin")
+        
+        fasttext_embedding = WordEmbeddings(wv_path)
         embeddings.append(fasttext_embedding)
 
     if direction == 'bi' or direction == 'fwd':
