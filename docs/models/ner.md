@@ -13,7 +13,7 @@ and made available through the DaNLP library.
 | [BERT](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#bert) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
 | [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#flair) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔️ |
 | [spaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#spacy) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ | 
+| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ |
 | [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
 #### BERT
@@ -21,7 +21,7 @@ The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER 
 has been finetuned on the [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
-To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. 
+To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. 
 ```python
 from danlp.models import load_bert_ner_model
 
