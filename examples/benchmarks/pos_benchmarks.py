@@ -6,9 +6,9 @@ from flair.data import Sentence, Token
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_pos_model
 
-from seqeval.metrics import classification_report
+from tabulate import tabulate
 
-# bechmarking polyglotmodel requires
+# benchmarking polyglotmodel requires
 from polyglot.tag import POSTagger
 from polyglot.text import WordList
 
@@ -27,8 +27,38 @@ ccorpus_conll =ddt.load_as_conllu(predefined_splits=True)
 sentences_tokens = []
 for sent in ccorpus_conll[2]:
     sentences_tokens.append([token.form for token in sent._tokens])
-    
-    
+
+
+
+def print_accuracy_scores(tags_true, tags_pred):
+
+    # flatening tags lists
+    tags_true = [tag for sent in tags_true for tag in sent]
+    tags_pred = [tag for sent in tags_pred for tag in sent]
+
+    # list of all tags
+    labels = sorted(list(set(tags_true)))
+
+    headers = ["label", "accuracy", "support"]
+    tab = []
+    correct_tags = {l:[] for l in labels}
+    # counting correct predictions per tag
+    for label in labels:
+        correct_tags[label] = [t == p for t, p in zip(tags_true, tags_pred) if t == label]
+        acc = round(sum(correct_tags[label])/len(correct_tags[label])*100, 2) if len(correct_tags[label])>0 else 0
+        tab.append([label, acc, len(correct_tags[label])])
+    tab.append(['', '', ''])
+    total_examples = sum(len(correct_tags[l]) for l in correct_tags)
+
+    micro_acc = round( sum(sum(correct_tags[l]) for l in correct_tags) / total_examples *100, 2)
+    tab.append(["micro average", micro_acc, total_examples])
+
+    macro_acc = round( sum([sum(correct_tags[l])/len(correct_tags[l]) for l in labels if len(correct_tags[l])>0]) / len(labels) *100, 2)
+    tab.append(["macro average", macro_acc, total_examples])
+
+    print("\n", tabulate(tab, headers=headers, colalign=["right", "decimal", "right"]), "\n")
+
+
 def benchmark_flair_mdl():
     tagger = load_flair_pos_model()
     
@@ -43,11 +73,7 @@ def benchmark_flair_mdl():
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    
-    print(classification_report(tags_true, tags_pred,
-                                    digits=4))
-    
-    
+    print_accuracy_scores(tags_true, tags_pred)
     
     
 def benchmark_spacy_mdl():
@@ -74,48 +100,56 @@ def benchmark_spacy_mdl():
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    
-    print(classification_report(tags_true, tags_pred,
-                                    digits=4))
-    
+    print_accuracy_scores(tags_true, tags_pred)
 
-    
-def benchmark_polyglot_mdl():
+
+auxiliary_verbs = ["være", "er", "var", "været"]
+auxiliary_verbs += ["have", "har", "havde", "haft"]
+auxiliary_verbs += ["kunne", "kan", "kunnet"]
+auxiliary_verbs += ["ville", "vil", "villet"]
+auxiliary_verbs += ["skulle", "skal", "skullet"]
+auxiliary_verbs += ["måtte", "må", "måttet"]
+auxiliary_verbs += ["burde", "bør", "burdet"]
+
+def benchmark_polyglot_mdl(corrected_output=False):
     """
-    Running ployglot requires these packages:
+    Running polyglot requires these packages:
     # Morfessor==2.0.6
     # PyICU==2.4.2
     # pycld2==0.41
     # polyglot
     
     """
+
+    def udify_tag(tag, word):
+        if tag == "CONJ":
+            return "CCONJ"
+        if tag == "VERB" and word in auxiliary_verbs:
+            return "AUX"
+        return tag
     
     start = time.time()
 
     tags_pred = []
     for tokens in  sentences_tokens:
         word_list = WordList(tokens, language='da')
-        ne_chunker =  POSTagger(lang='da')
-        word_ent_tuples = list(ne_chunker.annotate(word_list))
-
-        tags_pred.append([entity for word, entity in word_ent_tuples])
-    print('**Polyglot model**')
+        tagger =  POSTagger(lang='da')
+        word_tag_tuples = list(tagger.annotate(word_list))
+        tags_pred.append([udify_tag(tag, word) if corrected_output else tag for word, tag in word_tag_tuples])
+    print('**Polyglot model'+(' (corrected output) ' if corrected_output else '')+'**')
     print("Made predictions on {} sentences and {} tokens in {}s".format(
     num_sentences, num_tokens, time.time() - start))
-    
+
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
-    
-    
-    print(classification_report(tags_true, tags_pred,
-                                    digits=4))
-    
-    
-    
-    
-    
-    
+
+    print_accuracy_scores(tags_true, tags_pred)
+
+
+
+
 if __name__ == '__main__':
     benchmark_polyglot_mdl()
+    benchmark_polyglot_mdl(corrected_output=True)
     benchmark_spacy_mdl()
     benchmark_flair_mdl()
