@@ -41,7 +41,7 @@ It is a collection  of available datasets and models for a variety of NLP tasks.
 It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow. 
 
 <br/>**Help us improve DaNLP**
-- :raising_hand: Have you tried the DaNLP package? Then we would love to have a chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. We also welcome and appreciate any written feedback. Reach us at [danlp@alexandra.dk](mailto:danlp@alexandra.dk)
+- :raising_hand: Have you tried the DaNLP package? Then we would love to chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. We also welcome and appreciate any written feedback. Reach us at [danlp@alexandra.dk](mailto:danlp@alexandra.dk)
 
 **News**
 - :paw_prints: A first version of a Spacy models for sentiment trained using hard distill from BERT is added to the repo, read about it in the [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md)
