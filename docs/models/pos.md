@@ -1,6 +1,6 @@
 Part of Speech Tagging
 ======================
-This section is concerned with public available Part of Speech taggers in Danish. 
+This section is concerned with public available Part of Speech (POS) taggers in Danish. 
 
 | Model | Train Data | License | Trained by | Tags | DaNLP |
 |-------|-------|-------|-------|-------|-------|
@@ -10,7 +10,7 @@ This section is concerned with public available Part of Speech taggers in Danish
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
-`ADJ`: Adjective, `ADP`: Adposition , `ADV`: Adverb, `AUX`: Auxiliary verb, `CONJ`: Coordinating conjunction, `DET`: Determiner, `INTJ`: Interjection, `NOUN`: Noun, `NUM`: Numeral, `PART`: Particle `PRON`: Pronoun `PROPN`: Proper noun `PUNCT`: Punctuation `SCONJ`: Subordinating conjunction `SYM`: Symbol `VERB`: Verb `X`: Other
+`ADJ`: Adjective, `ADP`: Adposition , `ADV`: Adverb, `AUX`: Auxiliary verb, `CCONJ`: Coordinating conjunction, `DET`: Determiner, `INTJ`: Interjection, `NOUN`: Noun, `NUM`: Numeral, `PART`: Particle `PRON`: Pronoun `PROPN`: Proper noun `PUNCT`: Punctuation `SCONJ`: Subordinating conjunction `SYM`: Symbol `VERB`: Verb `X`: Other
 
 A medium blog using Part of Speech tagging on Danish, can be found  [here](<https://medium.com/danlp/i-klasse-med-kierkegaard-eller-historien-om-det-fede-ved-at-en-computer-kan-finde-ordklasser-189774695f3b>).
 
@@ -23,7 +23,7 @@ This project provides a trained part of speech tagging model for Danish using th
 The code for training can be found on Flairs GitHub, and the following parameters are set:
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
 
-The flair pos tagger can be used by loading  it with the  `load_flair_pos_model` method. Please note the the text should be tokenized before hand, this can for example be done using spacy. 
+The flair pos tagger can be used by loading  it with the  `load_flair_pos_model` method. Please note that the text should be tokenized before hand, this can for example be done using spacy. 
 
 ```python
 from danlp.models import load_flair_pos_model
@@ -47,7 +47,7 @@ print(sentence.to_tagged_string())
 
 ##### :wrench:SpaCy
 
-Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the the data [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) . 
+Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) data. 
 
 Below is a small getting started snippet for using the Spacy pos tagger:
 
@@ -75,13 +75,28 @@ Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/la
 
 ## 📈 Benchmarks
 
-F1 scores is reported below and can be reproduced using `pos_benchmarks.py` in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder, where the details score from each class is calculated.
+Accuracy scores is reported below and can be reproduced using `pos_benchmarks.py` in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder, where the details score from each class is calculated.
 
-| Model    | Micro-F1   |
-| -------- | ---------- |
-| Polyglot | 0.7380     |
-| Flair    | **0.9667** |
-| SpaCy    | 0.9550     |
+#### DaNLP
+
+| Model                       | Accuracy   |
+|-----------------------------|------------|
+| Flair                       | **97.97**  |
+| SpaCy                       | 96.15      |
+
+#### Polyglot
+
+The tags predicted with the polyglot model differ slightly from the universal PoS-tags. The model predicts :
+* `CONJ` instead of `CCONJ`
+* `VERB` instead of `AUX` for the auxiliary and modal verbs (i.e. `være`, `have`, `kunne`, `ville`, `skulle`, `måtte`, `burde`)
+
+We calculated the scores for the original predictions and for the corrected version.
+
+| Model                       | Accuracy   |
+| --------                    | ---------- |
+| Polyglot                    | 76.76      |
+| Polyglot (corrected output) | 83.4       |
+
 
 
 
