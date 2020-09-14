@@ -1,6 +1,6 @@
 """
 Evaluation script for sentiment analyis
-**The scripts downloads scrips from a GitHub, and it is last tested on 24-03-2020**
+
 
 The script benchmark on the following dataset where scores are converted into a three class problem: positiv, neutral, negative:
     - Europarl_sentiment
@@ -11,15 +11,12 @@ The script benchmark the following models where scores are converted into a thre
             the model is integrated in danlp package 
     - Afinn:
            Requirements:
-               - afinn
-    - SentidaV2:
+               - pip install afinn
+    - Sentida:
            Sentida is converted to three class probelm by fitting a treshold for neutral on manualt annotated twitter corpus.
            The script downloadsfilles from sentida github and place them in cache folder
            Requirement:
-               - Pandas
-               - NumPy
-               - NLTK
-                      
+               - pip install sentida
  
 """
 
@@ -111,27 +108,12 @@ def afinn_benchmark(datasets):
         
         
 def sentida_benchmark(datasets):
-    "The scripts download from github from sentindaV2 and place it in cache folder"
-    DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
-    print(os.getcwd())
-    workdir = DEFAULT_CACHE_DIR +'/sentida'
-    print(workdir) 
-    if not os.path.isdir(workdir):
-        os.mkdir(workdir)
-        url = "https://raw.githubusercontent.com/esbenkc/emma/master/SentidaV2/"
-        for file in ['SentidaV2.py','aarup.csv','intensifier.csv']:
-            urllib.request.urlretrieve(url+file, workdir+'/'+file)
-                     
-       
-    
-    sys.path.insert(1, workdir)
-    os.chdir(workdir+ '/')
-    sys.stdout = open(os.devnull, 'w')
-    from SentidaV2 import sentidaV2
-    sys.stdout = sys.__stdout__
+
+    from sentida import Sentida
+    sentida =  Sentida()
     
     def sentida_score(sent):
-        return sentidaV2(sent, output ='total')
+        return sentida.sentida(sent, output ='total')
     
     for dataset in datasets:
         if dataset == 'euparlsent':
@@ -146,7 +128,7 @@ def sentida_benchmark(datasets):
         df['pred'] = df.text.map(sentida_score).map(to_label_sentida)
         df['valence'] = df['valence'].map(to_label)
 
-        report(df['valence'], df['pred'], 'SentidaV2', dataset)
+        report(df['valence'], df['pred'], 'Sentida', dataset)
         
 def bert_sent_benchmark(datasets):
     model = load_bert_tone_model()
