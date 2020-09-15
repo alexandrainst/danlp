@@ -23,7 +23,7 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 
 #### Sentida
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
-uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist two versions of the tool where the second version is an implementation in Python:  [Sentida](https://github.com/esbenkc/emma) and in these documentations we evaluate this second version. 
+uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist both an R version and an implementation in Python.  In these documentations we evaluate the python version from [sentida](https://github.com/guscode/sentida). 
 
 #### :wrench:Bert Emotion
 
@@ -115,7 +115,7 @@ The tools are benchmarked on the following datasets:
 
 A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afinn model is done in the following way: a score of zero to be "neutral", a positive score to be "positive" and a negative score to be "negative". 
 
-A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. 
+A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. However note, the original idea of the tools was not to convert into three  class problem. 
 
 The scripts for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/). There is one for the europarl sentiment and LCC sentiment data and another one for the twitter sentiment. This is due to the fact that downloading the twitter data requires login to a twitter API account. The scores below for the twitter data is reported for all the data, but if tweets are delete in the mean time on twitter, not all tweets can be downloaded. 
 In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
@@ -123,7 +123,7 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 | Tool/Model | Europarl Sentiment | LCC Sentiment | Twitter Sentiment (Polarity) |
 | ---- | ------------------ | ------------- | ---- |
 | AFINN | 0.68 (0.68) | 0.66 (0.61) | 0.48 (0.46) |
-| Sentida | 0.67 (0.65) | 0.58 (0.55) | 0.44 (0.44) |
+| Sentida (version 0.5.0) | 0.67 (0.65) | 0.58 (0.55) | 0.44 (0.44) |
 | Bert Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73** (0.70) |
 | spaCy sentiment (version 0.0.1) | 0.74 (0.73) | 0.66 (0.61) | 0.66 (0.60) |
 
