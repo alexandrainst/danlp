@@ -53,7 +53,7 @@ def benchmark_polyglot_mdl():
         word_ent_tuples = list(ne_chunker.annotate(word_list))
 
         predictions.append([entity for word, entity in word_ent_tuples])
-
+    print('polyglot:')
     print("Made predictions on {} sentences and {} tokens in {}s".format(
         num_sentences, num_tokens, time.time() - start))
     assert len(predictions) == len(sentences_entities)
@@ -79,13 +79,13 @@ def benchmark_spacy_mdl():
                 ents.append(t.ent_iob_ + "-" + t.ent_type_)
 
         predictions.append(ents)
-
+    print('spaCy:')
     print("Made predictions on {} sentences and {} tokens in {}s".format(
         num_sentences, num_tokens, time.time() - start)
     )
 
     assert len(predictions) == num_sentences
-
+    
     print(classification_report(sentences_entities, remove_miscs(predictions),
                                 digits=4))
 
@@ -105,7 +105,7 @@ def benchmark_flair_mdl():
 
     tagger.predict(flair_sentences, verbose=True)
     predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
-
+    print('Flair:')
     print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
 
     assert len(predictions) == num_sentences
@@ -122,7 +122,7 @@ def benchmark_bert_mdl():
     for i, sentence in enumerate(sentences_tokens):
         _, pred_ents = bert.predict(sentence)
         predictions.append(pred_ents)
-
+    print('bert:')
     print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
 
     assert len(predictions) == num_sentences

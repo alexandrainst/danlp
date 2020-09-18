@@ -37,8 +37,9 @@
   </h5>
 </div>
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
-It is a collection  of available datasets and models for a variety of NLP tasks.
-It features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow. 
+It is a collection  of available datasets and models for a variety of NLP tasks. The aim is to make it easier and more applicable to practitioners in the industry to use Danish NLP and hence this project is licensed to allow commercial use. The project features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow. 
+
+If you are new to NLP or want to know more about the project in a broader perspective, you can start on our [microsite](https://danlp.alexandra.dk/).
 
 <br/>**Help us improve DaNLP**
 - :raising_hand: Have you tried the DaNLP package? Then we would love to chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. We also welcome and appreciate any written feedback. Reach us at [danlp@alexandra.dk](mailto:danlp@alexandra.dk)
@@ -50,11 +51,9 @@ It features code examples on how to use the datasets and models in popular NLP f
 
   
 
-
 **Next up**
 
-- :traffic_light: An attempt to access fairness in sentiment models  through a synthetic test will be added as an example in a Jupyter notebook  
-
+- :hatching_chick: Example tutorials in Jupiter notebook and getting started guides is coming soon!
 - :paw_prints: Improving spaCy ner model using hard distil of Bert Ner
 
 
@@ -62,18 +61,18 @@ It features code examples on how to use the datasets and models in popular NLP f
 ## Get started
 
 To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
-will not install all NLP libraries. If you want to try out the models in DaNLP you can use the Docker images
-that has all the NLP libraries installed.
+will not install all NLP libraries because we want you to have the freedom to limit the dependency on what you use.
 
 ### Install with pip
+
 To get started using DaNLP simply install the project with pip:
 
 ```bash
 pip install danlp 
 ```
 
-Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy or Flair.
-This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `.
+Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy, Flair or Transformers.
+This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `. You can check the `requirements.txt` file to see what version the packages has been tested with.
 
 ### Install from source
 
@@ -85,7 +84,13 @@ cd danlp
 pip install . 
 ```
 
-if you have clone it before use ``git pull`` to get newest version instead of clone.  
+To install the dependency used in the package with the tested versions:
+
+```python
+pip install -r requirements.txt
+```
+
+
 
 ### Install with Docker 
 To quickly get started with DaNLP and to try out the models you can use our Docker image.
@@ -96,12 +101,12 @@ docker run -it --rm alexandrainst/danlp ipython
 If you want to run a `<script.py>` in your current working directory you can run:
 ```bash
 docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp python <script.py>
+                  
 ```
-You can also quickly get started with one of our [notebooks](/examples).
-  ​                   
 
 
 ## NLP Models
+
 Natural Language Processing is an active area of research and it consists of many different tasks. 
 The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
@@ -110,7 +115,9 @@ The repository is under development and this is the list of NLP tasks we have co
 -  [Part of speech](docs/models/pos.md)
 -  [Named Entity Recognition](docs/models/ner.md)
 -  [Sentiment Analysis](docs/models/sentiment_analysis.md)
+-  [Dependency parsing](https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md)
 -  Coreference resolution
+-  Lemmatization
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
@@ -124,6 +131,21 @@ The DaNLP package allows you to download and preprocess datasets. You can read a
 ## Examples
 You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
 
+## Structure of the the repo
+
+To help you navigate we here provide you with a overview of the structure in the github:
+
+    .
+    ├── danlp		   # Source files
+    │	├── datasets   # Code to load dataset with different frameworks 
+    │	├── models     # Code to load models with different frameworks 
+    ├── docker         # Docker image
+    ├── docs	       # Documentation files over dataset and models
+    │   ├── imgs	   # Images used in documentation
+    │   ├── models     # Overview over avalible models with code snippet and benchmarkresults
+    ├── exampels	   # Exampels, tutorials and benchmark scripts 
+    │   ├── benchmarks # Scripts for reproducing bechmarksresults reported in docs
+    ├── tests   	   # Test for continous integration with travis  
 ## How do I contribute?
 
 If you want to contribute to the DaNLP repository and make it better, your help is very welcome. You can contribute to the project in many ways:

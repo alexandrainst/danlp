@@ -43,7 +43,7 @@ conllu_format = ddt.load_as_conllu()
 
 The dataset can also be downloaded directly in CoNLL-U format.
 
-[Download DDT](https://danlp.s3.eu-central-1.amazonaws.com/datasets/ddt.zip) 
+[Download DDT](https://danlp.alexandra.dk/304bd159d5de/datasets/ddt.zip) 
 
 #### WikiANN
 The WikiANN dataset [(Pan et al. 2017)](https://aclweb.org/anthology/P17-1178) is a dataset with NER annotations 
@@ -71,7 +71,7 @@ It is constructed with frequently used Danish words.
 
 #### Twitter Sentiment
 
-The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actually tweet text one need a Twitter development account and to generate the sets of login keys. The then dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
+The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actually tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). The then dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
 ``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```|
 
@@ -84,7 +84,7 @@ df_test, df_train = twitSent.load_with_pandas()
 
 The dataset can also be downloaded directly with the labels and tweet id:
 
-[Download TwitterSent](https://danlp.s3.eu-central-1.amazonaws.com/datasets/twitter.sentiment.zip) 
+[Download TwitterSent](https://danlp.alexandra.dk/304bd159d5de/datasets/twitter.sentiment.zip) 
 
 #### Europarl Sentiment1
 

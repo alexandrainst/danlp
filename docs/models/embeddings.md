@@ -36,10 +36,7 @@ the next character in a sentence.
 
 To evaluate word embeddings it is common to do intrinsic evaluations to 
 directly test for syntactic or semantic relationships between words. The 
-[Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#danish-similarity-dataset)
-and [WordSim-353](https://github.com/alexandrainst/danlp/blob/add-ner/docs/datasets.md#wordsim-353)
-contains word pairs annotated with a similarity score. Calculating the
-correlation between the word embedding similarity and the similarity score
+[Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) and [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) contains word pairs annotated with a similarity score. Calculating the correlation between the word embedding similarity and the similarity score
 gives and indication of how well the word embeddings captures relationships 
 between words.
 
@@ -117,7 +114,7 @@ The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequenc
 `max_epochs=5`
 
 
-The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](docs/models/pos.md) and [ner](docs/models/ner.md) . 
+The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md) and [ner](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md) . 
 
 
 ## 🎓 References

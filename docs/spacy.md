@@ -55,15 +55,15 @@ nlp = load_spacy_model()
 doc = nlp("Spacy er et godt værtøj,og det virker på dansk")
 
 # prepare some pretty printing
-lingvistisk_features=['Text','Lemma','POS', 'Dep', 'Form', 'Bogstaver', 'stop ord']
-head_format ="\033[1m{!s:>11}\033[0m" * (len(lingvistisk_features) )
-row_format ="{!s:>11}" * (len(lingvistisk_features) )
+features=['Text','POS', 'Dep', 'Form', 'Bogstaver', 'Stop ord']
+head_format ="\033[1m{!s:>11}\033[0m" * (len(features) )
+row_format ="{!s:>11}" * (len(features) )
 
-print(head_format.format(*lingvistisk_features))
+print(head_format.format(*features))
 # printing for each token in det docs the coresponding linguistic features
 for token in doc:
-    print(row_format.format(token.text, token.lemma_, token.pos_, token.dep_,
-            token.shape_, token.is_alpha, token.is_stop))
+    print(row_format.format(token.text, token.pos_, token.dep_,
+            token.shape_, token.is_alpha, token.is_stop,))
     
 ```
 
@@ -80,6 +80,29 @@ displacy.serve(doc, style='dep')
 
 
 ![](imgs/dep.PNG)
+
+Here is an example of using Named entity recognitions . You can read more about [NER](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#named-entity-recognition) in the specific doc. 
+
+```python
+doc = nlp('Jens Peter Hansen kommer fra Danmark og arbejder hos Alexandra Instituttet') 
+for tok in doc:
+    print("{} {}".format(tok,tok.ent_type_))
+```
+
+```python
+# output 
+Jens PER
+Peter PER
+Hansen PER
+kommer 
+fra 
+Danmark LOC
+og 
+arbejder 
+hos 
+Alexandra ORG
+Instituttet ORG
+```
 
 ## :hatching_chick: Start ​training you own text classification model
 
