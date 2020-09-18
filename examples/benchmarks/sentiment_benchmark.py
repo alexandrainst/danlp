@@ -16,7 +16,7 @@ The script benchmark the following models where scores are converted into a thre
            Sentida is converted to three class probelm by fitting a treshold for neutral on manualt annotated twitter corpus.
            The script downloadsfilles from sentida github and place them in cache folder
            Requirement:
-               - pip install sentida
+               - pip install sentida==0.5.0
  
 """
 
