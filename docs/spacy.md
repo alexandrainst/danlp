@@ -6,19 +6,19 @@ This project supports a Danish spaCy model that can easily be loaded with the Da
 
 Support for Danish directly in the spaCy framework is realeased under [spacy 2.3](https://explosion.ai/blog/spacy-v2-3)
 
-Note that the two models are not the same, e.g. the spaCy model in DaNLP performers better on Named Entity Recognition due to more training data.  However the extra training data is not open source and can therefore not be included in the spaCy framework itself, as it contravenes the guidelines. 
+Note that the two models are not the same, e.g. the spaCy model in DaNLP performs better on Named Entity Recognition due to more training data.  However the extra training data is not open source and can therefore not be included in the spaCy framework itself, as it contravenes the guidelines. 
 
 The spaCy model comes with **tokenization**, **dependency parsing**, **part of speech tagging** , **word vectors** and **name entity recognition**. 
 
-The model is trained on the [Danish Dependency Treebansk (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
+The model is trained on the [Danish Dependency Treebank (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
 
-For comparison to other models and additional information of the tasks, check out the task individual pages for [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) , [word embeddings](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>) and [named entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>).
+For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>), [named entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>), [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) and [dependency parsing](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>).
 
-The danlp github also provide a version of the spaCy model which contains a sentiment classifier, read more about it in the sentiment analysis [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
+The danlp github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
 
-#### Performance on spaCy model
+#### Performance of the spaCy model
 
-The following lists the  performance scores of the spaCy model provided in DaNLP pakage. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
+The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
 
 | Task                    | Measures | Scores |
 | ----------------------- | -------- | :----- |
@@ -72,7 +72,7 @@ for token in doc:
 **Visualizing the dependency tree:**
 
 ```python
-# the spaCy framework provides a nice visualizatio tool!
+# the spaCy framework provides a nice visualization tool!
 # This is run in a terminal, but if run in jupyter use instead display.render 
 displacy.serve(doc, style='dep')
 ```
@@ -104,7 +104,7 @@ Alexandra ORG
 Instituttet ORG
 ```
 
-## :hatching_chick: Start ​training you own text classification model
+## :hatching_chick: Start ​training your own text classification model
 
 The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 
@@ -164,7 +164,7 @@ The data now looks like this cutted snippet:
 
 **Ensure you have the models and embeddings downloaded**
 
-The spaCy model and the embeddings most be downloaded. If you have done so it can be done by running the following commands. It will by default be placed in the cache directory of DaNLP, eg. "/home/USERNAME/.danlp/".
+The spaCy model and the embeddings must be downloaded. If you have done so it can be done by running the following commands. It will by default be placed in the cache directory of DaNLP, eg. "/home/USERNAME/.danlp/".
 
 ```python
 from danlp.models import load_spacy_model

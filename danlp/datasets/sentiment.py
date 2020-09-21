@@ -150,7 +150,7 @@ def construct_twitter_api_connection():
 
     try:
         api.verify_credentials()
-    except twe<epy.TweepError:
+    except tweepy.TweepError:
         sys.exit("Could not establish connection to the Twitter API, have you provieded the correct keys?")
 
     return api

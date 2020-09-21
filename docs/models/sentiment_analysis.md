@@ -117,7 +117,7 @@ A conversion of the scores of the LCC and Europarl Sentiment dataset and the Afi
 
 A conversion of the continuous scores of the Sentida tool into three classes is not given since the 'neutral' class  can not be assumed to be only exactly zero but instead we assume it to be an area around zero.  We looked for a threshold to see how closed to zero a score should be to be interpreted as neutral.   A symmetric threshold is found by optimizing the macro-f1 score on a twitter sentiment corpus (with 1327 examples (the corpus is under construction and will be released later on)) . The threshold is found to be 0.4, which makes our chosen conversion to be:  scores over 0.4 to be 'positive', under -0.4 to be 'negative' and scores between to be neutral. However note, the original idea of the tools was not to convert into three  class problem. 
 
-The scripts for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/). There is one for the europarl sentiment and LCC sentiment data and another one for the twitter sentiment. This is due to the fact that downloading the twitter data requires login to a twitter API account. The scores below for the twitter data is reported for all the data, but if tweets are delete in the mean time on twitter, not all tweets can be downloaded. 
+The scripts for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/). There is one for the europarl sentiment and LCC sentiment data and another one for the twitter sentiment. This is due to the fact that downloading the twitter data requires login to a twitter API account. The scores below for the twitter data is reported for all the data, but if tweets are deleted in the mean time on twitter, not all tweets can be downloaded. 
 In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
 
 | Tool/Model | Europarl Sentiment | LCC Sentiment | Twitter Sentiment (Polarity) |
@@ -151,7 +151,7 @@ So if you manage a site containing user reviews for example movie reviews and wo
 
 ## Zero-shot Cross-lingual transfer example
 
-An example of utilizing an dataset in another language to be able to make predicts on Danish without seeing Danish training data is shown in this 
+An example of utilizing a dataset in another language to be able to make predictions on Danish without seeing Danish training data is shown in this 
 [notebok](<https://github.com/alexandrainst/danlp/blob/sentiment-start/examples/Zero_shot_sentiment_analysi_example.ipynb>). It is trained on English movie reviews from IMDB, and
 it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf/1812.10464.pdf) called 
 [LASER](<https://github.com/facebookresearch/LASER>)(Language-Agnostic SEntence Representations).
