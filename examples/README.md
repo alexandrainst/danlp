@@ -13,12 +13,9 @@ The `benchmark` folder contains scripts to reproduce the benchmark results repor
 
 ### List of currently available stuff
 
--  Tutorial of applying zero shot transfer learning to train a sentiment 
-   classifier that can be applied on Danish text in a Jupyter notebook:
+Jupyter notebooks : 
+- Tutorial of applying zero shot transfer learning to train a sentiment 
+   classifier that can be applied on Danish text:
    `example_zero_shot_sentiment.ipynb`
+- Tutorial about how to learn a text classification model, here exemplified by a model that can predict which party a speech (from the Danish parliament) belongs to : `example_text_classification.ipynb`
    
-   
-   
-   
-   
-
