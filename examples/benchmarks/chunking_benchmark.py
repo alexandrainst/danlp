@@ -4,13 +4,13 @@ import os
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_chunking_model, get_noun_chunks
-from danlp.metrics import f1_report
 
 from seqeval.metrics import classification_report
 
 from spacy.tokens.doc import Doc
 from spacy.gold import read_json_object
 
+from .utils import print_speed_performance, f1_report
 
 chunker = load_spacy_chunking_model()
 
@@ -63,8 +63,7 @@ def benchmark_spacy_mdl():
         chks_pred.append(bio_chunks)
 
     print('**Spacy model**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(chks_pred)==num_sentences
     assert sum([len(s) for s in chks_pred])==num_tokens
