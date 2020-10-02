@@ -34,7 +34,7 @@ tagger = load_flair_pos_model()
 
 # Using the flair POS tagger
 sentence = Sentence('Jeg hopper på en bil , som er rød sammen med Niels .') 
-tagger.predict(sentence, use_tokenizer=False) 
+tagger.predict(sentence) 
 print(sentence.to_tagged_string())
 
 # Example
