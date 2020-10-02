@@ -24,4 +24,4 @@ For running the `sentiment_benchmarks_twitter` you need a twitter development ac
 
 - Benchmark script of [Dependency Parsing](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spaCy  model is benchmarked `dependency_benchmarks.py`
   
-- Benchmark script of [Noun-phrase Chunking](<https://github.com/alexandrainst/danlp/blob/master/docs/models/chunking.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spaCy model is benchmarked `chunking_benchmarks.py`
+- Benchmark script of Noun-phrase Chunking -- depending on the [Dependency Parsing model](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) -- on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). The (convertion of the dependencies given by the) spaCy model is benchmarked `chunking_benchmarks.py`
