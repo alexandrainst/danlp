@@ -3,17 +3,15 @@ import time
 import os
 
 from danlp.datasets import DDT
-from danlp.models import load_spacy_model
+from danlp.models import load_spacy_chunking_model, get_noun_chunks
 
 from seqeval.metrics import classification_report
 
 from spacy.tokens.doc import Doc
 from spacy.gold import read_json_object
 
-import numpy as np
 
-nlp = load_spacy_model()
-
+chunker = load_spacy_chunking_model()
 
 def load_test_with_spacy(ddt):
     from spacy.cli.converters import conllu2json
@@ -28,86 +26,12 @@ def load_test_with_spacy(ddt):
     return read_json_object(file_as_json)
 
 
-left_labels = ["det", "fixed", "nmod:poss", "amod", "flat", "goeswith", "nummod", "appos"]
-right_labels = ["fixed", "nmod:poss", "amod", "flat", "goeswith", "nummod", "appos"]
-stop_labels = ["punct"]
-
-np_label = "NP"
-
-def get_noun_chunks(doc, bio=False, nested=False):
-
-    def is_verb_token(tok):
-        return tok.pos_ in ['VERB', 'AUX']
-
-    def next_token(tok):
-        try:
-            return tok.nbor()
-        except IndexError:
-            return None
-
-    def get_left_bound(doc, root):
-        left_bound = root
-        for tok in reversed(list(root.lefts)):
-            if tok.dep_ in left_labels:
-                left_bound = tok
-        return left_bound
-
-    def get_right_bound(doc, root):
-        right_bound = root
-        for tok in root.rights:
-            if tok.dep_ in right_labels:
-                right = get_right_bound(doc, tok)
-                if list(
-                    filter(
-                        lambda t: is_verb_token(t) or t.dep_ in stop_labels,
-                        doc[root.i : right.i],
-                    )
-                ):
-                    break
-                else:
-                    right_bound = right
-        return right_bound
-
-    def get_bounds(doc, root):
-        return get_left_bound(doc, root), get_right_bound(doc, root)
-
-
-    chunks = []
-    for token in doc:
-        if token.pos_ in ["PROPN", "NOUN", "PRON"]:
-            left, right = get_bounds(doc, token)
-            chunks.append((left.i, right.i + 1, np_label))
-            token = right
-
-    is_chunk = [True for _ in chunks]
-    if not nested:
-        # remove nested chunks
-        for i, i_chunk in enumerate(chunks[:-1]):
-            i_left, i_right, _ = i_chunk 
-            for j, j_chunk in enumerate(chunks[i+1:], start=i+1):
-                j_left, j_right, _ = j_chunk
-                if j_left <= i_left < i_right <= j_right:
-                    is_chunk[i] = False
-                if i_left <= j_left < j_right <= i_right:
-                    is_chunk[j] = False
-
-    final_chunks = [c for c, ischk in zip(chunks, is_chunk) if ischk]
-    return chunks2bio(final_chunks, len(doc)) if bio else final_chunks
-
-def chunks2bio(chunks, sent_len):
-    bio_tags = ['O'] * sent_len
-    for (start, end, label) in chunks:
-        bio_tags[start] = 'B-'+label
-        for j in range(start+1, end):
-            bio_tags[j] = 'I-'+label
-    return bio_tags
-
-
 # load the data :
 #      * convert to spaCy Docs format
 #      * convert dependencies to (BIO) noun chunks
 ddt = DDT()
 corpus = load_test_with_spacy(ddt)
+nlp = chunker.model
 sentences_tokens = []
 chks_true = []
 for jobj in corpus:
@@ -130,18 +54,11 @@ num_tokens = sum([len(s) for s in sentences_tokens])
 
 def benchmark_spacy_mdl():
 
-    parser = nlp.parser
-    tagger = nlp.tagger
-
     start = time.time()
 
     chks_pred = []
     for sent in sentences_tokens:
-        doc = nlp.tokenizer.tokens_from_list(sent)
-        doc = tagger(doc)
-        doc = parser(doc)
-
-        bio_chunks = get_noun_chunks(doc, bio=True)
+        bio_chunks = chunker.predict(sent)
         chks_pred.append(bio_chunks)
 
     print('**Spacy model**')
