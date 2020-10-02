@@ -40,6 +40,9 @@ class BertNer:
             # Bit of a hack to get the tokens with the special tokens
             tokens = self.tokenizer.tokenize(self.tokenizer.decode(self.tokenizer.encode(text)))
             inputs = self.tokenizer.encode(text, return_tensors="pt")
+            if len(inputs[0])>512:
+                warnings.warn('The Bert ner model can maximum take 512 tokens as input. Split instead you text before calling predict. Eg by using sentence boundary detection')
+
             outputs = self.model(inputs)[0]
             predictions = torch.argmax(outputs, dim=2)
             predictions = [self.label_list[label] for label in
@@ -63,6 +66,9 @@ class BertNer:
             tokens_mask.extend([1])
 
             inputs = self.tokenizer.encode(tokens, return_tensors="pt")
+            if len(inputs[0])>512:
+                warnings.warn('The Bert ner model can maximum take 512 tokens as input. Split instead you text before calling predict. Eg by using sentence boundary detection')
+            
             assert inputs.shape[1] == len(tokens_mask)
 
             outputs = self.model(inputs)[0]
