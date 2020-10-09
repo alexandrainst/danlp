@@ -91,6 +91,11 @@ pip install -r requirements.txt
 ```
 
 
+### Install from github
+Alternatively you can install the latest version from github using:
+```
+pip install git+https://github.com/alexandrainst/danlp.git
+```
 
 ### Install with Docker 
 To quickly get started with DaNLP and to try out the models you can use our Docker image.
