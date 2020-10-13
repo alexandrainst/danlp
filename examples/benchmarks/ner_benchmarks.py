@@ -5,8 +5,7 @@ from flair.data import Sentence, Token
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_ner_model, \
     load_bert_ner_model
-
-from seqeval.metrics import classification_report
+from danlp.metrics import f1_report
 
 
 def is_misc(ent: str):
@@ -58,9 +57,7 @@ def benchmark_polyglot_mdl():
         num_sentences, num_tokens, time.time() - start))
     assert len(predictions) == len(sentences_entities)
 
-    print(classification_report(sentences_entities, remove_miscs(predictions),
-                                digits=4))
-
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 def benchmark_spacy_mdl():
     nlp = load_spacy_model()
@@ -86,8 +83,7 @@ def benchmark_spacy_mdl():
 
     assert len(predictions) == num_sentences
     
-    print(classification_report(sentences_entities, remove_miscs(predictions),
-                                digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 def benchmark_flair_mdl():
@@ -110,7 +106,7 @@ def benchmark_flair_mdl():
 
     assert len(predictions) == num_sentences
 
-    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 def benchmark_bert_mdl():
@@ -127,7 +123,7 @@ def benchmark_bert_mdl():
 
     assert len(predictions) == num_sentences
 
-    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 if __name__ == '__main__':
