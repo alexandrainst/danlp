@@ -6,8 +6,6 @@ from danlp.datasets import DDT
 from danlp.models import load_spacy_chunking_model, get_noun_chunks
 from danlp.metrics import f1_report
 
-from seqeval.metrics import classification_report
-
 from spacy.tokens.doc import Doc
 from spacy.gold import read_json_object
 
