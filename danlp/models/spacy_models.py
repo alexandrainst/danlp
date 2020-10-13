@@ -55,7 +55,9 @@ class SpacyChunking:
         """
         Predict NP chunks (BIO format) from raw text or tokenized text.
 
-        E.g. "varme vafler" will become ["varme", "va", "##fler"]
+        E.g. "Jeg kommer fra en lille by." become 
+            - a list of BIO tags: ['B-NP', 'O', 'O', 'O', 'B-NP', 'I-NP', 'I-NP']
+            - or a list of triplets (start id, end id, chunk label): [(0, 1, 'NP'), (4, 7, 'NP')]
 
         :param text: Can either be a raw text or a list of tokens
         :param bool bio: True to return a list of BIO labels (same length as the sentence), False to return a list of NP-chunks
