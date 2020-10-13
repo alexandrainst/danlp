@@ -4,6 +4,7 @@ import os
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_chunking_model, get_noun_chunks
+from danlp.metrics import f1_report
 
 from seqeval.metrics import classification_report
 
@@ -68,7 +69,7 @@ def benchmark_spacy_mdl():
     assert len(chks_pred)==num_sentences
     assert sum([len(s) for s in chks_pred])==num_tokens
 
-    print(classification_report(chks_true, chks_pred, digits=4))
+    print(f1_report(chks_true, chks_pred, bio=True))
 
 
 
