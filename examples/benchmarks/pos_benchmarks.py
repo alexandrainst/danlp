@@ -1,5 +1,6 @@
 
 import time
+from .utils import print_speed_performance
 
 from flair.data import Sentence, Token
 
@@ -36,8 +37,7 @@ def benchmark_flair_mdl():
     tags_pred = [[tok.tags['upos'].value for tok in fs] for fs in corpus_flair.test]
     
     print('**Flair model** ')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
@@ -63,8 +63,7 @@ def benchmark_spacy_mdl():
 
         tags_pred.append(tags)
     print('**Spacy model**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
@@ -106,8 +105,7 @@ def benchmark_polyglot_mdl(corrected_output=False):
         word_tag_tuples = list(tagger.annotate(word_list))
         tags_pred.append([udify_tag(tag, word) if corrected_output else tag for word, tag in word_tag_tuples])
     print('**Polyglot model'+(' (corrected output) ' if corrected_output else '')+'**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens

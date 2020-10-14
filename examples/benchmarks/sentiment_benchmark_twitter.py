@@ -33,11 +33,12 @@ import urllib
 from pathlib import Path
 import sys
 import operator
+import time
+from .utils import print_speed_performance
 
 ## Load the Twitter data
 twitSent = TwitterSent()
 df_val, _ = twitSent.load_with_pandas()
-
 
 def to_label(score):
     if score == 0:
@@ -60,7 +61,9 @@ def to_label_sentida(score):
 def afinn_benchmark():
     from afinn import Afinn
     afinn = Afinn(language='da', emoticons=True)
+    start = time.time()
     df_val['afinn'] = df_val.text.map(afinn.score).map(to_label)
+    print_speed_performance(start, len(df_val))
 
     f1_report(df_val['polarity'], df_val['afinn'], 'Afinn', "twitter_sentiment(val)")
 
@@ -73,7 +76,9 @@ def sentida_benchmark():
     def sentida_score(sent):
         return sentida.sentida(sent, output ='total')     
 
+    start = time.time()
     df_val['sentida'] = df_val.text.map(sentida_score).map(to_label_sentida)
+    print_speed_performance(start, len(df_val))
 
     f1_report(df_val['polarity'], df_val['sentida'], 'Sentida', "twitter_sentiment(val)")
 
@@ -81,7 +86,9 @@ def sentida_benchmark():
 def bert_sent_benchmark():
     model = load_bert_tone_model()       
 
+    start = time.time()
     preds = df_val.text.map(lambda x: model.predict(x))
+    print_speed_performance(start, len(df_val))
     spellings_map = {'subjective': 'subjektivt', 'objective': 'objektivt', 'positive': 'positiv', 'negative': 'negativ', 'neutral': 'neutral'}
     df_val['bert_ana'] = preds.map(lambda x: spellings_map[x['analytic']])
     df_val['bert_pol'] = preds.map(lambda x: spellings_map[x['polarity']])
@@ -97,7 +104,9 @@ def spacy_benchmark():
         doc = nlpS(x)
         return max(doc.cats.items(), key=operator.itemgetter(1))[0]
     
+    start = time.time()
     df_val['spacy'] = df_val.text.map(lambda x: predict(x))
+    print_speed_performance(start, len(df_val))
 
     f1_report(df_val['polarity'], df_val['spacy'], 'Spacy', "twitter_sentiment(val)")
 

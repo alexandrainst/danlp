@@ -5,6 +5,7 @@ from danlp.datasets import DDT
 from danlp.models import load_spacy_model
 from danlp.metrics import dependency_report
 
+from .utils import print_speed_performance
 
 # load the data
 ddt = DDT()
@@ -43,8 +44,7 @@ def benchmark_spacy_mdl():
         deps_pred.append([(r,h) for r,h in zip(deprels, depheads)])
 
     print('**Spacy model**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(deps_pred)==num_sentences
     assert sum([len(s) for s in deps_pred])==num_tokens

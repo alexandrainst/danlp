@@ -30,6 +30,8 @@ from pathlib import Path
 import sys
 import spacy
 import operator
+import time
+from .utils import print_speed_performance
 
 
 def to_label(score):
@@ -62,8 +64,9 @@ def afinn_benchmark(datasets):
         df = data.load_with_pandas()
 
 
-
+        start = time.time()
         df['pred'] = df.text.map(afinn.score).map(to_label)
+        print_speed_performance(start, len(df))
         df['valence'] = df['valence'].map(to_label)
 
         f1_report(df['valence'], df['pred'], 'Afinn', dataset)
@@ -86,9 +89,11 @@ def sentida_benchmark(datasets):
         df = data.load_with_pandas()
 
 
-
+        start = time.time()
         df['pred'] = df.text.map(sentida_score).map(to_label_sentida)
+        print_speed_performance(start, len(df))
         df['valence'] = df['valence'].map(to_label)
+
 
         f1_report(df['valence'], df['pred'], 'Sentida', dataset)
         
@@ -106,8 +111,9 @@ def bert_sent_benchmark(datasets):
 
         df['valence'] = df['valence'].map(to_label)
         # predict with bert sentiment 
+        start = time.time()
         df['pred'] = df.text.map(lambda x: model.predict(x, analytic=False)['polarity'])
-        
+        print_speed_performance(start, len(df))
 
         f1_report(df['valence'], df['pred'], 'BERT_Tone (polarity)', dataset)
 
@@ -132,14 +138,15 @@ def spacy_sent_benchmark(datasets):
             #mathc the labels 
             labels = {'positiv': 'positive', 'neutral': 'neutral', 'negativ': 'negative'}
             return labels[pred]
-        
+
+        start = time.time()
         df['pred'] = df.text.map(lambda x: predict(x))
-        
+        print_speed_performance(start, len(df))
 
         f1_report(df['valence'], df['pred'], 'Spacy sentiment (polarity)', dataset)
         
 if __name__ == '__main__':
-    #sentida_benchmark(['euparlsent','lccsent'])
+    sentida_benchmark(['euparlsent','lccsent'])
     afinn_benchmark(['euparlsent','lccsent'])
     bert_sent_benchmark(['euparlsent','lccsent'])
     spacy_sent_benchmark(['euparlsent','lccsent'])
