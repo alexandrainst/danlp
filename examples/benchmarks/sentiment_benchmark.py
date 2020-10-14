@@ -1,11 +1,8 @@
 """
 Evaluation script for sentiment analyis
-
-
 The script benchmark on the following dataset where scores are converted into a three class problem: positiv, neutral, negative:
     - Europarl_sentiment
     - Lcc_sentiment 
-
 The script benchmark the following models where scores are converted into a three class problem:
     - BERT Tone for positiv, negative, neutral 
             the model is integrated in danlp package 
@@ -24,32 +21,9 @@ from danlp.datasets import EuroparlSentiment1, LccSentiment
 from danlp.models import load_bert_tone_model, load_spacy_model
 from danlp.metrics import f1_report
 from afinn import Afinn
-import os
-import urllib
-from pathlib import Path
-import sys
-import spacy
 import operator
 import time
-from .utils import print_speed_performance
-
-
-def to_label(score):
-    if score == 0:
-        return 'neutral'
-    if score < 0:
-        return 'negative'
-    else:
-        return 'positive'
-    
-def to_label_sentida(score):
-    # the treshold of 0.4 is fitted on a manuelt annotated twitter corpus for sentiment on 1327 exampels
-    if score > 0.4:
-        return 'positive'
-    if score < -0.4:
-        return 'negative'
-    else:
-        return 'neutral'
+from .utils import *
 
 
 def afinn_benchmark(datasets):
@@ -65,9 +39,9 @@ def afinn_benchmark(datasets):
 
 
         start = time.time()
-        df['pred'] = df.text.map(afinn.score).map(to_label)
+        df['pred'] = df.text.map(afinn.score).map(sentiment_score_to_label)
         print_speed_performance(start, len(df))
-        df['valence'] = df['valence'].map(to_label)
+        df['valence'] = df['valence'].map(sentiment_score_to_label)
 
         f1_report(df['valence'], df['pred'], 'Afinn', dataset)
         
@@ -90,9 +64,9 @@ def sentida_benchmark(datasets):
 
 
         start = time.time()
-        df['pred'] = df.text.map(sentida_score).map(to_label_sentida)
+        df['pred'] = df.text.map(sentida_score).map(sentiment_score_to_label_sentida)
         print_speed_performance(start, len(df))
-        df['valence'] = df['valence'].map(to_label)
+        df['valence'] = df['valence'].map(sentiment_score_to_label)
 
 
         f1_report(df['valence'], df['pred'], 'Sentida', dataset)
@@ -109,11 +83,13 @@ def bert_sent_benchmark(datasets):
         df = data.load_with_pandas()
 
 
-        df['valence'] = df['valence'].map(to_label)
+        df['valence'] = df['valence'].map(sentiment_score_to_label)
         # predict with bert sentiment 
         start = time.time()
         df['pred'] = df.text.map(lambda x: model.predict(x, analytic=False)['polarity'])
         print_speed_performance(start, len(df))
+        spellings_map = {'subjective': 'subjektivt', 'objective': 'objektivt', 'positive': 'positiv', 'negative': 'negativ', 'neutral': 'neutral'}
+        df['pred'] = df['pred'].map(lambda x: spellings_map[x])
 
         f1_report(df['valence'], df['pred'], 'BERT_Tone (polarity)', dataset)
 
@@ -129,22 +105,23 @@ def spacy_sent_benchmark(datasets):
 
         df = data.load_with_pandas()
         
-        df['valence'] = df['valence'].map(to_label)
+        df['valence'] = df['valence'].map(sentiment_score_to_label)
         
         # predict with spacy sentiment 
         def predict(x):
             doc = nlpS(x)
             pred = max(doc.cats.items(), key=operator.itemgetter(1))[0]
-            #mathc the labels 
+            #match the labels 
             labels = {'positiv': 'positive', 'neutral': 'neutral', 'negativ': 'negative'}
             return labels[pred]
 
+        spellings_map = {'subjective': 'subjektivt', 'objective': 'objektivt', 'positive': 'positiv', 'negative': 'negativ', 'neutral': 'neutral'}
         start = time.time()
-        df['pred'] = df.text.map(lambda x: predict(x))
+        df['pred'] = df.text.map(lambda x: spellings_map[predict(x)])
         print_speed_performance(start, len(df))
 
         f1_report(df['valence'], df['pred'], 'Spacy sentiment (polarity)', dataset)
-        
+
 if __name__ == '__main__':
     sentida_benchmark(['euparlsent','lccsent'])
     afinn_benchmark(['euparlsent','lccsent'])
