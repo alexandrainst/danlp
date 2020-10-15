@@ -37,8 +37,8 @@ def load_spacy_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, textcat=None, v
     return nlp
 
 
-def load_spacy_chunking_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
-    return SpacyChunking(cache_dir=cache_dir, verbose=verbose)
+def load_spacy_chunking_model(spacy_model=None,cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    return SpacyChunking(model=spacy_model, cache_dir=cache_dir, verbose=verbose)
 
 
 
@@ -47,9 +47,12 @@ class SpacyChunking:
     Spacy Chunking Model 
     """
 
-    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    def __init__(self, model=None, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
 
-        self.model = load_spacy_model(cache_dir=cache_dir, verbose=verbose)
+        if model == None:
+            self.model = load_spacy_model(cache_dir=cache_dir, verbose=verbose)
+        else:
+            self.model = model
 
     def predict(self, text: Union[str, List[str]], bio=True):
         """
