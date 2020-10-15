@@ -27,7 +27,6 @@ The script benchmark the following models where scores are converted into a thre
 
 from danlp.datasets import TwitterSent
 from danlp.models import load_bert_tone_model, load_spacy_model
-from danlp.metrics import f1_report
 import operator
 import time
 from .utils import *

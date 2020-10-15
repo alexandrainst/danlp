@@ -19,7 +19,6 @@ The script benchmark the following models where scores are converted into a thre
 
 from danlp.datasets import EuroparlSentiment1, LccSentiment
 from danlp.models import load_bert_tone_model, load_spacy_model
-from danlp.metrics import f1_report
 from afinn import Afinn
 import operator
 import time

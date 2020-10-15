@@ -1,12 +1,11 @@
 
 import time
-from .utils import print_speed_performance
+from .utils import print_speed_performance, accuracy_report
 
 from flair.data import Sentence, Token
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_pos_model
-from danlp.metrics import accuracy_report
 
 # benchmarking polyglotmodel requires
 from polyglot.tag import POSTagger

@@ -3,9 +3,8 @@ import time
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model
-from danlp.metrics import dependency_report
 
-from .utils import print_speed_performance
+from .utils import print_speed_performance, dependency_report
 
 # load the data
 ddt = DDT()

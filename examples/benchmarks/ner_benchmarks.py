@@ -1,12 +1,11 @@
 import time
 
 from flair.data import Sentence, Token
-from .utils import print_speed_performance
+from .utils import print_speed_performance, f1_report
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_ner_model, \
     load_bert_ner_model
-from danlp.metrics import f1_report
 
 
 def is_misc(ent: str):
