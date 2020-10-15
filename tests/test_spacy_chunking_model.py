@@ -13,8 +13,12 @@ class TestSpacyChunkingModel(unittest.TestCase):
 
         chunker = load_spacy_chunking_model()
         some_text = "Jeg gik en tur med Lars"
+        nlp = chunker.model
+        doc = nlp(some_text)
+        self.assertTrue(doc.is_tagged)
+        self.assertTrue(doc.is_parsed)
         chunks = chunker.predict(some_text)
-        self.assertEqual(chunks, ['B-NP', 'O', 'B-NP', 'I-NP', 'O', 'B-NP'])
+        self.assertEqual(len(chunks), len(doc))
 
 
 if __name__ == '__main__':
