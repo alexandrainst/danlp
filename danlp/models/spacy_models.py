@@ -3,6 +3,7 @@ from typing import Union, List
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
+from spacy.tokens import Doc
 
 def load_spacy_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, textcat=None, vectorError=False):
     """
@@ -77,7 +78,7 @@ class SpacyChunking:
             parser = self.model.parser
             tagger = self.model.tagger
 
-            doc = self.model.tokenizer.tokens_from_list(text)
+            doc = Doc(self.model.vocab, words=text)
             doc = tagger(doc)
             doc = parser(doc)
 
@@ -96,12 +97,6 @@ def get_noun_chunks(spacy_doc, bio=True, nested=False):
 
     def is_verb_token(tok):
         return tok.pos_ in ['VERB', 'AUX']
-
-    def next_token(tok):
-        try:
-            return tok.nbor()
-        except IndexError:
-            return None
 
     def get_left_bound(doc, root):
         left_bound = root

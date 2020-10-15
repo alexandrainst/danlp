@@ -19,15 +19,17 @@ class TestSpacyModel(unittest.TestCase):
 
     def test_predictions(self):
         nlp = load_spacy_model()
-        some_text = "Jeg gik en tur med Lars"
+        some_text = "Jeg gik en tur med Lars Bo Jensen i går"
         doc = nlp(some_text)
         self.assertTrue(doc.is_parsed)
         self.assertTrue(doc.is_nered)
         self.assertTrue(doc.is_tagged)
 
         chunker = load_spacy_chunking_model(spacy_model=nlp)
-        chunks = chunker.predict(some_text)
-        self.assertEqual(len(chunks), len(doc))
+        chunks_from_text = chunker.predict(some_text)
+        chunks_from_tokens = chunker.predict([t.text for t in doc])
+        self.assertEqual(chunks_from_text, chunks_from_tokens)
+        self.assertEqual(len(chunks_from_text), len(doc))
 
 
 class TestSpacySentimentModel(unittest.TestCase):
