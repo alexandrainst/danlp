@@ -3,7 +3,7 @@ import unittest
 import spacy
 import operator
 from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
-from danlp.models import load_spacy_model
+from danlp.models import load_spacy_model, load_spacy_chunking_model
 import os
 
 class TestSpacyModel(unittest.TestCase):
@@ -16,17 +16,22 @@ class TestSpacyModel(unittest.TestCase):
         info = spacy.info(model_path)
         self.assertListEqual(info['pipeline'], ['tagger', 'parser', 'ner'])
         self.assertEqual(info['lang'], 'da')
-        
 
     def test_predictions(self):
-
         nlp = load_spacy_model()
-        some_text = "Jeg gik en tur med Lars"
+        some_text = "Jeg gik en tur med Lars Bo Jensen i går"
         doc = nlp(some_text)
         self.assertTrue(doc.is_parsed)
         self.assertTrue(doc.is_nered)
         self.assertTrue(doc.is_tagged)
-        
+
+        chunker = load_spacy_chunking_model(spacy_model=nlp)
+        chunks_from_text = chunker.predict(some_text)
+        chunks_from_tokens = chunker.predict([t.text for t in doc])
+        self.assertEqual(chunks_from_text, chunks_from_tokens)
+        self.assertEqual(len(chunks_from_text), len(doc))
+
+
 class TestSpacySentimentModel(unittest.TestCase):
     def test_download(self):
         # Download model beforehand
