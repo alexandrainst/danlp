@@ -100,7 +100,8 @@ chunker = load_spacy_chunking_model()
 np_chunks = chunker.predict(text)
 
 # Using the spaCy model to get linguistic features (e.g., tokens, dependencies) 
-# Note: this is used for printing features but is not necessary for processing the chunking task
+# Note: this is used for printing features but is not necessary for processing the chunking task 
+# OBS - The model loaded is the same as can be loaded with 'load_spacy_model()'  
 nlp = chunker.model
 doc = nlp(text)
 

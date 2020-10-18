@@ -8,7 +8,7 @@ from danlp.models import load_spacy_chunking_model, get_noun_chunks
 from spacy.tokens.doc import Doc
 from spacy.gold import read_json_object
 
-from .utils import print_speed_performance, f1_report
+from utils import print_speed_performance, f1_report
 
 
 chunker = load_spacy_chunking_model()
