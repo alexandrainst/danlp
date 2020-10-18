@@ -1,6 +1,6 @@
 
 import time
-from .utils import print_speed_performance, accuracy_report
+from utils import print_speed_performance, accuracy_report
 
 from flair.data import Sentence, Token
 

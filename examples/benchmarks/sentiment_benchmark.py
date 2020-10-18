@@ -22,7 +22,7 @@ from danlp.models import load_bert_tone_model, load_spacy_model
 from afinn import Afinn
 import operator
 import time
-from .utils import *
+from utils import *
 
 
 def afinn_benchmark(datasets):

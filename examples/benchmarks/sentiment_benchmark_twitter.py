@@ -29,7 +29,7 @@ from danlp.datasets import TwitterSent
 from danlp.models import load_bert_tone_model, load_spacy_model
 import operator
 import time
-from .utils import *
+from utils import *
 
 ## Load the Twitter data
 twitSent = TwitterSent()

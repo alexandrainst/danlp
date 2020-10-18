@@ -1,7 +1,7 @@
 import time
 
 from flair.data import Sentence, Token
-from .utils import print_speed_performance, f1_report
+from utils import print_speed_performance, f1_report
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_ner_model, \
