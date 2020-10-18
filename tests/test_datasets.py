@@ -11,6 +11,7 @@ from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,Europ
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
+DANLP_STORAGE_URL = 'http://danlp-downloads.alexandra.dk'
 
 class TestNerDatasets(unittest.TestCase):
 
@@ -95,35 +96,35 @@ class TestNerDatasets(unittest.TestCase):
 
         self.assertIsInstance(corpus, GoldCorpus)
         self.assertEqual(self.train_len, num_sents_train)
-# temporary omitted due to changes in storage
-#     def test_wikiann_dataset(self):
-#         # Change to a sample of the full wikiann to ease test computation
-#         DATASETS['wikiann']['url'] = "https://danlp.s3.eu-central-1.amazonaws.com/test-datasets/da.tar.gz"
-#         DATASETS['wikiann']['size'] = 2502
-#         DATASETS['wikiann']['md5_checksum'] = 'd0271de38ae23f215b5117450efb9ace'
+        
+    def test_wikiann_dataset(self):
+        # Change to a sample of the full wikiann to ease test computation
+        DATASETS['wikiann']['url'] = DANLP_STORAGE_URL+ "/tests/da.tar.gz"
+        DATASETS['wikiann']['size'] = 2502
+        DATASETS['wikiann']['md5_checksum'] = 'd0271de38ae23f215b5117450efb9ace'
 
-#         wikiann = WikiAnn()
+        wikiann = WikiAnn()
 
-#         corpus = wikiann.load_with_flair()
+        corpus = wikiann.load_with_flair()
 
-#         self.assertEqual([len(corpus.train), len(corpus.dev), len(corpus.test)], [21, 2, 3])
+        self.assertEqual([len(corpus.train), len(corpus.dev), len(corpus.test)], [21, 2, 3])
 
-#         ner_tags = corpus.make_tag_dictionary('ner').idx2item
-#         asserted_ner_tags = [
-#             b'B-ORG', b'B-PER', b'B-LOC',
-#             b'I-ORG', b'I-PER', b'I-LOC',
-#             b'O', b'<START>', b'<STOP>', b'<unk>'
-#         ]
-#         self.assertCountEqual(ner_tags, asserted_ner_tags)
+        ner_tags = corpus.make_tag_dictionary('ner').idx2item
+        asserted_ner_tags = [
+            b'B-ORG', b'B-PER', b'B-LOC',
+            b'I-ORG', b'I-PER', b'I-LOC',
+            b'O', b'<START>', b'<STOP>', b'<unk>'
+        ]
+        self.assertCountEqual(ner_tags, asserted_ner_tags)
 
-#         spacy_gold = wikiann.load_with_spacy()
-#         self.assertIsInstance(spacy_gold, GoldCorpus)
+        spacy_gold = wikiann.load_with_spacy()
+        self.assertIsInstance(spacy_gold, GoldCorpus)
 
-#         num_train_sents = len(list(spacy_gold.train_tuples)[0][1])
-#         num_dev_sents = len(list(spacy_gold.dev_tuples)[0][1])
-#         self.assertEqual(num_dev_sents + num_train_sents, 26)
+        num_train_sents = len(list(spacy_gold.train_tuples)[0][1])
+        num_dev_sents = len(list(spacy_gold.dev_tuples)[0][1])
+        self.assertEqual(num_dev_sents + num_train_sents, 26)
 
-#         shutil.rmtree(wikiann.dataset_dir)
+        shutil.rmtree(wikiann.dataset_dir)
 
 class TestSimilarityDatasets(unittest.TestCase):
     def test_wordsim353(self):
