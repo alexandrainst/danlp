@@ -37,16 +37,20 @@
   </h5>
 </div>
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
-It is a collection  of available datasets and models for a variety of NLP tasks. The aim is to make it easier and more applicable to practitioners in the industry to use Danish NLP and hence this project is licensed to allow commercial use. The project features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy and Flair as well as Deep Learning frameworks such as PyTorch and TensorFlow. 
+It is a collection  of available datasets and models for a variety of NLP tasks. The aim is to make it easier and more applicable to practitioners in the industry to use Danish NLP and hence this project is licensed to allow commercial use. The project features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy, Transformers and Flair as well as Deep Learning frameworks such as PyTorch. 
 
 If you are new to NLP or want to know more about the project in a broader perspective, you can start on our [microsite](https://danlp.alexandra.dk/).
 
 <br/>**Help us improve DaNLP**
+
 - :raising_hand: Have you tried the DaNLP package? Then we would love to chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. We also welcome and appreciate any written feedback. Reach us at [danlp@alexandra.dk](mailto:danlp@alexandra.dk)
 
 **News**
-- :paw_prints: A first version of a Spacy models for sentiment trained using hard distill from BERT is added to the repo, read about it in the [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md)
-- :hotel: :broken_heart:  Version 0.0.9 has been [released](https://github.com/alexandrainst/danlp/releases) with an update of storage host for models and dataset hosted by danlp - this means older pip version support for downloading models and dataset from danlp host is broken. 
+
+- :hotel: Version 0.0.10 has been [released](https://github.com/alexandrainst/danlp/releases) with an update of a permanent URL for storage host of models and dataset hosted by danlp, a first version of a spaCy sentiment model is added, and a noun phrase chunking function using spaCy dependecy model is added to the danlp package.
+
+- :blue_book: A jupyter notebook tutorial of FasText  classification model on speeches from Danish Parliament is added
+
 - 🚧 Support for Danish in the [spaCy]( https://spacy.io/models/da) new 2.3 version. The progress for supporting spaCy can be seen here [issue #3056](https://github.com/explosion/spaCy/issues/3056). The spacy model is trained using DaNE and DDT [datasets](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) - Read more about using spacy through danlp [here](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md)  
 
   
@@ -54,6 +58,7 @@ If you are new to NLP or want to know more about the project in a broader perspe
 **Next up**
 
 - :hatching_chick: Example tutorials in Jupiter notebook and getting started guides is coming soon!
+- :link:  Dataset for coreference is coming soon​
 - :paw_prints: Improving spaCy ner model using hard distil of Bert Ner
 
 
