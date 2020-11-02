@@ -1,12 +1,11 @@
 import time
 
 from flair.data import Sentence, Token
+from utils import print_speed_performance, f1_report
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_ner_model, \
     load_bert_ner_model
-
-from seqeval.metrics import classification_report
 
 
 def is_misc(ent: str):
@@ -54,13 +53,10 @@ def benchmark_polyglot_mdl():
 
         predictions.append([entity for word, entity in word_ent_tuples])
     print('polyglot:')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-        num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     assert len(predictions) == len(sentences_entities)
 
-    print(classification_report(sentences_entities, remove_miscs(predictions),
-                                digits=4))
-
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 def benchmark_spacy_mdl():
     nlp = load_spacy_model()
@@ -80,14 +76,11 @@ def benchmark_spacy_mdl():
 
         predictions.append(ents)
     print('spaCy:')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-        num_sentences, num_tokens, time.time() - start)
-    )
+    print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(predictions) == num_sentences
     
-    print(classification_report(sentences_entities, remove_miscs(predictions),
-                                digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 def benchmark_flair_mdl():
@@ -106,11 +99,11 @@ def benchmark_flair_mdl():
     tagger.predict(flair_sentences, verbose=True)
     predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
     print('Flair:')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(predictions) == num_sentences
 
-    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 def benchmark_bert_mdl():
@@ -123,11 +116,11 @@ def benchmark_bert_mdl():
         _, pred_ents = bert.predict(sentence)
         predictions.append(pred_ents)
     print('bert:')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(num_sentences, num_tokens, time.time() - start))
-
+    print_speed_performance(start, num_sentences, num_tokens)
+    
     assert len(predictions) == num_sentences
 
-    print(classification_report(sentences_entities, remove_miscs(predictions), digits=4))
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
 if __name__ == '__main__':

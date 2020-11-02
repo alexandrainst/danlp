@@ -1,12 +1,11 @@
 
 import time
+from utils import print_speed_performance, accuracy_report
 
 from flair.data import Sentence, Token
 
 from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_pos_model
-
-from tabulate import tabulate
 
 # benchmarking polyglotmodel requires
 from polyglot.tag import POSTagger
@@ -29,36 +28,6 @@ for sent in ccorpus_conll[2]:
     sentences_tokens.append([token.form for token in sent._tokens])
 
 
-
-def print_accuracy_scores(tags_true, tags_pred):
-
-    # flatening tags lists
-    tags_true = [tag for sent in tags_true for tag in sent]
-    tags_pred = [tag for sent in tags_pred for tag in sent]
-
-    # list of all tags
-    labels = sorted(list(set(tags_true)))
-
-    headers = ["label", "accuracy", "support"]
-    tab = []
-    correct_tags = {l:[] for l in labels}
-    # counting correct predictions per tag
-    for label in labels:
-        correct_tags[label] = [t == p for t, p in zip(tags_true, tags_pred) if t == label]
-        acc = round(sum(correct_tags[label])/len(correct_tags[label])*100, 2) if len(correct_tags[label])>0 else 0
-        tab.append([label, acc, len(correct_tags[label])])
-    tab.append(['', '', ''])
-    total_examples = sum(len(correct_tags[l]) for l in correct_tags)
-
-    micro_acc = round( sum(sum(correct_tags[l]) for l in correct_tags) / total_examples *100, 2)
-    tab.append(["micro average", micro_acc, total_examples])
-
-    macro_acc = round( sum([sum(correct_tags[l])/len(correct_tags[l]) for l in labels if len(correct_tags[l])>0]) / len(labels) *100, 2)
-    tab.append(["macro average", macro_acc, total_examples])
-
-    print("\n", tabulate(tab, headers=headers, colalign=["right", "decimal", "right"]), "\n")
-
-
 def benchmark_flair_mdl():
     tagger = load_flair_pos_model()
     
@@ -67,13 +36,12 @@ def benchmark_flair_mdl():
     tags_pred = [[tok.tags['upos'].value for tok in fs] for fs in corpus_flair.test]
     
     print('**Flair model** ')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    print_accuracy_scores(tags_true, tags_pred)
+    print(accuracy_report(tags_true, tags_pred))
     
     
 def benchmark_spacy_mdl():
@@ -94,13 +62,12 @@ def benchmark_spacy_mdl():
 
         tags_pred.append(tags)
     print('**Spacy model**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    print_accuracy_scores(tags_true, tags_pred)
+    print(accuracy_report(tags_true, tags_pred))
 
 
 auxiliary_verbs = ["være", "er", "var", "været"]
@@ -137,13 +104,12 @@ def benchmark_polyglot_mdl(corrected_output=False):
         word_tag_tuples = list(tagger.annotate(word_list))
         tags_pred.append([udify_tag(tag, word) if corrected_output else tag for word, tag in word_tag_tuples])
     print('**Polyglot model'+(' (corrected output) ' if corrected_output else '')+'**')
-    print("Made predictions on {} sentences and {} tokens in {}s".format(
-    num_sentences, num_tokens, time.time() - start))
+    print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
 
-    print_accuracy_scores(tags_true, tags_pred)
+    print(accuracy_report(tags_true, tags_pred))
 
 
 

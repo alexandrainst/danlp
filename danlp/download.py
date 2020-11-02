@@ -13,7 +13,7 @@ from danlp.utils import extract_single_file_from_zip
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
-DANLP_STORAGE_URL = 'https://danlp.alexandra.dk/304bd159d5de'
+DANLP_STORAGE_URL = 'http://danlp-downloads.alexandra.dk'
 
 # The naming convention of the word embedding are on the form <dataset>.<lang>.<type>
 # The <type> can be subword vectors=swv or word vectors=wv
