@@ -21,7 +21,7 @@ class BertNer:
         self.label_list = ["O", "B-MISC", "I-MISC", "B-PER", "I-PER", "B-ORG",
                            "I-ORG", "B-LOC", "I-LOC"]
 
-        self.model = AutoModelForTokenClassification.from_pretrained(weights_path)
+        self.model = AutoModelForTokenClassification.from_pretrained(weights_path, num_labels = len(self.label_list))
         self.tokenizer = AutoTokenizer.from_pretrained(weights_path)
 
     def predict(self, text: Union[str, List[str]]):
@@ -104,18 +104,19 @@ class BertEmotion:
                                        process_func=_unzip_process_func,
                                        verbose=verbose)
         path_reject = os.path.join(path_reject,'bert.noemotion')
-        # load the models
-        self.tokenizer_reject = BertTokenizer.from_pretrained(path_reject)
-        self.model_reject = BertForSequenceClassification.from_pretrained(path_reject)
-        
-        self.tokenizer = BertTokenizer.from_pretrained(path_emotion)
-        self.model = BertForSequenceClassification.from_pretrained(path_emotion)
-        
+
         # load the class names mapping
         self.catagories = { 0: 'Glæde/Sindsro',1: 'Tillid/Accept', 2: 'Forventning/Interrese',
               3: 'Overasket/Målløs',4: 'Vrede/Irritation', 5: 'Foragt/Modvilje', 6: 'Sorg/trist',7: 'Frygt/Bekymret'}
 
         self.labels_no = {1: 'No emotion', 0: 'Emotional'}
+
+        # load the models
+        self.tokenizer_reject = BertTokenizer.from_pretrained(path_reject)
+        self.model_reject = BertForSequenceClassification.from_pretrained(path_reject, num_labels=len(self.labels_no.keys()))
+        
+        self.tokenizer = BertTokenizer.from_pretrained(path_emotion)
+        self.model = BertForSequenceClassification.from_pretrained(path_emotion, num_labels=len(self.catagories.keys()))
         
         # save embbeding dim, to later ensure the sequenze is no longer the embeddings 
         self.max_length = self.model.bert.embeddings.position_embeddings.num_embeddings
@@ -188,13 +189,13 @@ class BertTone:
         path_pol = download_model('bert.polarity', cache_dir, process_func=_unzip_process_func,verbose=verbose)
         path_pol = os.path.join(path_pol,'bert.pol.v0.0.1')
         
-        self.tokenizer_sub = BertTokenizer.from_pretrained(path_sub)
-        self.model_sub = BertForSequenceClassification.from_pretrained(path_sub)
-        self.tokenizer_pol = BertTokenizer.from_pretrained(path_pol)
-        self.model_pol = BertForSequenceClassification.from_pretrained(path_pol)
-        
         self.classes_pol= ['positive', 'neutral', 'negative']
         self.classes_sub= ['objective','subjective'] 
+
+        self.tokenizer_sub = BertTokenizer.from_pretrained(path_sub)
+        self.model_sub = BertForSequenceClassification.from_pretrained(path_sub, num_labels=len(self.classes_sub))
+        self.tokenizer_pol = BertTokenizer.from_pretrained(path_pol)
+        self.model_pol = BertForSequenceClassification.from_pretrained(path_pol, num_labels=len(self.classes_pol))
         
         # save embbeding dim, to later ensure the sequenze is no longer the embeddings 
         self.max_length_sub = self.model_sub.bert.embeddings.position_embeddings.num_embeddings
@@ -282,18 +283,6 @@ def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
 
     return BertEmotion(cache_dir, verbose)
-
-def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
-    """
-    Wrapper function to ensure that all models in danlp are
-    loaded in a similar way
-    :param cache_dir:
-    :param verbose:
-    :return:
-    """
-
-    return BertTone(cache_dir, verbose)
-
 
 def load_bert_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
