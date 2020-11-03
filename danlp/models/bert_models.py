@@ -224,6 +224,7 @@ class BertTone:
             self.device = torch.device(device)
             self.model_sub.to(self.device)
             self.model_pol.to(self.device)
+        else: self.device = device
         self.parallel = parallel
         if self.parallel:
             self.model_sub = torch.nn.DataParallel(self.model_sub)
@@ -305,7 +306,7 @@ class BertTone:
         return proba
 
 
-def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, device=None, parallel: bool = False):
     """
     Wrapper function to ensure that all models in danlp are
     loaded in a similar way
@@ -314,7 +315,7 @@ def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     :return:
     """
 
-    return BertTone(cache_dir, verbose)
+    return BertTone(cache_dir, verbose, device, parallel)
 
 
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
