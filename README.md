@@ -76,12 +76,12 @@ To get started using DaNLP simply install the project with pip:
 pip install danlp 
 ```
 
-Note that the installation of DaNLP does not install other NLP libraries such as Gensim, Spacy, Flair or Transformers.
+Note that the installation of DaNLP does not install other NLP libraries such as Gensim, SpaCy, flair or Transformers.
 This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `. You can check the `requirements.txt` file to see what version the packages has been tested with.
 
 ### Install from source
 
-If you want to be able to use the latest developments before they are realized in a new pip package, or you want to modify the code your self, then clone this repo and install from source. 
+If you want to be able to use the latest developments before they are released in a new pip package, or you want to modify the code yourself, then clone this repo and install from source.
 
 ```
 git clone https://github.com/alexandrainst/danlp.git
@@ -89,7 +89,7 @@ cd danlp
 pip install . 
 ```
 
-To install the dependency used in the package with the tested versions:
+To install the dependencies used in the package with the tested versions:
 
 ```python
 pip install -r requirements.txt
@@ -141,9 +141,9 @@ The DaNLP package allows you to download and preprocess datasets. You can read a
 ## Examples
 You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
 
-## Structure of the the repo
+## Structure of the repo
 
-To help you navigate we here provide you with a overview of the structure in the github:
+To help you navigate we provide you with an overview of the structure in the github:
 
     .
     ├── danlp		   # Source files
@@ -152,10 +152,11 @@ To help you navigate we here provide you with a overview of the structure in the
     ├── docker         # Docker image
     ├── docs	       # Documentation files over dataset and models
     │   ├── imgs	   # Images used in documentation
-    │   ├── models     # Overview over avalible models with code snippet and benchmarkresults
-    ├── exampels	   # Exampels, tutorials and benchmark scripts 
-    │   ├── benchmarks # Scripts for reproducing bechmarksresults reported in docs
-    ├── tests   	   # Test for continous integration with travis  
+    │   ├── models     # Overview over available models with code snippet and benchmark results
+    ├── examples	   # Examples, tutorials and benchmark scripts
+    │   ├── benchmarks # Scripts for reproducing benchmarks results reported in docs
+    ├── tests   	   # Test for continous integration with travis
+
 ## How do I contribute?
 
 If you want to contribute to the DaNLP repository and make it better, your help is very welcome. You can contribute to the project in many ways:
@@ -164,6 +165,8 @@ If you want to contribute to the DaNLP repository and make it better, your help 
 - Contribute with your own pretrained NLP models or datasets in Danish
 - Notify us of other Danish NLP resources
 - Create GitHub issues with questions and bug reports
+
+You can write us at danlp@alexandra.dk.
 
 ## Who is behind?
 <img align="right" width="150" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/alexandra_logo.png">
