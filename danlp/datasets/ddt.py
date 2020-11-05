@@ -14,10 +14,16 @@ def _any_part_exist(parts: list):
 
 class DDT:
     """
+
+    Class for loading the Danish Dependency Treebank (DDT) through several frameworks/formats.   
+
     The DDT dataset has been annotated with NER tags in the IOB2 format.
     The dataset is downloaded in CoNLL-U format, but with this class
     it can be converted to spaCy format or a simple NER format
     similar to the CoNLL 2003 NER format.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
 
     """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
@@ -27,9 +33,10 @@ class DDT:
 
     def load_as_conllu(self, predefined_splits: bool = False):
         """
+        Load the DDT in CoNLL-U format.
 
-        :param predefined_splits:
-        :return A single pyconll.Conll
+        :param bool predefined_splits:
+        :return: A single pyconll.Conll
                 or a tuple of (train, dev, test) pyconll.Conll
                 depending on predefined_split
         """
@@ -75,16 +82,20 @@ class DDT:
 
     def load_with_flair(self, predefined_splits: bool = False):
         """
+        Load the DDT with flair. 
+
         This function is inspired by the "Reading Your Own Sequence Labeling Dataset" from Flairs tutorial
         on reading corpora:
 
         https://github.com/zalandoresearch/flair/blob/master/resources/docs/TUTORIAL_6_CORPUS.md
 
-        TODO: Make a pull request to flair similar to this:
-        https://github.com/zalandoresearch/flair/issues/383
-
         :param predefined_splits:
+        :type predefined_splits: bool
         :return: ColumnCorpus
+
+        .. note:: TODO: Make a pull request to flair similar to this:
+            https://github.com/zalandoresearch/flair/issues/383
+
         """
 
         from flair.data import Corpus
@@ -112,11 +123,14 @@ class DDT:
 
     def load_with_spacy(self):
         """
-        Converts the conllu files to json in the spaCy format.
+        Loads the DDT with spaCy. 
+        
+        This function converts the conllu files to json in the spaCy format.
 
-        Not using jsonl because of:
-        https://github.com/explosion/spaCy/issues/3523
-        :return:
+        :return: GoldCorpus
+
+        .. note:: Not using jsonl because of:
+            https://github.com/explosion/spaCy/issues/3523
         """
         import srsly
         from spacy.cli.converters import conllu2json

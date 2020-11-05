@@ -7,6 +7,12 @@ from danlp.download import DATASETS, download_dataset, DEFAULT_CACHE_DIR, _unzip
 from danlp.utils import extract_single_file_from_zip
 
 class EuroparlSentiment1:
+    """
+    Class for loading the Europarl Sentiment dataset.
+
+    :param str cache_dir: the directory for storing cached models
+
+    """
     
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'europarl.sentiment1'
@@ -16,7 +22,13 @@ class EuroparlSentiment1:
         self.file_path = os.path.join(self.dataset_dir, self.dataset_name + self.file_extension)
         
     def load_with_pandas(self):
-        """ Load and drop duplicates and nan values"""
+        """
+        Loads the dataset in a dataframe
+        and drop duplicates and nan values
+
+        :return: a dataframe
+
+        """
 
         df = pd.read_csv(self.file_path, sep=',', index_col=0, encoding='utf-8')
 
@@ -24,19 +36,35 @@ class EuroparlSentiment1:
         return df.drop_duplicates()
 
 class EuroparlSentiment2:
-    
+    """
+    Class for loading the Europarl Sentiment dataset.
+
+    :param str cache_dir: the directory for storing cached models
+
+    """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'europarl.sentiment2'
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_unzip_process_func)
         self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
         
     def load_with_pandas(self):
-        
+        """
+        Loads the dataset as a dataframe
+
+        :return: a dataframe
+
+        """
         return pd.read_csv(self.file_path, sep=',', encoding='utf-8')
         
 
 
 class LccSentiment:
+    """
+    Class for loading the LCC Sentiment dataset. 
+
+    :param str cache_dir: the directory for storing cached models
+
+    """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name1 = 'lcc1.sentiment'
         self.file_extension1 = DATASETS[self.dataset_name1]['file_extension']
@@ -51,7 +79,13 @@ class LccSentiment:
         self.file_path2 = os.path.join(self.dataset_dir2, self.dataset_name2 + self.file_extension2)
         
     def load_with_pandas(self):
-        """ Load, combine and drop duplicates and nan values """
+        """ 
+        Loads the dataset in a dataframe,  
+        combines and drops duplicates and nan values 
+        
+        :return: a dataframe
+
+        """
         
         df1 = pd.read_csv(self.file_path1, sep=',', encoding='utf-8')
         df2 = pd.read_csv(self.file_path2, sep=',', encoding='utf-8')
@@ -63,7 +97,13 @@ class LccSentiment:
 
     
 class TwitterSent:
-    
+    """
+    Class for loading the Twitter Sentiment dataset.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool force: 
+
+    """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR, force: bool =False):
         self.dataset_name = 'twitter.sentiment'
 
@@ -71,6 +111,12 @@ class TwitterSent:
         self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
 
     def load_with_pandas(self):
+        """
+        Loads the dataset in a dataframe.
+
+        :return: a dataframe of the test set and a dataframe of the train set
+
+        """
         df=pd.read_csv(self.file_path, sep=',', encoding='utf-8')
         return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
 

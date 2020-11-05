@@ -5,6 +5,12 @@ from danlp.download import download_dataset, DEFAULT_CACHE_DIR, DATASETS
 
 
 class WikiAnn:
+    """
+    Class for loading the WikiANN dataset.
+
+    :param str cache_dir: the directory for storing cached models
+
+    """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'wikiann'
         self.file_extension = DATASETS[self.dataset_name]['file_extension']
@@ -12,6 +18,12 @@ class WikiAnn:
         self.dataset_dir = download_dataset(self.dataset_name, process_func=_wikiann_process_func, cache_dir=cache_dir)
 
     def load_with_flair(self, predefined_splits: bool = False):
+        """
+        Loads the dataset with flair.
+
+        :param bool predefined_splits:
+        :return: ColumnCorpus
+        """
         from flair.data import Corpus
         from flair.datasets import ColumnCorpus
 
@@ -23,13 +35,16 @@ class WikiAnn:
 
     def load_with_spacy(self):
         """
+        Loads the dataset with spaCy. 
+
         This function will convert the CoNLL02/03 format to json format for spaCy.
         As the function will return a spacy.gold.GoldCorpus which needs a dev set
         this function also splits the dataset into a 70/30 split as is done by
         Pan et al. (2017).
 
         - Pan et al. (2017): https://aclweb.org/anthology/P17-1178
-        :return:
+        
+        :return: GoldCorpus
         """
         import srsly
         from spacy.cli.converters import conll_ner2json

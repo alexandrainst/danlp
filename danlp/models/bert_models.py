@@ -7,8 +7,12 @@ import warnings
 
 class BertNer:
     """
-    Bert NER model
+    BERT NER model
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
     """
+
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
         from transformers import AutoModelForTokenClassification
         from transformers import AutoTokenizer
@@ -30,10 +34,12 @@ class BertNer:
         a raw string this method will return the string tokenized with
         BERTs subword tokens.
 
-        E.g. "varme vafler" will become ["varme", "va", "##fler"]
+        :param text: can either be a raw text or a list of tokens
+        :return: the tokenized text and the predicted labels
 
-        :param text: Can either be a raw text or a list of tokens
-        :return: The tokenized text and the predicted labels
+        :Example:
+
+            "`varme vafler`" becomes ["varme", "va", "##fler"]
         """
         
         if isinstance(text, str):
@@ -88,8 +94,13 @@ class BertNer:
 
 class BertEmotion:
     """
-    The class load both a BERT model to classify if emotion or not in the text,
-    and a BERT model to regonizes eight emotions
+    BERT Emotion model.
+
+    For classifying whether there is emotion in the text,
+    and recognizing amongst eight emotions.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
     """
 
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
@@ -136,13 +147,37 @@ class BertEmotion:
         return pred
     
     def predict_if_emotion(self, sentence):
+        """
+        Predicts whether there is emotion in the text.
+
+        :param str sentence: raw sentence
+        :return: 0 if no emotion else 1
+        :rtype: int
+        """
         
         pred=self._get_pred(self.tokenizer_reject, self.model_reject, self.max_length_reject, sentence)
         pred = pred.argmax().item()
         return self.labels_no[pred]
     
     def predict(self, sentence: str, no_emotion=False):
+        """
+        Predicts emotion among:
 
+            * 0: `Glæde/Sindsro`
+            * 1: `Tillid/Accept`
+            * 2: `Forventning/Interrese`
+            * 3: `Overasket/Målløs`
+            * 4: `Vrede/Irritation`
+            * 5: `Foragt/Modvilje`
+            * 6: `Sorg/trist`
+            * 7: `Frygt/Bekymret`
+
+        :param str sentence: raw text
+        :param bool no_emotion: whether there is emotion or not in the text
+        :return: index of the emotion
+        :rtype: int
+        """
+        
         def predict_emotion():
             pred=self._get_pred(self.tokenizer, self.model, self.max_length, sentence)
             pred = pred.argmax().item() 
@@ -158,6 +193,15 @@ class BertEmotion:
                 return predict_emotion()
             
     def predict_proba(self, sentence: str, emotions=True, no_emotion=True):
+        """
+        Predicts the probabilities of emotions.
+
+        :param str sentence: raw text
+        :param bool emotions: whether to return the probability of the emotion
+        :param bool no_emotion: whether to return the probability of the sentence being emotional 
+        :return: a list of probabilities
+        :rtype: List
+        """
         proba=[]
             
         # which emotion   
@@ -175,13 +219,16 @@ class BertEmotion:
 
 class BertTone:
     '''
-    The class load both a BERT model to classify boteh the tone of [subjective or objective] and the tone og [positive, neutral , negativ]
-    returns: [label_subjective, label_polarity]
+    BERT Tone model. 
+
+    For classifying both the tone [subjective, objective] 
+    and the polarity [positive, neutral, negativ] of sentences.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
     '''
-   
 
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
-
         from transformers import BertTokenizer, BertForSequenceClassification
         # download the model or load the model path
         path_sub = download_model('bert.subjective', cache_dir, process_func=_unzip_process_func,verbose=verbose)
@@ -223,7 +270,15 @@ class BertTone:
         return pred
     
     def predict(self, sentence: str, polarity: bool = True, analytic: bool = True):
+        """
+        Predict the polarity [positive, neutral, negativ] and/or the tone [subjective, objective] of the sentence. 
 
+        :param str sentence: raw text
+        :param bool polarity: returns the polarity if `True`
+        :param bool analytic: returns the tone if `True`
+        :return: a dictionary for polarity and tone results
+        :rtype: Dict
+        """
         
         sentence = self._clean(str(sentence))
         predDict = {'analytic': None, 'polarity': None }
@@ -264,32 +319,32 @@ class BertTone:
 
 def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
-    Wrapper function to ensure that all models in danlp are
-    loaded in a similar way
-    :param cache_dir:
-    :param verbose:
-    :return:
+    Loads a BERT Tone model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a BERT Tone model
     """
 
     return BertTone(cache_dir, verbose)   
             
 def load_bert_emotion_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
-    Wrapper function to ensure that all models in danlp are
-    loaded in a similar way
-    :param cache_dir:
-    :param verbose:
-    :return:
+    Loads a BERT Emotion model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a BERT Emotion model
     """
 
     return BertEmotion(cache_dir, verbose)
 
 def load_bert_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
-    Wrapper function to ensure that all models in danlp are
-    loaded in a similar way
-    :param cache_dir:
-    :param verbose:
-    :return:
+    Loads a BERT NER model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a BERT NER model
     """
     return BertNer(cache_dir, verbose)
