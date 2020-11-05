@@ -16,7 +16,7 @@ A medium blog using Part of Speech tagging on Danish, can be found  [here](<http
 
 ![](../imgs/postag_eksempel.gif)
 
-##### :wrench:Flair
+##### 🔧 Flair
 
 This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
 
@@ -45,7 +45,7 @@ print(sentence.to_tagged_string())
 
 
 
-##### :wrench:SpaCy
+##### 🔧 SpaCy
 
 Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) data. 
 

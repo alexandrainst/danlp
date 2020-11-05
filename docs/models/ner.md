@@ -16,7 +16,7 @@ and made available through the DaNLP library.
 | [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ |
 | [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
 
-#### BERT
+#### 🔧 BERT
 The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER model is based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO which 
 has been finetuned on the [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
@@ -32,7 +32,7 @@ print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
 ```
 
 
-#### Flair
+#### 🔧 Flair
 The Flair [(Akbik et al. 2018)](https://www.aclweb.org/anthology/C18-1139/) NER model
 uses pretrained [Flair embeddings](https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md#-training-details-for-flair-embeddings)
 in combination with fastText word embeddings. The model is trained using the [Flair](https://github.com/flairNLP/flair)
@@ -52,7 +52,7 @@ flair_model.predict(sentence)
 print(sentence.to_tagged_string())
 ```
 
-#### spaCy
+#### 🔧 spaCy
 The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md) uing the [DDT and DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) annotations.
 The spaCy model can be loaded with DaNLP to do NER predictions in the following way.
 ```python

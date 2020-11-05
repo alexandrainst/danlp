@@ -1,5 +1,6 @@
 Pretrained Danish embeddings
 ============================
+
 This repository keeps a list of pretrained word embeddings publicly available in Danish. The `download_embeddings.py`
 and `load_embeddings.py` provides functions for downloading the embeddings as well as prepare them for use in 
 popular NLP frameworks.

@@ -1,5 +1,6 @@
 Datasets
 ========
+
 This section keeps a list of Danish NLP datasets publicly available. 
 
 | Dataset | Task | Words | Sents | License | DaNLP |
@@ -20,7 +21,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
-#### Danish Dependency Treebank (DaNE)
+### Danish Dependency Treebank (DaNE)
 
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
 conversion of the Danish Dependency Treebank (Buch-Kromann et
@@ -45,7 +46,7 @@ The dataset can also be downloaded directly in CoNLL-U format.
 
 [Download DDT](https://danlp.alexandra.dk/304bd159d5de/datasets/ddt.zip) 
 
-#### WikiANN
+### WikiANN
 The WikiANN dataset [(Pan et al. 2017)](https://aclweb.org/anthology/P17-1178) is a dataset with NER annotations 
 for **PER**, **ORG** and **LOC**. It has been constructed using the linked entities in Wikipedia pages for 282 different
 languages including Danish. The dataset can be loaded with the DaNLP package: 
@@ -58,18 +59,18 @@ spacy_corpus = wikiann.load_with_spacy()
 flair_corpus = wikiann.load_with_flair()
 ```
 
-#### WordSim-353
+### WordSim-353
 The WordSim-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf) 
 contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations 
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been 
 [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Årup Nielsen.
 
-#### Danish Similarity Dataset
+### Danish Similarity Dataset
 The [Danish Similarity Dataset](https://github.com/kuhumcst/Danish-Similarity-Dataset) 
 consists of 99 word pairs annotated by 38 annotators with a similarity score (1-6).
 It is constructed with frequently used Danish words.
 
-#### Twitter Sentiment
+### Twitter Sentiment
 
 The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actual tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
@@ -86,7 +87,7 @@ The dataset can also be downloaded directly with the labels and tweet id:
 
 [Download TwitterSent](https://danlp.alexandra.dk/304bd159d5de/datasets/twitter.sentiment.zip) 
 
-#### Europarl Sentiment1
+### Europarl Sentiment1
 
 The [Europarl Sentiment1](https://github.com/fnielsen/europarl-da-sentiment) dataset contains sentences from 
 the [Europarl](http://www.statmt.org/europarl/) corpus which has been annotated manually by Finn Årup Nielsen.
@@ -101,7 +102,7 @@ eurosent = EuroparlSentiment1()
 df = eurosent.load_with_pandas()
 ```
 
-#### Europarl Sentiment2
+### Europarl Sentiment2
 
 The dataset consist of  957 manually annotation by Alexandra institute on sentences from Eruroparl. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. 
 The dataset can be loaded with the DaNLP package:
@@ -113,9 +114,7 @@ eurosent = EuroparlSentiment2()
 df = eurosent.load_with_pandas()
 ```
 
-#### 
-
-#### LCC Sentiment
+### LCC Sentiment
 
 The [LCC Sentiment](https://github.com/fnielsen/lcc-sentiment) dataset contains sentences from Leipzig Copora Collection [(Quasthoff et al. 2006)](https://www.aclweb.org/anthology/L06-1396/) 
 which has been manually annotated by Finn Årup Nielsen.  

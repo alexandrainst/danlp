@@ -1,4 +1,5 @@
-# SpaCy model in Danish 
+SpaCy model in Danish
+=====================
 
 SpaCy is an industrial friendly open source framework for doing NLP, and you can read more about it on their [homesite](https://spacy.io/) or [gitHub](https://github.com/explosion/spaCy).
 
@@ -32,7 +33,7 @@ The following lists the  performance scores of the spaCy model provided in DaNLP
 
 
 
-## :hatching_chick: Getting started with the spaCy model
+### 🐣 Getting started with the spaCy model
 
 Below is some small snippets to get started using the spaCy model within the DaNLP package. More information about using spaCy can be found on spaCy's own [page](https://spacy.io/).  
 
@@ -104,7 +105,7 @@ Alexandra ORG
 Instituttet ORG
 ```
 
-## :hatching_chick: Start ​training your own text classification model
+### 🐣 Start ​training your own text classification model
 
 The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 

@@ -31,7 +31,7 @@ We provide a convertion function -- from dependencies to NP-chunks -- thus depen
 
 
 
-## :wrench:SpaCy
+## 🔧 SpaCy
 
 Read more about the SpaCy model in the dedicated [SpaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) dataset. 
 

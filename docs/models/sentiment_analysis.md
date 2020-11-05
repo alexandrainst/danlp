@@ -1,5 +1,5 @@
 Sentiment Analysis
-============================
+==================
 
 Sentiment analysis is a broad term for a set of tasks with the purpose of identifying an emotion or opinion in a text.
 
@@ -9,8 +9,8 @@ In this repository we provide an overview of open sentiment analysis models and 
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | ------------------ | ------------------------------------------------------------ | ----- |
 | [AFINN](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity           | Score (integers)                                             | ❌     |
 | [Sentida](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity           | Score (continuous)                                           | ❌     |
-| [Bert Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions           | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
-| [Bert Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔️     |
+| [BERT Emotion](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions           | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔️     |
+| [BERT Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔️     |
 | [SpaCy Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrench-spacy-sentiment) (beta) | spaCy    | MIT                                                          | Alexandra Institute                                       | Polarity           | 'postive', 'neutral', 'negative'                             | ✔️     |
 
 
@@ -25,11 +25,11 @@ The tool scores texts with an integer where scores <0 are negative, =0 are neutr
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
 uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist both an R version and an implementation in Python.  In these documentations we evaluate the python version from [sentida](https://github.com/guscode/sentida). 
 
-#### :wrench:Bert Emotion
+#### 🔧 BERT Emotion
 
 The emotion classifier is developed in a collaboration with Danmarks Radio, which has granted access to a set of social media data. The data has been manual annotated first to distinguish between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) emotion model is finetuned on this data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO . The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. 
 
- Below is a small snippet for getting started using the Bert Emotion model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
+ Below is a small snippet for getting started using the BERT Emotion model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
 
 ```python
 from danlp.models import load_bert_emotion_model
@@ -50,11 +50,11 @@ classifier._classes()
 
 
 
-#### :wrench:Bert Tone
+#### 🔧 BERT Tone
 
 The tone analyzer consists of two BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/)  classification models, and the first is recognizing the following tags positive, neutral and negative and the  second model  the tags: subjective and objective. This is a first version of the models, and work should be done to improve performance. Both models is finetuned on annotated twitter data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO .  The data used is manually annotated data from Twitter Sentiment (train part)([see here](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#twitter-sentiment) ) and EuroParl sentiment 2 ([se here](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
 
- Below is a small snippet for getting started using the Bert Tone model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
+ Below is a small snippet for getting started using the BERT Tone model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
 
 ```python
 from danlp.models import load_bert_tone_model
@@ -73,11 +73,11 @@ classifier._clases()
 
 
 
-#### :wrench: SpaCy Sentiment
+#### 🔧 SpaCy Sentiment
 
 SpaCy sentiment is a text classification model trained using spacy built in command line interface. It uses the CoNLL2017 word vectors, read about it [here](https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md) .
 
-The model is trained using hard distil of the [Bert Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) - Meaning,  the Bert Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
+The model is trained using hard distil of the [BERT Tone](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md#wrenchbert-tone) (beta) - Meaning,  the BERT Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
 
 It is a first version. 
 
@@ -124,7 +124,7 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 | ---- | ------------------ | ------------- | ---- |
 | AFINN | 0.68 (0.68) | 0.66 (0.61) | 0.48 (0.46) |
 | Sentida (version 0.5.0) | 0.67 (0.65) | 0.58 (0.55) | 0.44 (0.44) |
-| Bert Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73** (0.70) |
+| BERT Tone (polarity, version 0.0.1) | **0.79** (0.78) | **0.74** (0.67) | **0.73** (0.70) |
 | spaCy sentiment (version 0.0.1) | 0.74 (0.73) | 0.66 (0.61) | 0.66 (0.60) |
 
 **Benchmark of subjective versus objective classification**
@@ -137,7 +137,7 @@ The script for the benchmarks can be found [here](https://github.com/alexandrain
 
 | Model                               | Twitter sentiment (analytic) |
 | ----------------------------------- | ---------------------------- |
-| Bert Tone (analytic, version 0.0.1) | 0.90 (0.77)                  |
+| BERT Tone (analytic, version 0.0.1) | 0.90 (0.77)                  |
 
 
 
