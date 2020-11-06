@@ -7,6 +7,7 @@ This section is concerned with public available Part of Speech (POS) taggers in 
 | [Polyglot](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#polyglot) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot | 17  Universal part of speech | ❌ |
 | [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#flair) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
 | [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
+| [Stanza](https://stanfordnlp.github.io/stanza/) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | Apache 2.0 | Stanford NLP | Universal part of speech | ❌ |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
@@ -97,11 +98,16 @@ We calculated the scores for the original predictions and for the corrected vers
 | Polyglot                    | 76.76      |
 | Polyglot (corrected output) | 83.4       |
 
+## Stanza
+The following performance metrics are the ones presented by Stanza on their [official website](https://stanfordnlp.github.io/stanza/performance.html)
 
+| Model                       | Accuracy   |
+|-----------------------------|------------|
+| Stanza                       | 97.75  |
 
 
 ## 🎓 References 
 - Rami Al-Rfou, Bryan Perozzi, and Steven Skiena. 2013. [Polyglot: Distributed Word Representations for Multilingual NLP](https://www.aclweb.org/anthology/W13-3520). In **CoNLL**.
 - Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://alanakbik.github.io/papers/coling2018.pdf). In **COLING**.
-
+- Peng Qi, Yuhao Zhang, Yuhui Zhang, Jason Bolton and Christopher D. Manning. 2020. [Stanza: A Python Natural Language Processing Toolkit for Many Human Languages](https://arxiv.org/abs/2003.07082). In Association for Computational Linguistics (ACL) System Demonstrations. 2020.
   
