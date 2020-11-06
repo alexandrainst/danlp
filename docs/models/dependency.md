@@ -11,9 +11,10 @@ A dependency relation is a triplet consisting of: a head (word), a dependent (an
 | Model | Train Data | License | Trained by | Tags | DaNLP |
 |-------|-------|-------|-------|-------|-------|
 | [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Institute | 17  Universal dependencies | ✔️ |
+| [Stanza](https://stanfordnlp.github.io/stanza/) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | Apache 2.0 | Stanford NLP | Universal dependencies | ❌ |
 
 
-The model has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
+The models has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
 It uses 39 dependency relations.
 
 ### Noun Phrase Chunking
@@ -128,6 +129,7 @@ Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment
 | Model | LA    | UAS   | LAS   |
 |-------|-------|-------|-------|
 | SpaCy | 87.68 | 81.36 | 77.46 |
+| Stanza |      | **86.83** | **84.19** |
 
 ### Noun Phrase Chunking
 
