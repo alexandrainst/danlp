@@ -51,7 +51,7 @@ def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR,
     :param bool verbose: `True` to increase verbosity
     :return: KeyedVectors or FastTextKeyedVectors
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=True)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=True)
     download_model(pretrained_embedding, cache_dir,
                    _process_downloaded_embeddings, verbose=verbose)
     wv_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
@@ -77,7 +77,7 @@ def load_wv_with_spacy(pretrained_embedding: str,
     import spacy
 
     # spaCy does not support subwords
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
 
     spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
 
@@ -112,7 +112,7 @@ def load_keras_embedding_layer(pretrained_embedding: str,
     :param kwargs: used to forward arguments to the Keras Embedding layer
     :return: a Keras Embedding layer and index to word dictionary
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
 
     from keras.layers import Embedding
     wv = load_wv_with_gensim(pretrained_embedding, cache_dir, verbose)
@@ -137,7 +137,7 @@ def load_pytorch_embedding_layer(pretrained_embedding: str,
     :param bool verbose: `True` to increase verbosity
     :return: a pytorch Embedding module and a list id2word
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
     import torch
     from torch.nn import Embedding
 
@@ -166,7 +166,7 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
     embeddings = []
 
     if word_embeddings is not None:
-        word_embeddings_available(word_embeddings, can_use_subword=False)
+        _word_embeddings_available(word_embeddings, can_use_subword=False)
         download_model(word_embeddings, cache_dir,
                    _process_downloaded_embeddings, verbose=verbose)
         wv_path = os.path.join(cache_dir, word_embeddings + ".bin")
@@ -192,7 +192,7 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
     return StackedEmbeddings(embeddings=embeddings)
 
 
-def word_embeddings_available(pretrained_embedding: str,
+def _word_embeddings_available(pretrained_embedding: str,
                               can_use_subword=False):
     if not can_use_subword and pretrained_embedding in AVAILABLE_SUBWORD_EMBEDDINGS:
         raise ValueError(

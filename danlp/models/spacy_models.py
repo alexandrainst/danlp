@@ -176,9 +176,9 @@ def get_noun_chunks(spacy_doc, bio=True, nested=False):
                     is_chunk[j] = False
 
     final_chunks = [c for c, ischk in zip(chunks, is_chunk) if ischk]
-    return chunks2bio(final_chunks, len(spacy_doc)) if bio else final_chunks
+    return _chunks2bio(final_chunks, len(spacy_doc)) if bio else final_chunks
 
-def chunks2bio(chunks, sent_len):
+def _chunks2bio(chunks, sent_len):
     bio_tags = ['O'] * sent_len
     for (start, end, label) in chunks:
         bio_tags[start] = 'B-'+label

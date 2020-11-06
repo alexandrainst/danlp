@@ -101,10 +101,9 @@ class TwitterSent:
     Class for loading the Twitter Sentiment dataset.
 
     :param str cache_dir: the directory for storing cached models
-    :param bool force: 
 
     """
-    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR, force: bool =False):
+    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
         self.dataset_name = 'twitter.sentiment'
 
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func)
@@ -121,7 +120,7 @@ class TwitterSent:
         return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
 
 
-def lookup_tweets(tweet_ids, api):
+def _lookup_tweets(tweet_ids, api):
     import tweepy
     full_tweets = []
     tweet_count = len(tweet_ids)
@@ -143,7 +142,7 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
                                verbose: bool = True):
     from zipfile import ZipFile
 
-    twitter_api = construct_twitter_api_connection()
+    twitter_api = _construct_twitter_api_connection()
     
     model_name = meta_info['name']
     full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
@@ -156,7 +155,7 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
 
     twitter_ids = list(df['twitterid'])
     
-    full_t = lookup_tweets(twitter_ids, twitter_api)
+    full_t = _lookup_tweets(twitter_ids, twitter_api)
     tweet_texts = [[tweet.id, tweet.full_text] for tweet in full_t]
     tweet_ids, t_texts = list(zip(*tweet_texts))
     tweet_texts_df = pd.DataFrame({'twitterid': tweet_ids, 'text': t_texts})
@@ -173,7 +172,7 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
         print("Downloaded {} out of {} tweets".format(len(full_t), len(twitter_ids)))
  
 
-def construct_twitter_api_connection():
+def _construct_twitter_api_connection():
     if not('TWITTER_CONSUMER_KEY' in os.environ
            and 'TWITTER_CONSUMER_SECRET' in os.environ
            and 'TWITTER_ACCESS_TOKEN' in os.environ
