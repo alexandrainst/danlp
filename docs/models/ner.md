@@ -8,20 +8,20 @@ tools are available for NER in Danish. Popular models for NER
 are continuously trained on the newest available named entity datasets such as DaNE
 and made available through the DaNLP library.
 
-| Model | Train Data | Maintainer | Tags | DaNLP |
-|-------|-------|------------|------|-------|
-| [BERT](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#bert) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
-| [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#flair) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔️ |
-| [spaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#spacy) | [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | Alexandra Institute | PER, ORG, LOC | ✔ |
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/POS.html/#) | Wikipedia | Polyglot | PER, ORG, LOC | ❌ |
-| [daner](https://github.com/ITUnlp/daner) | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌ |
+| Model                                                                             | Train Data                                                            | Maintainer                     | Tags          | DaNLP |
+|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------------------|---------------|-------|
+| [BERT](#bert)                                                                     | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
+| [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔    |
+| [spaCy](#spacy)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
+| [Polyglot](https://polyglot.readthedocs.io/en/latest/NamedEntityRecognition.html) | Wikipedia                                                             | Polyglot                       | PER, ORG, LOC | ❌     |
+| [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
 
-#### 🔧 BERT
+#### 🔧 BERT {#bert}
 The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER model is based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO which 
-has been finetuned on the [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) 
+has been finetuned on the [DaNE](../datasets.md#dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
-To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md ).) 
+To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](../spacy.md ).) 
 ```python
 from danlp.models import load_bert_ner_model
 
@@ -32,11 +32,11 @@ print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
 ```
 
 
-#### 🔧 Flair
+#### 🔧 Flair {#flair}
 The Flair [(Akbik et al. 2018)](https://www.aclweb.org/anthology/C18-1139/) NER model
-uses pretrained [Flair embeddings](https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md#-training-details-for-flair-embeddings)
+uses pretrained [Flair embeddings](embeddings.md#flair-embeddings)
 in combination with fastText word embeddings. The model is trained using the [Flair](https://github.com/flairNLP/flair)
- library on the the [DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) dataset.
+ library on the the [DaNE](../datasets.md#dane) dataset.
 
 The Flair NER model can be used with DaNLP using the `load_flair_ner_model()` method.
 ```python
@@ -52,8 +52,8 @@ flair_model.predict(sentence)
 print(sentence.to_tagged_string())
 ```
 
-#### 🔧 spaCy
-The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md) uing the [DDT and DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) annotations.
+#### 🔧 spaCy {#spacy}
+The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../spacy.md) uing the [DDT and DaNE](../datasets.md#dane) annotations.
 The spaCy model can be loaded with DaNLP to do NER predictions in the following way.
 ```python
 from danlp.models import load_spacy_model
@@ -80,16 +80,16 @@ The tool is not available through DaNLP but it can be used from the [daner repos
 
 ## 📈 Benchmarks
 The benchmarks has been performed on the test part of the
-[DaNE](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) dataset.
+[DaNE](../datasets.md#dane) dataset.
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model |   LOC | ORG | PER | AVG |
-|-------|-------|-----|-----|-----|
-| BERT | 83.90 | **72.98** | 92.82 | **84.04** |
-| Flair | **84.82** | 62.95 | **93.15** | 81.78 |
-| spaCy | 75.96 | 59.57 | 87.87 | 75.73 |
-| Polyglot | 64.95 | 39.3 | 78.74 | 64.18 |
+| Model    | LOC       | ORG       | PER       | AVG       |
+|----------|-----------|-----------|-----------|-----------|
+| BERT     | 83.90     | **72.98** | 92.82     | **84.04** |
+| Flair    | **84.82** | 62.95     | **93.15** | 81.78     |
+| spaCy    | 75.96     | 59.57     | 87.87     | 75.73     |
+| Polyglot | 64.95     | 39.3      | 78.74     | 64.18     |
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 

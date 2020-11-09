@@ -2,11 +2,11 @@ Part of Speech Tagging
 ======================
 This section is concerned with public available Part of Speech (POS) taggers in Danish. 
 
-| Model | Train Data | License | Trained by | Tags | DaNLP |
-|-------|-------|-------|-------|-------|-------|
-| [Polyglot](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#polyglot) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot | 17  Universal part of speech | ❌ |
-| [Flair](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#flair) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
-| [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Instittut | 17  Universal part of speech | ✔️ |
+| Model                 | Train Data                                                                | License       | Trained by          | Tags                         | DaNLP |
+|-----------------------|---------------------------------------------------------------------------|---------------|---------------------|------------------------------|-------|
+| [Polyglot](#polyglot) | [Danish Dependency Treebank](../datasets.md#dane) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot            | 17  Universal part of speech | ❌     |
+| [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut | 17  Universal part of speech | ✔️    |
+| [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut | 17  Universal part of speech | ✔️    |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
@@ -16,9 +16,9 @@ A medium blog using Part of Speech tagging on Danish, can be found  [here](<http
 
 ![](../imgs/postag_eksempel.gif)
 
-##### 🔧 Flair
+##### 🔧 Flair {#flair}
 
-This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>).
+This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data [Danish Dependency Treebank](../datasets.md#dane)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](embeddings.md).
 
 The code for training can be found on Flairs GitHub, and the following parameters are set:
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
@@ -45,9 +45,9 @@ print(sentence.to_tagged_string())
 
 
 
-##### 🔧 SpaCy
+##### 🔧 SpaCy {#spacy}
 
-Read more about the spaCy model in the dedicated [spaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) data. 
+Read more about the spaCy model in the dedicated [spaCy docs](../spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) data. 
 
 Below is a small getting started snippet for using the Spacy pos tagger:
 

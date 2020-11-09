@@ -11,15 +11,15 @@ Note that the two models are not the same, e.g. the spaCy model in DaNLP perform
 
 The spaCy model comes with **tokenization**, **dependency parsing**, **part of speech tagging** , **word vectors** and **name entity recognition**. 
 
-The model is trained on the [Danish Dependency Treebank (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
+The model is trained on the [Danish Dependency Treebank (DaNe)](datasets.md#dane), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
 
-For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](<https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md>), [named entity recognition](<https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md>), [part of speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) and [dependency parsing](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>).
+For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](models/embeddings.md), [named entity recognition](models/ner.md), [part of speech tagging](models/pos.md) and [dependency parsing](models/dependency.md).
 
-The danlp github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
+The danlp github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](models/sentiment_analysis.md).
 
 #### Performance of the spaCy model
 
-The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
+The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](datasets.md#dane) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
 
 | Task                    | Measures | Scores |
 | ----------------------- | -------- | :----- |
@@ -27,7 +27,6 @@ The following lists the  performance scores of the spaCy model provided in DaNLP
 | Dependency parsing      | las      | 77.22  |
 | Part of speech tags     | accuracy | 96.40  |
 | Named entity recognition| f1       | 80.50  |
-|                         |          |        |
 
 
 
@@ -82,7 +81,7 @@ displacy.serve(doc, style='dep')
 
 ![](imgs/dep.PNG)
 
-Here is an example of using Named entity recognitions . You can read more about [NER](https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md#named-entity-recognition) in the specific doc. 
+Here is an example of using Named entity recognitions . You can read more about [NER](models/ner.md#named-entity-recognition) in the specific doc. 
 
 ```python
 doc = nlp('Jens Peter Hansen kommer fra Danmark og arbejder hos Alexandra Instituttet') 
@@ -109,7 +108,7 @@ Instituttet ORG
 
 The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 
-As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  A first verison of  a spacy model with a sentiment classifier can be load with the danlp wrapper, read more about it in the sentiment analysis [docs](https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md).
+As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  A first verison of  a spacy model with a sentiment classifier can be load with the danlp wrapper, read more about it in the sentiment analysis [docs](models/sentiment_analysis.md).
 
  **The first thing is to convert the annotated data into a data format readable by spaCy**
 

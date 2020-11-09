@@ -14,7 +14,9 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-from recommonmark.transform import AutoStructify
+import sphinx_markdown_parser
+from sphinx_markdown_parser.parser import MarkdownParser
+from sphinx_markdown_parser.transform import AutoStructify
 
 # -- Project information -----------------------------------------------------
 
@@ -29,11 +31,12 @@ author = 'Alexandra Institute'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-        'recommonmark',
         'sphinx.ext.autodoc',
         'sphinx_markdown_tables',
         'sphinx.ext.todo',
-        'sphinx.ext.autosectionlabel'
+        'sphinx.ext.autosectionlabel',
+        'sphinx.ext.napoleon',
+        'sphinx.ext.mathjax'
 ]
 
 source_suffix = ['.rst', '.md']
@@ -85,8 +88,14 @@ github_doc_root = 'https://github.com/alexandrainst/danlp/tree/master/readthedoc
 autosectionlabel_prefix_document = True
 
 def setup(app):
-    app.add_config_value('recommonmark_config', {
-            'url_resolver': lambda url: github_doc_root + url,
-            'auto_toc_tree_section': 'Contents',
-            }, True)
+    app.add_source_suffix('.md', 'markdown')
+    app.add_source_parser(MarkdownParser)
+    app.add_config_value('markdown_parser_config', {
+        "extensions": ["tables","extra"],
+        'auto_toc_tree_section': 'Content',
+        'enable_auto_toc_tree': True,
+        'enable_eval_rst': True,
+        'enable_inline_math': True,
+        'enable_math': True,
+    }, True)
     app.add_transform(AutoStructify)
