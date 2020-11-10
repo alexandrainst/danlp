@@ -253,8 +253,7 @@ class BertTone:
                 'Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_length))
         if self.device:
             input1.to(self.device)  # move files to GPU if specified
-        else:
-            pred = model(**input1)[0]
+        pred = model(**input1)[0]
 
         return pred
 
