@@ -11,15 +11,15 @@ Note that the two models are not the same, e.g. the spaCy model in DaNLP perform
 
 The spaCy model comes with **tokenization**, **dependency parsing**, **part of speech tagging** , **word vectors** and **name entity recognition**. 
 
-The model is trained on the [Danish Dependency Treebank (DaNe)](datasets.md#dane), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
+The model is trained on the [Danish Dependency Treebank (DaNe)](../datasets.md#dane), and with additional data for NER  which originates from news articles form a collaboration with InfoMedia. 
 
-For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](models/embeddings.md), [named entity recognition](models/ner.md), [part of speech tagging](models/pos.md) and [dependency parsing](models/dependency.md).
+For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](../models/embeddings.md), [named entity recognition](../models/ner.md), [part of speech tagging](../models/pos.md) and [dependency parsing](../models/dependency.md).
 
-The DaNLP github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](models/sentiment_analysis.md).
+The DaNLP github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](../models/sentiment_analysis.md).
 
 ### Performance of the spaCy model
 
-The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](datasets.md#dane) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
+The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](../datasets.md#dane) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
 
 | Task                    | Measures | Scores |
 | ----------------------- | -------- | :----- |
@@ -66,7 +66,7 @@ for token in doc:
     
 ```
 
-![](imgs/ling_feat.PNG)
+![](../imgs/ling_feat.PNG)
 
 **Visualizing the dependency tree**
 
@@ -78,9 +78,9 @@ displacy.serve(doc, style='dep')
 
 
 
-![](imgs/dep.PNG)
+![](../imgs/dep.PNG)
 
-Here is an example of using Named entity recognitions . You can read more about [NER](models/ner.md#named-entity-recognition) in the specific doc. 
+Here is an example of using Named entity recognitions . You can read more about [NER](../models/ner.md#named-entity-recognition) in the specific doc. 
 
 ```python
 doc = nlp('Jens Peter Hansen kommer fra Danmark og arbejder hos Alexandra Instituttet') 
@@ -107,13 +107,13 @@ Instituttet ORG
 
 The spaCy framework provides an easy command line tool for training an existing model, for example by adding a text classifier.  This short example shows how to do so using your own annotated data. It is also possible to use any static embedding provided in the DaNLP wrapper. 
 
-As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  A first verison of  a spacy model with a sentiment classifier can be load with the danlp wrapper, read more about it in the sentiment analysis [docs](models/sentiment_analysis.md).
+As an example we will use a small dataset for sentiment classification on twitter. The dataset is under development and will be added in the DaNLP package when ready, and the spacy model will be updated with the classification model as well.  A first verison of  a spacy model with a sentiment classifier can be load with the danlp wrapper, read more about it in the sentiment analysis [docs](../models/sentiment_analysis.md).
 
  **The first thing is to convert the annotated data into a data format readable by spaCy**
 
 Imagine you have the data in an e.g csv format and have it split in development and training part. Our twitter data has (in time of creating this snippet)  973 training examples and 400 evaluation examples, with the following labels : 'positive' marked by 0, 'neutral' marked by 1, and 'negative' marked by 2. Loaded with pandas dataFrame it looks like this:  
 
-![](imgs/data_head.PNG)
+![](../imgs/data_head.PNG)
 
 It needs to be converted into the format expected by spaCy for training the model, which can be done as follows:
 
@@ -159,7 +159,7 @@ prepare_data(df_dev, 'eval_dev.json')
 
 The data now looks like this cutted snippet:
 
-![](imgs/snippet_json.PNG)
+![](../imgs/snippet_json.PNG)
 
 **Ensure you have the models and embeddings downloaded**
 

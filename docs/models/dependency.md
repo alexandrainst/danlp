@@ -33,7 +33,7 @@ We provide a convertion function -- from dependencies to NP-chunks -- thus depen
 
 ## 🔧 SpaCy {#spacy}
 
-Read more about the SpaCy model in the dedicated [SpaCy docs](../spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset. 
+Read more about the SpaCy model in the dedicated [SpaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset. 
 
 ### Dependency Parser
 

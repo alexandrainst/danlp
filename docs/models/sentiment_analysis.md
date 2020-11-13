@@ -77,11 +77,11 @@ classifier._clases()
 
 SpaCy sentiment is a text classification model trained using spacy built in command line interface. It uses the CoNLL2017 word vectors (read about it [here](embeddings.md)).
 
-The model is trained using hard distil of the [BERT Tone](#wrenchbert-tone) (beta) - Meaning,  the BERT Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
+The model is trained using hard distil of the [BERT Tone](#bert-tone) (beta) - Meaning,  the BERT Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
 
 It is a first version. 
 
-Read more about using the Danish spaCy model [here](../spacy.md).
+Read more about using the Danish spaCy model [here](../frameworks/spacy.md).
 
 Below is a small snippet for getting started using the spaCy sentiment model. Currently the danlp packages provide both a spaCy model which do not provide any classes in the textcat module (so it is empty for you to train from scratch), and the sentiment spacy model which have pretrained the classes 'positiv', 'neutral' and 'negative'. Notice it is possible with the spacy command line interface to continue training of the sentiment classes, or add new tags. 
 

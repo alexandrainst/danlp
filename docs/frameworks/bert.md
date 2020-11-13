@@ -43,6 +43,6 @@ The tone analyzer consists of two BERT classification models.
 The first model detects the polarity of a sentence, i.e. whether it is perceived as `positive`, `neutral` or `negative`.
 The second model detects the tone of a sentence, between `subjective` and `objective`. 
 
-The models are finetuned on manually annotated Twitter data from [Twitter Sentiment](datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](datasets.md#europarl-sentiment2)).
+The models are finetuned on manually annotated Twitter data from [Twitter Sentiment](../datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](../datasets.md#europarl-sentiment2)).
 Both datasets can be loaded with the DaNLP package.  
 

@@ -14,16 +14,16 @@ If you are new to NLP or want to know more about the project in a broader perspe
    :maxdepth: 1
    :caption: Getting started
 
-   gettingstarted/installation.md
-   gettingstarted/quickstart.md
-   gettingstarted/contributing.md
+   docs/gettingstarted/installation.md
+   docs/gettingstarted/quickstart.md
+   docs/gettingstarted/contributing.md
 
 .. toctree::
    :maxdepth: 2
    :caption: Documentation
 
-   docs/models/models.rst
-   docs/frameworks.rst
+   models.rst
+   frameworks.rst
    docs/datasets.md
 
 .. toctree::

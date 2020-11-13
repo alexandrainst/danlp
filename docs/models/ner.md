@@ -21,7 +21,7 @@ The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER 
 has been finetuned on the [DaNE](../datasets.md#dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
-To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](../spacy.md ).) 
+To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](../frameworks/spacy.md ).) 
 ```python
 from danlp.models import load_bert_ner_model
 
@@ -53,7 +53,7 @@ print(sentence.to_tagged_string())
 ```
 
 #### 🔧 spaCy {#spacy}
-The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../spacy.md) uing the [DDT and DaNE](../datasets.md#dane) annotations.
+The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../frameworks/spacy.md) uing the [DDT and DaNE](../datasets.md#dane) annotations.
 The spaCy model can be loaded with DaNLP to do NER predictions in the following way.
 ```python
 from danlp.models import load_spacy_model

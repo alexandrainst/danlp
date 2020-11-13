@@ -47,7 +47,7 @@ print(sentence.to_tagged_string())
 
 ##### 🔧 SpaCy {#spacy}
 
-Read more about the spaCy model in the dedicated [spaCy docs](../spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) data. 
+Read more about the spaCy model in the dedicated [spaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) data. 
 
 Below is a small getting started snippet for using the Spacy pos tagger:
 
