@@ -127,5 +127,5 @@ dmypy.json
 .idea
 
 # readthedocs
-readthedocs/_build
-readthedocs/make.bat
+docs/_build
+docs/make.bat
