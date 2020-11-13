@@ -33,8 +33,8 @@ pip install -r requirements.txt
 ```
 
 
-### Install from github
-Alternatively you can install the latest version from github using:
+### Install from GitHub
+Alternatively you can install the latest version from GitHub using:
 ```
 pip install git+https://github.com/alexandrainst/danlp.git
 ```
@@ -50,3 +50,4 @@ If you want to run a `<script.py>` in your current working directory you can run
 docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp python <script.py>
                   
 ```
+

@@ -26,7 +26,7 @@ It is also recommend to check out Finn Årup Nielsen's [dasem github](https://gi
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
 conversion of the Danish Dependency Treebank (Buch-Kromann et
 al. 2003) based on texts from Parole (Britt, 1998).
-UD-DDT has annotations for dependency parsing and POS. 
+UD-DDT has annotations for dependency parsing and part-of-speech (POS) tagging. 
 The dataset was annotated with Named Entities for **PER**, **ORG** and **LOC** 
 by the Alexandra Institute in the DaNE dataset (Hvingelby et al. 2020).
 To read more about how the dataset was annotated with POS and DEP tags we refer to the
@@ -74,14 +74,14 @@ It is constructed with frequently used Danish words.
 
 The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actual tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
-``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```|
+``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```
 
- ```python
+```python
 from danlp.datasets import TwitterSent
 twitSent = TwitterSent()
 
 df_test, df_train = twitSent.load_with_pandas()
- ```
+```
 
 The dataset can also be downloaded directly with the labels and tweet id:
 

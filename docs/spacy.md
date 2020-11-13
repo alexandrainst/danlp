@@ -1,5 +1,5 @@
-SpaCy model in Danish
-=====================
+SpaCy
+=====
 
 SpaCy is an industrial friendly open source framework for doing NLP, and you can read more about it on their [homesite](https://spacy.io/) or [gitHub](https://github.com/explosion/spaCy).
 
@@ -15,19 +15,18 @@ The model is trained on the [Danish Dependency Treebank (DaNe)](datasets.md#dane
 
 For comparison to other models and additional information of the tasks, check out the task individual pages for [word embeddings](models/embeddings.md), [named entity recognition](models/ner.md), [part of speech tagging](models/pos.md) and [dependency parsing](models/dependency.md).
 
-The danlp github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](models/sentiment_analysis.md).
+The DaNLP github also provides a version of the spaCy model which contains a sentiment classifier, read more about it in the [sentiment analysis docs](models/sentiment_analysis.md).
 
-#### Performance of the spaCy model
+### Performance of the spaCy model
 
 The following lists the  performance scores of the spaCy model provided in DaNLP pakage on the [Danish Dependency Treebank (DaNe)](datasets.md#dane) test set. The scores and elaborating scores can be found in the file meta.json that is shipped with the model when it is downloaded. 
 
 | Task                    | Measures | Scores |
 | ----------------------- | -------- | :----- |
-| Dependency parsing      | uas      | 81.63  |
-| Dependency parsing      | las      | 77.22  |
+| Dependency parsing      | UAS      | 81.63  |
+| Dependency parsing      | LAS      | 77.22  |
 | Part of speech tags     | accuracy | 96.40  |
-| Named entity recognition| f1       | 80.50  |
-
+| Named entity recognition| F1       | 80.50  |
 
 
 
@@ -69,7 +68,7 @@ for token in doc:
 
 ![](imgs/ling_feat.PNG)
 
-**Visualizing the dependency tree:**
+**Visualizing the dependency tree**
 
 ```python
 # the spaCy framework provides a nice visualization tool!

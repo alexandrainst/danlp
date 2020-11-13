@@ -7,3 +7,5 @@ Frameworks
    :caption: Frameworks
 
    spacy.md
+   flair.md
+   bert.md
