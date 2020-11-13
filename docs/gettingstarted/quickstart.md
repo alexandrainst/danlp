@@ -10,11 +10,11 @@ The DaNLP package provides you with several models for different NLP tasks using
 On this section, you will have a quick tour of the main functions of the DaNLP package. 
 For a more detailed description of the tasks and frameworks, follow the links to the documentation: 
 
-*  [Embedding of text](../models/embeddings.md) with flair, spaCy or Gensim
-*  [Part of speech tagging](../models/pos.md) (POS) with spaCy or flair
-*  [Named Entity Recognition](../models/ner.md) (NER) with spaCy, flair or BERT
-*  [Sentiment Analysis](../models/sentiment_analysis.md) with spaCy or BERT
-*  [Dependency parsing and NP-chunking](../models/dependency.md) with spaCy
+*  [Embedding of text](../tasks/embeddings.md) with flair, spaCy or Gensim
+*  [Part of speech tagging](../tasks/pos.md) (POS) with spaCy or flair
+*  [Named Entity Recognition](../tasks/ner.md) (NER) with spaCy, flair or BERT
+*  [Sentiment Analysis](../tasks/sentiment_analysis.md) with spaCy or BERT
+*  [Dependency parsing and NP-chunking](../tasks/dependency.md) with spaCy
 
 
 ## All-in-one with the spaCy models
@@ -28,7 +28,7 @@ The main functions are:
 
 ### Pre-processing tasks
 
-Perform [Part-of-Speech tagging](../models/pos.md), [Named Entity Recognition](../models/ner.md) and [dependency parsing](../models/dependency.md) at the same time with the DaNLP spaCy model.
+Perform [Part-of-Speech tagging](../tasks/pos.md), [Named Entity Recognition](../tasks/ner.md) and [dependency parsing](../tasks/dependency.md) at the same time with the DaNLP spaCy model.
 Here is a snippet to quickly getting started: 
 
 ```python

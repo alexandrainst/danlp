@@ -22,7 +22,7 @@ If you are new to NLP or want to know more about the project in a broader perspe
    :maxdepth: 2
    :caption: Documentation
 
-   models.rst
+   tasks.rst
    frameworks.rst
    docs/datasets.md
 
