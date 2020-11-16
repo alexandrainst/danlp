@@ -8,4 +8,4 @@ Frameworks
 
    docs/frameworks/spacy.md
    docs/frameworks/flair.md
-   docs/frameworks/bert.md
+   docs/frameworks/transformers.md
