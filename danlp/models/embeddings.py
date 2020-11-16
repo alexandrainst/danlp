@@ -1,3 +1,26 @@
+"""
+This module provides you with functions for loading 
+pretrained Danish word embeddings through several NLP frameworks: 
+
+    * flair
+    * spaCy
+    * Gensim
+
+Available word embeddings:
+
+    * wiki.da.wv
+    * cc.da.wv
+    * conll17.da.wv
+    * news.da.wv
+    * sketchengine.da.wv
+
+Available subword embeddings:
+
+    * wiki.da.swv
+    * cc.da.swv
+    * sketchengine.da.swv
+"""
+
 import os
 from tempfile import TemporaryDirectory
 from time import sleep
@@ -9,33 +32,26 @@ from danlp.download import MODELS, download_model, DEFAULT_CACHE_DIR, \
 
 AVAILABLE_EMBEDDINGS = ['wiki.da.wv', 'cc.da.wv', 'conll17.da.wv',
                         'news.da.wv', 'sketchengine.da.wv', 'dslreddit.da.wv']
+"""
+"""
 
 AVAILABLE_SUBWORD_EMBEDDINGS = ['wiki.da.swv', 'cc.da.swv',
                                 'sketchengine.da.swv']
+"""
+"""
 
 
 def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR,
                         verbose: bool = False):
     """
+    Loads word embeddings with Gensim.
 
-    Available wordembeddings:
-    - wiki.da.wv
-    - cc.da.wv
-    - conll17.da.wv
-    - news.da.wv
-    - sketchengine.da.wv
-
-    Available subwordembeddings:
-    - wiki.da.swv
-    - cc.da.swv
-    - sketchengine.da.swv
-
-    :param pretrained_embedding:
+    :param str pretrained_embedding:
     :param cache_dir: the directory for storing cached data
-    :param verbose:
+    :param bool verbose: `True` to increase verbosity
     :return: KeyedVectors or FastTextKeyedVectors
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=True)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=True)
     download_model(pretrained_embedding, cache_dir,
                    _process_downloaded_embeddings, verbose=verbose)
     wv_path = os.path.join(cache_dir, pretrained_embedding + ".bin")
@@ -51,15 +67,17 @@ def load_wv_with_gensim(pretrained_embedding: str, cache_dir=DEFAULT_CACHE_DIR,
 def load_wv_with_spacy(pretrained_embedding: str,
                        cache_dir: str = DEFAULT_CACHE_DIR, verbose=False):
     """
+    Loads a spaCy model with pretrained embeddings.
+
     :param str pretrained_embedding:
     :param str cache_dir: the directory for storing cached data
-    :param bool verbose:
-    :return
+    :param bool verbose: `True` to increase verbosity
+    :return: spaCy model
     """
     import spacy
 
     # spaCy does not support subwords
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
 
     spacy_model_dir = os.path.join(cache_dir, pretrained_embedding + ".spacy")
 
@@ -86,14 +104,15 @@ def load_keras_embedding_layer(pretrained_embedding: str,
                                cache_dir=DEFAULT_CACHE_DIR, verbose=False,
                                **kwargs):
     """
+    Loads a Keras Embedding layer.
 
-    :param pretrained_embedding:
-    :param cache_dir: the directory for storing cached models
-    :param verbose:
-    :param kwargs: used to forward arguments to the keras Embedding layer
-    :return:
+    :param str pretrained_embedding:
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :param kwargs: used to forward arguments to the Keras Embedding layer
+    :return: a Keras Embedding layer and index to word dictionary
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
 
     from keras.layers import Embedding
     wv = load_wv_with_gensim(pretrained_embedding, cache_dir, verbose)
@@ -111,12 +130,14 @@ def load_keras_embedding_layer(pretrained_embedding: str,
 def load_pytorch_embedding_layer(pretrained_embedding: str,
                                  cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
+    Loads a pytorch embbeding layer.
 
-    :param pretrained_embedding:
-    :param cache_dir: the directory for storing cached models
-    :return: an pytorch Embedding module and a list id2word
+    :param str pretrained_embedding:
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a pytorch Embedding module and a list id2word
     """
-    word_embeddings_available(pretrained_embedding, can_use_subword=False)
+    _word_embeddings_available(pretrained_embedding, can_use_subword=False)
     import torch
     from torch.nn import Embedding
 
@@ -131,9 +152,12 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
                                        cache_dir=DEFAULT_CACHE_DIR,
                                        verbose=False):
     """
-    :param bidirectional:
-    :param cache_dir:
-    :param verbose:
+    Loads contextutal (dynamic) word embeddings with flair.
+
+    :param str direction: bidirectional 'bi', forward 'fwd' or backward 'bwd'
+    :param word_embedding:
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
     """
     from flair.embeddings import FlairEmbeddings
     from flair.embeddings import WordEmbeddings
@@ -142,7 +166,7 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
     embeddings = []
 
     if word_embeddings is not None:
-        word_embeddings_available(word_embeddings, can_use_subword=False)
+        _word_embeddings_available(word_embeddings, can_use_subword=False)
         download_model(word_embeddings, cache_dir,
                    _process_downloaded_embeddings, verbose=verbose)
         wv_path = os.path.join(cache_dir, word_embeddings + ".bin")
@@ -168,7 +192,7 @@ def load_context_embeddings_with_flair(direction='bi', word_embeddings=None,
     return StackedEmbeddings(embeddings=embeddings)
 
 
-def word_embeddings_available(pretrained_embedding: str,
+def _word_embeddings_available(pretrained_embedding: str,
                               can_use_subword=False):
     if not can_use_subword and pretrained_embedding in AVAILABLE_SUBWORD_EMBEDDINGS:
         raise ValueError(
@@ -196,7 +220,8 @@ def _process_embeddings_for_spacy(tmp_file_path: str, meta_info: dict,
 
     :param str tmp_file_path: the file name of the embedding binary file
     :param str cache_dir: the directory for storing cached data
-    :param bool verbose:
+    :param bool clean_up_raw_data: 
+    :param bool verbose: `True` to increase verbosity
     """
     from pathlib import Path
     from spacy.cli import init_model
@@ -237,8 +262,10 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
     """
 
     :param str tmp_file_path:
+    :param dict meta_info:
+    :param str cache_dir: the directory for storing cached data
     :param bool clean_up_raw_data:
-    :param bool verbose:
+    :param bool verbose: `True` to increase verbosity
     """
     pretrained_embedding = meta_info['name']
 
@@ -400,10 +427,10 @@ def _process_dslreddit(tmp_file_path: str, cache_dir: str,
 
 def assert_wv_dimensions(wv: KeyedVectors, pretrained_embedding: str):
     """
-    This functions will check the dimensions of some wordembeddings wv,
+    This function will check the dimensions of some word embeddings wv,
     and check them against the data stored in WORD_EMBEDDINGS.
 
-    :param gensim.models.KeyedVectors wv:
+    :param gensim.models.KeyedVectors wv: word embeddings
     :param str pretrained_embedding: the name of the pretrained embeddings
     """
     vocab_size = MODELS[pretrained_embedding]['vocab_size']

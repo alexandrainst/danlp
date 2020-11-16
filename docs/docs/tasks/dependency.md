@@ -8,9 +8,9 @@ It is typically represented by a directed graph that depicts the grammatical str
 A dependency relation is a triplet consisting of: a head (word), a dependent (another word) and a dependency label (describing the type of the relation).
 
 
-| Model | Train Data | License | Trained by | Tags | DaNLP |
-|-------|-------|-------|-------|-------|-------|
-| [SpaCy](https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md#spacy) | [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) | MIT | Alexandra Institute | 17  Universal dependencies | ✔️ |
+| Model           | Train Data                                        | License | Trained by          | Tags                       | DaNLP |
+|-----------------|---------------------------------------------------|---------|---------------------|----------------------------|-------|
+| [SpaCy](#spacy) | [Danish Dependency Treebank](../datasets.md#dane) | MIT     | Alexandra Institute | 17  Universal dependencies | ✔️     |
 
 
 The model has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
@@ -31,9 +31,9 @@ We provide a convertion function -- from dependencies to NP-chunks -- thus depen
 
 
 
-## 🔧 SpaCy
+## 🔧 SpaCy {#spacy}
 
-Read more about the SpaCy model in the dedicated [SpaCy docs](<https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md>) , it has also been trained using the [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>) dataset. 
+Read more about the SpaCy model in the dedicated [SpaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset. 
 
 ### Dependency Parser
 
@@ -121,7 +121,7 @@ for token, nc in zip(doc, np_chunks):
 
 See detailed scoring of the benchmarks in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder.
 
-### Dependency Parsing
+### Dependency Parsing Scores
 
 Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment Score) and LAS (Labelled Attachment Score) — are reported below :
 
@@ -129,7 +129,7 @@ Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment
 |-------|-------|-------|-------|
 | SpaCy | 87.68 | 81.36 | 77.46 |
 
-### Noun Phrase Chunking
+### Noun Phrase Chunking Scores
 
 NP chunking scores (F1) are reported below :
 

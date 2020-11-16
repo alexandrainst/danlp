@@ -125,3 +125,7 @@ dmypy.json
 
 # PyCharm
 .idea
+
+# readthedocs
+docs/_build
+docs/make.bat

@@ -3,10 +3,11 @@ from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_fun
 
 def load_flair_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
+    Loads a flair model for NER.
 
-    :param cache_dir:
-    :param verbose:
-    :return:
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: an NER flair model
     """
     from flair.models import SequenceTagger
 
@@ -19,10 +20,11 @@ def load_flair_ner_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
 
 def load_flair_pos_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
+    Loads a flair model for Part-of-Speech tagging.
 
-    :param cache_dir:
-    :param verbose:
-    :return:
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a POS flair model
     """
     from flair.models import SequenceTagger
 

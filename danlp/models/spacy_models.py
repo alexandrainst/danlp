@@ -7,9 +7,15 @@ from spacy.tokens import Doc
 
 def load_spacy_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, textcat=None, vectorError=False):
     """
-    Loads a spacy model.
+    Loads a spaCy model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :param bool textcat: '`sentiment`' for loading the spaCy sentiment analyser
+    :param bool vectorError:
+    :return: a spaCy model
     
-    OBS vectorError is a TEMP ugly work around error encounted by keeping two models an not been able to find referece name for vectros
+    .. warning:: vectorError is a temporary work around error encounted by keeping two models and not been able to find reference name for vectors
     """
     from spacy.util import load_model_from_path
 
@@ -39,17 +45,34 @@ def load_spacy_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, textcat=None, v
 
 
 def load_spacy_chunking_model(spacy_model=None,cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Loads a spaCy chunking model.
+
+    :param spacy_model: a (preloaded) spaCy model
+    :type spacy_model: spaCy model
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a spaCy Chunking model
+
+    .. note:: A spaCy model can be previously loaded using load_spacy_model 
+        and given as an argument to load_spacy_chunking_model 
+        (for instance, to avoid loading the model twice)
+    """
     return SpacyChunking(model=spacy_model, cache_dir=cache_dir, verbose=verbose)
 
 
 
 class SpacyChunking:
     """
-    Spacy Chunking Model 
+    Spacy Chunking Model
+
+    :param model: a (preloaded) spaCy model
+    :type model: spaCy model
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
     """
 
     def __init__(self, model=None, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
-
         if model == None:
             self.model = load_spacy_model(cache_dir=cache_dir, verbose=verbose)
         else:
@@ -57,15 +80,23 @@ class SpacyChunking:
 
     def predict(self, text: Union[str, List[str]], bio=True):
         """
-        Predict NP chunks (BIO format) from raw text or tokenized text.
+        Predict NP chunks from raw or tokenized text.
+        
+        :param text: can either be a raw text or a list of tokens
+        :param bio: 
+            `True` to return a list of labels in BIO format (same length as the sentence), 
+            `False` to return a list of tuples `(start id, end id, chunk label)`
+        :type bio: bool
+        :return: NP chunks - either a list of labels in BIO format or a list of tuples `(start id, end id, chunk label)`
 
-        E.g. "Jeg kommer fra en lille by." become 
-            - a list of BIO tags: ['B-NP', 'O', 'O', 'O', 'B-NP', 'I-NP', 'I-NP']
-            - or a list of triplets (start id, end id, chunk label): [(0, 1, 'NP'), (4, 7, 'NP')]
+        :Example:
 
-        :param text: Can either be a raw text or a list of tokens
-        :param bool bio: True to return a list of BIO labels (same length as the sentence), False to return a list of NP-chunks
-        :return: NP chunks
+            "`Jeg kommer fra en lille by`" 
+            becomes
+
+            * a list of BIO tags: ['B-NP', 'O', 'O', 'B-NP', 'I-NP', 'I-NP']
+            * or a list of tuples : [(0, 1, 'NP'), (3, 6, 'NP')]
+
         """
         
         if isinstance(text, str):
@@ -145,9 +176,9 @@ def get_noun_chunks(spacy_doc, bio=True, nested=False):
                     is_chunk[j] = False
 
     final_chunks = [c for c, ischk in zip(chunks, is_chunk) if ischk]
-    return chunks2bio(final_chunks, len(spacy_doc)) if bio else final_chunks
+    return _chunks2bio(final_chunks, len(spacy_doc)) if bio else final_chunks
 
-def chunks2bio(chunks, sent_len):
+def _chunks2bio(chunks, sent_len):
     bio_tags = ['O'] * sent_len
     for (start, end, label) in chunks:
         bio_tags[start] = 'B-'+label

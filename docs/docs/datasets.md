@@ -3,30 +3,30 @@ Datasets
 
 This section keeps a list of Danish NLP datasets publicly available. 
 
-| Dataset | Task | Words | Sents | License | DaNLP |
-|---------|------|-------|-------|---------|-----------------|
-| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation | 206,700,000 | 30,178,452 |[None](http://opus.nlpl.eu/OpenSubtitles2018.php) | ❌ |
-| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php) | Translation | 208,175,843 | 8,650,537 | - | ❌ |
-| [Europarl7](http://www.statmt.org/europarl/) | Translation | 47,761,381 | 2,323,099	 | [None](http://www.statmt.org/europarl/) | ❌ |
-| [ParaCrawl5](https://paracrawl.eu/) | Translation | - | - | [CC0](https://paracrawl.eu/releases.html) | ❌ |
-| [WikiANN](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wikiann)| NER | 832.901 | 95.924 |[ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)| ✔️ |
-| [UD-DDT (DaNE)](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) | DEP, POS, NER |  100,733 |  5,512 | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️ |
-| [LCC Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#lcc-sentiment) | Sentiment | 10.588 | 499 | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️ |
-| [Europarl Sentiment1](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment1) | Sentiment | 3.359 | 184 | None | ✔️ |
-| [Europarl Sentiment2](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#europarl-sentiment2) | sentiment |  | 957 | CC BY-SA 4.0 | ✔️ |
-| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/) | Raw | - | - | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html) | ❌ |
-| [WordSim-353](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#wordsim-353) | Word Similarity  | 353 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
-| [Danish Similarity Dataset](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-similarity-dataset) | Word Similarity  | 99 | - | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)| ✔️ |
-| [Twitter Sentiment](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#Twitter-Sentiment) | Sentiment | - | train: 1215, test: 512 | Twitter privacy policy applies | ✔️ |
+| Dataset                                                          | Task            | Words       | Sents                  | License                                                                                      | DaNLP |
+|------------------------------------------------------------------|-----------------|-------------|------------------------|----------------------------------------------------------------------------------------------|-------|
+| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation     | 206,700,000 | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)                                            | ❌     |
+| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)             | Translation     | 208,175,843 | 8,650,537              | -                                                                                            | ❌     |
+| [Europarl7](http://www.statmt.org/europarl/)                     | Translation     | 47,761,381  | 2,323,099              | [None](http://www.statmt.org/europarl/)                                                      | ❌     |
+| [ParaCrawl5](https://paracrawl.eu/)                              | Translation     | -           | -                      | [CC0](https://paracrawl.eu/releases.html)                                                    | ❌     |
+| [WikiANN](#wikiann)                                              | NER             | 832.901     | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                                                 | ✔️    |
+| [UD-DDT (DaNE)](#dane)                                           | DEP, POS, NER   | 100,733     | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️    |
+| [LCC Sentiment](#lcc-sentiment)                                  | Sentiment       | 10.588      | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE)                       | ✔️    |
+| [Europarl Sentiment1](#europarl-sentiment1)                      | Sentiment       | 3.359       | 184                    | None                                                                                         | ✔️    |
+| [Europarl Sentiment2](#europarl-sentiment2)                      | sentiment       |             | 957                    | CC BY-SA 4.0                                                                                 | ✔️    |
+| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)          | Raw             | -           | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)                                       | ❌     |
+| [WordSim-353](#wordsim-353)                                      | Word Similarity | 353         | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
+| [Danish Similarity Dataset](#danish-similarity-dataset)          | Word Similarity | 99          | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
+| [Twitter Sentiment](#twitter-sentiment)                          | Sentiment       | -           | train: 1215, test: 512 | Twitter privacy policy applies                                                               | ✔️    |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
-### Danish Dependency Treebank (DaNE)
+### Danish Dependency Treebank (DaNE) {#dane}
 
 The Danish UD treebank (Johannsen et al., 2015, UD-DDT) is a
 conversion of the Danish Dependency Treebank (Buch-Kromann et
 al. 2003) based on texts from Parole (Britt, 1998).
-UD-DDT has annotations for dependency parsing and POS. 
+UD-DDT has annotations for dependency parsing and part-of-speech (POS) tagging. 
 The dataset was annotated with Named Entities for **PER**, **ORG** and **LOC** 
 by the Alexandra Institute in the DaNE dataset (Hvingelby et al. 2020).
 To read more about how the dataset was annotated with POS and DEP tags we refer to the
@@ -74,14 +74,14 @@ It is constructed with frequently used Danish words.
 
 The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actual tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
-``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```|
+``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```
 
- ```python
+```python
 from danlp.datasets import TwitterSent
 twitSent = TwitterSent()
 
 df_test, df_train = twitSent.load_with_pandas()
- ```
+```
 
 The dataset can also be downloaded directly with the labels and tweet id:
 
