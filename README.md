@@ -146,16 +146,20 @@ You will find examples and tutorials [here](/examples) that shows how to use NLP
 To help you navigate we provide you with an overview of the structure in the github:
 
     .
-    ├── danlp		   # Source files
-    │	├── datasets   # Code to load dataset with different frameworks 
-    │	├── models     # Code to load models with different frameworks 
-    ├── docker         # Docker image
-    ├── docs	       # Documentation files over dataset and models
-    │   ├── imgs	   # Images used in documentation
-    │   ├── models     # Overview over available models with code snippet and benchmark results
-    ├── examples	   # Examples, tutorials and benchmark scripts
-    │   ├── benchmarks # Scripts for reproducing benchmarks results reported in docs
-    ├── tests   	   # Test for continous integration with travis
+    ├── danlp		   			# Source files
+    │	├── datasets   			# Code to load dataset with different frameworks 
+    │	├── models     			# Code to load models with different frameworks 
+    ├── docker         			# Docker image
+    ├── docs	       			# Documentation and files for setting up for Read The Docs
+    │   ├── docs	   			# Documentation for tasks, dataset and frameworks
+    │	    ├── tasks  			# Documentation for nlp tasks with benchmark results
+    │	    ├── frameworks 		# Overview over different frameworks used
+    │		├── Gettingstarted 	# Guides for installation and getting started  
+    │	    ├── imgs   			# Images used in documentation
+    │   ├── libary     			# Files used for Read the Docs
+    ├── examples	   			# Examples, tutorials and benchmark scripts
+    │   ├── benchmarks 			# Scripts for reproducing benchmarks results
+    ├── tests   	   			# Test for continous integration with travis
 
 ## How do I contribute?
 

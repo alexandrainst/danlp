@@ -4,10 +4,9 @@ Flair
 The [flair](https://github.com/flairNLP/flair) framework from Zalando is based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). 
 
 
-Through the DaNLP package, we provide a pre-trained Part-of-Speech tagger and Named Entity recognizer using the flair framework. 
-The models have been trained on the [Danish Dependency Treebank](../datasets.md#dane) and use fastText word embeddings and [flair contextual word embeddings](../tasks/embeddings.md#flair-embeddings) trained on data from Wikipedia and EuroParl corpus.
-The code for training can be found on flair's GitHub, and the following parameters are set:
-`learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
+Through the DaNLP package, we provide a pre-trained Part-of-Speech tagger, Named Entity recognizer and contextual embeddings using the flair framework. 
+The NER and POS models have been trained on the [Danish Dependency Treebank](../datasets.md#dane) and using fastText word embeddings and [flair contextual word embeddings](../tasks/embeddings.md#flair-embeddings), which are trained on data from Wikipedia and EuroParl corpus.
+
 
 
 ## One sentence at a time

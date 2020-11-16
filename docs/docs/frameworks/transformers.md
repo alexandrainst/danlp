@@ -1,9 +1,9 @@
-BERT
+Transformers
 ====
 
 BERT (Bidirectional Encoder Representations from Transformers) [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) is a deep neural network model used in Natural Language Processing. 
 
-The BERT models provided with DaNLP are based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO which has been finetuned on several tasks using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
+The BERT models provided with DaNLP are based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO, and the models have been finetuned on differnet tasks using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
 Through DaNLP, we provide fine-tuned BERT models for the following tasks: 
 
