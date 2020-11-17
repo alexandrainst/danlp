@@ -24,11 +24,20 @@ dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/
 To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](../frameworks/spacy.md ).) 
 ```python
 from danlp.models import load_bert_ner_model
-
 bert = load_bert_ner_model()
+# Get lists of tokens and labesl in IBO format
 tokens, labels = bert.predict("Jens Peter Hansen kommer fra Danmark")
-
 print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
+
+# To get a "right" tokenization provide it your self (SpaCy can be used for this) by providing a a list of tokens
+# With this options, output can also be choosen to be a dict with tags and position instead of IBO format
+tekst_tokenized = ['Han', 'hedder', 'Anders', 'And', 'Andersen', 'og', 'bor', 'i', 'Århus', 'C']
+bert.predict(tekst_tokenized, IOBformat=False)
+"""
+{'text': 'Han hedder Anders And Andersen og bor i Århus C',
+ 'entities': [{'type': 'PER','text':'Anders And Andersen','start_pos': 11,'end_pos': 30},
+  {'type': 'LOC', 'text': 'Århus C', 'start_pos': 40, 'end_pos': 47}]}
+"""
 ```
 
 
