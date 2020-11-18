@@ -153,11 +153,20 @@ You can also perform NER with BERT. Load the DaNLP model with `load_bert_ner_mod
 
 ```python
 from danlp.models import load_bert_ner_model
-
 bert = load_bert_ner_model()
+# Get lists of tokens and labesl in IBO format
 tokens, labels = bert.predict("Jens Peter Hansen kommer fra Danmark")
-
 print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
+
+# To get a "right" tokenization provide it your self (SpaCy can be used for this) by providing a a list of tokens
+# With this option, output can also be choosen to be a dict with tags and position instead of IBO format
+tekst_tokenized = ['Han', 'hedder', 'Anders', 'And', 'Andersen', 'og', 'bor', 'i', 'Århus', 'C']
+bert.predict(tekst_tokenized, IOBformat=False)
+"""
+{'text': 'Han hedder Anders And Andersen og bor i Århus C',
+ 'entities': [{'type': 'PER','text':'Anders And Andersen','start_pos': 11,'end_pos': 30},
+  {'type': 'LOC', 'text': 'Århus C', 'start_pos': 40, 'end_pos': 47}]}
+"""
 
 ```
 

@@ -71,6 +71,13 @@ class TestBertNer(unittest.TestCase):
 
         self.assertEqual(len(tokenized_string), len(prediction))
 
-
+        # test with non IBOformat:
+        tekst_tokenized = ['Han', 'hedder', 'Anders', 'And', 'Andersen', 'og', 'bor', 'i', 'Århus', 'C']
+        dict_pred = bert.predict(tekst_tokenized, IOBformat=False)
+        self.assertEqual(dict_pred['entities'][0]['text'], 'Anders And Andersen')
+        self.assertEqual(dict_pred['entities'][1]['type'], 'LOC')
+        
+        
+        
 if __name__ == '__main__':
     unittest.main()

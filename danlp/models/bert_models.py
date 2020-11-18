@@ -28,14 +28,15 @@ class BertNer:
         self.model = AutoModelForTokenClassification.from_pretrained(weights_path, num_labels = len(self.label_list))
         self.tokenizer = AutoTokenizer.from_pretrained(weights_path)
 
-    def predict(self, text: Union[str, List[str]]):
+    def predict(self, text: Union[str, List[str]], IOBformat=True):
         """
         Predict NER labels from raw text or tokenized text. If the text is
         a raw string this method will return the string tokenized with
         BERTs subword tokens.
 
         :param text: can either be a raw text or a list of tokens
-        :return: the tokenized text and the predicted labels
+        :param IOBformat: can either be TRUE or FASE, but can only be Flase if text input is a list of tokens. Specifify if output should be in IOB format or a dictionary 
+        :return: the tokenized text and the predicted labels in IOB format, or a dictonary with the tags and position
 
         :Example:
 
@@ -43,6 +44,8 @@ class BertNer:
         """
         
         if isinstance(text, str):
+            if IOBformat==False:
+                warnings.warn('To choose a different output format with IOBformat=False, the text parameter should be a list of tokens like eg. ["Han", "hedder", "Ole"]')
             # Bit of a hack to get the tokens with the special tokens
             tokens = self.tokenizer.tokenize(self.tokenizer.decode(self.tokenizer.encode(text)))
             inputs = self.tokenizer.encode(text, return_tensors="pt")
@@ -89,8 +92,41 @@ class BertNer:
 
             # Map prediction ids to labels
             predictions = [self.label_list[label] for label in predictions]
-
-            return text, predictions
+            
+            if IOBformat==True:
+                return text, predictions
+                              
+            else:
+                text_combine = ""
+                entities = []
+                entity = None
+                i = 0
+                while i < len(predictions):
+                    label = predictions[i]
+                    if entity != None:
+                        if label[0] == "I":
+                            entity["text"] += ' {}'.format(text[i])
+                        else:
+                            entity["end_pos"] = len(text_combine) - 1
+                            entities.append(entity)
+                            entity = None
+                    if label[0] == "B":
+                        entity = {
+                            "type": label.split("-")[1],
+                            "text": '{}'.format(text[i]),
+                            "start_pos": len(text_combine),
+                            "end_pos": None
+                        }
+                    text_combine += '{} '.format(text[i])
+                    i+=1
+                text_combine = text_combine.rstrip()
+                if entity != None:
+                    entity["end_pos"] = len(text_combine)
+                    entities.append(entity)
+                return {"text": text_combine, "entities": entities}              
+                
+                              
+                              
 
 class BertEmotion:
     """
