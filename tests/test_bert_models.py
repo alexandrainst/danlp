@@ -50,7 +50,7 @@ class TestBertTone(unittest.TestCase):
         self.assertEqual(model._classes()[0],  ['positive', 'neutral', 'negative'])
         self.assertTrue(len(model.predict_proba('jeg er meget glad idag', polarity=False)[0])==2)
 
-class TestBertTone(unittest.TestCase):
+class TestBertBase(unittest.TestCase):
     def test_download(self):
         # Download model beforehand
             model = 'bert.botxo.pytorch'
