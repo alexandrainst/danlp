@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/danlp_logo.png"  width="350"  />
+  <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/docs/imgs/danlp_logo.png"  width="350"  />
 </h1>
 
 <div align="center">
@@ -10,24 +10,24 @@
 </div>
 <div align="center">
   <h5>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/ner.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/ner.md">
       Named Entity Recognition
       </a>
       <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/pos.md">
       Part of Speech
     </a>
     <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/sentiment_analysis.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/ddocs/docs/tasks/sentiment_analysis.md">
       Sentiment Analysis
     </a>
       <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/models/embeddings.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/embeddings.md">
       Embeddings
       </a>
   </h5>
     <h5>
-   	 <a href="https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md">
+   	 <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/datasets.md">
       Datasets
    	 </a>
       <span> | </span>
@@ -121,11 +121,11 @@ Natural Language Processing is an active area of research and it consists of man
 The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
 The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
--  [Embedding of text](docs/models/embeddings.md)
--  [Part of speech](docs/models/pos.md)
--  [Named Entity Recognition](docs/models/ner.md)
--  [Sentiment Analysis](docs/models/sentiment_analysis.md)
--  [Dependency parsing](https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md)
+-  [Embedding of text](docs/docs/tasks/embeddings.md)
+-  [Part of speech](docs/docs/tassk/pos.md)
+-  [Named Entity Recognition](docs/docs/tasks/ner.md)
+-  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
+-  [Dependency parsing](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/dependency.md)
 -  Coreference resolution
 -  Lemmatization
 
@@ -136,7 +136,7 @@ We do also recommend to check out this awesome [list](https://github.com/fnielse
 ## Datasets
 The number of datasets in the Danish is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
 
-The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/datasets.md).
+The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/docs/datasets.md).
 
 ## Examples
 You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
