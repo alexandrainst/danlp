@@ -1,6 +1,6 @@
 import unittest
 
-from danlp.models import load_bert_emotion_model, load_bert_tone_model, BertNer
+from danlp.models import load_bert_emotion_model, load_bert_tone_model, load_bert_base_model, BertNer
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -50,6 +50,23 @@ class TestBertTone(unittest.TestCase):
         self.assertEqual(model._classes()[0],  ['positive', 'neutral', 'negative'])
         self.assertTrue(len(model.predict_proba('jeg er meget glad idag', polarity=False)[0])==2)
 
+class TestBertTone(unittest.TestCase):
+    def test_download(self):
+        # Download model beforehand
+            model = 'bert.botxo.pytorch'
+            model_path = download_model(model, DEFAULT_CACHE_DIR,
+                                        process_func=_unzip_process_func,
+                                        verbose=True)
+            
+            # check if path to model excist
+            self.assertTrue(os.path.exists(model_path))
+            
+    def test_embedding(self):
+        model = load_bert_base_model()
+        vecs_embedding, sentence_embedding, tokenized_text =model.embed_text('Han sælger frugt')
+        self.assertEqual(len(vecs_embedding),3)
+        self.assertEqual(vecs_embedding[0].shape[0], 3072)
+        self.assertEqual(sentence_embedding.shape[0], 768)
 
 class TestBertNer(unittest.TestCase):
     def test_bert_tagger(self):

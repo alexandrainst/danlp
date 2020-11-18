@@ -60,7 +60,7 @@ MODELS = {
         'md5_checksum': '6846134374cfae008a32f62dea5ed8bf',
     },
     'sketchengine.da.wv': {
-        'url': 'https://embeddings.sketchengine.co.uk/static/models/lc/datenten14_5.vec',
+        'url': 'https://embeddings.sketchengine.co.uk/static/models/word/datenten14_5.vec',
         'dimensions': 100,
         'vocab_size': 2360830,
         'size': 2053148194,
@@ -68,7 +68,7 @@ MODELS = {
         'file_extension': '.bin'
     },
     'sketchengine.da.swv': {
-        'url': 'https://embeddings.sketchengine.co.uk/static/models/lc/datenten14_5.bin',
+        'url': 'https://embeddings.sketchengine.co.uk/static/models/word/datenten14_5.bin',
         'size': 2739302263,
         'md5_checksum': '7387bfa5be6fbf525734b617e3d547de',
         'file_extension': '.bin'
@@ -136,7 +136,14 @@ MODELS = {
         'file_extension': ''
     },
 
-    # BERT sentiment models
+    # BERT models 
+        'bert.botxo.pytorch': {
+        'url': DANLP_STORAGE_URL + '/models/bert.botxo.pytorch.zip',
+        'md5_checksum': '8d73bb1ad154c3ca137ab06a3d5d37a1',
+        'size': 413164986,
+        'file_extension': ''
+    },
+    
     'bert.emotion': {
         'url': DANLP_STORAGE_URL + '/models/bert.emotion.zip',
         'md5_checksum': '832214e9362b12372bedbbc8e819ea9d',
