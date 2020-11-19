@@ -11,6 +11,8 @@ Through DaNLP, we provide fine-tuned BERT models for the following tasks:
 * Emotion detection
 * Tone and polarity detection
 
+BERT can also be used for embeddings of tokens or sentences just be using the pre-trained  [Danish BERT](https://github.com/botxo/nordic_bert) representations from BotXO.
+
 Please note that the BERT models can take a maximum of 512 tokens as input at a time. For longer text sequences, you should split the text before hand -- for example by using sentence boundary detection (e.g. with the [spaCy model](spacy.md)).
 
 See our [getting started guides](../gettingstarted/quickstart.md#bert) for examples on how to use the BERT models. 

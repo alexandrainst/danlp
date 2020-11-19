@@ -5,15 +5,16 @@ This repository keeps a list of pretrained word embeddings publicly available in
 and `load_embeddings.py` provides functions for downloading the embeddings as well as prepare them for use in 
 popular NLP frameworks.
 
-| Name                                                                      | Model    | Tokens |   Vocab   | Unit        | Task     | License                                                                                | DaNLP |
-|---------------------------------------------------------------------------|----------|--------|:---------:|-------------|----------|----------------------------------------------------------------------------------------|-------|
-| [CoNLL2017](http://vectors.nlpl.eu/repository/#)                          | word2vec | 1.6B   | 1,655,886 | Word        | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html)             | ✔️    |
-| [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329)                 | word2vec | -      | 2,404,836 | Word        | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329)                                          | ✔️    |
-| [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html)             | fastText | -      | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license)                 | ✔️    |
-| [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html)      | fastText | -      |  312,956  | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license)                 | ✔️    |
-| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html)   | fastText | 2B     | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html)             | ✔️    |
-| [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec |        |  178,649  | Word        | CBOW     | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔️    |
-| flair                                                                     | Flair    | -      |           | Char        | LM       | MIT                                                                                    | ✔️    |
+| Name                                                         | Model    | Tokens |   Vocab   | Unit        | Task     | License                                                      | DaNLP |
+| ------------------------------------------------------------ | -------- | ------ | :-------: | ----------- | -------- | ------------------------------------------------------------ | ----- |
+| [CoNLL2017](http://vectors.nlpl.eu/repository/#)             | word2vec | 1.6B   | 1,655,886 | Word        | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔️     |
+| [Kongelige Bibliotek](https://loar.kb.dk/handle/1902/329)    | word2vec | -      | 2,404,836 | Word        | Skipgram | [CC0 1.0](https://loar.kb.dk/handle/1902/329)                | ✔️     |
+| [Facebook CC](https://fasttext.cc/docs/en/crawl-vectors.html) | fastText | -      | 2,000,000 | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️     |
+| [Facebook Wiki](https://fasttext.cc/docs/en/pretrained-vectors.html) | fastText | -      |  312,956  | Char N-gram | Skipgram | [CC BY-SA 3.0](https://fasttext.cc/docs/en/crawl-vectors.html#license) | ✔️     |
+| [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B     | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔️     |
+| [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec |        |  178,649  | Word        | CBOW     | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔️     |
+| [flair](https://github.com/alexandrainst/danlp/blob/ner_predict/docs/docs/tasks/embeddings.md#-training-details-for-flair-embeddings-flair-embeddings) | Flair    | -      |           | Char        | LM       | MIT                                                          | ✔️     |
+| [BERT](https://github.com/alexandrainst/danlp/blob/Update_embbedings/docs/docs/tasks/embeddings.md#-bert-embeddings-bert-embeddings)                                          |  BERT        |    1,611,153,110    |          |      BPE       |      LM    |                  [CC BY 4.0](https://github.com/botxo/nordic_bert)                                             |    ✔️  | 
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
 words, sentences or documents.
@@ -84,6 +85,15 @@ word_embeddings = load_wv_with_spacy('conll17.da.wv')
 
 
 
+##### 🔧 Flair embeddings {#flair-embeddings}
+
+This repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
+
+The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequence_length=250`, `mini_batch_size=50`, 
+`max_epochs=5`
+
+The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](pos.md) and [ner](ner.md) . 
+
 In the snippet below you can see how to load the pretrained flair embeddings and an example of simple use. 
 
 ```python
@@ -107,15 +117,25 @@ print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==s
 
 
 
-## 🔧 Training details for Flair embeddings {#flair-embeddings}
+##### 🔧 BERT embeddings {#bert-embeddings}
 
-This repository provides pretrained Flair word embeddings trained on Danish data from Wikipedia and EuroParl both forwards and backwards. To see the code for training the Flair embeddings have a look at  [Flairs GitHub](https://github.com/zalandoresearch/flair).
+BERT is a language model but the different layers can be used as embeddings of tokens or sentences. This code loads a pytorch version using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace of pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO model. Since the models is not a designated  models for embeddings, some choices is made of what layers to use. For each tokens in a sentence there is 13 layers of dim 768. Based on the [blogpost](https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/), it has been choice to concatenate the four last layer to use as token embeddings, which gives a dimension of 4*768=3072. For sentence embeddings the second last layers is used and the mean across all tokens in the sentence is calculated. 
 
-The hyperparameter are set as follows: `hidden_size=1032`, `nlayers=1`, `sequence_length=250`, `mini_batch_size=50`, 
-`max_epochs=5`
+Note, BERT tokenize out of vocabulary words into sub words.
+
+Below is a small code snippet for getting started:
+
+```python
+from danlp.models import load_bert_base_model
+model = load_bert_base_model()
+vecs_embedding, sentence_embedding, tokenized_text =model.embed_text('Han sælger frugt')
+```
 
 
-The trained Flair word embeddings has been used in training a Part of Speech tagger and Name Entity Recognition tagger with Flair, check it out in the docs for  [pos](pos.md) and [ner](ner.md) . 
+
+ 
+
+
 
 
 ## 🎓 References

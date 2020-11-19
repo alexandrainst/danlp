@@ -352,6 +352,100 @@ class BertTone:
             proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba    
+    
+    
+class BertBase:
+    '''
+    BERT language model used for embedding of tokens or sentence.
+    The Model is trained by BotXO: https://github.com/botxo/nordic_bert
+    The Bert model is transformed into pytorch version
+    
+    Credit for code eksempel: https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/
+    
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    '''
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        from transformers import BertTokenizer, BertModel
+        import torch
+        # download model
+        path= download_model('bert.botxo.pytorch', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        # Load pre-trained model tokenizer
+        self.tokenizer = BertTokenizer.from_pretrained(path)
+        # Load pre-trained model (weights)
+        self.model = BertModel.from_pretrained(path,
+                                          output_hidden_states = True, # Whether the model returns all hidden-states.
+                                          )
+
+        # Put the model in "evaluation" mode, meaning feed-forward operation.
+        self.model.eval()
+
+    def embed_text(self, text):
+        """
+        Calcualte the embeedings for each token in a sentence ant the emebedding for the sentence based on a BERT language model.
+        The embedding for a token is chossen to be the concatenated last four layers, and the sentece embeddings to be the mean of the second to last layer of all tokens in the sentence
+        The BERT tokenixer splits in subword for UNK word. The tokinized sentences is therefore returned as well. The embeddings for the special tokens is not returned.
+       
+
+        :param str sentence: raw text
+        :return: three lists: token_embeddings (dim: toknes x 3072), sentence_embedding (1x738), tokenized_text
+        :rtype: list, list, list
+        """
+
+        marked_text = "[CLS] " + text + " [SEP]"
+        # Tokenize sentence with the BERT tokenizer
+        tokenized_text = self.tokenizer.tokenize(marked_text)
+
+
+        # Map the token strings to their vocabulary indeces
+        indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_text)
+
+
+        # Mark each of the tokens as belonging to sentence "1"
+        segments_ids = [1] * len(tokenized_text)
+
+        # Convert inputs to PyTorch tensors
+        tokens_tensor = torch.tensor([indexed_tokens])
+        segments_tensors = torch.tensor([segments_ids])
+
+        with torch.no_grad():
+            outputs = self.model(tokens_tensor, segments_tensors)
+            hidden_states = outputs[2]
+
+        token_embeddings = torch.stack(hidden_states, dim=0)
+        # Remove dimension 1, the "batches".
+        token_embeddings = torch.squeeze(token_embeddings, dim=1)
+        # Swap dimensions 0 and 1. to tokens x layers x embedding
+        token_embeddings = token_embeddings.permute(1,0,2)
+
+        # choose to concatenate last four layers, dim 4x 768 = 3072
+        token_vecs_cat= [torch.cat((token[-1], token[-2], token[-3], token[-4]), dim=0) for token in token_embeddings]
+        # drop the CLS and the SEP tokens and embedding
+        token_vecs_cat=token_vecs_cat[1:-1]
+        tokenized_text =tokenized_text[1:-1]
+
+        # choos to summarize the last four layers
+        #token_vecs_sum=[torch.sum(token[-4:], dim=0) for token in token_embeddings]
+
+        # sentence embedding
+        # Calculate the average of all token vectors for the second last layers
+        sentence_embedding = torch.mean(hidden_states[-2][0], dim=0)
+
+        return token_vecs_cat, sentence_embedding, tokenized_text
+    
+    
+def load_bert_base_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Load BERT language model and use for embedding of tokens or sentence.
+    The Model is trained by BotXO: https://github.com/botxo/nordic_bert
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: BERT model 
+    """
+
+    return BertBase(cache_dir, verbose)  
+
 
 def load_bert_tone_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """

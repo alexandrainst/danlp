@@ -10,7 +10,7 @@ The DaNLP package provides you with several models for different NLP tasks using
 On this section, you will have a quick tour of the main functions of the DaNLP package. 
 For a more detailed description of the tasks and frameworks, follow the links to the documentation: 
 
-*  [Embedding of text](../tasks/embeddings.md) with flair, spaCy or Gensim
+*  [Embedding of text](../tasks/embeddings.md) with flair, transformers, spaCy or Gensim
 *  [Part of speech tagging](../tasks/pos.md) (POS) with spaCy or flair
 *  [Named Entity Recognition](../tasks/ner.md) (NER) with spaCy, flair or BERT
 *  [Sentiment Analysis](../tasks/sentiment_analysis.md) with spaCy or BERT
@@ -233,3 +233,6 @@ classes = classifier._classes()[0]
 for c, p in zip(classes, probas):
     print(c, ':', p)
 ```
+
+
+
