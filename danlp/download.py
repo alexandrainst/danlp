@@ -195,6 +195,15 @@ DATASETS = {
         'size': 3489,
         'file_extension': '.csv'
         },
+     # coreference dataset
+     'dacoref': {
+        'url': 'http://danlp-downloads.alexandra.dk/datasets/dacoref.zip',
+        'md5_checksum': '28e0df8844271d52282a9735e6e2de00',
+        'size': 1002592,
+        'file_extension': ''
+        },
+    
+    
     # SENTIMENT EVALUATION
     'europarl.sentiment1': {
         'url': 'https://raw.githubusercontent.com/fnielsen/europarl-da-sentiment/master/europarl-da-sentiment.csv',

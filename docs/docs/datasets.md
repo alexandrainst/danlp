@@ -3,21 +3,22 @@ Datasets
 
 This section keeps a list of Danish NLP datasets publicly available. 
 
-| Dataset                                                          | Task            | Words       | Sents                  | License                                                                                      | DaNLP |
-|------------------------------------------------------------------|-----------------|-------------|------------------------|----------------------------------------------------------------------------------------------|-------|
-| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation     | 206,700,000 | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)                                            | ❌     |
-| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)             | Translation     | 208,175,843 | 8,650,537              | -                                                                                            | ❌     |
-| [Europarl7](http://www.statmt.org/europarl/)                     | Translation     | 47,761,381  | 2,323,099              | [None](http://www.statmt.org/europarl/)                                                      | ❌     |
-| [ParaCrawl5](https://paracrawl.eu/)                              | Translation     | -           | -                      | [CC0](https://paracrawl.eu/releases.html)                                                    | ❌     |
-| [WikiANN](#wikiann)                                              | NER             | 832.901     | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                                                 | ✔️    |
-| [UD-DDT (DaNE)](#dane)                                           | DEP, POS, NER   | 100,733     | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️    |
-| [LCC Sentiment](#lcc-sentiment)                                  | Sentiment       | 10.588      | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE)                       | ✔️    |
-| [Europarl Sentiment1](#europarl-sentiment1)                      | Sentiment       | 3.359       | 184                    | None                                                                                         | ✔️    |
-| [Europarl Sentiment2](#europarl-sentiment2)                      | sentiment       |             | 957                    | CC BY-SA 4.0                                                                                 | ✔️    |
-| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)          | Raw             | -           | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)                                       | ❌     |
-| [WordSim-353](#wordsim-353)                                      | Word Similarity | 353         | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
-| [Danish Similarity Dataset](#danish-similarity-dataset)          | Word Similarity | 99          | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
-| [Twitter Sentiment](#twitter-sentiment)                          | Sentiment       | -           | train: 1215, test: 512 | Twitter privacy policy applies                                                               | ✔️    |
+| Dataset                                                      | Task                   | Words           | Sents                  | License                                                      | DaNLP |
+| ------------------------------------------------------------ | ---------------------- | --------------- | ---------------------- | ------------------------------------------------------------ | ----- |
+| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation            | 206,700,000     | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)            | ❌     |
+| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)         | Translation            | 208,175,843     | 8,650,537              | -                                                            | ❌     |
+| [Europarl7](http://www.statmt.org/europarl/)                 | Translation            | 47,761,381      | 2,323,099              | [None](http://www.statmt.org/europarl/)                      | ❌     |
+| [ParaCrawl5](https://paracrawl.eu/)                          | Translation            | -               | -                      | [CC0](https://paracrawl.eu/releases.html)                    | ❌     |
+| [WikiANN](#wikiann)                                          | NER                    | 832.901         | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                 | ✔️     |
+| [UD-DDT (DaNE)](#dane)                                       | DEP, POS, NER          | 100,733         | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️     |
+| [LCC Sentiment](#lcc-sentiment)                              | Sentiment              | 10.588          | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️     |
+| [Europarl Sentiment1](#europarl-sentiment1)                  | Sentiment              | 3.359           | 184                    | None                                                         | ✔️     |
+| [Europarl Sentiment2](#europarl-sentiment2)                  | sentiment              |                 | 957                    | CC BY-SA 4.0                                                 | ✔️     |
+| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)      | Raw                    | -               | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)       | ❌     |
+| [WordSim-353](#wordsim-353)                                  | Word Similarity        | 353             | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
+| [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99              | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
+| [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -               | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
+| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens) | 3.403                  | GNU Public License version 2                                 | ✔️     |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -45,6 +46,23 @@ conllu_format = ddt.load_as_conllu()
 The dataset can also be downloaded directly in CoNLL-U format.
 
 [Download DDT](https://danlp.alexandra.dk/304bd159d5de/datasets/ddt.zip) 
+
+### Dacoref
+
+This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank  (Kromann and Lynge (2004), It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. This works is conducted by Maria Jung Barrett. Read more about it in the  in the dedicated [dacoref docs](https://github.com/alexandrainst/danlp/master/docs/docs/dacoref_docs.md).
+
+The dataset can be load with the DaNLP package:
+
+```python
+from danlp.datasets import Dacoref
+dacoref = Dacoref()
+# The corpus can be loaded with or without splitting into train, dev and test in a list in that order
+corpus = dacoref.load_as_conllu(predefined_splits=True) 
+```
+
+The dataset can also be download directly:
+
+[Download dacoref](http://danlp-downloads.alexandra.dk/datasets/dacoref.zip) 
 
 ### WikiANN
 The WikiANN dataset [(Pan et al. 2017)](https://aclweb.org/anthology/P17-1178) is a dataset with NER annotations 
@@ -137,3 +155,4 @@ df = lccsent.load_with_pandas()
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
 - Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
 - Uwe Quasthoff, Matthias Richter and Christian Biemann. 2006. [Corpus Portal for Search in Monolingual Corpora](https://www.aclweb.org/anthology/L06-1396/). In **LREC**.
+-  M.T. Kromann and S.K. Lynge. Danish Dependency Treebank v. 1.0. Department of Computational Linguistics, Copenhagen Business School., 2004. https://github.com/mbkromann/copenhagen-dependency-treebank
