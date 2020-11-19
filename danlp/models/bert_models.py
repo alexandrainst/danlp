@@ -345,17 +345,27 @@ class BertBase:
         self.model.eval()
 
     def embed_text(self, text):
+        """
+        Calcualte the embeedings for each token in a sentence ant the emebedding for the sentence based on a BERT language model.
+        The embedding for a token is chossen to be the concatenated last four layers, and the sentece embeddings to be the mean of the second to last layer of all tokens in the sentence
+        The BERT tokenixer splits in subword for UNK word. The tokinized sentences is therefore returned as well. The embeddings for the special tokens is not returned.
+       
+
+        :param str sentence: raw text
+        :return: three lists: token_embeddings (dim: toknes x 3072), sentence_embedding (1x738), tokenized_text
+        :rtype: list, list, list
+        """
 
         marked_text = "[CLS] " + text + " [SEP]"
-        # Tokenize our sentence with the BERT tokenizer.
+        # Tokenize sentence with the BERT tokenizer
         tokenized_text = self.tokenizer.tokenize(marked_text)
 
 
-        # Map the token strings to their vocabulary indeces.
+        # Map the token strings to their vocabulary indeces
         indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_text)
 
 
-        # Mark each of the 22 tokens as belonging to sentence "1".
+        # Mark each of the tokens as belonging to sentence "1"
         segments_ids = [1] * len(tokenized_text)
 
         # Convert inputs to PyTorch tensors
@@ -382,7 +392,7 @@ class BertBase:
         #token_vecs_sum=[torch.sum(token[-4:], dim=0) for token in token_embeddings]
 
         # sentence embedding
-        # Calculate the average of all 22 token vectors for the second last layers
+        # Calculate the average of all token vectors for the second last layers
         sentence_embedding = torch.mean(hidden_states[-2][0], dim=0)
 
         return token_vecs_cat, sentence_embedding, tokenized_text
