@@ -14,7 +14,7 @@ popular NLP frameworks.
 | [SketchEngine](https://embeddings.sketchengine.co.uk/static/index.html) | fastText | 2B     | 2,722,811 | Char N-gram | Skipgram | [CC BY-NC-SA 4.0](https://embeddings.sketchengine.co.uk/static/index.html) | ✔️     |
 | [DSL Reddit](https://github.com/danish-stance-detectors/RumourResolution) | word2vec |        |  178,649  | Word        | CBOW     | [MIT](https://github.com/danish-stance-detectors/RumourResolution/blob/master/LICENSE) | ✔️     |
 | [flair](https://github.com/alexandrainst/danlp/blob/ner_predict/docs/docs/tasks/embeddings.md#-training-details-for-flair-embeddings-flair-embeddings) | Flair    | -      |           | Char        | LM       | MIT                                                          | ✔️     |
-| BERT                                                         |          |        |           |             |          |                                                              |       |
+| [BERT](https://github.com/alexandrainst/danlp/blob/Update_embbedings/docs/docs/tasks/embeddings.md#-bert-embeddings-bert-embeddings)                                          |  BERT        |    1,611,153,110    |          |      BPE       |      LM    |                  [CC BY 4.0](https://github.com/botxo/nordic_bert)                                             |    ✔️  | 
 
 Embeddings are a way of representing text as numeric vectors, and can be calculated both for chars, subword units [(Sennrich et al. 2016)](https://aclweb.org/anthology/P16-1162), 
 words, sentences or documents.
