@@ -21,7 +21,7 @@ class Dacoref:
                 depending on predefined_split
         """
 
-        conlist = conllu.parse(open('{}/CDT_coref.conll'.format(self.dataset_dir)).read(), fields=["id", "form", "lemma", "upos", 'xpos', 'feats', 'head', 'deprel','deps', 'misc', 'coref_id', 'coref_rel', 'doc_id', 'qid'])
+        conlist = conllu.parse(open('{}/CDT_coref.conllu'.format(self.dataset_dir)).read(), fields=["id", "form", "lemma", "upos", 'xpos', 'feats', 'head', 'deprel','deps', 'misc', 'coref_id', 'coref_rel', 'doc_id', 'qid'])
 
         if predefined_splits==False:
             return conlist

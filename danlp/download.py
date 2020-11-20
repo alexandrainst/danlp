@@ -195,11 +195,11 @@ DATASETS = {
         'size': 3489,
         'file_extension': '.csv'
         },
-     # coreference dataset
+     # coreference dataset 
      'dacoref': {
         'url': 'http://danlp-downloads.alexandra.dk/datasets/dacoref.zip',
-        'md5_checksum': '28e0df8844271d52282a9735e6e2de00',
-        'size': 1002592,
+        'md5_checksum': 'e6f2707f4f600a0d357dc7afa1b01f92',
+        'size': 1005278,
         'file_extension': ''
         },
     
