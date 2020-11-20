@@ -122,7 +122,7 @@ The DaNLP repository provides an overview of Danish models for some of the most 
 
 The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
--  [Part of speech](docs/docs/tassk/pos.md)
+-  [Part of speech](docs/docs/tasks/pos.md)
 -  [Named Entity Recognition](docs/docs/tasks/ner.md)
 -  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
 -  [Dependency parsing](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/dependency.md)
