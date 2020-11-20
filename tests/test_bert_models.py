@@ -1,6 +1,6 @@
 import unittest
 
-from danlp.models import load_bert_emotion_model, load_bert_tone_model, load_bert_base_model, BertNer
+from danlp.models import load_bert_emotion_model, load_bert_tone_model, load_bert_base_model, BertNer, load_bert_nextsent_model
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -53,13 +53,13 @@ class TestBertTone(unittest.TestCase):
 class TestBertBase(unittest.TestCase):
     def test_download(self):
         # Download model beforehand
-            model = 'bert.botxo.pytorch'
-            model_path = download_model(model, DEFAULT_CACHE_DIR,
-                                        process_func=_unzip_process_func,
-                                        verbose=True)
-            
-            # check if path to model excist
-            self.assertTrue(os.path.exists(model_path))
+        model = 'bert.botxo.pytorch'
+        model_path = download_model(model, DEFAULT_CACHE_DIR,
+                                    process_func=_unzip_process_func,
+                                    verbose=True)
+
+        # check if path to model excist
+        self.assertTrue(os.path.exists(model_path))
             
     def test_embedding(self):
         model = load_bert_base_model()
@@ -68,6 +68,17 @@ class TestBertBase(unittest.TestCase):
         self.assertEqual(vecs_embedding[0].shape[0], 3072)
         self.assertEqual(sentence_embedding.shape[0], 768)
 
+class TestBertNextSent(unittest.TestCase):  
+    def test_next_sent(self):
+        model = load_bert_nextsent_model()
+        
+        sent_A= "Uranus er den syvende planet fra Solen i Solsystemet og var den første planet der blev opdaget i historisk tid."
+        sent_B1 =" William Herschel opdagede d. 13. marts 1781 en tåget klat, som han først troede var en fjern komet." 
+        sent_B2= "Yderligere er magnetfeltets akse 59° forskudt for rotationsaksen og skærer ikke centrum."
+        
+        self.assertTrue(model.predict_if_next_sent(sent_A, sent_B1) >0.75)
+        self.assertTrue(model.predict_if_next_sent(sent_A, sent_B2) <0.75)
+        
 class TestBertNer(unittest.TestCase):
     def test_bert_tagger(self):
         bert = BertNer()

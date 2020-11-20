@@ -5,6 +5,6 @@ torch==1.6.0
 flair==0.4.5
 pyconll==2.2.1
 pandas==1.0.1
-transformers==2.3.0
+transformers==3.5.1
 srsly==1.0.2
 tweepy
