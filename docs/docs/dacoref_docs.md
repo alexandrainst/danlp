@@ -25,9 +25,9 @@ It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) 
 The [CDT documentation](https://github.com/mbkromann/copenhagen-dependency-treebank/blob/master/manual/cdt-manual.pdf) contains description of the coreference classes as well as inter-annotator agreement and confusion matrices.
 
 For this resource, we used the annotation files from the annotator "Lotte" along with the UD syntax which is an automatic conversion og the CDT syntax annotation by Johansen et al. (2015). We provide the sentence ID from the UD resource as well as the document ID from CDT. The document ID has been prepended with a two letter domain code compatible with the domain codes of the Ontonotes corpus. This is a manually mapping of the sources listed in the CDT. Only nw (newswire), mz (magazine), and bn (broadcast news) were present:
-299 nw documents
-41 mz documents
-1 bn
+* 299 nw documents
+* 41 mz documents
+* 1 bn
 
 For the CDT, only the core node of each span was annotated and one annotator manually propagated the label to the entire span. A few systematic errors were corrected in this process, the most important being that plural pronouns "we" and "they" can be coreferent with company names if they refer to the employee group of this company. 
 
