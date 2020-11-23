@@ -20,7 +20,7 @@ Size:
 3.403 sentences
 341 documents
 
-It was originally annotatated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. The incomplete annotation can be downloaded from the project github https://github.com/mbkromann/copenhagen-dependency-treebank.
+It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. The incomplete annotation can be downloaded from the [project github](https://github.com/mbkromann/copenhagen-dependency-treebank).
 
 The CDT documentation (https://github.com/mbkromann/copenhagen-dependency-treebank/blob/master/manual/cdt-manual.pdf) contains description of the coreference classes as well as inter-annotator agreement and confusion matrices.
 
