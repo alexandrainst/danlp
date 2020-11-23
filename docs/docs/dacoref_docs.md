@@ -1,6 +1,6 @@
 ## Documentation about the coreference resource: Dacoref
 
- To get an overview of different datasets, please go to the general [dataset docs](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md). This is extra documentation for the coreference resources named Dacoref. In the general dataset docs, there is also a small snippet to show how to load this resource with the DaNLP package. The resource can also be downloaded directly using the link below: 
+ To get an overview of different datasets, please go to the general [dataset docs](datasets.md). This is extra documentation for the coreference resources named Dacoref. In the general dataset docs, there is also a small snippet to show how to load this resource with the DaNLP package. The resource can also be downloaded directly using the link below: 
 
 [Download dacoref](http://danlp-downloads.alexandra.dk/datasets/dacoref.zip) 
 
