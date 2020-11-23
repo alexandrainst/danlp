@@ -1,6 +1,8 @@
 Part of Speech Tagging
 ======================
-This section is concerned with public available Part of Speech (POS) taggers in Danish. 
+This section is concerned with public available Part of Speech (POS) taggers in Danish.
+
+Part-of-speech tagging is the task of classifying words into their part-of-speech, based on both their definition and context. Parts of speech are also known as word classes, which describe the role of the words in sentences relatively to their neighbors (such as verbs and nouns). 
 
 | Model                 | Train Data                                                                | License       | Trained by          | Tags                         | DaNLP |
 |-----------------------|---------------------------------------------------------------------------|---------------|---------------------|------------------------------|-------|

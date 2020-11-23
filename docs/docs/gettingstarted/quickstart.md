@@ -40,17 +40,21 @@ nlp = load_spacy_model()
 
 # Parse the text using the spaCy model 
 # it creates a spaCy Doc object
-doc = nlp("Jeg er en sætning, der skal analyseres")
+doc = nlp("Niels Henrik David Bohr var en dansk fysiker fra København")
 
 # prepare some pretty printing
-features = ['Text','POS', 'Dep']
+features = ['Text','POS', 'Dep', 'NE']
 head_format ="\033[1m{!s:>11}\033[0m" * (len(features) )
 row_format ="{!s:>11}" * (len(features) )
 
 print(head_format.format(*features))
-# printing for each token in the docs the pos and dep features
+# printing for each token in the docs the pos, dep and entity features
 for token in doc:
-    print(row_format.format(token.text, token.pos_, token.dep_))
+    print(row_format.format(token.text, token.pos_, token.dep_, token.ent_type_))
+
+# printing the list of entities (and their category)
+for ent in doc.ents:
+    print(ent.text, '-', ent.label_)
     
 ```
 
@@ -95,7 +99,7 @@ text = "Jeg er meget glad med DaNLP"
 doc = nlpS(text)
 
 # print the most probable category among 'positiv', 'negativ' or 'neutral'
-print(max(doc.cats))
+print(max(doc.cats, key=doc.cats.get))
 ```
 
 
