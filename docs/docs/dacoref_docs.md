@@ -13,7 +13,7 @@ This resource is copyrighted material, licensed under the GNU Public License ver
 
 #### Dacoref
 
-This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank (Kromann and Lynge (2004). Please cite this work when using the coreference resource. For the Universal Dependencies conversion included in the file, please cite Johannsen et al. (2015).
+This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank (Kromann and Lynge, 2004). Please cite this work when using the coreference resource. For the Universal Dependencies conversion included in the file, please cite Johannsen et al. (2015).
 
 Size:
 64.076 tokens
