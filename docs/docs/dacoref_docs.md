@@ -40,7 +40,7 @@ The spans are generally as long as possible. Example: Det sidste gik ud over pol
 
 Singletons are not annotated. 
 The annotation does not label attributative noun phrases that are connected through copula verbs such as to be. Name-initual appositive constructions are part of the same mention as the name.
-Generic pronouns (mainly "man" and "du") are not clusered unless they are part of a cluster, e.g. with a reflexive or possesive pronoun.
+Generic pronouns (mainly "man" and "du") are not clustered unless they are part of a cluster, e.g. with a reflexive or possesive pronoun.
 
 Furthermore, the resource has been augmented with Qcodes from Wiktionary. This was a semi-automatic process conducted in the Spring of 2020 with the Wikidata entries available at that time.
 First, all tokens (not just named entities) were used to search using the Wikidata API. 
