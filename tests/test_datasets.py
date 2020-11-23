@@ -7,7 +7,7 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -159,6 +159,14 @@ class TestSentimentDatasets(unittest.TestCase):
         sent = LccSentiment()
         df = sent.load_with_pandas()
         self.assertEqual(len(df), 499)
+        
+class TestCorefDatasets(unittest.TestCase):
+    def test_dacoreg(self):
+        dacoref = Dacoref() 
+        corpus = dacoref.load_as_conllu(predefined_splits=True) 
+        self.assertEqual(len(corpus), 3)
+        self.assertEqual(len(corpus[0])+len(corpus[1])+len(corpus[2]), 3403)
+        self.assertEqual(corpus[0][0][0]['form'], 'På')
        
        
 if __name__ == '__main__':
