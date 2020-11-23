@@ -6,7 +6,14 @@ from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_f
 
 class Dacoref:
     """
-    This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank, It was originally annotatated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extens the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. Read more about it in the danlp docs.
+    This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank. 
+    It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. 
+    This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. 
+    Read more about it in the danlp docs.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+
     """
 
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
@@ -15,8 +22,8 @@ class Dacoref:
 
     def load_as_conllu(self, predefined_splits: bool = False):
         """
-        :param predefined_splits: Boolean
-        :return A single parsed conllu list
+        :param bool predefined_splits: Boolean
+        :return: A single parsed conllu list
                 or a list of train, dev, test split parsed conllu list
                 depending on predefined_split
         """
