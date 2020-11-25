@@ -439,7 +439,7 @@ class BertNextSent:
     The Model is trained by BotXO: https://github.com/botxo/nordic_bert
     The Bert model is transformed into pytorch version
     
-    Credit for code eksempel: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
+    Credit for code example: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
     
     :param str cache_dir: the directory for storing cached models
     :param bool verbose: `True` to increase verbosity
@@ -458,17 +458,17 @@ class BertNextSent:
 
     def predict_if_next_sent(self, sent_A: str, sent_B: str):
         """
-        calculate the probaility that sentence B followes sentence A
+        Calculate the probability that sentence B follows sentence A.
         
-        Credit for code eksempel: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
+        Credit for code example: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
         
-        :param str setnt_A: sentence A
-        :param str setnt_B: sentence B to  check if follows sentence A or is random
-        :return: A probability of sentence B follows sentence A 
+        :param str sent_A: sentence A
+        :param str sent_B: sentence B
+        :return: the probability of sentence B following sentence A 
         :rtype: float
         """
         from torch.nn.functional import softmax
-        # encoded as "one" input to the model by using 'seq_B' as the 'text_pair'
+        # encoded as "one" input to the model by using 'sent_B' as the 'text_pair'
         encoded = self.tokenizer.encode_plus(sent_A, text_pair=sent_B, return_tensors='pt')
 
         # a model's output is a tuple, we only need the output tensor containing
@@ -480,17 +480,17 @@ class BertNextSent:
         # index 1: sequence B is a random sequence
         probs = softmax(seq_relationship_logits, dim=1)
         
-        # retunr the pobability og sentence B following sentence A
+        # return the pobability of sentence B following sentence A
         return round(float(probs[0][0]),4)
 
 def load_bert_nextsent_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
-    Load BERT language model used for nexstence predictions.
+    Load BERT language model used for next sentence predictions.
     The Model is trained by BotXO: https://github.com/botxo/nordic_bert
 
     :param str cache_dir: the directory for storing cached models
     :param bool verbose: `True` to increase verbosity
-    :return: BERT model 
+    :return: BERT NextSent model 
     """
 
     return BertNextSent(cache_dir, verbose)      

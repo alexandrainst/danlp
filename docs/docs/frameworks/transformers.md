@@ -21,21 +21,21 @@ Please note that the BERT models can take a maximum of 512 tokens as input at a 
 
 ### Language model, embeddings and next sentence prediction
 
-The BERT model  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/)  is original pretrained on two task. The first, is to predict a mask word in a sentence, and the second is to predict if a sentence follows another sentence. There for the model can without any further finetuning be used for this two task. 
+The BERT model  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/)  is originally pretrained on two tasks. The first, is to predict a masked word in a sentence, and the second is to predict if a sentence follows another sentence. Therefore, the model can without any further finetuning be used for this two tasks. 
 
 A pytorch version of the  [Danish BERT](https://github.com/botxo/nordic_bert) trained by BotXo can therefore be loaded with the DaNLP package and used through the [Transformers](https://github.com/huggingface/transformers)  library. 
 
-For **predicting mask word** in a sentence, we can after downloading the model, used the transformer library directly do this:
+For **predicting a masked word** in a sentence, you can after downloading the model through DaNLP, use the transformer library directly as described in the following snippet:
 
 ```python
 from danlp.models import load_bert_base_model
 # load the BERT model
 model = load_bert_base_model()
-# Use the transfomer libary built in fuction
+# Use the transfomer libary built in function
 LM = pipeline("fill-mask", model=model.path_model)
-# Use the model as a languag model to prdict mask words in a sentence
+# Use the model as a language model to predict masked words in a sentence
 LM(f"Jeg kan godt lide at spise {LM.tokenizer.mask_token}.")  
-#output is top five words in a list of dicts
+# output is top five words in a list of dicts
 """
 [{'sequence': '[CLS] jeg kan godt lide at spise her. [SEP]',
   'score': 0.15520372986793518,
@@ -60,7 +60,7 @@ LM(f"Jeg kan godt lide at spise {LM.tokenizer.mask_token}.")
 """
 ```
 
-The DaNLP package provides some wrapper code for during **next sentence prediction**:
+The DaNLP package also provides some wrapper code for **next sentence prediction**:
 
 ```python
 from danlp.models import load_bert_nextsent_model
@@ -79,20 +79,20 @@ model.predict_if_next_sent(sent_A, sent_B2)
 """0.0001"""
 ```
 
-The wrapper function for during **embeddings** of tokens or sentence can be read about in the [docs for embeddings](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/embeddings.md).
+The wrapper function for **embeddings** of tokens or sentences can be read about in the [docs for embeddings](../tasks/embeddings.md).
 
 
 
 ### Named Entity Recognition
 
 The BERT NER model has been finetuned on the [DaNE](../datasets.md#dane) dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). 
-The tagger recognize the following tags:
+The tagger recognizes the following tags:
 
-- `PER`:  person
+- `PER`: person
 - `ORG`: organization
 - `LOC`: location
 
-Read more about it in the [NER docs](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/ner.md).
+Read more about it in the [NER docs](../tasks/ner.md).
 
 ### Emotion detection
 
@@ -111,7 +111,7 @@ The model can detect the eight following emotions:
 
 The model achieves an accuracy of 0.65 and a macro-f1 of 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. 
 
-Read more about it in the [sentiment docs](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md).
+Read more about it in the [sentiment docs](../tasks/sentiment_analysis.md).
 
 ### Tone and polarity detection
 
@@ -123,5 +123,5 @@ Both datasets can be loaded with the DaNLP package.
 The first model detects the polarity of a sentence, i.e. whether it is perceived as `positive`, `neutral` or `negative`.
 The second model detects the tone of a sentence, between `subjective` and `objective`. 
 
-Read more about it in the [sentiment docs](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md). 
+Read more about it in the [sentiment docs](../tasks/sentiment_analysis.md).
 
