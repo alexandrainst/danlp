@@ -369,11 +369,11 @@ class BertBase:
         from transformers import BertTokenizer, BertModel
         import torch
         # download model
-        path= download_model('bert.botxo.pytorch', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        self.path_model= download_model('bert.botxo.pytorch', cache_dir, process_func=_unzip_process_func,verbose=verbose)
         # Load pre-trained model tokenizer
-        self.tokenizer = BertTokenizer.from_pretrained(path)
+        self.tokenizer = BertTokenizer.from_pretrained(self.path_model)
         # Load pre-trained model (weights)
-        self.model = BertModel.from_pretrained(path,
+        self.model = BertModel.from_pretrained(self.path_model,
                                           output_hidden_states = True, # Whether the model returns all hidden-states.
                                           )
 
@@ -433,6 +433,67 @@ class BertBase:
 
         return token_vecs_cat, sentence_embedding, tokenized_text
     
+class BertNextSent:
+    '''
+    BERT language model is trained for next sentence predictions.
+    The Model is trained by BotXO: https://github.com/botxo/nordic_bert
+    The Bert model is transformed into pytorch version
+    
+    Credit for code example: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
+    
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    '''
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        
+        from transformers import BertForNextSentencePrediction, BertTokenizer
+        # download model
+        self.path_model= download_model('bert.botxo.pytorch', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        # Load pre-trained model tokenizer
+        self.tokenizer = BertTokenizer.from_pretrained(self.path_model)
+        # Load pre-trained model (weights)
+        self.model = BertForNextSentencePrediction.from_pretrained(self.path_model,
+                                          output_hidden_states = True, # Whether the model returns all hidden-states.
+                                          )
+
+    def predict_if_next_sent(self, sent_A: str, sent_B: str):
+        """
+        Calculate the probability that sentence B follows sentence A.
+        
+        Credit for code example: https://stackoverflow.com/questions/55111360/using-bert-for-next-sentence-prediction
+        
+        :param str sent_A: sentence A
+        :param str sent_B: sentence B
+        :return: the probability of sentence B following sentence A 
+        :rtype: float
+        """
+        from torch.nn.functional import softmax
+        # encoded as "one" input to the model by using 'sent_B' as the 'text_pair'
+        encoded = self.tokenizer.encode_plus(sent_A, text_pair=sent_B, return_tensors='pt')
+
+        # a model's output is a tuple, we only need the output tensor containing
+        # the relationships which is the first item in the tuple
+        seq_relationship_logits = self.model(**encoded)[0]
+
+        # we still need softmax to convert the logits into probabilities
+        # index 0: sequence B is a continuation of sequence A
+        # index 1: sequence B is a random sequence
+        probs = softmax(seq_relationship_logits, dim=1)
+        
+        # return the pobability of sentence B following sentence A
+        return round(float(probs[0][0]),4)
+
+def load_bert_nextsent_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Load BERT language model used for next sentence predictions.
+    The Model is trained by BotXO: https://github.com/botxo/nordic_bert
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: BERT NextSent model 
+    """
+
+    return BertNextSent(cache_dir, verbose)      
     
 def load_bert_base_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
