@@ -147,19 +147,19 @@ To help you navigate we provide you with an overview of the structure in the git
 
     .
     ├── danlp		   			# Source files
-    │	├── datasets   			# Code to load dataset with different frameworks 
-    │	├── models     			# Code to load models with different frameworks 
+    │	├── datasets   			# Code to load datasets with different frameworks 
+    │	└── models     			# Code to load models with different frameworks 
     ├── docker         			# Docker image
-    ├── docs	       			# Documentation and files for setting up for Read The Docs
-    │   ├── docs	   			# Documentation for tasks, dataset and frameworks
+    ├── docs	       			# Documentation and files for setting up Read The Docs
+    │   ├── docs	   			# Documentation for tasks, datasets and frameworks
     │	    ├── tasks  			# Documentation for nlp tasks with benchmark results
     │	    ├── frameworks 		# Overview over different frameworks used
-    │		├── Gettingstarted 	# Guides for installation and getting started  
-    │	    ├── imgs   			# Images used in documentation
-    │   ├── libary     			# Files used for Read the Docs
+    │		├── gettingstarted 	  # Guides for installation and getting started  
+    │	    └── imgs   			 # Images used in documentation
+    │   └── library     		# Files used for Read the Docs
     ├── examples	   			# Examples, tutorials and benchmark scripts
-    │   ├── benchmarks 			# Scripts for reproducing benchmarks results
-    ├── tests   	   			# Test for continous integration with travis
+    │   └── benchmarks 			# Scripts for reproducing benchmarks results
+    └── tests   	   			# Test for continous integration with travis
 
 ## How do I contribute?
 

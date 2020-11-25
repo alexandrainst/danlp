@@ -35,8 +35,8 @@ class BertNer:
         BERTs subword tokens.
 
         :param text: can either be a raw text or a list of tokens
-        :param IOBformat: can either be TRUE or FASE, but can only be Flase if text input is a list of tokens. Specifify if output should be in IOB format or a dictionary 
-        :return: the tokenized text and the predicted labels in IOB format, or a dictonary with the tags and position
+        :param IOBformat: can either be TRUE or FALSE, but can only be False if text input is a list of tokens. Specifify if output should be in IOB format or a dictionary 
+        :return: the tokenized text and the predicted labels in IOB format, or a dictionary with the tags and position
 
         :Example:
 
@@ -360,7 +360,7 @@ class BertBase:
     The Model is trained by BotXO: https://github.com/botxo/nordic_bert
     The Bert model is transformed into pytorch version
     
-    Credit for code eksempel: https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/
+    Credit for code example: https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/
     
     :param str cache_dir: the directory for storing cached models
     :param bool verbose: `True` to increase verbosity
@@ -382,9 +382,9 @@ class BertBase:
 
     def embed_text(self, text):
         """
-        Calcualte the embeedings for each token in a sentence ant the emebedding for the sentence based on a BERT language model.
-        The embedding for a token is chossen to be the concatenated last four layers, and the sentece embeddings to be the mean of the second to last layer of all tokens in the sentence
-        The BERT tokenixer splits in subword for UNK word. The tokinized sentences is therefore returned as well. The embeddings for the special tokens is not returned.
+        Calculate the embeddings for each token in a sentence ant the embedding for the sentence based on a BERT language model.
+        The embedding for a token is chosen to be the concatenated last four layers, and the sentence embeddings to be the mean of the second to last layer of all tokens in the sentence
+        The BERT tokenizer splits in subword for UNK word. The tokenized sentence is therefore returned as well. The embeddings for the special tokens are not returned.
        
 
         :param str sentence: raw text
@@ -424,7 +424,7 @@ class BertBase:
         token_vecs_cat=token_vecs_cat[1:-1]
         tokenized_text =tokenized_text[1:-1]
 
-        # choos to summarize the last four layers
+        # chose to summarize the last four layers
         #token_vecs_sum=[torch.sum(token[-4:], dim=0) for token in token_embeddings]
 
         # sentence embedding

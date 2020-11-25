@@ -1,10 +1,9 @@
-Models
-======
+Tasks
+=====
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Models
 
    docs/tasks/embeddings.md
    docs/tasks/pos.md

@@ -101,7 +101,7 @@ from danlp.models.embeddings import load_context_embeddings_with_flair
 from flair.data import Sentence
 
 # Use the wrapper from DaNLP to download and load embeddings with Flair
-# You can combine it with on of the static emebdings
+# You can combine it with the static embeddings
 stacked_embeddings = load_context_embeddings_with_flair(word_embeddings='wiki.da.wv')
 
 # Embed two different sentences
@@ -119,7 +119,7 @@ print('{} sentences out of {} is equal'.format(int(sum(sentence2[4].embedding==s
 
 ##### 🔧 BERT embeddings {#bert-embeddings}
 
-BERT is a language model but the different layers can be used as embeddings of tokens or sentences. This code loads a pytorch version using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace of pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO model. Since the models is not a designated  models for embeddings, some choices is made of what layers to use. For each tokens in a sentence there is 13 layers of dim 768. Based on the [blogpost](https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/), it has been choice to concatenate the four last layer to use as token embeddings, which gives a dimension of 4*768=3072. For sentence embeddings the second last layers is used and the mean across all tokens in the sentence is calculated. 
+BERT is a language model but the different layers can be used as embeddings of tokens or sentences. This code loads a pytorch version using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace of pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO model. Since the models is not a designated  models for embeddings, some choices is made of what layers to use. For each tokens in a sentence there is 13 layers of dim 768. Based on the [blogpost](https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/), it has been chosen to concatenate the four last layer to use as token embeddings, which gives a dimension of 4*768=3072. For sentence embeddings the second last layers is used and the mean across all tokens in the sentence is calculated. 
 
 Note, BERT tokenize out of vocabulary words into sub words.
 

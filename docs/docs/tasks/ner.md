@@ -21,11 +21,12 @@ The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER 
 has been finetuned on the [DaNE](../datasets.md#dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
-To use the BERT NER model it can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example be using sentence boundary detection (eg. by using the [spacy model](../frameworks/spacy.md ).) 
+The BERT NER model can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example using sentence boundary detection (e.g. by using the [spacy model](../frameworks/spacy.md ).) 
+
 ```python
 from danlp.models import load_bert_ner_model
 bert = load_bert_ner_model()
-# Get lists of tokens and labesl in IBO format
+# Get lists of tokens and labels in BIO format
 tokens, labels = bert.predict("Jens Peter Hansen kommer fra Danmark")
 print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
 
