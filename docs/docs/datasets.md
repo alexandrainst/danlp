@@ -147,6 +147,72 @@ df = lccsent.load_with_pandas()
 ```
 
 
+### DanNet
+
+[DanNet](https://cst.ku.dk/projekter/dannet/) is a lexical database such as [Wordnet](https://wordnet.princeton.edu/). 
+
+DanNet depicts the relations between words in Danish (mostly nouns, verbs and adjectives). 
+The main relation among words in WordNet is synonymy.
+
+The dataset consists of 4 databases:
+
+    * words
+    * word senses
+    * relations
+    * synsets
+
+DanNet uses the concept of `synset` to link words together. All the words in the database are part of one or multiple synsets. A synset is a set of synonyms (words which have the same meanings).
+
+
+For downloading DanNet through DaNLP, you can do: 
+
+```python
+from danlp.datasets import DanNet
+
+dannet = DanNet()
+
+# you can load the databases if you want to look into the databases by yourself
+words, wordsenses, relations, synsets = dannet.load_with_pandas()
+```
+
+We also provide helper functions to search for synonyms, hyperonyms and hyponyms through the databases. 
+Once you have downloaded the DanNet wrapper, you can use the following features: 
+
+```python
+
+word = "myre"
+# synonyms
+dannet.synonyms(word)
+""" ['tissemyre'] """
+# hypernyms
+dannet.hypernyms(word)
+""" ['årevingede insekter'] """
+# hyponyms
+dannet.hyponyms(word)
+""" ['hærmyre', 'skovmyre', 'pissemyre', 'tissemyre'] """
+# meanings
+dannet.meanings(word)
+""" ['ca. 1 cm langt, årevinget insekt med en kraftig in ... (Brug: "Myrer på terrassen, og andre steder udendørs, kan hurtigt blive meget generende")'] """
+
+
+# to help you dive into the databases
+# we also provide the following functions: 
+
+# part-of-speech (returns a list comprised in 'Noun', 'Verb' or 'Adjective')
+dannet.pos(word)
+# wordnet relations (EUROWORDNET or WORDNETOWL)
+dannet.wordnet_relations(word, eurowordnet=True))
+# word ids
+dannet._word_ids(word)
+# synset ids
+dannet._synset_ids(word)
+# word from id
+dannet._word_from_id(11034863)
+# synset from id
+dannet._synset_from_id(3514)
+```
+
+
 ## 🎓 References
 - Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. “Universal Dependencies for Danish”. TLT14, 2015.
 - Keson, Britt (1998). Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus. Technical report, DSL
