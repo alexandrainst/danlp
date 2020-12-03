@@ -7,7 +7,7 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref, DanNet
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -168,6 +168,14 @@ class TestCorefDatasets(unittest.TestCase):
         self.assertEqual(len(corpus[0])+len(corpus[1])+len(corpus[2]), 3403)
         self.assertEqual(corpus[0][0][0]['form'], 'På')
        
+
+class TestDannetDataset(unittest.TestCase):
+    def test_dannet(self):
+        dannet = Dannet() 
+        corpus = dannet.load_with_pandas()
+        self.assertEqual(len(corpus), 4)
+        self.assertEqual(dannet.synonyms('kat'), ['missekat', 'mis'])
+        
        
 if __name__ == '__main__':
     unittest.main()
