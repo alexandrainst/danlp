@@ -3,7 +3,7 @@ from typing import Union, List
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
-from spacy.tokens import Doc
+
 
 def load_spacy_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False, textcat=None, vectorError=False):
     """
@@ -71,8 +71,9 @@ class SpacyChunking:
     :param str cache_dir: the directory for storing cached models
     :param bool verbose: `True` to increase verbosity
     """
-
+    
     def __init__(self, model=None, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        
         if model == None:
             self.model = load_spacy_model(cache_dir=cache_dir, verbose=verbose)
         else:
@@ -105,7 +106,7 @@ class SpacyChunking:
             return get_noun_chunks(doc, bio=bio)
 
         if isinstance(text, list):
-
+            from spacy.tokens import Doc
             parser = self.model.parser
             tagger = self.model.tagger
 

@@ -4,13 +4,15 @@ gensim==3.8.1
 flair==0.4.5
 pyconll==2.2.1
 pandas==1.0.1
-transformers==2.3.0
+transformers==3.1.0
+torch==1.6.0
 srsly==1.0.2
 sentida==0.5.0
 Morfessor==2.0.6
 PyICU==2.4.2
 pycld2==0.41
 sentida==0.5.0
+nltk
 afinn
 polyglot
 seqeval

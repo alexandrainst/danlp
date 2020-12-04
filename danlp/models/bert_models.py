@@ -175,7 +175,7 @@ class BertEmotion:
     
     def _get_pred(self, tokenizer, model, max_lenght, sentence):
         input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
-                                                max_length=max_lenght, return_overflowing_tokens=True)
+                                                max_length=max_lenght, truncation=True, return_overflowing_tokens=True)
         if 'overflowing_tokens' in input1:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
         pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
@@ -298,7 +298,7 @@ class BertTone:
     
     def _get_pred(self, tokenizer, model, max_lenght, sentence):
         input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
-                                                max_length=max_lenght, return_overflowing_tokens=True)
+                                                max_length=max_lenght, truncation=True, return_overflowing_tokens=True)
         if 'overflowing_tokens' in input1:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
         pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
