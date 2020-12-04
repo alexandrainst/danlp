@@ -171,7 +171,7 @@ class TestCorefDatasets(unittest.TestCase):
 
 class TestDannetDataset(unittest.TestCase):
     def test_dannet(self):
-        dannet = Dannet() 
+        dannet = DanNet() 
         corpus = dannet.load_with_pandas()
         self.assertEqual(len(corpus), 4)
         self.assertEqual(dannet.synonyms('kat'), ['missekat', 'mis'])
