@@ -167,15 +167,17 @@ class TestCorefDatasets(unittest.TestCase):
         self.assertEqual(len(corpus), 3)
         self.assertEqual(len(corpus[0])+len(corpus[1])+len(corpus[2]), 3403)
         self.assertEqual(corpus[0][0][0]['form'], 'På')
-       
-
+        
 class TestDannetDataset(unittest.TestCase):
     def test_dannet(self):
         dannet = DanNet() 
         corpus = dannet.load_with_pandas()
         self.assertEqual(len(corpus), 4)
         self.assertEqual(dannet.synonyms('kat'), ['missekat', 'mis'])
-        
-       
+        self.assertEqual(dannet.hypernyms('myre'), ['årevingede insekter'])
+        self.assertEqual(dannet.hyponyms('myre'), ['hærmyre', 'skovmyre', 'pissemyre', 'tissemyre'])
+        self.assertEqual(dannet.pos('myre'), ['Noun'])
+        self.assertEqual(dannet.meanings('myre'), ['ca. 1 cm langt, årevinget insekt med en kraftig in ... (Brug: "Myrer på terrassen, og andre steder udendørs, kan hurtigt blive meget generende")'])
+
 if __name__ == '__main__':
     unittest.main()
