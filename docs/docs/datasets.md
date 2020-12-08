@@ -3,22 +3,23 @@ Datasets
 
 This section keeps a list of Danish NLP datasets publicly available. 
 
-| Dataset                                                      | Task                   | Words           | Sents                  | License                                                      | DaNLP |
-| ------------------------------------------------------------ | ---------------------- | --------------- | ---------------------- | ------------------------------------------------------------ | ----- |
-| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation            | 206,700,000     | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)            | ❌     |
-| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)         | Translation            | 208,175,843     | 8,650,537              | -                                                            | ❌     |
-| [Europarl7](http://www.statmt.org/europarl/)                 | Translation            | 47,761,381      | 2,323,099              | [None](http://www.statmt.org/europarl/)                      | ❌     |
-| [ParaCrawl5](https://paracrawl.eu/)                          | Translation            | -               | -                      | [CC0](https://paracrawl.eu/releases.html)                    | ❌     |
-| [WikiANN](#wikiann)                                          | NER                    | 832.901         | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                 | ✔️     |
-| [UD-DDT (DaNE)](#dane)                                       | DEP, POS, NER          | 100,733         | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️     |
-| [LCC Sentiment](#lcc-sentiment)                              | Sentiment              | 10.588          | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️     |
-| [Europarl Sentiment1](#europarl-sentiment1)                  | Sentiment              | 3.359           | 184                    | None                                                         | ✔️     |
-| [Europarl Sentiment2](#europarl-sentiment2)                  | sentiment              |                 | 957                    | CC BY-SA 4.0                                                 | ✔️     |
-| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)      | Raw                    | -               | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)       | ❌     |
-| [WordSim-353](#wordsim-353)                                  | Word Similarity        | 353             | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
-| [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99              | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
-| [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -               | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
-| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens) | 3.403                  | GNU Public License version 2                                 | ✔️     |
+| Dataset                                                      | Task                   | Words             | Sents                  | License                                                      | DaNLP |
+| ------------------------------------------------------------ | ---------------------- | ----------------- | ---------------------- | ------------------------------------------------------------ | ----- |
+| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation            | 206,700,000       | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)            | ❌     |
+| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)         | Translation            | 208,175,843       | 8,650,537              | -                                                            | ❌     |
+| [Europarl7](http://www.statmt.org/europarl/)                 | Translation            | 47,761,381        | 2,323,099              | [None](http://www.statmt.org/europarl/)                      | ❌     |
+| [ParaCrawl5](https://paracrawl.eu/)                          | Translation            | -                 | -                      | [CC0](https://paracrawl.eu/releases.html)                    | ❌     |
+| [WikiANN](#wikiann)                                          | NER                    | 832.901           | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                 | ✔️     |
+| [UD-DDT (DaNE)](#dane)                                       | DEP, POS, NER          | 100,733           | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️     |
+| [LCC Sentiment](#lcc-sentiment)                              | Sentiment              | 10.588            | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️     |
+| [Europarl Sentiment1](#europarl-sentiment1)                  | Sentiment              | 3.359             | 184                    | None                                                         | ✔️     |
+| [Europarl Sentiment2](#europarl-sentiment2)                  | sentiment              |                   | 957                    | CC BY-SA 4.0                                                 | ✔️     |
+| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)      | Raw                    | -                 | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)       | ❌     |
+| [WordSim-353](#wordsim-353)                                  | Word Similarity        | 353               | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
+| [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
+| [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -                 | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
+| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens)   | 3.403                  | GNU Public License version 2                                 | ✔️     |
+| [DanNet](#dannet)                                            | Wordnet                | 66.308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)    | ✔️     |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -147,11 +148,78 @@ df = lccsent.load_with_pandas()
 ```
 
 
+### DanNet
+
+[DanNet](https://cst.ku.dk/projekter/dannet/) is a lexical database such as [Wordnet](https://wordnet.princeton.edu/). "Center for sprogteknologi" at The University of Copenhagen is behind it and more details about it can be found in the paper Pedersen et al 2009. 
+
+DanNet depicts the relations between words in Danish (mostly nouns, verbs and adjectives). 
+The main relation among words in WordNet is synonymy.
+
+The dataset consists of 4 databases:
+
+    * words
+    * word senses
+    * relations
+    * synsets
+
+DanNet uses the concept of `synset` to link words together. All the words in the database are part of one or multiple synsets. A synset is a set of synonyms (words which have the same meanings).
+
+
+For downloading DanNet through DaNLP, you can do: 
+
+```python
+from danlp.datasets import DanNet
+
+dannet = DanNet()
+
+# you can load the databases if you want to look into the databases by yourself
+words, wordsenses, relations, synsets = dannet.load_with_pandas()
+```
+
+We also provide helper functions to search for synonyms, hyperonyms and hyponyms through the databases. 
+Once you have downloaded the DanNet wrapper, you can use the following features: 
+
+```python
+
+word = "myre"
+# synonyms
+dannet.synonyms(word)
+""" ['tissemyre'] """
+# hypernyms
+dannet.hypernyms(word)
+""" ['årevingede insekter'] """
+# hyponyms
+dannet.hyponyms(word)
+""" ['hærmyre', 'skovmyre', 'pissemyre', 'tissemyre'] """
+# meanings
+dannet.meanings(word)
+""" ['ca. 1 cm langt, årevinget insekt med en kraftig in ... (Brug: "Myrer på terrassen, og andre steder udendørs, kan hurtigt blive meget generende")'] """
+
+
+# to help you dive into the databases
+# we also provide the following functions: 
+
+# part-of-speech (returns a list comprised in 'Noun', 'Verb' or 'Adjective')
+dannet.pos(word)
+# wordnet relations (EUROWORDNET or WORDNETOWL)
+dannet.wordnet_relations(word, eurowordnet=True))
+# word ids
+dannet._word_ids(word)
+# synset ids
+dannet._synset_ids(word)
+# word from id
+dannet._word_from_id(11034863)
+# synset from id
+dannet._synset_from_id(3514)
+```
+
+
 ## 🎓 References
 - Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. “Universal Dependencies for Danish”. TLT14, 2015.
 - Keson, Britt (1998). Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus. Technical report, DSL
 - Matthias T. Buch-Kromann, Line Mikkelsen, and Stine Kern Lynge. 2003. "Danish dependency treebank". In **TLT**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. DaNE: A Named Entity Resource for Danish. In **LREC**.
+- Pedersen, Bolette S. Sanni Nimb, Jørg Asmussen, Nicolai H. Sørensen, Lars Trap-Jensen og Henrik Lorentzen (2009). [DanNet – the challenge of compiling a WordNet for Danish by reusing a monolingual dictionary](https://pdfs.semanticscholar.org/6891/69de00c63d58bd68229cb0b3469a617f5ab3.pdf). *Lang Resources & Evaluation* 43:269–299.
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
 - Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
 - Uwe Quasthoff, Matthias Richter and Christian Biemann. 2006. [Corpus Portal for Search in Monolingual Corpora](https://www.aclweb.org/anthology/L06-1396/). In **LREC**.

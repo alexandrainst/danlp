@@ -194,15 +194,21 @@ DATASETS = {
         'md5_checksum': '5e7dad9e6c8c32aa9dd17830bed5e0f6',
         'size': 3489,
         'file_extension': '.csv'
-        },
+    },
      # coreference dataset 
      'dacoref': {
         'url': 'http://danlp-downloads.alexandra.dk/datasets/dacoref.zip',
         'md5_checksum': 'e6f2707f4f600a0d357dc7afa1b01f92',
         'size': 1005278,
         'file_extension': ''
-        },
-    
+    },
+    # Danish Wordnet
+    'dannet': {
+        'url': DANLP_STORAGE_URL + '/datasets/dannet.zip',
+        'md5_checksum': 'a5aa388bb08487bd59d72257aa15d8fa',
+        'size': 6083044,
+        'file_extension': '.csv'
+    },
     
     # SENTIMENT EVALUATION
     'europarl.sentiment1': {
