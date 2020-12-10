@@ -18,4 +18,5 @@ Jupyter notebooks :
    classifier that can be applied on Danish text:
    `example_zero_shot_sentiment.ipynb`
 - Tutorial about how to learn a text classification model, here exemplified by a model that can predict which party a speech (from the Danish parliament) belongs to : `example_text_classification.ipynb`
+- Tutorial about how to perform data augmentation on Danish text, here exemplified by augmenting Tweets and testing if the increased data increases the performance of a sentiment model: `example_data_augmentation.ipynb`
    
