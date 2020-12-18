@@ -47,19 +47,22 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **News**
 
-- :hotel: Version 0.0.10 has been [released](https://github.com/alexandrainst/danlp/releases) with an update of a permanent URL for storage host of models and dataset hosted by danlp, a first version of a spaCy sentiment model is added, and a noun phrase chunking function using spaCy dependecy model is added to the danlp package.
+- :tada: Version 0.0.11 has been [released](https://github.com/alexandrainst/danlp/releases) with new features using a pre-trained BERT model by BotXo for predicting mask word, next sentence prediction and embeddings. The NER bert model also come with a updated feature of predicting the tags combined. To new datasets is added, one dataset for coreference resolution and also the wordnet DanNet, which can be loaded to find e.g. synonyms.   
 
-- :blue_book: A jupyter notebook tutorial of FasText  classification model on speeches from Danish Parliament is added
-
-- 🚧 Support for Danish in the [spaCy]( https://spacy.io/models/da) new 2.3 version. The progress for supporting spaCy can be seen here [issue #3056](https://github.com/explosion/spaCy/issues/3056). The spacy model is trained using DaNE and DDT [datasets](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane) - Read more about using spacy through danlp [here](https://github.com/alexandrainst/danlp/blob/master/docs/spacy.md)  
+- :blue_book: A jupyter notebook tutorial of during data augmentation on texts 
 
   
 
+  
+
+
 **Next up**
 
-- :hatching_chick: Example tutorials in Jupiter notebook and getting started guides is coming soon!
-- :link:  Dataset for coreference is coming soon​
-- :paw_prints: Improving spaCy ner model using hard distil of Bert Ner
+- :santa: ​Christmas holiday
+
+  <h1 align="center">
+    <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/docs/imgs/christmas.jpg"  width="350"  />
+  </h1>
 
 
 
