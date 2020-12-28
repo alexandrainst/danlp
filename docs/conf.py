@@ -97,5 +97,6 @@ def setup(app):
         'enable_eval_rst': True,
         'enable_inline_math': True,
         'enable_math': True,
+        'highlight': True,
     }, True)
     app.add_transform(AutoStructify)

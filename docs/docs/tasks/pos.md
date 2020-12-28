@@ -25,7 +25,7 @@ This project provides a trained part of speech tagging model for Danish using th
 The code for training can be found on Flairs GitHub, and the following parameters are set:
 `learning_rate=1`, `mini_batch_size=32`, `max_epochs=150`, `hidden_size=256`.
 
-The flair pos tagger can be used by loading  it with the  `load_flair_pos_model` method. Please note that the text should be tokenized before hand, this can for example be done using spacy. 
+The flair pos tagger can be used by loading  it with the  `load_flair_pos_model` method. Please note that the text should be tokenized before hand, this can for example be done using spaCy. 
 
 ```python
 from danlp.models import load_flair_pos_model
@@ -51,7 +51,7 @@ print(sentence.to_tagged_string())
 
 Read more about the spaCy model in the dedicated [spaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) data. 
 
-Below is a small getting started snippet for using the Spacy pos tagger:
+Below is a small getting started snippet for using the spaCy POS tagger:
 
 ```python
 from danlp.models import load_spacy_model
@@ -86,7 +86,7 @@ Accuracy scores is reported below and can be reproduced using `pos_benchmarks.py
 | Flair                       | **97.97**  |
 | SpaCy                       | 96.15      |
 
-#### Polyglot
+#### Polyglot model
 
 The tags predicted with the polyglot model differ slightly from the universal PoS-tags. The model predicts :
 * `CONJ` instead of `CCONJ`
