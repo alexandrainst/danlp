@@ -3,14 +3,3 @@ sphinx==3.1.2
 sphinx_rtd_theme==0.5.0
 sphinx_markdown_tables==0.0.15
 sphinx_markdown_parser==0.2.4
-tqdm==4.42.1
-spacy==2.2.3
-gensim==3.8.1
-torch==1.6.0
-flair==0.4.5
-pyconll==2.2.1
-conllu==0.11
-pandas==1.0.1
-transformers==3.1.0
-srsly==1.0.2
-tweepy
