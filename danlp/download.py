@@ -1,7 +1,6 @@
 import hashlib
 import inspect
 import os
-import shutil
 import urllib
 from pathlib import Path
 from typing import Callable
@@ -137,7 +136,7 @@ MODELS = {
     },
 
     # BERT models 
-        'bert.botxo.pytorch': {
+    'bert.botxo.pytorch': {
         'url': DANLP_STORAGE_URL + '/models/bert.botxo.pytorch.zip',
         'md5_checksum': '8d73bb1ad154c3ca137ab06a3d5d37a1',
         'size': 413164986,
@@ -195,8 +194,8 @@ DATASETS = {
         'size': 3489,
         'file_extension': '.csv'
     },
-     # coreference dataset 
-     'dacoref': {
+    # coreference dataset 
+    'dacoref': {
         'url': 'http://danlp-downloads.alexandra.dk/datasets/dacoref.zip',
         'md5_checksum': 'e6f2707f4f600a0d357dc7afa1b01f92',
         'size': 1005278,
@@ -257,32 +256,31 @@ class TqdmUpTo(tqdm):
         self.update(b * bsize - self.n)  # will also set self.n = b * bsize
 
 
-def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
-                     process_func: Callable = None, verbose: bool = False, force = False):
+def download_dataset(dataset_name: str, cache_dir: str = DEFAULT_CACHE_DIR,
+                     process_func: Callable = None, verbose: bool = False, force_download: bool = False):
     """
-    :param verbose:
-    :param dataset:
-    :param cache_dir:
+    :param str dataset_name:
+    :param str cache_dir:
     :param process_func:
+    :param bool verbose:
+    :param bool force_download:
     :return:
     """
-    if dataset not in DATASETS:
-        raise ValueError("The dataset {} do not exist".format(dataset))
+    if dataset_name not in DATASETS:
+        raise ValueError("The dataset {} do not exist".format(dataset_name))
 
-    dataset_dir = os.path.join(cache_dir, dataset)
-    dataset_info = DATASETS[dataset]
-    dataset_info['name'] = dataset
+    dataset_dir = os.path.join(cache_dir, dataset_name)
+    dataset_info = DATASETS[dataset_name]
+    dataset_info['name'] = dataset_name
 
-    if not os.path.isdir(dataset_dir) or force==True:  # Then dataset has not been downloaded
+    if not os.path.isdir(dataset_dir) or not os.listdir(dataset_dir) or force_download:  # Then dataset has not been downloaded
         os.makedirs(dataset_dir, exist_ok=True)
 
-        file_path = os.path.join(cache_dir, dataset)
-
-        _download_and_process(dataset_info, process_func, file_path, verbose)
+        _download_and_process(dataset_info, process_func, dataset_dir, verbose)
 
     else:
         if verbose:
-            print("Dataset {} exists in {}".format(dataset, dataset_dir))
+            print("Dataset {} exists in {}".format(dataset_name, dataset_dir))
 
     return dataset_dir
 
@@ -290,13 +288,13 @@ def download_dataset(dataset: str, cache_dir: str = DEFAULT_CACHE_DIR,
 def download_model(model_name: str, cache_dir: str = DEFAULT_CACHE_DIR, process_func: Callable = None,
                    verbose: bool = False, clean_up_raw_data=True, force_download: bool = False, file_extension=None):
     """
-    :param file_extension:
-    :param force_download:
-    :param model_name:
-    :param process_func:
-    :param bool clean_up_raw_data:
+    :param str model_name:
     :param str cache_dir: the directory for storing cached data
+    :param process_func:
     :param bool verbose:
+    :param bool clean_up_raw_data:
+    :param bool force_download:
+    :param str file_extension:
     """
     if model_name not in MODELS:
         raise ValueError("The model {} do not exist".format(model_name))
@@ -350,15 +348,16 @@ def _download_and_process(meta_info: dict, process_func: Callable, single_file_p
     :param single_file_path:
     :param verbose:
     """
+
     if process_func is not None:
 
         _check_process_func(process_func)
 
         tmp_file_path = NamedTemporaryFile().name
-
         _download_file(meta_info, tmp_file_path, verbose=verbose)
 
-        process_func(tmp_file_path, meta_info, verbose=verbose, clean_up_raw_data=True)
+        cache_dir = os.path.split(single_file_path)[0]
+        process_func(tmp_file_path, meta_info, cache_dir=cache_dir, verbose=verbose, clean_up_raw_data=True)
 
     else:
         single_file = meta_info['name'] + meta_info['file_extension']
@@ -393,30 +392,31 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
     assert _check_file(destination) == (expected_size, expected_hash), \
         "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
 
+
 def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
-                        clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip: str = None, singel: bool=False):
+                        clean_up_raw_data: bool = True, verbose: bool = False, file_in_zip: str = None):
     """
     Simple process function for processing models
     that only needs to be unzipped after download.
-    :param tmp_file_path: The path to the downloaded raw file
-    :param clean_up_raw_data:
-    :param verbose:
-    :param file_in_zip: Name of the model file in the zip, if the zip contains more than one file
+
+    :param str tmp_file_path: The path to the downloaded raw file
+    :param dict meta_info:
+    :param str cache_dir:
+    :param bool clean_up_raw_data:
+    :param bool verbose:
+    :param str file_in_zip: Name of the model file in the zip, if the zip contains more than one file
+
     """
     from zipfile import ZipFile
     
     model_name = meta_info['name']
-    
-    
     full_path = os.path.join(cache_dir, model_name) + meta_info['file_extension']
 
-    
     if verbose:
         print("Unzipping {} ".format(model_name))
 
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
         
-
         file_list = zip_file.namelist()
 
         if len(file_list) == 1:
