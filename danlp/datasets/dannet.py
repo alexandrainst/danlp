@@ -140,6 +140,24 @@ class DanNet():
         
         return hypernyms
 
+    def domains(self, word, pos=None):
+        """
+        Returns the domains of `word`.
+
+        :param word: text
+        :param pos: (list of) part of speech tag(s) (in "Noun", "Verb", "Adjective")
+        :return: list of domains
+
+        """
+        
+        word_synset_ids = self._synset_ids(word, pos)
+        dom_synset_ids = self.relations[self.relations['synset_id'].isin(word_synset_ids) & (self.relations['relation']=='domain')]['value'].tolist()
+        dom_synset_ids = [val for val in dom_synset_ids if val.isdigit()]
+        domains_ids = self.wordsenses[self.wordsenses['synset_id'].isin(dom_synset_ids)]['word_id'].tolist()
+        domains = self.words[self.words['word_id'].isin(domains_ids)]['form'].tolist()
+        
+        return domains
+
     def wordnet_relations(self, word, pos=None, eurowordnet=True):
         """
         Returns the name of the relations `word` is associated with.

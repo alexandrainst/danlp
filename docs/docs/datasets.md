@@ -176,7 +176,7 @@ dannet = DanNet()
 words, wordsenses, relations, synsets = dannet.load_with_pandas()
 ```
 
-We also provide helper functions to search for synonyms, hyperonyms and hyponyms through the databases. 
+We also provide helper functions to search for synonyms, hyperonyms, hyponyms and domains through the databases. 
 Once you have downloaded the DanNet wrapper, you can use the following features: 
 
 ```python
@@ -191,6 +191,9 @@ dannet.hypernyms(word)
 # hyponyms
 dannet.hyponyms(word)
 """ ['hærmyre', 'skovmyre', 'pissemyre', 'tissemyre'] """
+# domains
+dannet.domains(word)
+""" ['zoologi'] """
 # meanings
 dannet.meanings(word)
 """ ['ca. 1 cm langt, årevinget insekt med en kraftig in ... (Brug: "Myrer på terrassen, og andre steder udendørs, kan hurtigt blive meget generende")'] """
