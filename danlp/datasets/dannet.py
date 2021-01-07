@@ -203,14 +203,14 @@ class DanNet():
 
     def _word_from_id(self, word_id):
 
-        assert(type(word_id) == int or (type(word_id) == str and word_id.is_digit()))
+        assert(type(word_id) == int or (type(word_id) == str and word_id.isdigit()))
         word_id = str(word_id)
 
         return self.words[self.words['word_id'] == word_id]['form'].tolist()
 
     def _synset_from_id(self, synset_id):
 
-        assert(type(synset_id) == int or (type(synset_id) == str and synset_id.is_digit()))
+        assert(type(synset_id) == int or (type(synset_id) == str and synset_id.isdigit()))
         synset_id = str(synset_id)
 
         synset_labels = self.synsets[self.synsets['synset_id'] == synset_id]['label'].tolist()
