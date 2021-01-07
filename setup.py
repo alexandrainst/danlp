@@ -17,7 +17,13 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=['tqdm', 'pyconll', 'tweepy'],
+    install_requires=[
+        'conllu',
+        'pandas'
+        'pyconll', 
+        'tqdm', 
+        'tweepy'
+    ],
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3 :: Only",
