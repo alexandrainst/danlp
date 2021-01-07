@@ -19,11 +19,20 @@ setup(
     packages=find_packages(),
     install_requires=[
         'conllu',
-        'pandas'
+        'pandas',
         'pyconll', 
         'tqdm', 
         'tweepy'
     ],
+    extras_require={
+        'all' : [
+            'transformers<=3.5.1',
+            'gensim',
+            'torch',
+            'flair',
+            'spacy<=2.2.3'
+        ]
+    },
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3 :: Only",

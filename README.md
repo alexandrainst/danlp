@@ -79,8 +79,17 @@ To get started using DaNLP simply install the project with pip:
 pip install danlp 
 ```
 
-Note that the installation of DaNLP does not install other NLP libraries such as Gensim, SpaCy, flair or Transformers.
-This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `. You can check the `requirements.txt` file to see what version the packages has been tested with.
+Note that the default installation of DaNLP does not install other NLP libraries such as Gensim, SpaCy, flair or Transformers.
+This allows the installation to be as minimal as possible and let the user choose to e.g. load word embeddings with either spaCy, flair or Gensim.  Therefore, depending on the function you need to use, you should install one or several of the following: `pip install flair`, `pip install spacy ` or/and `pip install gensim `. 
+
+Alternatively if you want to install all the required dependencies including the packages mentionned above, you can do:
+
+```bash
+pip install danlp[all]
+```
+
+You can check the `requirements.txt` file to see what version the packages has been tested with.
+
 
 ### Install from source
 
