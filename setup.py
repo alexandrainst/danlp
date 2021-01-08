@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'conllu',
-        'pandas'
+        'pandas',
         'pyconll', 
         'tqdm', 
         'tweepy'
