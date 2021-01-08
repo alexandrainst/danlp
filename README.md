@@ -68,8 +68,8 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 ## Get started
 
-To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
-will not install all NLP libraries because we want you to have the freedom to limit the dependency on what you use.
+To get started using DaNLP in your python project simply install the pip package. Note that installing the default pip package 
+will not install all NLP libraries because we want you to have the freedom to limit the dependency on what you use. Instead we provide you with an installation option if you want to install all the required dependencies. 
 
 ### Install with pip
 
@@ -98,7 +98,10 @@ If you want to be able to use the latest developments before they are released i
 ```
 git clone https://github.com/alexandrainst/danlp.git
 cd danlp
+# minimum installation
 pip install . 
+# or install all the packages
+pip install .[all]
 ```
 
 To install the dependencies used in the package with the tested versions:
