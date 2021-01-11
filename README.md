@@ -58,11 +58,7 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **Next up**
 
-- :santa: ​Christmas holiday
-
-  <h1 align="center">
-    <img src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/docs/imgs/christmas.jpg"  width="350"  />
-  </h1>
+- :link: Models for coreference resolution with benchmarks and documentation  
 
 
 
