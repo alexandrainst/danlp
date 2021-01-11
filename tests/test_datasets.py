@@ -176,6 +176,7 @@ class TestDannetDataset(unittest.TestCase):
         self.assertEqual(dannet.synonyms('kat'), ['missekat', 'mis'])
         self.assertEqual(dannet.hypernyms('myre', pos=['Noun']), ['årevingede insekter'])
         self.assertEqual(dannet.hyponyms('myre', pos='Noun'), ['hærmyre', 'skovmyre', 'pissemyre', 'tissemyre'])
+        self.assertEqual(dannet.domains('myre', pos='Noun'), ['zoologi'])
         self.assertEqual(dannet.pos('myre'), ['Noun'])
         self.assertEqual(dannet.meanings('myre'), ['ca. 1 cm langt, årevinget insekt med en kraftig in ... (Brug: "Myrer på terrassen, og andre steder udendørs, kan hurtigt blive meget generende")'])
         self.assertEqual(dannet.wordnet_relations('kat'), {'domain', 'has_holo_part', 'eq_has_synonym', 'has_hyperonym', 'role_agent', 'used_for', 'has_mero_part'})

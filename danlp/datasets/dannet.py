@@ -140,6 +140,24 @@ class DanNet():
         
         return hypernyms
 
+    def domains(self, word, pos=None):
+        """
+        Returns the domains of `word`.
+
+        :param word: text
+        :param pos: (list of) part of speech tag(s) (in "Noun", "Verb", "Adjective")
+        :return: list of domains
+
+        """
+        
+        word_synset_ids = self._synset_ids(word, pos)
+        dom_synset_ids = self.relations[self.relations['synset_id'].isin(word_synset_ids) & (self.relations['relation']=='domain')]['value'].tolist()
+        dom_synset_ids = [val for val in dom_synset_ids if val.isdigit()]
+        domains_ids = self.wordsenses[self.wordsenses['synset_id'].isin(dom_synset_ids)]['word_id'].tolist()
+        domains = self.words[self.words['word_id'].isin(domains_ids)]['form'].tolist()
+        
+        return domains
+
     def wordnet_relations(self, word, pos=None, eurowordnet=True):
         """
         Returns the name of the relations `word` is associated with.
@@ -185,14 +203,14 @@ class DanNet():
 
     def _word_from_id(self, word_id):
 
-        assert(type(word_id) == int or (type(word_id) == str and word_id.is_digit()))
+        assert(type(word_id) == int or (type(word_id) == str and word_id.isdigit()))
         word_id = str(word_id)
 
         return self.words[self.words['word_id'] == word_id]['form'].tolist()
 
     def _synset_from_id(self, synset_id):
 
-        assert(type(synset_id) == int or (type(synset_id) == str and synset_id.is_digit()))
+        assert(type(synset_id) == int or (type(synset_id) == str and synset_id.isdigit()))
         synset_id = str(synset_id)
 
         synset_labels = self.synsets[self.synsets['synset_id'] == synset_id]['label'].tolist()
