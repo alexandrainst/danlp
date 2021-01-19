@@ -32,7 +32,7 @@ UD-DDT has annotations for dependency parsing and part-of-speech (POS) tagging.
 The dataset was annotated with Named Entities for **PER**, **ORG** and **LOC** 
 by the Alexandra Institute in the DaNE dataset (Hvingelby et al. 2020).
 To read more about how the dataset was annotated with POS and DEP tags we refer to the
-[Universal Dependencies](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) page.
+[Universal Dependencies](https://github.com/UniversalDependencies/UD_Danish-DDT/) page.
 The dataset can be loaded with the DaNLP package:
 
 ```python
@@ -79,8 +79,7 @@ flair_corpus = wikiann.load_with_flair()
 ```
 
 ### WordSim-353
-The WordSim-353 dataset [(Finkelstein et al. 2002)](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf) 
-contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations 
+The WordSim-353 dataset (Finkelstein et al. 2002) contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations 
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been 
 [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Årup Nielsen.
 
@@ -150,7 +149,7 @@ df = lccsent.load_with_pandas()
 
 ### DanNet
 
-[DanNet](https://cst.ku.dk/projekter/dannet/) is a lexical database such as [Wordnet](https://wordnet.princeton.edu/). "Center for sprogteknologi" at The University of Copenhagen is behind it and more details about it can be found in the paper Pedersen et al 2009. 
+[DanNet](https://cst.ku.dk/projekter/dannet/) is a lexical database such as [Wordnet](https://wordnet.princeton.edu/). "Center for sprogteknologi" at The University of Copenhagen is behind it and more details about it can be found in the paper (Pedersen et al 2009).
 
 DanNet depicts the relations between words in Danish (mostly nouns, verbs and adjectives). 
 The main relation among words in WordNet is synonymy.
@@ -218,12 +217,12 @@ dannet._synset_from_id(3514)
 
 
 ## 🎓 References
-- Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. “Universal Dependencies for Danish”. TLT14, 2015.
-- Keson, Britt (1998). Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus. Technical report, DSL
-- Matthias T. Buch-Kromann, Line Mikkelsen, and Stine Kern Lynge. 2003. "Danish dependency treebank". In **TLT**.
-- Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. DaNE: A Named Entity Resource for Danish. In **LREC**.
+- Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. [Universal Dependencies for Danish](http://tlt14.ipipan.waw.pl/files/4914/4974/3227/TLT14_proceedings.pdf#page=164). TLT14, 2015.
+- Keson, Britt (1998). [Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus](https://korpus.dsl.dk/clarin/corpus-doc/parole-doc/paroledoc_en.pdf). Technical report, DSL
+- Matthias T. Buch-Kromann, Line Mikkelsen, and Stine Kern Lynge. 2003. [Danish dependency treebank](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.208.6716&rep=rep1&type=pdf). In **TLT**.
+- Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. [DaNE: A Named Entity Resource for Danish](https://www.aclweb.org/anthology/2020.lrec-1.565.pdf). In **LREC**.
 - Pedersen, Bolette S. Sanni Nimb, Jørg Asmussen, Nicolai H. Sørensen, Lars Trap-Jensen og Henrik Lorentzen (2009). [DanNet – the challenge of compiling a WordNet for Danish by reusing a monolingual dictionary](https://pdfs.semanticscholar.org/6891/69de00c63d58bd68229cb0b3469a617f5ab3.pdf). *Lang Resources & Evaluation* 43:269–299.
 - Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight and Heng Ji. 2017. [Cross-lingual Name Tagging and Linking for 282 Languages](https://aclweb.org/anthology/P17-1178). In **ACL**.
-- Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.technion.ac.il/~gabr/papers/tois_context.pdf). In  **ACM TOIS**.
+- Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.tau.ac.il/~ruppin/p116-finkelstein.pdf). In  **ACM TOIS**.
 - Uwe Quasthoff, Matthias Richter and Christian Biemann. 2006. [Corpus Portal for Search in Monolingual Corpora](https://www.aclweb.org/anthology/L06-1396/). In **LREC**.
--  M.T. Kromann and S.K. Lynge. Danish Dependency Treebank v. 1.0. Department of Computational Linguistics, Copenhagen Business School., 2004. https://github.com/mbkromann/copenhagen-dependency-treebank
+-  M.T. Kromann and S.K. Lynge. [Danish Dependency Treebank v. 1.0](https://github.com/mbkromann/copenhagen-dependency-treebank). Department of Computational Linguistics, Copenhagen Business School., 2004. 
