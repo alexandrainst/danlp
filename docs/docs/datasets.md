@@ -18,7 +18,7 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [WordSim-353](#wordsim-353)                                  | Word Similarity        | 353               | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
 | [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
 | [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -                 | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
-| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens)   | 3.403                  | GNU Public License version 2                                 | ✔️     |
+| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens)   | 3.403                  | CC BY-SA 4.0                                 | ✔️     |
 | [DanNet](#dannet)                                            | Wordnet                | 66.308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)    | ✔️     |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
