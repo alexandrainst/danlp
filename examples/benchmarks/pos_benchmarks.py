@@ -41,7 +41,7 @@ def benchmark_flair_mdl():
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    print(accuracy_report(tags_true, tags_pred))
+    print(accuracy_report(tags_true, tags_pred), end="\n\n")
     
     
 def benchmark_spacy_mdl():
@@ -67,7 +67,7 @@ def benchmark_spacy_mdl():
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
     
-    print(accuracy_report(tags_true, tags_pred))
+    print(accuracy_report(tags_true, tags_pred), end="\n\n")
 
 
 auxiliary_verbs = ["være", "er", "var", "været"]
@@ -109,7 +109,7 @@ def benchmark_polyglot_mdl(corrected_output=False):
     assert len(tags_pred)==num_sentences
     assert sum([len(s) for s in tags_pred])==num_tokens
 
-    print(accuracy_report(tags_true, tags_pred))
+    print(accuracy_report(tags_true, tags_pred), end="\n\n")
 
 
 

@@ -11,10 +11,12 @@ and made available through the DaNLP library.
 | Model                                                                             | Train Data                                                            | Maintainer                     | Tags          | DaNLP |
 |-----------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------------------|---------------|-------|
 | [BERT](#bert)                                                                     | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔    |
+| [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [spaCy](#spacy)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [Polyglot](https://polyglot.readthedocs.io/en/latest/NamedEntityRecognition.html) | Wikipedia                                                             | Polyglot                       | PER, ORG, LOC | ❌     |
 | [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
+| [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
+
 
 #### 🔧 BERT {#bert}
 The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER model is based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO which 
@@ -63,7 +65,7 @@ print(sentence.to_tagged_string())
 ```
 
 #### 🔧 spaCy {#spacy}
-The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../frameworks/spacy.md) uing the [DDT and DaNE](../datasets.md#dane) annotations.
+The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../frameworks/spacy.md) using the [DDT and DaNE](../datasets.md#dane) annotations.
 The spaCy model can be loaded with DaNLP to do NER predictions in the following way.
 ```python
 from danlp.models import load_spacy_model
@@ -82,11 +84,22 @@ by automatic generating a dataset using the link structure from Wikipedia.
 This model is not available through DaNLP but it can be used from the 
 [Polyglot](https://github.com/aboSamoor/polyglot) library.
 
+
+### NERDA
+
+[NERDA](https://github.com/ebanalyse/NERDA/) is a python package 
+that provides an interface for fine-tuning pretrained transformers for NER. 
+It also includes some ready-to-use fine-tuned (on [DaNE](../datasets.md#dane)) NER models based on a 
+[multilingual BERT](https://github.com/google-research/bert/blob/master/multilingual.md) 
+and a [Danish Electra](https://github.com/MalteHB/-l-ctra). 
+
+
 #### Daner
 The daner [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) NER tool
 is a wrapper around the [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 
 using data from [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) (not released).
 The tool is not available through DaNLP but it can be used from the [daner repository](https://github.com/ITUnlp/daner).
+
 
 ## 📈 Benchmarks
 The benchmarks has been performed on the test part of the
@@ -94,12 +107,14 @@ The benchmarks has been performed on the test part of the
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model    | LOC       | ORG       | PER       | AVG       |
-|----------|-----------|-----------|-----------|-----------|
-| BERT     | 83.90     | **72.98** | 92.82     | **84.04** |
-| Flair    | **84.82** | 62.95     | **93.15** | 81.78     |
-| spaCy    | 75.96     | 59.57     | 87.87     | 75.73     |
-| Polyglot | 64.95     | 39.3      | 78.74     | 64.18     |
+| Model           | LOC       | ORG       | PER       | AVG       |
+|-----------------|-----------|-----------|-----------|-----------|
+| BERT            | 83.90     | **72.98** | 92.82     | **84.04** |
+| Flair           | **84.82** | 62.95     | **93.15** | 81.78     |
+| spaCy           | 75.96     | 59.57     | 87.87     | 75.73     |
+| Polyglot        | 64.95     | 39.3      | 78.74     | 64.18     |
+| NERDA (mBERT)   | 80.75     | 65.73     | 92.66     | 80.66     |
+| NERDA (electra) | 77.67     | 60.13     | 90.16     | 76.77     |
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 
@@ -111,3 +126,4 @@ The evaluation script `ner_benchmarks.py` can be found [here](https://github.com
 - Leon Derczynski, Camilla V. Field and Kenneth S. Bøgh. 2014. [DKIE: Open Source Information Extraction for Danish](https://www.aclweb.org/anthology/E14-2016). In **EACL**.
 - Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139/). In **COLING**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. [DaNE: A Named Entity Resource for Danish](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). In **LREC**.
+- Kevin Clark, Minh-Thang Luong, Quoc V. Le and Christopher D. Manning. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://nlp.stanford.edu/pubs/clark2020electra.pdf). In **ICLR**.

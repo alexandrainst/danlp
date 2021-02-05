@@ -7,6 +7,10 @@ from danlp.datasets import DDT
 from danlp.models import load_spacy_model, load_flair_ner_model, \
     load_bert_ner_model
 
+from NERDA.datasets import download_dane_data
+from NERDA.precooked import DA_BERT_ML, DA_ELECTRA_DA
+
+download_dane_data()
 
 def is_misc(ent: str):
     if len(ent) < 4:
@@ -115,7 +119,43 @@ def benchmark_bert_mdl():
     for i, sentence in enumerate(sentences_tokens):
         _, pred_ents = bert.predict(sentence)
         predictions.append(pred_ents)
-    print('bert:')
+    print('BERT:')
+    print_speed_performance(start, num_sentences, num_tokens)
+    
+    assert len(predictions) == num_sentences
+
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+
+
+def benchmark_nerda_multi_mdl():
+
+    nerda = DA_BERT_ML()
+    nerda.download_network()
+    nerda.load_network()
+
+    start = time.time()
+
+    predictions = nerda.predict(sentences_tokens)
+
+    print('NERDA multilingual:')
+    print_speed_performance(start, num_sentences, num_tokens)
+    
+    assert len(predictions) == num_sentences
+
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+
+
+def benchmark_nerda_electra_mdl():
+
+    nerda = DA_ELECTRA_DA()
+    nerda.download_network()
+    nerda.load_network()
+
+    start = time.time()
+
+    predictions = nerda.predict(sentences_tokens)
+    
+    print('NERDA DA electra:')
     print_speed_performance(start, num_sentences, num_tokens)
     
     assert len(predictions) == num_sentences
@@ -128,3 +168,5 @@ if __name__ == '__main__':
     benchmark_spacy_mdl()
     benchmark_flair_mdl()
     benchmark_bert_mdl()
+    benchmark_nerda_multi_mdl()
+    benchmark_nerda_electra_mdl()
