@@ -37,9 +37,19 @@
   </h5>
 </div>
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
-It is a collection  of available datasets and models for a variety of NLP tasks. The aim is to make it easier and more applicable to practitioners in the industry to use Danish NLP and hence this project is licensed to allow commercial use. The project features code examples on how to use the datasets and models in popular NLP frameworks such as spaCy, Transformers and Flair as well as Deep Learning frameworks such as PyTorch. 
+It is a collection  of available datasets and models for a variety of NLP tasks. 
+The aim is to make it easier and more applicable to practitioners in the industry to use 
+Danish NLP and hence this project is licensed to allow commercial use. 
+The project features code examples on how to use the datasets and models in popular 
+NLP frameworks such as spaCy, Transformers and Flair as well as Deep Learning frameworks 
+such as PyTorch. 
+See our [documentation pages](https://danlp-alexandra.readthedocs.io/en/latest/index.html) 
+for more details about our models and datasets, and definitions of the modules provided 
+through the DaNLP package. 
+
 
 If you are new to NLP or want to know more about the project in a broader perspective, you can start on our [microsite](https://danlp.alexandra.dk/).
+
 
 <br/>**Help us improve DaNLP**
 
@@ -51,9 +61,6 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 - :blue_book: A jupyter notebook tutorial of during data augmentation on texts 
 
-  
-
-  
 
 
 **Next up**
@@ -62,7 +69,7 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 
 
-## Get started
+## Installation
 
 To get started using DaNLP in your python project simply install the pip package. However installing the pip package 
 will not install all NLP libraries because we want you to have the freedom to limit the dependency on what you use.
@@ -113,18 +120,22 @@ docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app alexandrainst/danlp p
                   
 ```
 
+### Quick Start
+
+Read more in our [documentation pages](https://danlp-alexandra.readthedocs.io/en/latest/docs/gettingstarted/quickstart.html).
+
 
 ## NLP Models
 
 Natural Language Processing is an active area of research and it consists of many different tasks. 
 The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
-The repository is under development and this is the list of NLP tasks we have covered and plan to cover in the repository.
+The repository is under development and this is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we have covered and plan to cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
 -  [Part of speech](docs/docs/tasks/pos.md)
 -  [Named Entity Recognition](docs/docs/tasks/ner.md)
 -  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
--  [Dependency parsing](https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/dependency.md)
+-  [Dependency parsing](docs/docs/tasks/dependency.md)
 -  Coreference resolution
 -  Lemmatization
 
@@ -133,9 +144,9 @@ If you are interested in Danish support for any specific NLP task you are welcom
 We do also recommend to check out this awesome [list](https://github.com/fnielsen/awesome-danish) of Danish NLP stuff from Finn Årup Nielsen. 
 
 ## Datasets
-The number of datasets in the Danish is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
+The number of datasets in the Danish language is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
 
-The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](/docs/docs/datasets.md).
+The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](https://danlp-alexandra.readthedocs.io/en/latest/docs/datasets.html).
 
 ## Examples
 You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
@@ -164,10 +175,10 @@ To help you navigate we provide you with an overview of the structure in the git
 
 If you want to contribute to the DaNLP repository and make it better, your help is very welcome. You can contribute to the project in many ways:
 
-- Help us write good tutorials on Danish NLP use-cases
-- Contribute with your own pretrained NLP models or datasets in Danish
-- Notify us of other Danish NLP resources
+- Help us write good [tutorials](https://github.com/alexandrainst/danlp/tree/master/examples) on Danish NLP use-cases
+- Contribute with your own pretrained NLP models or datasets in Danish (see our [contributing guidelines](CONTRIBUTING.md) for more details on how to contribute to this repository)
 - Create GitHub issues with questions and bug reports
+- Notify us of other Danish NLP resources
 
 You can write us at danlp@alexandra.dk.
 
@@ -178,5 +189,5 @@ The DaNLP repository is maintained by the [Alexandra Institute](https://alexandr
 with a mission to create value, growth and welfare in society. The Alexandra Institute is a member of [GTS](https://gts-net.dk/), 
 a network of independent Danish research and technology organisations.
 
-The work on this repository is part the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
-allocated to the Alexandra Insitute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). ````
+The work on this repository is part of the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
+allocated to the Alexandra Institute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). ````

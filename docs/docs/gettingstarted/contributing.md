@@ -1,17 +1,11 @@
 How do I contribute?
 ====================
 
-If you want to contribute to the [DaNLP](https://github.com/alexandrainst/danlp) project, your help is very welcome. You can contribute to the project in many ways:
-
-- Help us write good [tutorials](https://github.com/alexandrainst/danlp/tree/master/examples) on Danish NLP use-cases 
-- Contribute with your own pretrained NLP models or datasets in Danish (see [below](#contributing) for more details)
-- Notify us of other Danish NLP resources
-- Create GitHub issues with questions and bug reports
-
-You can write us at danlp@alexandra.dk.
+If you want to contribute to the DaNLP project, your help is very welcome. 
+Please follow these guidelines for contributing to the [repository](https://github.com/alexandrainst/danlp).
 
 
-## Contributing to the DaNLP repository {#contributing}
+## Contributing to the DaNLP repository
 
 If you don't know how to contribute to an open source repository (i.e. open a pull request), 
 [here](https://github.com/firstcontributions/first-contributions) is an example tutorial. 
@@ -23,20 +17,30 @@ Before pushing your pull request, make sure that the tests pass running `python 
 ### Adding new models or datasets
 
 
-When you add a new model or a new dataset to the danlp package, you should also: 
+When you add a new model or a new dataset to the danlp repository, you should also: 
 
 1. test it
 2. benchmark it
 3. document it
 
 
-Add a test for it: 
+#### Test 
+
+Add a test for your model or dataset: 
 
 - in `tests/test_datasets.py` for a new dataset,
 - in `tests/test_{framework}_models.py` for a new model (where `framework` is `spacy`, `flair` or `bert`) or create a new test file if you introduce a new framework.
 
+Then run the test(s) (e.g. `python -m unittest tests/test_dataset.md`).
 
-Benchmark it in `examples/benchmarks`. Add the code for benchmarking in the corresponding task file. If your model introduce a new task, create a new benchmark file for this task. Don't forget to add any potential required packages in `requirements_benchmarks.txt`. 
+#### Benchmark
+
+Benchmark your model or dataset.
+In `examples/benchmarks`, add the code for benchmarking in the corresponding task file. 
+If your model introduce a new task, create a new benchmark file for this task. 
+Don't forget to add any potential required packages in `requirements_benchmarks.txt`. 
+
+#### Document
 
 Add (markdown) documentation in `docs`: 
 
