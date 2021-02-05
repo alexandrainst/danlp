@@ -104,20 +104,51 @@ class TwitterSent:
 
     """
     def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
+        self.cache_dir = cache_dir
         self.dataset_name = 'twitter.sentiment'
+        self.dataset_name_game = 'game_tweets'
 
         self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func)
         self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
+        
+        self.dataset_dir_game = download_dataset(self.dataset_name_game, 
+                                                 cache_dir=cache_dir, process_func=_twitter_data_process_func)
+        self.file_path_game = os.path.join(cache_dir, self.dataset_name_game + '.csv')
 
-    def load_with_pandas(self):
+        # download extra information about the game
+        self.info_game = 'game_information'
+        self.path_game = download_dataset(self.info_game, cache_dir=cache_dir, process_func=_unzip_process_func)
+        
+        
+        
+    def load_with_pandas(self, training_version: int=1, game_info: bool=False):
         """
         Loads the dataset in a dataframe.
 
         :return: a dataframe of the test set and a dataframe of the train set
 
         """
+        if training_version!=1 and training_version!=2:
+            raise Exception("Training version should be 1 or 2")
+        if training_version==1 and game_info==True:
+            raise Exception("Game information is only relevant for training version 2")    
+            
         df=pd.read_csv(self.file_path, sep=',', encoding='utf-8')
-        return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
+        df_test=df[df['part'] == 'test'].drop(columns=['part'])
+        
+        if training_version==1:
+            df_train = df[df['part'] == 'train'].drop(columns=['part'])
+        
+        if training_version==2:
+            df_train=pd.read_csv(self.file_path_game, sep=',', encoding='utf-8')
+            if game_info==True:
+                df_gameover = pd.read_csv(os.path.join(self.cache_dir, 'game_gameover.csv'), sep=',', encoding='utf-8')
+                df_verifying = pd.read_csv(os.path.join(self.cache_dir, 'game_verifying.csv'), sep=',', encoding='utf-8')
+                df_session = pd.read_csv(os.path.join(self.cache_dir, 'game_session.csv'), sep=',', encoding='utf-8')
+        
+                return  df_test, df_train, df_gameover, df_verifying, df_session
+            
+        return df_test, df_train
 
 
 def _lookup_tweets(tweet_ids, api):
@@ -150,7 +181,7 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
         file_list = zip_file.namelist()
         extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
-    file_path = os.path.join(cache_dir, 'twitter.sentiment' + '.csv')
+    file_path = os.path.join(cache_dir, model_name + '.csv')
     df = pd.read_csv(file_path)
 
     twitter_ids = list(df['twitterid'])

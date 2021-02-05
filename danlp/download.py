@@ -234,6 +234,18 @@ DATASETS = {
         'size': 17365, 
         'file_extension': '.csv'
     },
+    'game_tweets': {
+        'url': DANLP_STORAGE_URL + '/datasets/game_tweets.zip',
+        'md5_checksum': '9451ea83333efb98317d2e3267ab8508', 
+        'size': 57903, 
+        'file_extension': '.csv'
+    },
+    'game_information': {
+        'url': DANLP_STORAGE_URL + '/datasets/AngryTweets.zip',
+        'md5_checksum': '9fa8fbd770495d0664a2ef1f9e0b43f1', 
+        'size': 47252, 
+        'file_extension': ''
+    },
     'europarl.sentiment2': {
         'url': DANLP_STORAGE_URL + '/datasets/europarl.sentiment2.zip',
         'md5_checksum': 'fa7cfc829867a00dba74d917c78df294', 
@@ -273,7 +285,7 @@ def download_dataset(dataset_name: str, cache_dir: str = DEFAULT_CACHE_DIR,
     dataset_info = DATASETS[dataset_name]
     dataset_info['name'] = dataset_name
 
-    if not os.path.isdir(dataset_dir) or not os.listdir(dataset_dir) or force_download:  # Then dataset has not been downloaded
+    if not os.path.isdir(dataset_dir) or force_download:  # Then dataset has not been downloaded
         os.makedirs(dataset_dir, exist_ok=True)
 
         _download_and_process(dataset_info, process_func, dataset_dir, verbose)

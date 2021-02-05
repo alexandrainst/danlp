@@ -90,20 +90,30 @@ It is constructed with frequently used Danish words.
 
 ### Twitter Sentiment
 
-The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actual tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
+The Twitter sentiment is original a small manually annotated dataset by the Alexandra Institute conducted by one trained annotator. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. The train part is denoted as training_version 1.
+
+Annotations for polarity is extend through a crowd-sourcing game named Angry Tweets. Here, volunteers were asked to annotate tweets based on what they thought the authors had "meant, felt or thought". An option for "skip" provided in case of the tweet being, e.g. not Danish. In an attempt to control the annotation quality and increase the gamification element, Game Overs and points were issued in the following way. The game (one session) consisted of eight rounds of four tweets per pages. Time was measured on each page, and Game Over was issued if the player was too quick. On one out of every two pages, one of the tweets was a "verifying" tweet which had prior to the game been annotated with agreement by four trained annotators. Game Over was issued if the players' annotation did not match. On every page, one tweet was previous annotated, and if the players' annotation match, one point was granted. In addition, one point was granted for completing a round. The annotation for the training_version 1 was used in the game to initial the double annotation, and therefore part of training_version 2. Downloading the training version 2 provides information of the annotations, the sessions with point and time, the game overs and the verifying tweets. 
+
+Due to Twitter's privacy policy, it is only allowed to display the "tweet ID" and not the actual text. This will enable people to delete their tweets. Therefore, to download the actual tweet text, one needs a Twitter development account, and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
 ``` TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET```
 
 ```python
 from danlp.datasets import TwitterSent
 twitSent = TwitterSent()
-
+# the default is to download the training version 1 which is annotated by a trained annotator
 df_test, df_train = twitSent.load_with_pandas()
+# To download the tweets annotated in the game and the ekstra information
+df_test, df_train, df_gameover, df_verifying, df_session = 	twitSent.load_with_pandas( 	 training_version=2, game_info=True)
 ```
 
 The dataset can also be downloaded directly with the labels and tweet id:
 
-[Download TwitterSent](https://danlp.alexandra.dk/304bd159d5de/datasets/twitter.sentiment.zip) 
+​	Test set and first training version: [Download TwitterSent](https://danlp-downloads.alexandra.dk/datasets/twitter.sentiment.zip) 
+
+​	Second training version with extra annotation from the game: [Download TwitterSent - game](https://danlp-downloads.alexandra.dk/datasets/game_tweets.zip) 
+
+​	Information about the game annotations: [Download TwitterSent - game information](https://danlp-downloads.alexandra.dk/datasets/AngryTweets.zip) 
 
 ### Europarl Sentiment1
 
