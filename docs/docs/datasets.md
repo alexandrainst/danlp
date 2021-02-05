@@ -104,7 +104,7 @@ twitSent = TwitterSent()
 # the default is to download the training version 1 which is annotated by a trained annotator
 df_test, df_train = twitSent.load_with_pandas()
 # To download the tweets annotated in the game and the ekstra information
-df_test, df_train, df_gameover, df_verifying, df_session = 	twitSent.load_with_pandas( 	 training_version=2, game_info=True)
+df_test, df_train, df_gameover, df_verifying, df_session = twitSent.load_with_pandas(training_version=2, game_info=True)
 ```
 
 The dataset can also be downloaded directly with the labels and tweet id:
