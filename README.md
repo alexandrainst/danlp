@@ -168,7 +168,7 @@ To help you navigate we provide you with an overview of the structure in the git
     │	    └── imgs   			 # Images used in documentation
     │   └── library     		# Files used for Read the Docs
     ├── examples	   			# Examples, tutorials and benchmark scripts
-    │   └── benchmarks 			# Scripts for reproducing benchmarks results
+    │   ├── benchmarks 			# Scripts for reproducing benchmarks results
     │   └── tutorials 			# Jupyter notebook tutorials
     └── tests   	   			# Tests for continuous integration with travis
 
