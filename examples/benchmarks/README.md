@@ -1,14 +1,15 @@
 Benchmarks scripts
 ========
 
-This  folder contains scripts to reproduce the benchmark results reported for the different models in the docs in this project.  
+This  folder contains scripts to reproduce the benchmark results reported in our [documentation](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) for the different tasks we cover. 
 
-The benchmark script  evaluate models implemented in the danlp package but also models implemented in other frameworks.
+The benchmark scripts evaluate models implemented in the danlp package but also models implemented in other frameworks.
 Therefore more installation of packages is needed to run some of the scripts.
-You can either look in the specific scripts to check which packages is needed, or you can install all the packages which is needed by `pip install requirements_benchmark.py`.
+You can either look in the specific scripts to check which packages is needed, or you can install all the packages which is needed by `pip install -r requirements_benchmark.txt`.
+
 For running the `sentiment_benchmarks_twitter` you need a twitter development account and setting the keys as environment variable.
 
-#### List of currently benchmark scripts
+#### List of current benchmark scripts
 
 - Benchmark script for word embeddings in `wordembeddings_benchmarks.py`
 

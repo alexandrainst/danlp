@@ -149,7 +149,7 @@ The number of datasets in the Danish language is limited. The DaNLP repository p
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](https://danlp-alexandra.readthedocs.io/en/latest/docs/datasets.html).
 
 ## Examples
-You will find examples and tutorials [here](/examples) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
+You will find examples and tutorials [here](/examples/tutorials) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
 
 ## Structure of the repo
 
@@ -169,13 +169,14 @@ To help you navigate we provide you with an overview of the structure in the git
     │   └── library     		# Files used for Read the Docs
     ├── examples	   			# Examples, tutorials and benchmark scripts
     │   └── benchmarks 			# Scripts for reproducing benchmarks results
-    └── tests   	   			# Test for continous integration with travis
+    │   └── tutorials 			# Jupyter notebook tutorials
+    └── tests   	   			# Tests for continuous integration with travis
 
 ## How do I contribute?
 
 If you want to contribute to the DaNLP repository and make it better, your help is very welcome. You can contribute to the project in many ways:
 
-- Help us write good [tutorials](https://github.com/alexandrainst/danlp/tree/master/examples) on Danish NLP use-cases
+- Help us write good [tutorials](examples/tutorials) on Danish NLP use-cases
 - Contribute with your own pretrained NLP models or datasets in Danish (see our [contributing guidelines](CONTRIBUTING.md) for more details on how to contribute to this repository)
 - Create GitHub issues with questions and bug reports
 - Notify us of other Danish NLP resources
