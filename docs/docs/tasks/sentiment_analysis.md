@@ -43,7 +43,7 @@ classifier.predict('jeg ejer en rød bil og det er en god bil')
 classifier.predict('jeg ejer en rød bil men den er gået i stykker')
 ''''Sorg/trist''''
 
-# Get probabilities and matching clases names
+# Get probabilities and matching classes names
 classifier.predict_proba('jeg ejer en rød bil men den er gået i stykker', no_emotion=False)
 classifier._classes()
 ```
@@ -66,9 +66,9 @@ classifier.predict('Analysen viser, at økonomien bliver forfærdelig dårlig')
 classifier.predict('Jeg tror alligvel, det bliver godt')
 '''{'analytic': 'subjektive', 'polarity': 'positive'}'''
 
-# Get probabilities and matching clases names
+# Get probabilities and matching classes names
 classifier.predict_proba('Analysen viser, at økonomien bliver forfærdelig dårlig')
-classifier._clases()
+classifier._classes()
 ```
 
 
@@ -87,6 +87,8 @@ Below is a small snippet for getting started using the spaCy sentiment model. Cu
 
 ```python
 from danlp.models import load_spacy_model
+import operator 
+
 # load the model
 nlp = load_spacy_model(textcat='sentiment') # if you got an error saying da.vectors not found, try setting vectorError=True - it is an temp fix
 

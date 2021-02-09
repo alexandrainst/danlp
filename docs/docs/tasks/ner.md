@@ -32,8 +32,9 @@ bert = load_bert_ner_model()
 tokens, labels = bert.predict("Jens Peter Hansen kommer fra Danmark")
 print(" ".join(["{}/{}".format(tok,lbl) for tok,lbl in zip(tokens,labels)]))
 
-# To get a "right" tokenization provide it your self (SpaCy can be used for this) by providing a a list of tokens
-# With this options, output can also be choosen to be a dict with tags and position instead of IBO format
+# To get a correct tokenization, you have to provide it yourself to BERT  by providing a list of tokens
+# (for example SpaCy can be used for tokenization)
+# With this option, output can also be choosen to be a dict with tags and position instead of BIO format
 tekst_tokenized = ['Han', 'hedder', 'Anders', 'And', 'Andersen', 'og', 'bor', 'i', 'Århus', 'C']
 bert.predict(tekst_tokenized, IOBformat=False)
 """

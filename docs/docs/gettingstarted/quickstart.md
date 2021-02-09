@@ -16,6 +16,7 @@ For a more detailed description of the tasks and frameworks, follow the links to
 *  [Sentiment Analysis](../tasks/sentiment_analysis.md) with spaCy or BERT
 *  [Dependency parsing and NP-chunking](../tasks/dependency.md) with spaCy
 
+You can also try out our [getting started jupyter notebook](https://github.com/alexandrainst/danlp/blob/master/examples/tutorials/getting_started.ipynb) for quicly learning how to load and use the DaNLP models and datasets. 
 
 ## All-in-one with the spaCy models
 

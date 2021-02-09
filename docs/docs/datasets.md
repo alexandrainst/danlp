@@ -82,11 +82,27 @@ flair_corpus = wikiann.load_with_flair()
 The WordSim-353 dataset (Finkelstein et al. 2002) contains word pairs annotated with a similarity score (1-10). It is common to use it to do intrinsic evaluations 
 on word embeddings to test for syntactic or semantic relationships between words. The dataset has been 
 [translated to Danish](https://github.com/fnielsen/dasem/tree/master/dasem/data/wordsim353-da) by Finn Årup Nielsen.
+Here is how you can load the dataset:
+
+```python
+from danlp.datasets import WordSim353Da
+
+ws353 = WordSim353Da()
+ws353.load_with_pandas()
+```
 
 ### Danish Similarity Dataset
 The [Danish Similarity Dataset](https://github.com/kuhumcst/Danish-Similarity-Dataset) 
 consists of 99 word pairs annotated by 38 annotators with a similarity score (1-6).
 It is constructed with frequently used Danish words.
+Here is how you can load the dataset:
+
+```python
+from danlp.datasets import DSD
+
+dsd = DSD()
+dsd.load_with_pandas()
+```
 
 ### Twitter Sentiment
 

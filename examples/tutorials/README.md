@@ -8,6 +8,7 @@ learning on Danish.
 ### List of currently available tutorials
 
 Jupyter notebooks : 
+- Getting started tutorial, including examples of how to load and use DaNLP models and datasets (similar to the code snippets from our [documentation](https://danlp-alexandra.readthedocs.io/en/latest/index.html)) : `getting_started.ipynb`
 - Tutorial of applying zero shot transfer learning to train a sentiment 
    classifier that can be applied on Danish text:
    `example_zero_shot_sentiment.ipynb`
