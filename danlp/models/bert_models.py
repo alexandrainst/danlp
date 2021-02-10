@@ -176,7 +176,7 @@ class BertEmotion:
     def _get_pred(self, tokenizer, model, max_lenght, sentence):
         input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
                                                 max_length=max_lenght, truncation=True, return_overflowing_tokens=True)
-        if 'overflowing_tokens' in input1:
+        if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
         pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
 
@@ -299,7 +299,7 @@ class BertTone:
     def _get_pred(self, tokenizer, model, max_lenght, sentence):
         input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
                                                 max_length=max_lenght, truncation=True, return_overflowing_tokens=True)
-        if 'overflowing_tokens' in input1:
+        if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequenze then {} tokens'.format(max_lenght))
         pred = model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
 
@@ -352,7 +352,7 @@ class BertTone:
             proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
 
         return proba    
-    
+
     
 class BertBase:
     '''
@@ -388,7 +388,7 @@ class BertBase:
        
 
         :param str sentence: raw text
-        :return: three lists: token_embeddings (dim: toknes x 3072), sentence_embedding (1x738), tokenized_text
+        :return: three lists: token_embeddings (dim: tokens x 3072), sentence_embedding (1x738), tokenized_text
         :rtype: list, list, list
         """
 
@@ -455,6 +455,7 @@ class BertNextSent:
         self.model = BertForNextSentencePrediction.from_pretrained(self.path_model,
                                           output_hidden_states = True, # Whether the model returns all hidden-states.
                                           )
+        self.max_length = self.model.bert.embeddings.position_embeddings.num_embeddings
 
     def predict_if_next_sent(self, sent_A: str, sent_B: str):
         """
@@ -469,7 +470,10 @@ class BertNextSent:
         """
         from torch.nn.functional import softmax
         # encoded as "one" input to the model by using 'sent_B' as the 'text_pair'
-        encoded = self.tokenizer.encode_plus(sent_A, text_pair=sent_B, return_tensors='pt')
+        encoded = self.tokenizer.encode_plus(sent_A, text_pair=sent_B, return_tensors='pt',
+                                        max_length=self.max_length, truncation=True, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in encoded and encoded['overflowing_tokens'].shape[1]>0:
+             warnings.warn('Maximum length for sequence (sent_A + sent_B) exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(self.max_length))
 
         # a model's output is a tuple, we only need the output tensor containing
         # the relationships which is the first item in the tuple
