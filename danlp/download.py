@@ -142,7 +142,6 @@ MODELS = {
         'size': 413164986,
         'file_extension': ''
     },
-    
     'bert.emotion': {
         'url': DANLP_STORAGE_URL + '/models/bert.emotion.zip',
         'md5_checksum': '832214e9362b12372bedbbc8e819ea9d',
@@ -166,6 +165,12 @@ MODELS = {
         'md5_checksum': 'bb0940fba75b39795332105bb2bc2af1',
         'size': 410888897,
         'file_extension': ''
+    },
+    'xlmr.coref': {
+        'url': DANLP_STORAGE_URL + '/models/xlmr.coref.zip',
+        'md5_checksum': '7cb9032c6b3a6af9d22f372de5817b35',
+        'size': 853720929,
+        'file_extension': '.tar.gz'
     },
 }
 
@@ -390,7 +395,7 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
             print("The file {} exists here: {}".format(file_name, destination))
             
     assert _check_file(destination) == (expected_size, expected_hash), \
-        "Downloaded file does not match the expected checksum! Remove the file: {} and try again.".format(destination)
+        "Downloaded file does not match the expected size or checksum! Remove the file: {} and try again.".format(destination)
 
 
 def _unzip_process_func(tmp_file_path: str, meta_info: dict, cache_dir: str = DEFAULT_CACHE_DIR,
