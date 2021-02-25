@@ -19,7 +19,9 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
 | [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -                 | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
 | [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens)   | 3.403                  | CC BY-SA 4.0                                 | ✔️     |
-| [DanNet](#dannet)                                            | Wordnet                | 66.308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)    | ✔️     |
+| [DanNet](#dannet)                                            | Wordnet                | 66,308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)    | ✔️     | 
+| [DKHate](#dkhate)  | Hate Speech Detection    | 61,967 | 3,289   | CC BY 4.0 | ✔️     |
+
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -64,6 +66,27 @@ corpus = dacoref.load_as_conllu(predefined_splits=True)
 The dataset can also be downloaded directly:
 
 [Download dacoref](http://danlp-downloads.alexandra.dk/datasets/dacoref.zip) 
+
+
+### DKHate
+
+The DKHate dataset contains user-generated comments from social media platforms (Facebook and Reddit) 
+annotated for various types and target of offensive language. 
+The original corpus used for the [OffensEval 2020](https://sites.google.com/site/offensevalsharedtask/results-and-paper-submission) shared task can be found [here](https://figshare.com/articles/dataset/Danish_Hate_Speech_Abusive_Language_data/12220805).  
+Note that only labels for the sub-task A (Offensive language identification), i.e.  `NOT` (Not Offensive) / `OFF` (Offensive), are available.
+
+The dataset can be loaded with the DaNLP package:
+
+```python
+from danlp.datasets import DKHate
+dkhate = DKHate()
+test, train = dkhate.load_with_pandas()
+```
+
+The dataset can also be downloaded directly:
+
+[Download dkhate](http://danlp-downloads.alexandra.dk/datasets/dkhate.zip)
+
 
 ### WikiANN
 The WikiANN dataset [(Pan et al. 2017)](https://aclweb.org/anthology/P17-1178) is a dataset with NER annotations 
@@ -242,3 +265,4 @@ dannet._synset_from_id(3514)
 - Lev Finkelstein, Evgeniy Gabrilovich, Yossi Matias, Ehud Rivlin, Zach Solan, Gadi Wolfman, and Eytan Ruppin. 2002. [Placing Search in Context: The Concept Revisited](http://www.cs.tau.ac.il/~ruppin/p116-finkelstein.pdf). In  **ACM TOIS**.
 - Uwe Quasthoff, Matthias Richter and Christian Biemann. 2006. [Corpus Portal for Search in Monolingual Corpora](https://www.aclweb.org/anthology/L06-1396/). In **LREC**.
 -  M.T. Kromann and S.K. Lynge. [Danish Dependency Treebank v. 1.0](https://github.com/mbkromann/copenhagen-dependency-treebank). Department of Computational Linguistics, Copenhagen Business School., 2004. 
+- Sigurbergsson, Gudbjartur Ingi  and Derczynski, Leon. [Offensive Language and Hate Speech Detection for {D}anish](https://www.aclweb.org/anthology/2020.lrec-1.430.pdf). in **LREC 2020**
