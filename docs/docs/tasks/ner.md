@@ -16,6 +16,8 @@ and made available through the DaNLP library.
 | [Polyglot](https://polyglot.readthedocs.io/en/latest/NamedEntityRecognition.html) | Wikipedia                                                             | Polyglot                       | PER, ORG, LOC | ❌     |
 | [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
 | [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
+| [DaCy](#dacy)                                      | [DaNE](../datasets.md#dane)                                           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com)                 | PER, ORG, LOC | (✔)    |
+
 
 
 #### 🔧 BERT {#bert}
@@ -95,6 +97,11 @@ It also includes some ready-to-use fine-tuned (on [DaNE](../datasets.md#dane)) N
 and a [Danish Electra](https://github.com/MalteHB/-l-ctra). 
 
 
+### DaCy {#dacy}
+
+[DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v. 3.
+its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
+
 #### Daner
 The daner [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) NER tool
 is a wrapper around the [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 
@@ -110,12 +117,14 @@ The table below has the achieved F1 score on the test set:
 
 | Model           | LOC       | ORG       | PER       | AVG       |
 |-----------------|-----------|-----------|-----------|-----------|
-| BERT            | 83.90     | **72.98** | 92.82     | **84.04** |
-| Flair           | **84.82** | 62.95     | **93.15** | 81.78     |
+| BERT            | 83.90     | 72.98 | 92.82     | 84.04 |
+| Flair           | **84.82** | 62.95     | **93.15 | 81.78     |
 | spaCy           | 75.96     | 59.57     | 87.87     | 75.73     |
 | Polyglot        | 64.95     | 39.3      | 78.74     | 64.18     |
 | NERDA (mBERT)   | 80.75     | 65.73     | 92.66     | 80.66     |
 | NERDA (electra) | 77.67     | 60.13     | 90.16     | 76.77     |
+| DaCy (medium) | 83.09     | 67.35     | 89.62     | 78.46     |
+| DaCy (large) | 83.90     | **77.82**     |  **95.53**     | **85.20**     |
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 
