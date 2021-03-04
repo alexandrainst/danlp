@@ -4,7 +4,7 @@ import spacy
 import operator
 from danlp.download import download_model, DEFAULT_CACHE_DIR, _unzip_process_func
 from danlp.models import load_spacy_model, load_spacy_chunking_model
-import os
+import os, io
 
 class TestSpacyModel(unittest.TestCase):
     def test_download(self):
@@ -19,6 +19,19 @@ class TestSpacyModel(unittest.TestCase):
 
     def test_predictions(self):
         nlp = load_spacy_model()
+
+
+        k, v = None, None
+        for k,v in globals().items():
+            if isinstance(v, io.IOBase):
+
+                print(k,v)
+                print(type(k))
+                print(type(v))
+                print(v.name)
+                print(isinstance(v, io.IOBase))
+                #v.close()
+
         some_text = "Jeg gik en tur med Lars Bo Jensen i går"
         doc = nlp(some_text)
         self.assertTrue(doc.is_parsed)
