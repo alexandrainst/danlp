@@ -29,7 +29,7 @@ class DKHate:
         
         :return: a dataframe for test data and a dataframe from train data
         """
-        df_test = pd.read_csv(os.path.join(self.dataset_dir, self.dataset_name + '.test' + self.file_extension), sep='\t', index_col=0, encoding='utf-8')
-        df_train = pd.read_csv(os.path.join(self.dataset_dir, self.dataset_name + '.train' + self.file_extension), sep='\t', index_col=0, encoding='utf-8')
+        df_test = pd.read_csv(os.path.join(self.dataset_dir, self.dataset_name + '.test' + self.file_extension), sep='\t', index_col=0, encoding='utf-8').dropna()
+        df_train = pd.read_csv(os.path.join(self.dataset_dir, self.dataset_name + '.train' + self.file_extension), sep='\t', index_col=0, encoding='utf-8').dropna()
         
         return df_test, df_train
