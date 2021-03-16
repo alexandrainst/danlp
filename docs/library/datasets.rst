@@ -10,12 +10,25 @@ Danish Dependency Treebank
 
 
 Dacoref
---------------------------
+-------
 
 .. automodule:: danlp.datasets.dacoref
     :members:
     :show-inheritance:
 
+DanNet
+------
+
+.. automodule:: danlp.datasets.dannet
+    :members:
+    :show-inheritance:
+
+DKHate
+------
+
+.. automodule:: danlp.datasets.dkhate
+    :members:
+    :show-inheritance:
 
 Sentiment datasets
 ------------------

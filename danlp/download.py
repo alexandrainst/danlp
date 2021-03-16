@@ -206,6 +206,13 @@ DATASETS = {
         'size': 1005278,
         'file_extension': ''
     },
+    # DKHate 
+    'dkhate': {
+        'url': 'http://danlp-downloads.alexandra.dk/datasets/dkhate.zip',
+        'md5_checksum': '79d5abc0492637701edd0ca08154eb58',
+        'size': 170933,
+        'file_extension': '.tsv'
+    },
     # Danish Wordnet
     'dannet': {
         'url': DANLP_STORAGE_URL + '/datasets/dannet.zip',
