@@ -18,7 +18,7 @@
       Part of Speech
     </a>
     <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/ddocs/docs/tasks/sentiment_analysis.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md">
       Sentiment Analysis
     </a>
       <span> | </span>
