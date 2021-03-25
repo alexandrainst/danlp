@@ -12,7 +12,15 @@ import os
 from typing import List
 
 class XLMRCoref():
+    """
+    XLM-Roberta Coreference Resolution Model.
 
+    For predicting which expressions (word or group of words) 
+    refer to the same entity in a document. 
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    """
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
 
         # download the model or load the model path
@@ -29,7 +37,7 @@ class XLMRCoref():
     
     def predict(self, document: List[List[str]]):
         """
-        Predict coreferences
+        Predict coreferences in a document
 
         :param List[List[str]] document: segmented and tokenized text
         :return: a dictionary

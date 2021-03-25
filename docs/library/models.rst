@@ -32,3 +32,10 @@ BERT models
 .. automodule:: danlp.models.bert_models
     :members:
     :show-inheritance:
+
+XLM-R models
+------------
+
+.. automodule:: danlp.models.xlmr_models
+    :members:
+    :show-inheritance:
