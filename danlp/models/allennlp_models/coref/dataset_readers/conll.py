@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, DefaultDict
 from overrides import overrides
 
 from allennlp.common.file_utils import cached_path
-from allennlp.data.dataset_readers.dataset_reader import DatasetReader
+from allennlp.data.dataset_readers.dataset_reader import DatasetReader, AllennlpDataset
 from allennlp.data.instance import Instance
 from allennlp.data.tokenizers import PretrainedTransformerTokenizer
 from allennlp.data.token_indexers import SingleIdTokenIndexer, TokenIndexer
@@ -77,20 +77,59 @@ class ConllCorefReader(DatasetReader):
 
         ontonotes_reader = Ontonotes()
         for sentences in ontonotes_reader.dataset_document_iterator(file_path):
-            clusters: DefaultDict[int, List[Tuple[int, int]]] = collections.defaultdict(list)
+            words, list_clusters, desc_embeddings = self._process_sentences(sentences)
+            yield self.text_to_instance(words, list_clusters, desc_embeddings)
 
-            total_tokens = 0
-            for sentence in sentences:
-                for typed_span in sentence.coref_spans:
-                    # Coref annotations are on a _per sentence_
-                    # basis, so we need to adjust them to be relative
-                    # to the length of the document.
-                    span_id, (start, end) = typed_span
-                    clusters[span_id].append((start + total_tokens, end + total_tokens))
-                total_tokens += len(sentence.words)
-            desc_embeddings = [s.word_senses for s in sentences] 
+    def _load(self, dataset: str):
 
-            yield self.text_to_instance([s.words for s in sentences], list(clusters.values()), desc_embeddings)
+        lines = []
+        sent_id = 0
+        for sent in dataset:
+            for t in sent:
+                line = [
+                        t['doc_id'], 
+                        str(sent_id),
+                        str(t['id']), 
+                        t['form'], 
+                        t['upos'], 
+                        '-', 
+                        t['lemma'], 
+                        t['qid'], 
+                        '-', 
+                        '-'
+                        ] + ['*']*6 + [t['coref_rel']]
+                lines.append('\t'.join(line))
+            lines.append("")
+            sent_id += 1
+
+        ontonotes_reader = Ontonotes()
+        for sentences in ontonotes_reader.dataset_iterator(lines):
+            words, list_clusters, desc_embeddings = self._process_sentences(sentences)
+            yield self.text_to_instance(words, list_clusters, desc_embeddings)
+
+    def load_dataset(self, dataset: str):
+        instances = self._multi_worker_islice(self._load(dataset))
+        if not isinstance(instances, list):
+            instances = list(instances)
+
+        return AllennlpDataset(instances)
+
+    def _process_sentences(self, sentences):
+        clusters: DefaultDict[int, List[Tuple[int, int]]] = collections.defaultdict(list)
+
+        total_tokens = 0
+        for sentence in sentences:
+            for typed_span in sentence.coref_spans:
+                # Coref annotations are on a _per sentence_
+                # basis, so we need to adjust them to be relative
+                # to the length of the document.
+                span_id, (start, end) = typed_span
+                clusters[span_id].append((start + total_tokens, end + total_tokens))
+            total_tokens += len(sentence.words)
+        desc_embeddings = [s.word_senses for s in sentences] 
+
+        return [s.words for s in sentences], list(clusters.values()), desc_embeddings
+
     @overrides
     def text_to_instance(
         self,  # type: ignore

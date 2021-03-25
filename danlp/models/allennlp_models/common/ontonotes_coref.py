@@ -215,25 +215,29 @@ class Ontonotes:
         for conll data which has been preprocessed, such as the preprocessing which
         takes place for the 2012 CONLL Coreference Resolution task.
         """
-        with codecs.open(file_path, "r", encoding="utf8") as open_file:
-            conll_rows = []
-            document: List[OntonotesSentence] = []
-            for line in open_file:
-                line = line.strip()
-                if line != "" and not line.startswith("#"):
-                    # Non-empty line. Collect the annotation.
-                    conll_rows.append(line)
-                else:
-                    if conll_rows:
-                        document.append(self._conll_rows_to_sentence(conll_rows))
-                        conll_rows = []
-                if line.startswith("#end document"):
-                    yield document
-                    document = []
-            if document:
-                # Collect any stragglers or files which might not
-                # have the '#end document' format for the end of the file.
+        lines = [line for line in codecs.open(file_path, "r", encoding="utf8")]
+        dataset_iterator(lines)
+
+    def dataset_iterator(self, lines: List) -> Iterator[List[OntonotesSentence]]:
+
+        conll_rows = []
+        document: List[OntonotesSentence] = []
+        for line in lines:
+            #line = line.strip()
+            if line != "" and not line.startswith("#"):
+                # Non-empty line. Collect the annotation.
+                conll_rows.append(line)
+            else:
+                if conll_rows:
+                    document.append(self._conll_rows_to_sentence(conll_rows))
+                    conll_rows = []
+            if line.startswith("#end document"):
                 yield document
+                document = []
+        if document:
+            # Collect any stragglers or files which might not
+            # have the '#end document' format for the end of the file.
+            yield document
 
     def sentence_iterator(self, file_path: str) -> Iterator[OntonotesSentence]:
         """
