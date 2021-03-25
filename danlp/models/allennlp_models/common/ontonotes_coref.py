@@ -184,30 +184,6 @@ class Ontonotes:
 8 word sense is now embeddings
     """
 
-    def dataset_iterator(self, file_path: str) -> Iterator[OntonotesSentence]:
-        """
-        An iterator over the entire dataset, yielding all sentences processed.
-        """
-        for conll_file in self.dataset_path_iterator(file_path):
-            yield from self.sentence_iterator(conll_file)
-
-    @staticmethod
-    def dataset_path_iterator(file_path: str) -> Iterator[str]:
-        """
-        An iterator returning file_paths in a directory
-        containing CONLL-formatted files.
-        """
-        logger.info("Reading CONLL sentences from dataset files at: %s", file_path)
-        for root, _, files in list(os.walk(file_path)):
-            for data_file in files:
-                # These are a relic of the dataset pre-processing. Every
-                # file will be duplicated - one file called filename.gold_skel
-                # and one generated from the preprocessing called filename.gold_conll.
-                if not data_file.endswith("gold_conll"):
-                    continue
-
-                yield os.path.join(root, data_file)
-
     def dataset_document_iterator(self, file_path: str) -> Iterator[List[OntonotesSentence]]:
         """
         An iterator over CONLL formatted files which yields documents, regardless
@@ -218,7 +194,7 @@ class Ontonotes:
         lines = [line for line in codecs.open(file_path, "r", encoding="utf8")]
         dataset_iterator(lines)
 
-    def dataset_iterator(self, lines: List) -> Iterator[List[OntonotesSentence]]:
+    def dataset_conllu_iterator(self, lines: List) -> Iterator[List[OntonotesSentence]]:
 
         conll_rows = []
         document: List[OntonotesSentence] = []
@@ -238,14 +214,6 @@ class Ontonotes:
             # Collect any stragglers or files which might not
             # have the '#end document' format for the end of the file.
             yield document
-
-    def sentence_iterator(self, file_path: str) -> Iterator[OntonotesSentence]:
-        """
-        An iterator over the sentences in an individual CONLL formatted file.
-        """
-        for document in self.dataset_document_iterator(file_path):
-            for sentence in document:
-                yield sentence
 
     def _conll_rows_to_sentence(self, conll_rows: List[str]) -> OntonotesSentence:
         document_id: str = None
@@ -283,31 +251,7 @@ class Ontonotes:
             word = conll_components[3]
             #print(word)
             pos_tag = conll_components[4]
-            parse_piece = conll_components[5]
-
-            # Replace brackets in text and pos tags
-            # with a different token for parse trees.
-            if pos_tag != "XX" and word != "XX":
-                if word == "(":
-                    parse_word = "-LRB-"
-                elif word == ")":
-                    parse_word = "-RRB-"
-                else:
-                    parse_word = word
-                if pos_tag == "(":
-                    pos_tag = "-LRB-"
-                if pos_tag == ")":
-                    pos_tag = "-RRB-"
-                #(left_brackets, right_hand_side) = parse_piece.split("*")
-                # only keep ')' if there are nested brackets with nothing in them.
-                #right_brackets = right_hand_side.count(")") * ")"
-                parse_piece = ''#f"{left_brackets} ({pos_tag} {parse_word}) {right_brackets}"
-            else:
-                # There are some bad annotations in the CONLL data.
-                # They contain no information, so to make this explicit,
-                # we just set the parse piece to be None which will result
-                # in the overall parse tree being None.
-                parse_piece = None
+            parse_piece = ''
 
             lemmatised_word = conll_components[6]
             framenet_id = conll_components[7]

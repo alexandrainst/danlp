@@ -103,7 +103,7 @@ class ConllCorefReader(DatasetReader):
             sent_id += 1
 
         ontonotes_reader = Ontonotes()
-        for sentences in ontonotes_reader.dataset_iterator(lines):
+        for sentences in ontonotes_reader.dataset_conllu_iterator(lines):
             words, list_clusters, desc_embeddings = self._process_sentences(sentences)
             yield self.text_to_instance(words, list_clusters, desc_embeddings)
 
