@@ -80,10 +80,8 @@ class CoreferenceResolver(Model):
         max_antecedents: int,
         coarse_to_fine: bool = True,
         inference_order: int = 1,
-        lexical_dropout: float = 0.2,
         initializer: InitializerApplicator = InitializerApplicator(),
         desc_dropout: float = 0.2,
-        desc_emb_size: int = 0,
         **kwargs
     ) -> None:
         super().__init__(vocab, **kwargs)
@@ -107,7 +105,7 @@ class CoreferenceResolver(Model):
             bucket_widths=False,
         )
         self._attentive_span_extractor = SelfAttentiveSpanExtractor(
-            input_dim=text_field_embedder.get_output_dim()+desc_emb_size
+            input_dim=text_field_embedder.get_output_dim()
         )
 
         # 10 possible distance buckets.
@@ -124,11 +122,6 @@ class CoreferenceResolver(Model):
 
         #for description embeddings
         self.desc_dropout = torch.nn.Dropout(desc_dropout)
-        self.desc_emb_size = desc_emb_size
-        if self.desc_emb_size == 0:
-            self.use_desc_emb = False
-        else:
-            self.use_desc_emb =True
 
         if self._coarse_to_fine:
             print("Use coarse to fine:", self._coarse_to_fine)
@@ -141,10 +134,7 @@ class CoreferenceResolver(Model):
 
         self._mention_recall = MentionRecall()
         self._conll_coref_scores = ConllCorefScores()
-        if lexical_dropout > 0:
-            self._lexical_dropout = torch.nn.Dropout(p=lexical_dropout)
-        else:
-            self._lexical_dropout = lambda x: x
+        self._lexical_dropout = torch.nn.Dropout(p=0.2)
         initializer(self)
 
     @overrides
@@ -198,28 +188,6 @@ class CoreferenceResolver(Model):
         batch_size = spans.size(0)
         document_length = text_embeddings.size(1)
         num_spans = spans.size(1)
-
-        # Shape: (batch_size, document_length, desc_embedding_size)
-        #replace None word vectors with zeroes of the same dimension and also padd with zeros to obtain document
-        if self.use_desc_emb:
-            print("** using desc_emb **")
-            desc_emb = []
-            zeroarr = np.zeros(self.desc_emb_size)
-            for batchi, batch in enumerate(metadata):
-                one_doc =  batch['desc_embeddings']
-                batcharr = []
-                for wordi in range(document_length): #document_length in the longest doc in the batch 
-                    try:
-                        if one_doc[wordi] != None:
-                            batcharr.append(np.array(one_doc[wordi]))
-                        else:
-                            batcharr.append(zeroarr)
-                    except IndexError:
-                        batcharr.append(zeroarr)
-                desc_emb.append(np.array(batcharr))
-            desc_emb = np.array(desc_emb)
-            desc_emb = torch.from_numpy(desc_emb).cuda()
-            assert text_embeddings.size() == desc_emb.size()
                 
 
         # Shape: (batch_size, document_length)
@@ -237,12 +205,6 @@ class CoreferenceResolver(Model):
 
         # Shape: (batch_size, num_spans, 2)
         spans = F.relu(spans.float()).long()
-
-        #Concatenating description embeddings with text_embeddings
-        # Shape (batch_size, document_length, text_embedding_size + desc_emb_size
-        if self.use_desc_emb:
-            desc_text_emb = torch.cat((text_embeddings, desc_emb), 2)
-            text_embeddings = desc_text_emb.float()
 
         # Shape: (batch_size, document_length, encoding_dim + desc_emb_size)
         contextualized_embeddings = self._context_layer(text_embeddings, text_mask)
