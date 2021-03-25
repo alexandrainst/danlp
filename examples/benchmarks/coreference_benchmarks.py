@@ -1,6 +1,6 @@
 
 import time
-from .utils import print_speed_performance
+from utils import print_speed_performance
 
 from danlp.datasets import Dacoref
 from danlp.models import load_xlmr_coref_model
@@ -40,7 +40,7 @@ def benchmark_xlmr_mdl():
         data_loader
     )
 
-    print('**XLMR model**')
+    print('**XLM-R model**')
     print_speed_performance(start, num_sentences, num_tokens)
     print('Precision : ', metrics['coref_precision'])
     print('Recall : ', metrics['coref_recall'])
