@@ -3,6 +3,10 @@ Coreference Resolution
 
 Coreference resolution is the task of finding all expressions that refer to the same entity in a text.
 
+Typically, in a document, persons are first introduced by their name (e.g. `Dronning Margrethe II`) and later refered by pronouns (e.g. `hun`) or expressions (e.g. `Hendes Majestæt`, `Danmarks dronning`, etc). 
+The goal of the coreference resolution task is to find all these references and link them through a common ID. 
+
+
 | Model           | Train Data                                        | License | Trained by          | Tags            | DaNLP |
 |-----------------|---------------------------------------------------|---------|---------------------|-----------------|--|
 | [XLM-R](#xlmr)  | [Dacoref](../datasets.md#dacoref)                 | GPLv2   | Maria Jung Barrett  | Generic QIDs    | ✔️     |
