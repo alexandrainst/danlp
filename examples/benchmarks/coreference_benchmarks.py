@@ -15,12 +15,6 @@ _, _, testset = dacoref.load_as_conllu(predefined_splits=True)
 num_sentences = len(testset)
 num_tokens = sum([len(s) for s in testset])
 
-
-for i, sent in enumerate(testset):
-    if len(sent)<8:
-        print(i, [t['form'] for t in sent], [t['coref_rel'] for t in sent])
-exit()
-
 def benchmark_xlmr_mdl():
 
     from allennlp.data import DataLoader

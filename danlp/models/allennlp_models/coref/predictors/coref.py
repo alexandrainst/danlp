@@ -1,11 +1,9 @@
 from typing import List, Dict
 
 from overrides import overrides
-import numpy
 
 from allennlp.common.util import JsonDict
 from allennlp.data import DatasetReader, Instance
-from allennlp.data.fields import ListField, SequenceLabelField
 from allennlp.models import Model
 from allennlp.predictors.predictor import Predictor
 
