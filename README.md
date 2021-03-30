@@ -136,8 +136,7 @@ The repository is under development and this is the list of [NLP tasks](https://
 -  [Named Entity Recognition](docs/docs/tasks/ner.md)
 -  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
--  Coreference resolution
--  Lemmatization
+-  [Coreference resolution](docs/docs/tasks/coreference.md)
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
