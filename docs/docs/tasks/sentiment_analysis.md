@@ -36,7 +36,7 @@ from danlp.models import load_bert_emotion_model
 classifier = load_bert_emotion_model()
 
 # using the classifier
-classifier.predict('bilen er flot')
+classifier.predict('der er et træ i haven')
 ''''No emotion''''
 classifier.predict('jeg ejer en rød bil og det er en god bil')
 ''''Tillid/Accept''''
