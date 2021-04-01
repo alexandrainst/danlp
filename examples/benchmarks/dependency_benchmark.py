@@ -53,8 +53,7 @@ def benchmark_spacy_mdl():
     
     print(dependency_report(deps_true, deps_pred))
 
-
-def benchmark_dacy_mdl():
+def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
     """
     an adaption of benchmark spacy model which is compatible with spacy v. 3
 
@@ -65,16 +64,19 @@ def benchmark_dacy_mdl():
     def normalize_spacy_head(i, hd):
         return 0 if i == hd else hd+1
 
-    DACY_PATH = os.path.expanduser(
-        "~/desktop/package/da_dacy_large_tft-0.0.0/da_dacy_large_tft/da_dacy_large_tft-0.0.0")
-    nlp = spacy.load(DACY_PATH)
-    parser = nlp
+    from spacy.tokens import Doc
+    import dacy
+    nlp = dacy.load(dacy_model)
+    trf = nlp.get_pipe('transformer')
+    parser = nlp.get_pipe('parser')
+
     
     start = time.time()
 
     deps_pred = []
     for sent in sentences_tokens:
-        doc = nlp.tokenizer.tokens_from_list(sent)
+        doc = Doc(nlp.vocab, words=sent)
+        doc = trf(doc)
         doc = parser(doc)
 
         deprels = []
@@ -91,6 +93,7 @@ def benchmark_dacy_mdl():
     assert sum([len(s) for s in deps_pred])==num_tokens
     
     print(dependency_report(deps_true, deps_pred))
+
 
 if __name__ == '__main__':
     benchmark_spacy_mdl()
