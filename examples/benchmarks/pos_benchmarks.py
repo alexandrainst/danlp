@@ -72,7 +72,7 @@ def benchmark_spacy_mdl():
     print(accuracy_report(tags_true, tags_pred), end="\n\n")
 
 
-def benchmark_dacy_mdl():
+def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
     """
     an adaption of benchmark spacy model which is compatible with spacy v. 3
 
@@ -80,22 +80,24 @@ def benchmark_dacy_mdl():
     spacy >= 3.0.0
     spacy-transformers
     """
-    DACY_PATH = os.path.expanduser(
-        "~/desktop/package/da_dacy_large_tft-0.0.0/da_dacy_large_tft/da_dacy_large_tft-0.0.0")
-    nlp = spacy.load(DACY_PATH)
-    tagger = nlp
+    import dacy
+    from spacy.tokens import Doc
+    nlp = dacy.load(dacy_model)
+    trf = nlp.get_pipe('transformer')
+    tagger = nlp.get_pipe('tagger')
 
     start = time.time()
 
     tags_pred = []
     for sent in sentences_tokens:
-        doc = nlp.tokenizer.tokens_from_list(sent)
+        doc = Doc(nlp.vocab, words=sent)
+        doc = trf(doc)
         doc = tagger(doc)
 
         tags = []
         for tok in doc:
 
-            tags.append(tok.pos_)
+            tags.append(tok.tag_)
 
         tags_pred.append(tags)
     print('**Spacy model**')

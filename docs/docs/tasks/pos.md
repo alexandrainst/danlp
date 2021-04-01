@@ -4,12 +4,12 @@ This section is concerned with public available Part of Speech (POS) taggers in 
 
 Part-of-speech tagging is the task of classifying words into their part-of-speech, based on both their definition and context. Parts of speech are also known as word classes, which describe the role of the words in sentences relatively to their neighbors (such as verbs and nouns). 
 
-| Model                 | Train Data                                                                | License       | Trained by          | Tags                         | DaNLP |
-|-----------------------|---------------------------------------------------------------------------|---------------|---------------------|------------------------------|-------|
-| [Polyglot](#polyglot) | [Danish Dependency Treebank](../datasets.md#dane) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot            | 17  Universal part of speech | ❌     |
-| [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut | 17  Universal part of speech | ✔️    |
-| [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut | 17  Universal part of speech | ✔️    |
-| [DaCy](#dacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache 2           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal part of speech | (✔️)    |
+| Model                 | Train Data                                                                | License       | Trained by                                                                                                   | Tags                         | DaNLP |
+| --------------------- | ------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------- | ----- |
+| [Polyglot](#polyglot) | [Danish Dependency Treebank](../datasets.md#dane) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot                                                                                                     | 17  Universal part of speech | ❌     |
+| [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️     |
+| [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️     |
+| [DaCy](#dacy)         | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache 2      | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal part of speech | (✔️)   |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
@@ -87,12 +87,12 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 
 #### DaNLP
 
-| Model                       | Accuracy   |
-|-----------------------------|------------|
-| Flair                       | 97.97  |
-| SpaCy                       | 96.15      |
-| DaCy (medium)                      | 97.93      |
-| DaCy (large)               | **98.39**      |
+| Model         | Accuracy  |
+| ------------- | --------- |
+| Flair         | 97.97     |
+| SpaCy         | 96.15     |
+| DaCy (medium) | 98.27     |
+| DaCy (large)  | **98.65** |
 
 #### Polyglot model
 
@@ -102,10 +102,10 @@ The tags predicted with the polyglot model differ slightly from the universal Po
 
 We calculated the scores for the original predictions and for the corrected version.
 
-| Model                       | Accuracy   |
-| --------                    | ---------- |
-| Polyglot                    | 76.76      |
-| Polyglot (corrected output) | 83.4       |
+| Model                       | Accuracy |
+| --------------------------- | -------- |
+| Polyglot                    | 76.76    |
+| Polyglot (corrected output) | 83.4     |
 
 
 
