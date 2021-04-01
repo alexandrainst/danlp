@@ -173,7 +173,7 @@ class TestHateSpeechDatasets(unittest.TestCase):
         dkhate = DKHate() 
         test, train = dkhate.load_with_pandas()
         self.assertEqual(len(test), 329)
-        self.assertEqual(len(train), 2961)
+        self.assertEqual(len(train), 2960)
         self.assertEqual(set(test['subtask_a'].to_list()), {'NOT', 'OFF'})
 
 class TestDannetDataset(unittest.TestCase):

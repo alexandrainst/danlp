@@ -18,7 +18,7 @@
       Part of Speech
     </a>
     <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/ddocs/docs/tasks/sentiment_analysis.md">
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md">
       Sentiment Analysis
     </a>
       <span> | </span>
@@ -53,7 +53,7 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 <br/>**Help us improve DaNLP**
 
-- :raising_hand: Have you tried the DaNLP package? Then we would love to chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. We also welcome and appreciate any written feedback. Reach us at [danlp@alexandra.dk](mailto:danlp@alexandra.dk)
+- :raising_hand: Have you tried the DaNLP package? Then we would love to chat with you about your experiences from a company perspective. It will take approx 20-30 minutes and there's no preparation. English/danish as you prefer. Please leave your details [here](https://forms.office.com/Pages/ResponsePage.aspx?id=zSPaS4dKm0GkfXZzEwsohKhC_ON5BmxBtRwkonVf21tUQUxDQ0oyTVAyU0tDUDVDMTM4SkU4SjJISi4u) and then we will reach out to arrange a call. 
 
 **News**
 
@@ -136,8 +136,7 @@ The repository is under development and this is the list of [NLP tasks](https://
 -  [Named Entity Recognition](docs/docs/tasks/ner.md)
 -  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
--  Coreference resolution
--  Lemmatization
+-  [Coreference resolution](docs/docs/tasks/coreference.md)
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
@@ -178,10 +177,9 @@ If you want to contribute to the DaNLP repository and make it better, your help 
 
 - Help us write good [tutorials](examples/tutorials) on Danish NLP use-cases
 - Contribute with your own pretrained NLP models or datasets in Danish (see our [contributing guidelines](CONTRIBUTING.md) for more details on how to contribute to this repository)
-- Create GitHub issues with questions and bug reports
-- Notify us of other Danish NLP resources
+- Create GitHub issues with questions and bug reports 
+- Notify us of other Danish NLP resources or tell us about any good ideas that you have for improving the project through the [Discussions](https://github.com/alexandrainst/danlp/discussions) section of this repository.
 
-You can write us at danlp@alexandra.dk.
 
 ## Who is behind?
 <img align="right" width="150" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/alexandra_logo.png">

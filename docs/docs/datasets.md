@@ -52,7 +52,7 @@ The dataset can also be downloaded directly in CoNLL-U format.
 
 ### Dacoref
 
-This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank  (Kromann and Lynge, 2004), It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. This work is conducted by Maria Jung Barrett. Read more about it in the dedicated [dacoref docs](dacoref_docs.md).
+This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank  (Kromann and Lynge, 2004). It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. This work is conducted by Maria Jung Barrett. Read more about it in the dedicated [dacoref docs](dacoref_docs.md).
 
 The dataset can be loaded with the DaNLP package:
 
@@ -60,7 +60,7 @@ The dataset can be loaded with the DaNLP package:
 from danlp.datasets import Dacoref
 dacoref = Dacoref()
 # The corpus can be loaded with or without splitting into train, dev and test in a list in that order
-corpus = dacoref.load_as_conllu(predefined_splits=True) 
+corpus = dacoref.load_as_conllu(predefined_splits=True)
 ```
 
 The dataset can also be downloaded directly:
