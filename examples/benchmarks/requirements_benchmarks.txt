@@ -18,3 +18,4 @@ seqeval
 tweepy
 conllu
 NERDA
+allennlp==1.3.0

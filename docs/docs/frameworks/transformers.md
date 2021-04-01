@@ -1,7 +1,13 @@
 Transformers
-====
+============
 
-BERT (Bidirectional Encoder Representations from Transformers) [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) is a deep neural network model used in Natural Language Processing. 
+In DaNLP, we use language representation models based on the Transformer architecure [(Vaswani et al. 2017)](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf). 
+We build specialized models for the most common NLP tasks by fine-tuning transformer models, such as BERT and XLM-RoBERTa.  
+
+
+## BERT
+
+BERT (Bidirectional Encoder Representations from Transformers) [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) is a deep neural network model. It is one of the most popular transformer-based model used in Natural Language Processing. 
 
 The BERT models provided with DaNLP are based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO, and different models have been finetuned on different tasks using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
@@ -11,7 +17,7 @@ Through DaNLP, we provide fine-tuned BERT models for the following tasks:
 * Emotion detection
 * Tone and polarity detection
 
-The  pre-trained  [Danish BERT](https://github.com/botxo/nordic_bert)  from BotXO can also by used for the following task without any further finetuning:
+The  pre-trained  [Danish BERT](https://github.com/botxo/nordic_bert)  from BotXO can also be used for the following tasks without any further finetuning:
 
 - Embeddings of tokens or sentences 
 - Predict a mask word in a sentence 
@@ -126,3 +132,14 @@ The second model detects the tone of a sentence, between `subjective` and `objec
 
 Read more about it in the [sentiment docs](../tasks/sentiment_analysis.md).
 
+## XLM-RoBERTa
+
+XLM-Roberta is a transformer-based multilingual masked language model [(Conneau et al. 2020)](https://www.aclweb.org/anthology/2020.acl-main.747.pdf). It has shown better performance than mBERT (multilingual BERT) on a range of NLP tasks. 
+
+Through DaNLP, we provide a fine-tuned XLM-R model for the task of coreference resolution. 
+
+### Coreference resolution
+
+Coreference resolution is the task of finding all expressions that refer to the same entity in a text.
+
+Read more about it in the [coreference docs](../tasks/coreference.md).

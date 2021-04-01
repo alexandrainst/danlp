@@ -3,14 +3,14 @@ python:
   - "3.6"
 before_install:
   # See https://github.com/travis-ci/travis-ci/issues/7940
-- sudo rm -f /etc/boto.cfg
+  - sudo rm -f /etc/boto.cfg
 cache: pip
 install:
   - pip install coverage --quiet
   - pip install coveralls --quiet
   - pip install -r requirements.txt --quiet
 script:
-  - coverage run -m unittest discover
+  - ./tests/build.sh
 after_success:
   coveralls
 notifications:
