@@ -87,7 +87,7 @@ def benchmark_spacy_mdl():
     print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
-def benchmark_dacy_mdl():
+def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
     """
     an adaption of benchmark spacy model which is compatible with spacy v. 3
 
@@ -95,16 +95,18 @@ def benchmark_dacy_mdl():
     spacy >= 3.0.0
     spacy-transformers
     """
-    DACY_PATH = os.path.expanduser(
-        "~/desktop/package/da_dacy_large_tft-0.0.0/da_dacy_large_tft/da_dacy_large_tft-0.0.0")
-    nlp = spacy.load(DACY_PATH)
-    ner = nlp
+    from spacy.tokens import Doc
+    import dacy
+    nlp = dacy.load(dacy_model)
+    trf = nlp.get_pipe('transformer')
+    ner = nlp.get_pipe('ner')
 
     predictions = []
     start = time.time()
     for token in sentences_tokens:
-        doc = nlp.tokenizer.tokens_from_list(token)
-        ner(doc)
+        doc = Doc(nlp.vocab, words=token)
+        doc = trf(doc)
+        doc = ner(doc)
         ents = []
         for t in doc:
             if t.ent_iob_ == 'O':
