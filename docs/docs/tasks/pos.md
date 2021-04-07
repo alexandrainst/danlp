@@ -91,8 +91,8 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 | ------------- | --------- |
 | Flair         | 97.97     |
 | SpaCy         | 96.15     |
-| DaCy (medium) | 98.27     |
-| DaCy (large)  | **98.65** |
+| DaCy (medium) v0.0.0 | 98.27     |
+| DaCy (large) v0.0.0 | **98.65** |
 
 #### Polyglot model
 

@@ -123,8 +123,8 @@ The table below has the achieved F1 score on the test set:
 | Polyglot        | 64.95     | 39.3      | 78.74     | 64.18     |
 | NERDA (mBERT)   | 80.75     | 65.73     | 92.66     | 80.66     |
 | NERDA (electra) | 77.67     | 60.13     | 90.16     | 76.77     |
-| DaCy (medium) | 83.96     | 66.23     | 90.41     | 80.09     |
-| DaCy (large) | **85.29**     | **79.04**     |  **95.53**     | **86.64**     |
+| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |
+| DaCy (large) v0.0.0 | **85.29**     | **79.04**     |  **95.53**     | **86.64**     |
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 

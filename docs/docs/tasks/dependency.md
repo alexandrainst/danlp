@@ -131,8 +131,8 @@ Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment
 | Model | LA    | UAS   | LAS   |
 | ----- | ----- | ----- | ----- |
 | SpaCy | 87.68 | 81.36 | 77.46 |
-| DaCy (medium) | 93.09 | 88.91 | 86.65 |
-| DaCy (large) | **93.64** | **90.49** | **88.42** |
+| DaCy (medium) v0.0.0 | 93.09 | 88.91 | 86.65 |
+| DaCy (large) v0.0.0 | **93.64** | **90.49** | **88.42** |
 
 ### Noun Phrase Chunking Scores
 
