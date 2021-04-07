@@ -8,10 +8,10 @@ It is typically represented by a directed graph that depicts the grammatical str
 A dependency relation is a triplet consisting of: a head (word), a dependent (another word) and a dependency label (describing the type of the relation).
 
 
-| Model           | Train Data                                        | License | Trained by          | Tags                       | DaNLP |
-|-----------------|---------------------------------------------------|---------|---------------------|----------------------------|-------|
-| [SpaCy](#spacy) | [Danish Dependency Treebank](../datasets.md#dane) | MIT     | Alexandra Institute | 17  Universal dependencies | ✔️     |
-
+| Model           | Train Data                                        | License  | Trained by                                            | Tags                       | DaNLP |
+| --------------- | ------------------------------------------------- | -------- | ----------------------------------------------------- | -------------------------- | ----- |
+| [SpaCy](#spacy) | [Danish Dependency Treebank](../datasets.md#dane) | MIT      | Alexandra Institute                                   | 17  Universal dependencies | ✔️     |
+| [DaCy](#dacy)   | [Danish Dependency Treebank](../datasets.md#dane) | Apache 2 | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal dependencies | (✔️)     |
 
 The model has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
 It uses 39 dependency relations.
@@ -34,6 +34,9 @@ We provide a convertion function -- from dependencies to NP-chunks -- thus depen
 ## 🔧 SpaCy {#spacy}
 
 Read more about the SpaCy model in the dedicated [SpaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset. 
+
+## DaCy {#dacy}
+DaCy is a transformer-based version of the SpaCy model, thus obtaining higher performance, but with a higher computational cost. Read more about the DaCy model in the dedicated [DaCy github](https://github.com/KennethEnevoldsen/DaCy), it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset.
 
 ### Dependency Parser
 
@@ -126,14 +129,16 @@ See detailed scoring of the benchmarks in the [example](<https://github.com/alex
 Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment Score) and LAS (Labelled Attachment Score) — are reported below :
 
 | Model | LA    | UAS   | LAS   |
-|-------|-------|-------|-------|
+| ----- | ----- | ----- | ----- |
 | SpaCy | 87.68 | 81.36 | 77.46 |
+| DaCy (medium) v0.0.0 | 93.09 | 88.91 | 86.65 |
+| DaCy (large) v0.0.0 | **93.64** | **90.49** | **88.42** |
 
 ### Noun Phrase Chunking Scores
 
 NP chunking scores (F1) are reported below :
 
 | Model | Precision | Recall | F1    |
-|-------|-----------|--------|-------|
+| ----- | --------- | ------ | ----- |
 | SpaCy | 91.32     | 91.79  | 91.56 |
 

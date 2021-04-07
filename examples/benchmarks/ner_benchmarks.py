@@ -87,6 +87,42 @@ def benchmark_spacy_mdl():
     print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
+def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
+    """
+    an adaption of benchmark spacy model which is compatible with spacy v. 3
+
+    running this requires:
+    spacy >= 3.0.0
+    spacy-transformers
+    """
+    from spacy.tokens import Doc
+    import dacy
+    nlp = dacy.load(dacy_model)
+    trf = nlp.get_pipe('transformer')
+    ner = nlp.get_pipe('ner')
+
+    predictions = []
+    start = time.time()
+    for token in sentences_tokens:
+        doc = Doc(nlp.vocab, words=token)
+        doc = trf(doc)
+        doc = ner(doc)
+        ents = []
+        for t in doc:
+            if t.ent_iob_ == 'O':
+                ents.append(t.ent_iob_)
+            else:
+                ents.append(t.ent_iob_ + "-" + t.ent_type_)
+
+        predictions.append(ents)
+    print('spaCy:')
+    print_speed_performance(start, num_sentences, num_tokens)
+
+    assert len(predictions) == num_sentences
+    
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+
+
 def benchmark_flair_mdl():
     tagger = load_flair_ner_model()
 
@@ -170,3 +206,6 @@ if __name__ == '__main__':
     benchmark_bert_mdl()
     benchmark_nerda_multi_mdl()
     benchmark_nerda_electra_mdl()
+    # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
+    # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
+    # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
