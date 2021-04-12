@@ -10,3 +10,4 @@ Tasks
    docs/tasks/ner.md
    docs/tasks/dependency.md
    docs/tasks/sentiment_analysis.md
+   docs/tasks/coreference.md
