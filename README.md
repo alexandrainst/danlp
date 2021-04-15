@@ -15,12 +15,20 @@
       </a>
       <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/pos.md">
-      Part of Speech
+      Part of Speech Tagging
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/dependency.md">
+      Dependency Parsing
     </a>
     <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md">
       Sentiment Analysis
     </a>
+      <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/coreference.md">
+      Coreference Resolution
+      </a>
       <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/embeddings.md">
       Embeddings
@@ -31,11 +39,12 @@
       Datasets
    	 </a>
       <span> | </span>
-   	 <a href="https://github.com/alexandrainst/danlp/tree/master/examples">
-      Examples
+   	 <a href="https://github.com/alexandrainst/danlp/tree/master/examples/tutorials">
+      Tutorials
    	 </a>
   </h5>
 </div>
+
 DaNLP is a repository for Natural Language Processing resources for the Danish Language. 
 It is a collection  of available datasets and models for a variety of NLP tasks. 
 The aim is to make it easier and more applicable to practitioners in the industry to use 
@@ -66,7 +75,8 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **Next up**
 
-- :link: the Danish Gigaword will be made available through the DaNLP package
+- the AngryTweets dataset will be added to the DaNLP package, as a result of the crowdsourcing game [AngryTweets](https://medium.com/danlp/angry-tweets-f%C3%B8lelser-og-annoteringer-er-p%C3%A5-spil-s%C3%A5-spil-med-eacade042c95)
+- the Danish Gigaword will be made available through the DaNLP package
 
 
 
