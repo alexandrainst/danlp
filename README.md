@@ -57,15 +57,16 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **News**
 
-- :tada: Version 0.0.11 has been [released](https://github.com/alexandrainst/danlp/releases) with new features using a pre-trained BERT model by BotXo for predicting mask word, next sentence prediction and embeddings. The NER bert model also come with a updated feature of predicting the tags combined. To new datasets is added, one dataset for coreference resolution and also the wordnet DanNet, which can be loaded to find e.g. synonyms.   
+- :tada: Version 0.0.12 has been [released](https://github.com/alexandrainst/danlp/releases) with a new feature for finding the `domains` of a word with DanNet. One new dataset has been made available -- the DKHate -- for hate speech detection and one new model has been added for coreference resolution.  
 
-- :blue_book: A jupyter notebook tutorial of during data augmentation on texts 
-
+- :blue_book: A jupyter notebook tutorial for quick starting
+- Benchmarking of the NERDA model for NER
+- Benchmarking of the Dacy model for PoS-tagging, NER and dependency parsing
 
 
 **Next up**
 
-- :link: Models for coreference resolution with benchmarks and documentation  
+- :link: the Danish Gigaword will be made available through the DaNLP package
 
 
 
