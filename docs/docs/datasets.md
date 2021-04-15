@@ -127,7 +127,7 @@ dsd = DSD()
 dsd.load_with_pandas()
 ```
 
-### Twitter Sentiment
+### Twitter Sentiment {#twitsent}
 
 The Twitter sentiment is a small manually annotated dataset by the Alexandra Institute. It contains tags in two sentiment dimension: analytic: ['subjective' , 'objective'] and polarity: ['positive', 'neutral', 'negative' ]. It is split in train and test part. Due to Twitters privacy policy, it is only allowed to display the "tweet ID" and not the actually text. This allows people to delete their tweets. Therefore, to download the actual tweet text one need a Twitter development account and to generate the sets of login keys, read how to get started [here](https://python-twitter.readthedocs.io/en/latest/getting_started.html). Then the dataset can be loaded with the DaNLP package by setting the following environment variable for the keys:
 
@@ -184,6 +184,25 @@ lccsent = LccSentiment()
 
 df = lccsent.load_with_pandas()
 ```
+
+### AngryTweets
+
+The AngryTweets sentiment dataset is a crowd-sourced dataset annotated with polarity tags: ['positive', 'neutral', 'negative' ].
+The dataset contains 4122 tweets including 1727 that were annotated by one trained annotator. More annotations have been collected through the AngryTweets game resulting in 1266 tweets with double annotations. If you want to read more about the game, see the [Medium blog post](https://medium.com/danlp/angry-tweets-f%C3%B8lelser-og-annoteringer-er-p%C3%A5-spil-s%C3%A5-spil-med-eacade042c95) or the [DataTech article](https://pro.ing.dk/datatech/article/angry-tweets-vaer-med-til-bygge-datasaet-over-foelelsesladede-tweets-9496).
+In the same way as the Twitter Sentiment dataset, only the ID of the tweets are made available (see [Twtitter Sentiment](#twitsent) for more details). 
+
+Here is how to load the dataset with the DaNLP package:
+```python
+from danlp.datasets import AngryTweets
+angrytweets = AngryTweets()
+
+df = angrytweets.load_with_pandas()
+```
+
+The dataset (labels and tweet ids) can also be downloaded directly:
+
+[Download AngryTweets](https://danlp-downloads.alexandra.dk/datasets/game_tweets.zip) 
+
 
 
 ### DanNet
