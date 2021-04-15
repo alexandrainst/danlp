@@ -252,6 +252,12 @@ DATASETS = {
         'size': 51545, 
         'file_extension': '.csv'
     },
+    'angrytweets.sentiment': {
+        'url': DANLP_STORAGE_URL + '/datasets/game_tweets.zip',
+        'md5_checksum': '9451ea83333efb98317d2e3267ab8508', 
+        'size': 57903,
+        'file_extension': '.csv'
+    },
 }
 
 
