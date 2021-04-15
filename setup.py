@@ -24,6 +24,16 @@ setup(
         'tqdm', 
         'tweepy'
     ],
+    extras_require={
+        'all' : [
+            'transformers<=3.5.1',
+            'gensim<=3.8.1',
+            'torch<=1.6.0',
+            'flair<=0.4.5',
+            'spacy<=2.2.3',
+            'allennlp<=1.3.0'
+        ]
+    },
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3 :: Only",
