@@ -119,6 +119,28 @@ class TwitterSent:
         df=pd.read_csv(self.file_path, sep=',', encoding='utf-8')
         return df[df['part'] == 'test'].drop(columns=['part']), df[df['part'] == 'train'].drop(columns=['part'])
 
+class AngryTweets:
+    """
+    Class for loading the AngryTweets Sentiment dataset.
+
+    :param str cache_dir: the directory for storing cached models
+
+    """
+    def __init__(self, cache_dir: str = DEFAULT_CACHE_DIR):
+        self.dataset_name = 'angrytweets.sentiment'
+
+        self.dataset_dir = download_dataset(self.dataset_name, cache_dir=cache_dir, process_func=_twitter_data_process_func)
+        self.file_path = os.path.join(cache_dir, self.dataset_name + '.csv')
+
+    def load_with_pandas(self):
+        """
+        Loads the dataset in a dataframe.
+
+        :return: a dataframe
+
+        """
+        return pd.read_csv(self.file_path, sep=',', encoding='utf-8')
+
 
 def _lookup_tweets(tweet_ids, api):
     import tweepy
@@ -150,7 +172,8 @@ def _twitter_data_process_func(tmp_file_path: str, meta_info: dict,
     with ZipFile(tmp_file_path, 'r') as zip_file:  # Extract files to cache_dir
         file_list = zip_file.namelist()
         extract_single_file_from_zip(cache_dir, file_list[0], full_path, zip_file)
-    file_path = os.path.join(cache_dir, 'twitter.sentiment' + '.csv')
+    
+    file_path = os.path.join(cache_dir, model_name + '.csv')
     df = pd.read_csv(file_path)
 
     twitter_ids = list(df['twitterid'])
