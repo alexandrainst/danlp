@@ -81,7 +81,7 @@ Add a test for your model or dataset to the [test](https://github.com/alexandrai
 - in `tests/test_datasets.py` for a new dataset,
 - in `tests/test_{framework}_models.py` for a new model (where `framework` is `spacy`, `flair` or `bert` -- or create a new test file if you introduce a new framework).
 
-Then run the test(s) (e.g. `python -m unittest tests/test_dataset.md`) to check that your code doesn't fail. 
+Then run the test(s) (e.g. `python -m unittest tests.test_datasets`) to check that your code doesn't fail. 
 
 ### Benchmark
 
