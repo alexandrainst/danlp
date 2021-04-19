@@ -1,7 +1,7 @@
 Dependency Parsing & Noun Phrase Chunking
 =========================================
 
-### Dependency Parsing
+#### Dependency Parsing
 
 Dependency parsing is the task of extracting a dependency parse of a sentence. 
 It is typically represented by a directed graph that depicts the grammatical structure of the sentence; where nodes are words and edges define syntactic relations between those words. 
@@ -16,7 +16,7 @@ A dependency relation is a triplet consisting of: a head (word), a dependent (an
 The model has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
 It uses 39 dependency relations.
 
-### Noun Phrase Chunking
+#### Noun Phrase Chunking
 
 Chunking is the task of grouping words of a sentence into syntactic phrases (e.g. noun-phrase, verb phrase). 
 Here, we focus on the prediction of noun-phrases (NP). Noun phrases can be pronouns (`PRON`), proper nouns (`PROPN`) or nouns (`NOUN`)  -- potentially bound with other tokens that act as modifiers, e.g., adjectives (`ADJ`) or other nouns. 
@@ -29,16 +29,24 @@ Examples of noun-phrases :
 NP-chunks can be deduced from dependencies. 
 We provide a convertion function -- from dependencies to NP-chunks -- thus depending on a dependency model.
 
+### Use cases
+
+Dependency parsing and chunking can be used as preprocessing steps for other NLP tasks. 
+See for example the [EPE](http://epe.nlpl.eu/index.php?page=3) shared task, where the performance of dependency parsers is evaluated through the ouput of downstream tasks such as: 
+* Biological Event Extraction
+* Fine-Grained Opinion Analysis
+* Negation Resolution
+
+It can also be used, for instance, for the extraction of keyphrases or for building a knowledge graph. 
 
 
-## 🔧 SpaCy {#spacy}
+## Models 
+
+### 🔧 SpaCy {#spacy}
 
 Read more about the SpaCy model in the dedicated [SpaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset. 
 
-## DaCy {#dacy}
-DaCy is a transformer-based version of the SpaCy model, thus obtaining higher performance, but with a higher computational cost. Read more about the DaCy model in the dedicated [DaCy github](https://github.com/KennethEnevoldsen/DaCy), it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset.
-
-### Dependency Parser
+#### Dependency Parser
 
 Below is a small getting started snippet for using the SpaCy dependency parser:
 
@@ -87,7 +95,7 @@ displacy.serve(doc, style='dep')
 `punct`: punctuation
 
 
-### Chunker 
+#### Chunker 
 
 Below is a snippet showing how to use the chunker: 
 
@@ -119,6 +127,10 @@ for token, nc in zip(doc, np_chunks):
 ```
 
 ![](../imgs/chunk_features.png)
+
+### DaCy {#dacy}
+DaCy is a transformer-based version of the SpaCy model, thus obtaining higher performance, but with a higher computational cost. Read more about the DaCy model in the dedicated [DaCy github](https://github.com/KennethEnevoldsen/DaCy), it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset.
+
 
 ## 📈 Benchmarks
 

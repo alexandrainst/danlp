@@ -13,19 +13,27 @@ In this repository we provide an overview of open sentiment analysis models and 
 | [BERT Tone](#bert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔     |
 | [SpaCy Sentiment](#spacy-sentiment) (beta) | spaCy    | MIT                                                          | Alexandra Institute                                       | Polarity           | 'postive', 'neutral', 'negative'                             | ✔     |
 
+### Use cases 
 
+Sentiment analysis is a very useful tool for a company which wants to gain insight about its brand or products as it can be used, for example, for : 
+ * monitoring social media (e.g. quickly identifying posts that generate strong emotions)
+ * monitoring brand and managing reputation (e.g. analysing the global sentiment of people tweeting about a brand or a product)
+ * customer support (e.g. identifying happy or angry customers for better adapted responses)
+ * customers or employees feedback (e.g. analysing the global output of a satisfaction survey)
 
-#### AFINN
+## Models 
+
+### AFINN
 
 The [AFINN](https://github.com/fnielsen/afinn) tool [(Nielsen 2011)](https://arxiv.org/abs/1103.2903) uses a lexicon based approach for sentiment analysis.
 The tool scores texts with an integer where scores <0 are negative, =0 are neutral and >0 are positive. 
 
 
-#### Sentida
+### Sentida
 The tool Sentida  [(Lauridsen et al. 2019)](https://tidsskrift.dk/lwo/article/view/115711)
 uses a lexicon based approach to sentiment analysis. The tool scores texts with a continuous value. There exist both an R version and an implementation in Python.  In these documentations we evaluate the python version from [sentida](https://github.com/guscode/sentida). 
 
-#### 🔧 BERT Emotion {#bert-emotion}
+### 🔧 BERT Emotion {#bert-emotion}
 
 The emotion classifier is developed in a collaboration with Danmarks Radio, which has granted access to a set of social media data. The data has been manual annotated first to distinguish between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) emotion model is finetuned on this data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO . The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. 
 
@@ -49,8 +57,7 @@ classifier._classes()
 ```
 
 
-
-#### 🔧 BERT Tone {#bert-tone}
+### 🔧 BERT Tone {#bert-tone}
 
 The tone analyzer consists of two BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/)  classification models, and the first is recognizing the following tags positive, neutral and negative and the  second model  the tags: subjective and objective. This is a first version of the models, and work should be done to improve performance. Both models is finetuned on annotated twitter data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO .  The data used is manually annotated data from [Twitter Sentiment](../datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](../datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
 
@@ -72,8 +79,7 @@ classifier._classes()
 ```
 
 
-
-#### 🔧 SpaCy Sentiment {#spacy-sentiment}
+### 🔧 SpaCy Sentiment {#spacy-sentiment}
 
 SpaCy sentiment is a text classification model trained using spacy built in command line interface. It uses the CoNLL2017 word vectors (read about it [here](embeddings.md)).
 
@@ -102,9 +108,9 @@ max(doc.cats.items(), key=operator.itemgetter(1))[0]
 
 
 
-
 ## 📈 Benchmarks  
-##### Benchmark of polarity classification
+
+### Benchmark of polarity classification
 
 The benchmark is made by converting the relevant models scores and relevant datasets scores 
 into the there classes 'positive', 'neutral' and 'negative'.
@@ -129,7 +135,7 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 | BERT Tone (polarity, version 0.0.1) | **0.79** (0.78)    | **0.74** (0.67) | **0.73** (0.70)              |
 | spaCy sentiment (version 0.0.1)     | 0.74 (0.73)        | 0.66 (0.61)     | 0.66 (0.60)                  |
 
-**Benchmark of subjective versus objective classification**
+### Benchmark of subjective versus objective classification
 
 The data for benchmark is: 
 

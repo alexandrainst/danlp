@@ -15,11 +15,23 @@ The Danish UD treebank  uses 17 [universal part of speech tags](<https://univers
 
 `ADJ`: Adjective, `ADP`: Adposition , `ADV`: Adverb, `AUX`: Auxiliary verb, `CCONJ`: Coordinating conjunction, `DET`: Determiner, `INTJ`: Interjection, `NOUN`: Noun, `NUM`: Numeral, `PART`: Particle `PRON`: Pronoun `PROPN`: Proper noun `PUNCT`: Punctuation `SCONJ`: Subordinating conjunction `SYM`: Symbol `VERB`: Verb `X`: Other
 
-A medium blog using Part of Speech tagging on Danish, can be found  [here](<https://medium.com/danlp/i-klasse-med-kierkegaard-eller-historien-om-det-fede-ved-at-en-computer-kan-finde-ordklasser-189774695f3b>).
 
 ![](../imgs/postag_eksempel.gif)
 
-##### 🔧 Flair {#flair}
+### Use cases
+
+Part-of-Speech tagging in itself may not be the solution to any particular NLP problem. 
+It is a task that is mostly used as a pre-processing step in order to make it easier for more applicative problems. 
+
+It can be used for cleaning/filtering text (e.g. removing punctuation, extracting only nouns) or disambiguation. 
+The language is inherently ambiguous. For instance in Danish, `fisk` is a verb or a noun. In a sentence such as `Fisk en fisk`, a part-of-speech tagger is required to understand that the first one is a verb and the second is a noun in such a way that this information can be used in downstream tasks, for example for machine translation (in French it would be two different words depending on whether `fisk` is a verb -- `pêche` -- or a noun -- `poisson`) or for text to speech conversion (a same word can be pronounced differently depending on its meaning). 
+
+A medium blog using Part of Speech tagging on Danish, can be found  [here](<https://medium.com/danlp/i-klasse-med-kierkegaard-eller-historien-om-det-fede-ved-at-en-computer-kan-finde-ordklasser-189774695f3b>).
+
+
+## Models
+
+### 🔧 Flair {#flair}
 
 This project provides a trained part of speech tagging model for Danish using the [Flair](<https://github.com/flairNLP/flair>) framework from Zalando, based on the paper [Akbik et. al (2018)](<https://alanakbik.github.io/papers/coling2018.pdf>). The model is trained using the data [Danish Dependency Treebank](../datasets.md#dane)  and by using FastText word embeddings and Flair contextual word embeddings trained in this project on data from Wikipedia and EuroParl corpus, see [here](embeddings.md).
 
@@ -46,9 +58,7 @@ print(sentence.to_tagged_string())
 
 ```
 
-
-
-##### 🔧 SpaCy {#spacy}
+### 🔧 SpaCy {#spacy}
 
 Read more about the spaCy model in the dedicated [spaCy docs](../frameworks/spacy.md) , it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) data. 
 
@@ -72,12 +82,12 @@ print(pred)
  '''
 ```
 
-##### DaCy {#dacy}
+### DaCy {#dacy}
 
 [DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v. 3.
 its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
 
-##### Polyglot
+### Polyglot
 
 Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/latest/POS.html>), and in the original paper [Al-Rfou et al. (2013)](https://www.aclweb.org/anthology/W13-3520). 
 
@@ -85,7 +95,7 @@ Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/la
 
 Accuracy scores are reported below and can be reproduced using `pos_benchmarks.py` in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder, where the details score from each class is calculated.
 
-#### DaNLP
+### DaNLP
 
 | Model         | Accuracy  |
 | ------------- | --------- |
@@ -94,7 +104,7 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 | DaCy (medium) v0.0.0 | 98.27     |
 | DaCy (large) v0.0.0 | **98.65** |
 
-#### Polyglot model
+### Polyglot model
 
 The tags predicted with the polyglot model differ slightly from the universal PoS-tags. The model predicts :
 * `CONJ` instead of `CCONJ`

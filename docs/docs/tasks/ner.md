@@ -18,9 +18,24 @@ and made available through the DaNLP library.
 | [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
 | [DaCy](#dacy)                                      | [DaNE](../datasets.md#dane)                                           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com)                 | PER, ORG, LOC | (✔)    |
 
+### Use cases
+
+NER is one of the most famous NLP tasks used in the industry, probably because its use cases are pretty straightforward. 
+It can be used in many systems, by itself or in combination with other NLP models. 
+For instance, the extraction of entities from text can be used for : 
+ * classifying / indexing documents (e.g articles for news providers) and then
+ * recommending similar content (e.g. news articles)
+ * customer support (e.g. for tagging tickets)
+ * analysing feedback from customers (product reviews)
+ * speeding up search engines 
+ * extracting information (e.g from emails)
+ * building a structured database or a knowledge graph from a corpus
+ * anonymizing documents. 
 
 
-#### 🔧 BERT {#bert}
+## Models
+
+### 🔧 BERT {#bert}
 The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER model is based on the pre-trained [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO which 
 has been finetuned on the [DaNE](../datasets.md#dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
@@ -47,7 +62,7 @@ bert.predict(tekst_tokenized, IOBformat=False)
 ```
 
 
-#### 🔧 Flair {#flair}
+### 🔧 Flair {#flair}
 The Flair [(Akbik et al. 2018)](https://www.aclweb.org/anthology/C18-1139/) NER model
 uses pretrained [Flair embeddings](embeddings.md#flair-embeddings)
 in combination with fastText word embeddings. The model is trained using the [Flair](https://github.com/flairNLP/flair)
@@ -67,7 +82,7 @@ flair_model.predict(sentence)
 print(sentence.to_tagged_string())
 ```
 
-#### 🔧 spaCy {#spacy}
+### 🔧 spaCy {#spacy}
 The [spaCy](https://spacy.io/) model is trained for several NLP tasks [(read more here)](../frameworks/spacy.md) using the [DDT and DaNE](../datasets.md#dane) annotations.
 The spaCy model can be loaded with DaNLP to do NER predictions in the following way.
 ```python
@@ -80,7 +95,7 @@ for tok in doc:
     print("{} {}".format(tok,tok.ent_type_))
 ```
 
-#### Polyglot
+### Polyglot
 The Polyglot [(Al-Rfou et al. 2015)](https://arxiv.org/abs/1410.3791) NER model
 is  trained without any human annotation or language-specific knowledge but 
 by automatic generating a dataset using the link structure from Wikipedia.
@@ -102,7 +117,7 @@ and a [Danish Electra](https://github.com/MalteHB/-l-ctra).
 [DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v. 3.
 its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
 
-#### Daner
+### Daner
 The daner [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) NER tool
 is a wrapper around the [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 
 using data from [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) (not released).
