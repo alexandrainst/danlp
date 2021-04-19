@@ -220,6 +220,13 @@ DATASETS = {
         'size': 6083044,
         'file_extension': '.csv'
     },
+    # Danish Unimorph
+    'unimorph': {
+        'url': DANLP_STORAGE_URL + '/datasets/unimorph.zip',
+        'md5_checksum': '88d086c8b69523d8387c464bf0f82d7a',
+        'size': 99725,
+        'file_extension': '.tsv'
+    },
     
     # SENTIMENT EVALUATION
     'europarl.sentiment1': {
