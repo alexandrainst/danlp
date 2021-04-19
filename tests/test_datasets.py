@@ -7,7 +7,7 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref, DanNet, DKHate
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref, DanNet, DKHate, DaUnimorph
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -191,6 +191,16 @@ class TestDannetDataset(unittest.TestCase):
         self.assertEqual(dannet.wordnet_relations('kat', eurowordnet=False), {'domain', 'partMeronymOf', 'hyponymOf', 'partHolonymOf', 'usedFor', 'eqSynonymOf', 'roleAgent'})
         self.assertEqual(dannet._word_from_id(11025614), ['kat'])
         self.assertEqual(dannet._synset_from_id(3264), {'missekat', 'kat,1', 'mis'})
+
+class TestUnimorphDataset(unittest.TestCase):
+    def test_unimorph(self):
+        unimorph = DaUnimorph() 
+        database = unimorph.load_with_pandas()
+        self.assertEqual(len(database), 25503)
+        self.assertEqual(unimorph.get_inflections('svar'), ['svaredes', 'svarede', 'svarer', 'svares', 'svare', 'svar'])
+        self.assertEqual(unimorph.get_inflections('trolde', pos='V'), ['troldedes', 'troldede', 'trolder', 'troldes', 'trolde', 'trold'])
+        self.assertEqual(unimorph.get_inflections('trolde', pos='N', with_features=True)[0], {'lemma': 'trold', 'form': 'troldene', 'feats': 'N;DEF;NOM;PL', 'pos': 'N'})
+        self.assertEqual(unimorph.get_lemmas('papiret', with_features=True), [{'lemma': 'papir', 'form': 'papiret', 'feats': 'N;DEF;NOM;SG', 'pos': 'N'}])
 
 if __name__ == '__main__':
     unittest.main()
