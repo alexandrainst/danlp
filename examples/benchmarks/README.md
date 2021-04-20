@@ -1,5 +1,5 @@
 Benchmarks scripts
-========
+==================
 
 This  folder contains scripts to reproduce the benchmark results reported in our [documentation](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) for the different tasks we cover. 
 
@@ -21,8 +21,8 @@ For running the `sentiment_benchmarks_twitter` you need a twitter development ac
 
 - `sentiment_benchmarks_twitter.py` show evaluation on a small twitter dataset for both polarity and subjective/objective classification
 
-- Benchmark script of [Part of Speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spaCy, flair and polyglot model is benchmarked `pos_benchmarks.py`
+- Benchmark script of [Part of Speech tagging](<https://github.com/alexandrainst/danlp/blob/master/docs/models/pos.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). SpaCy, Dacy, flair, polyglot and Stanza models are benchmarked `pos_benchmarks.py`
 
-- Benchmark script of [Dependency Parsing](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). A spaCy  model is benchmarked `dependency_benchmarks.py`
+- Benchmark script of [Dependency Parsing](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). SpaCy, Dacy and Stanza models are benchmarked `dependency_benchmarks.py`
   
 - Benchmark script of Noun-phrase Chunking -- depending on the [Dependency Parsing model](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) -- on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). The (convertion of the dependencies given by the) spaCy model is benchmarked `chunking_benchmarks.py`
