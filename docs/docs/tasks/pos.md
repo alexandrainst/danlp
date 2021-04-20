@@ -5,11 +5,12 @@ This section is concerned with public available Part of Speech (POS) taggers in 
 Part-of-speech tagging is the task of classifying words into their part-of-speech, based on both their definition and context. Parts of speech are also known as word classes, which describe the role of the words in sentences relatively to their neighbors (such as verbs and nouns). 
 
 | Model                 | Train Data                                                                | License       | Trained by                                                                                                   | Tags                         | DaNLP |
-| --------------------- | ------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------- | ----- |
+|-----------------------|---------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------|------------------------------|-------|
 | [Polyglot](#polyglot) | [Danish Dependency Treebank](../datasets.md#dane) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot                                                                                                     | 17  Universal part of speech | ❌     |
-| [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️     |
-| [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️     |
-| [DaCy](#dacy)         | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache 2      | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal part of speech | (✔️)   |
+| [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️    |
+| [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️    |
+| [DaCy](#dacy)         | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache v2     | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal part of speech | ❌  |
+| [Stanza](#stanza)     | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache v2     | [Stanford NLP Group](https://nlp.stanford.edu/)                                                              | 17  Universal part of speech | ❌     |
 
 The Danish UD treebank  uses 17 [universal part of speech tags](<https://universaldependencies.org/u/pos/index.html>):
 
@@ -87,6 +88,11 @@ print(pred)
 [DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v. 3.
 its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
 
+
+### Stanza
+
+[Stanza](https://stanfordnlp.github.io/stanza/) is a python library which provides a neural network pipeline for NLP in many languages. It has been developed by the [Stanford NLP Group](https://nlp.stanford.edu/). The Stanza part-of-speech tagger has been trained on the [DDT](../datasets.md#dane). 
+
 ### Polyglot
 
 Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/latest/POS.html>), and in the original paper [Al-Rfou et al. (2013)](https://www.aclweb.org/anthology/W13-3520). 
@@ -97,12 +103,13 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 
 ### DaNLP
 
-| Model         | Accuracy  |
-| ------------- | --------- |
-| Flair         | 97.97     |
-| SpaCy         | 96.15     |
+| Model                | Accuracy  |
+|----------------------|-----------|
+| Flair                | 97.97     |
+| SpaCy                | 96.15     |
 | DaCy (medium) v0.0.0 | 98.27     |
-| DaCy (large) v0.0.0 | **98.65** |
+| DaCy (large) v0.0.0  | **98.65** |
+| Stanza               | 97.73     |
 
 ### Polyglot model
 

@@ -8,10 +8,11 @@ It is typically represented by a directed graph that depicts the grammatical str
 A dependency relation is a triplet consisting of: a head (word), a dependent (another word) and a dependency label (describing the type of the relation).
 
 
-| Model           | Train Data                                        | License  | Trained by                                            | Tags                       | DaNLP |
-| --------------- | ------------------------------------------------- | -------- | ----------------------------------------------------- | -------------------------- | ----- |
-| [SpaCy](#spacy) | [Danish Dependency Treebank](../datasets.md#dane) | MIT      | Alexandra Institute                                   | 17  Universal dependencies | ✔️     |
-| [DaCy](#dacy)   | [Danish Dependency Treebank](../datasets.md#dane) | Apache 2 | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal dependencies | (✔️)     |
+| Model             | Train Data                                        | License   | Trained by                                                                                                   | Tags                       | DaNLP |
+|-------------------|---------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------------|----------------------------|-------|
+| [SpaCy](#spacy)   | [Danish Dependency Treebank](../datasets.md#dane) | MIT       | Alexandra Institute                                                                                          | 39  Universal dependencies | ✔️    |
+| [DaCy](#dacy)     | [Danish Dependency Treebank](../datasets.md#dane) | Apache v2  | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 39  Universal dependencies | ❌  |
+| [Stanza](#stanza) | [Danish Dependency Treebank](../datasets.md#dane) | Apache v2 | [Stanford NLP Group](https://nlp.stanford.edu/)                                                              | 39  Universal dependencies | ❌     |
 
 The model has been trained on the Danish UD treebank which have been annotated with dependencies following the [Universal Dependency](https://universaldependencies.org/u/dep/index.html) scheme.
 It uses 39 dependency relations.
@@ -132,6 +133,11 @@ for token, nc in zip(doc, np_chunks):
 DaCy is a transformer-based version of the SpaCy model, thus obtaining higher performance, but with a higher computational cost. Read more about the DaCy model in the dedicated [DaCy github](https://github.com/KennethEnevoldsen/DaCy), it has also been trained using the [Danish Dependency Treebank](../datasets.md#dane) dataset.
 
 
+### Stanza
+
+[Stanza](https://stanfordnlp.github.io/stanza/) is a python library which provides a neural network pipeline for NLP in many languages. It has been developed by the [Stanford NLP Group](https://nlp.stanford.edu/). The Stanza dependency parser has been trained on the [DDT](../datasets.md#dane). 
+
+
 ## 📈 Benchmarks
 
 See detailed scoring of the benchmarks in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder.
@@ -140,11 +146,12 @@ See detailed scoring of the benchmarks in the [example](<https://github.com/alex
 
 Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment Score) and LAS (Labelled Attachment Score) — are reported below :
 
-| Model | LA    | UAS   | LAS   |
-| ----- | ----- | ----- | ----- |
-| SpaCy | 87.68 | 81.36 | 77.46 |
-| DaCy (medium) v0.0.0 | 93.09 | 88.91 | 86.65 |
-| DaCy (large) v0.0.0 | **93.64** | **90.49** | **88.42** |
+| Model                | LA        | UAS       | LAS       |
+|----------------------|-----------|-----------|-----------|
+| SpaCy                | 87.68     | 81.36     | 77.46     |
+| DaCy (medium) v0.0.0 | 93.09     | 88.91     | 86.65     |
+| DaCy (large) v0.0.0  | **93.64** | **90.49** | **88.42** |
+| Stanza               | 91.82     | 87.13     | 84.42     |
 
 ### Noun Phrase Chunking Scores
 
