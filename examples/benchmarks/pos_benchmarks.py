@@ -14,6 +14,8 @@ from polyglot.text import WordList
 import os
 import spacy
 
+import stanza
+
 # load the data
 ddt = DDT()
 
@@ -152,12 +154,35 @@ def benchmark_polyglot_mdl(corrected_output=False):
 
     print(accuracy_report(tags_true, tags_pred), end="\n\n")
 
+def benchmark_stanza_mdl():
+
+    nlp = stanza.Pipeline('da', processors='tokenize,pos', tokenize_pretokenized=True)
+
+    start = time.time()
+
+    tags_pred = []
+    for sent in sentences_tokens:
+        doc = nlp(" ".join(sent))
+
+        tags = []
+        for tok in doc.iter_tokens():
+            tags.append(tok.words[0].upos)
+        tags_pred.append(tags)
+
+    print('**Stanza model**')
+    print_speed_performance(start, num_sentences, num_tokens)
+
+    assert len(tags_pred) == num_sentences
+    assert sum([len(s) for s in tags_pred]) == num_tokens
+
+    print(accuracy_report(tags_true, tags_pred), end="\n\n")
 
 if __name__ == '__main__':
     benchmark_polyglot_mdl()
     benchmark_polyglot_mdl(corrected_output=True)
     benchmark_spacy_mdl()
     benchmark_flair_mdl()
+    benchmark_stanza_mdl()
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")

@@ -9,6 +9,8 @@ from danlp.models import load_spacy_model
 
 from utils import print_speed_performance, dependency_report
 
+import stanza
+
 # load the data
 ddt = DDT()
 
@@ -94,9 +96,34 @@ def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
     
     print(dependency_report(deps_true, deps_pred))
 
+def benchmark_stanza_mdl():
+
+    nlp = stanza.Pipeline('da', processors='tokenize,pos,lemma,depparse', tokenize_pretokenized=True)
+
+    start = time.time()
+    
+    deps_pred = []
+    for sent in sentences_tokens:
+        doc = nlp(" ".join(sent))
+
+        deprels = []
+        depheads = []
+        for tok in doc.iter_tokens():
+            deprels.append(tok.words[0].deprel)
+            depheads.append(tok.words[0].head)
+        deps_pred.append([(r,h) for r,h in zip(deprels, depheads)])
+
+    print('**Stanza model**')
+    print_speed_performance(start, num_sentences, num_tokens)
+
+    assert len(deps_pred)==num_sentences
+    assert sum([len(s) for s in deps_pred])==num_tokens
+
+    print(dependency_report(deps_true, deps_pred))
 
 if __name__ == '__main__':
     benchmark_spacy_mdl()
+    benchmark_stanza_mdl()
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
