@@ -274,6 +274,45 @@ dannet._synset_from_id(3514)
 ```
 
 
+### DaUnimorph
+
+The [UniMorph](https://unimorph.github.io/) project provides lists of word forms (for many languages) associated with their lemmas and morphological features following a universal schema which have been extracted from Wikipedia.
+
+The Danish UniMorph is a (non-exhaustive) list of nouns and verbs. 
+The following morphological features are provided : 
+    * the part-of-speech, i.e. noun `N` or verb `V`
+    * the voice (for verbs), i.e. active `ACT` or passive `PASS` 
+    * the mood (for verbs), i.e. infinitive `NFIN`, indicative `IND`, imperative `IMP`
+    * the tense (for verbs), i.e. past `PST` or present `PRS`
+    * the form (for nouns), i.e. indefinite `INDF` or definite `DEF`
+    * the case (for nouns), i.e. nominative `NOM` or genitive `GEN`
+    * the number (for nouns), i.e. plural `PL` or singular `SG`
+
+For downloading DanNet through DaNLP, you can do: 
+
+```python
+from danlp.datasets import DaUnimorph
+
+unimorph = DaUnimorph()
+
+# you can load the database if you want to look into it by yourself
+database = unimorph.load_with_pandas()
+```
+
+Once you have downloaded the DaUnimorph wrapper, you can also use the following features: 
+
+```python
+
+word = "trolde"
+# inflections (the different forms of a word)
+unimorph.get_inflections(word, pos='V', with_features=False)
+""" ['troldedes', 'troldede', 'trolder', 'troldes', 'trolde', 'trold'] """
+# lemmas (the root form of a word)
+unimorph.get_lemmas(word, pos='N', with_features=True)
+""" [{'lemma': 'trold', 'form': 'trolde', 'feats': 'N;INDF;NOM;PL', 'pos': 'N'}] """
+
+```
+
 ## 🎓 References
 - Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. [Universal Dependencies for Danish](http://tlt14.ipipan.waw.pl/files/4914/4974/3227/TLT14_proceedings.pdf#page=164). TLT14, 2015.
 - Keson, Britt (1998). [Documentation of The Danish Morpho-syntactically Tagged PAROLE Corpus](https://korpus.dsl.dk/clarin/corpus-doc/parole-doc/paroledoc_en.pdf). Technical report, DSL
