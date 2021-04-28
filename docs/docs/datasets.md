@@ -3,25 +3,26 @@ Datasets
 
 This section keeps a list of Danish NLP datasets publicly available. 
 
-| Dataset                                                      | Task                   | Words             | Sents                  | License                                                      | DaNLP |
-| ------------------------------------------------------------ | ---------------------- | ----------------- | ---------------------- | ------------------------------------------------------------ | ----- |
-| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>) | Translation            | 206,700,000       | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)            | ❌     |
-| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)         | Translation            | 208,175,843       | 8,650,537              | -                                                            | ❌     |
-| [Europarl7](http://www.statmt.org/europarl/)                 | Translation            | 47,761,381        | 2,323,099              | [None](http://www.statmt.org/europarl/)                      | ❌     |
-| [ParaCrawl5](https://paracrawl.eu/)                          | Translation            | -                 | -                      | [CC0](https://paracrawl.eu/releases.html)                    | ❌     |
-| [WikiANN](#wikiann)                                          | NER                    | 832.901           | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                 | ✔️     |
-| [UD-DDT (DaNE)](#dane)                                       | DEP, POS, NER          | 100,733           | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️     |
-| [LCC Sentiment](#lcc-sentiment)                              | Sentiment              | 10.588            | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE) | ✔️     |
-| [Europarl Sentiment1](#europarl-sentiment1)                  | Sentiment              | 3.359             | 184                    | None                                                         | ✔️     |
-| [Europarl Sentiment2](#europarl-sentiment2)                  | sentiment              |                   | 957                    | CC BY-SA 4.0                                                 | ✔️     |
-| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)      | Raw                    | -                 | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)       | ❌     |
-| [WordSim-353](#wordsim-353)                                  | Word Similarity        | 353               | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
-| [Danish Similarity Dataset](#danish-similarity-dataset)      | Word Similarity        | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE) | ✔️     |
-| [Twitter Sentiment](#twitter-sentiment)                      | Sentiment              | -                 | train: 1215, test: 512 | Twitter privacy policy applies                               | ✔️     |
-| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution | 64.076 (tokens)   | 3.403                  | CC BY-SA 4.0                                 | ✔️     |
-| [DanNet](#dannet)                                            | Wordnet                | 66,308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)    | ✔️     | 
-| [DKHate](#dkhate)  | Hate Speech Detection    | 61,967 | 3,289   | CC BY 4.0 | ✔️     |
-
+| Dataset                                                                                | Task                     | Words             | Sentences              | License                                                                                      | DaNLP |
+|----------------------------------------------------------------------------------------|--------------------------|-------------------|------------------------|----------------------------------------------------------------------------------------------|-------|
+| [OpenSubtitles2018](<http://opus.nlpl.eu/OpenSubtitles2018.php>)                       | Translation              | 206,700,000       | 30,178,452             | [None](http://opus.nlpl.eu/OpenSubtitles2018.php)                                            | ❌     |
+| [EU Bookshop](http://opus.nlpl.eu/EUbookshop-v2.php)                                   | Translation              | 208,175,843       | 8,650,537              | -                                                                                            | ❌     |
+| [Europarl7](http://www.statmt.org/europarl/)                                           | Translation              | 47,761,381        | 2,323,099              | [None](http://www.statmt.org/europarl/)                                                      | ❌     |
+| [ParaCrawl5](https://paracrawl.eu/)                                                    | Translation              | -                 | -                      | [CC0](https://paracrawl.eu/releases.html)                                                    | ❌     |
+| [WikiANN](#wikiann)                                                                    | NER                      | 832.901           | 95.924                 | [ODC-BY 1.0](http://nlp.cs.rpi.edu/wikiann/)                                                 | ✔️    |
+| [UD-DDT (DaNE)](#dane)                                                                 | DEP, POS, NER            | 100,733           | 5,512                  | [CC BY-SA 4.0](https://github.com/UniversalDependencies/UD_Danish-DDT/blob/master/README.md) | ✔️    |
+| [LCC Sentiment](#lcc-sentiment)                                                        | Sentiment                | 10.588            | 499                    | [CC BY](https://github.com/fnielsen/lcc-sentiment/blob/master/LICENSE)                       | ✔️    |
+| [Europarl Sentiment1](#europarl-sentiment1)                                            | Sentiment                | 3.359             | 184                    | None                                                                                         | ✔️    |
+| [Europarl Sentiment2](#europarl-sentiment2)                                            | sentiment                |                   | 957                    | CC BY-SA 4.0                                                                                 | ✔️    |
+| [Wikipedia](https://dumps.wikimedia.org/dawiki/latest/)                                | Raw                      | -                 | -                      | [CC BY-SA 3.0](https://dumps.wikimedia.org/legal.html)                                       | ❌     |
+| [WordSim-353](#wordsim-353)                                                            | Word Similarity          | 353               | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
+| [Danish Similarity Dataset](#danish-similarity-dataset)                                | Word Similarity          | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
+| [Twitter Sentiment](#twitter-sentiment)                                                | Sentiment                | -                 | train: 1215, test: 512 | Twitter privacy policy applies                                                               | ✔️    |
+| [AngryTweets](#angrytweets)                                                            | Sentiment                | -                 | 1,266                  | Twitter privacy policy applies                                                               | ✔️    |
+| [Dacoref](https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#dacoref) | coreference resolution   | 64.076 (tokens)   | 3.403                  | CC BY-SA 4.0                                                                                 | ✔️    |
+| [DanNet](#dannet)                                                                      | Wordnet                  | 66,308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)                                    | ✔️    |
+| [DKHate](#dkhate)                                                                      | Hate Speech Detection    | 61,967            | 3,289                  | CC BY 4.0                                                                                    | ✔️    |
+| [DaUnimorph](#daunimorph)                                                              | Morphological Inflection | 25,503            | -                      | CC BY-SA 3.0                                                                                 | ✔️    |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -280,13 +281,14 @@ The [UniMorph](https://unimorph.github.io/) project provides lists of word forms
 
 The Danish UniMorph is a (non-exhaustive) list of nouns and verbs. 
 The following morphological features are provided : 
-    * the part-of-speech, i.e. noun `N` or verb `V`
-    * the voice (for verbs), i.e. active `ACT` or passive `PASS` 
-    * the mood (for verbs), i.e. infinitive `NFIN`, indicative `IND`, imperative `IMP`
-    * the tense (for verbs), i.e. past `PST` or present `PRS`
-    * the form (for nouns), i.e. indefinite `INDF` or definite `DEF`
-    * the case (for nouns), i.e. nominative `NOM` or genitive `GEN`
-    * the number (for nouns), i.e. plural `PL` or singular `SG`
+
+* the part-of-speech, i.e. noun `N` or verb `V`
+* the voice (for verbs), i.e. active `ACT` or passive `PASS` 
+* the mood (for verbs), i.e. infinitive `NFIN`, indicative `IND`, imperative `IMP`
+* the tense (for verbs), i.e. past `PST` or present `PRS`
+* the form (for nouns), i.e. indefinite `INDF` or definite `DEF`
+* the case (for nouns), i.e. nominative `NOM` or genitive `GEN`
+* the number (for nouns), i.e. plural `PL` or singular `SG`
 
 For downloading DanNet through DaNLP, you can do: 
 
