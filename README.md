@@ -152,7 +152,7 @@ Read more in our [documentation pages](https://danlp-alexandra.readthedocs.io/en
 Natural Language Processing is an active area of research and it consists of many different tasks. 
 The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
 
-The repository is under development and this is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we have covered and plan to cover in the repository.
+The repository is continuously evolving and here is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we currently cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
 -  [Part of speech](docs/docs/tasks/pos.md)
 -  [Named Entity Recognition](docs/docs/tasks/ner.md)
@@ -170,7 +170,7 @@ The number of datasets in the Danish language is limited. The DaNLP repository p
 The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](https://danlp-alexandra.readthedocs.io/en/latest/docs/datasets.html).
 
 ## Examples
-You will find examples and tutorials [here](/examples/tutorials) that shows how to use NLP in Danish. This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies.
+You will find examples that shows how to use NLP in Danish (using our models or others) in our [benchmark](/examples/benchmarks) scripts and jupyter notebook [tutorials](/examples/tutorials). This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies. 
 
 ## Structure of the repo
 
