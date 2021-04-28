@@ -1,15 +1,19 @@
 Coreference Resolution
 ======================
 
-Coreference resolution is the task of finding all mentions (noun phrases) that refer to the same entity in a text.
+Coreference resolution is the task of finding all mentions (noun phrases) that refer to the same entity (e.g. a person, a location etc, see also the [NER](#ner) doc) in a text.
 
-Typically, in a document, persons are first introduced by their name (e.g. `Dronning Margrethe II`) and later refered by pronouns (e.g. `hun`) or expressions/titles (e.g. `Hendes Majestæt`, `Danmarks dronning`, etc). 
+Typically, in a document, entities are first introduced by their name (e.g. `Dronning Margrethe II`) and later refered by pronouns (e.g. `hun`) or expressions/titles (e.g. `Hendes Majestæt`, `Danmarks dronning`, etc). 
 The goal of the coreference resolution task is to find all these references and link them through a common ID. 
 
 
 | Model           | Train Data                                        | License | Trained by          | Tags            | DaNLP |
 |-----------------|---------------------------------------------------|---------|---------------------|-----------------|--|
 | [XLM-R](#xlmr)  | [Dacoref](../datasets.md#dacoref)                 | GPLv2   | Maria Jung Barrett  | Generic QIDs    | ✔️     |
+
+
+If you want to read more about coreference resolution and the DaNLP model, we also have a [blog post](https://medium.com/danlp/coreferensmodeller-nu-ogs%C3%A5-p%C3%A5-dansk-5aea04f4876e) (in Danish).
+
 
 ### Use cases 
 
