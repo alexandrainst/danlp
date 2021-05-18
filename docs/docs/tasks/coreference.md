@@ -40,7 +40,7 @@ coref_model = load_xlmr_coref_model()
 doc = [["Lotte", "arbejder", "med", "Mads", "."], ["Hun", "er", "tandlæge", "."]]
 
 # apply coreference resolution on the document
-preds = xlmr_model.predict(doc)
+preds = coref_model.predict(doc)
 ```
 
 ## 📈 Benchmarks
