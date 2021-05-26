@@ -212,3 +212,22 @@ a network of independent Danish research and technology organisations.
 
 The work on this repository is part of the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
 allocated to the Alexandra Institute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). ````
+
+## Cite
+
+If you want to cite this project, please use the following BibTeX entry: 
+
+```
+@inproceedings{danlp2021,
+    title = {{DaNLP}: An open-source toolkit for Danish Natural Language Processing},
+    author = {Brogaard Pauli, Amalie  and
+      Barrett, Maria  and
+      Lacroix, Ophélie  and
+      Hvingelby, Rasmus},
+    booktitle = {Proceedings of the 23rd Nordic Conference on Computational Linguistics (NoDaLiDa 2021)},
+    month = june,
+    year = "2021"
+}
+```
+
+Read the paper [here](https://ep.liu.se/ecp/178/053/ecp2021178053.pdf). 
