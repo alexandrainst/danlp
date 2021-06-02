@@ -5,13 +5,6 @@ import pyconll
 from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func, DATASETS
 
 
-def _any_part_exist(parts: list):
-    for part in parts:
-        if part is not None:
-            return True
-    return False
-
-
 class DDT:
     """
 
