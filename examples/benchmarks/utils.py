@@ -7,7 +7,7 @@ import numpy as np
 from seqeval.metrics import classification_report
 
 
-def accuracy_report(tags_true, tags_pred):
+def accuracy_report(tags_true, tags_pred, per_label=True):
 
     # flatening tags lists
     tags_true = [tag for sent in tags_true for tag in sent]
@@ -24,7 +24,8 @@ def accuracy_report(tags_true, tags_pred):
         correct_tags[label] = [t == p for t, p in zip(tags_true, tags_pred) if t == label]
         acc = round(sum(correct_tags[label])/len(correct_tags[label])*100, 2) if len(correct_tags[label])>0 else 0
         tab.append([label, acc, len(correct_tags[label])])
-    tab.append(['', '', ''])
+    if per_label:
+        tab.append(['', '', ''])
     total_examples = sum(len(correct_tags[l]) for l in correct_tags)
 
     micro_acc = round( sum(sum(correct_tags[l]) for l in correct_tags) / total_examples *100, 2)

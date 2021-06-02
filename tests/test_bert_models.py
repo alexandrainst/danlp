@@ -1,6 +1,6 @@
 import unittest
 
-from danlp.models import load_bert_emotion_model, load_bert_tone_model, load_bert_base_model, BertNer, load_bert_nextsent_model
+from danlp.models import load_bert_emotion_model, load_bert_tone_model, load_bert_base_model, load_bert_ner_model, load_bert_nextsent_model
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -23,7 +23,9 @@ class TestBertEmotion(unittest.TestCase):
         model = load_bert_emotion_model()
         self.assertTrue(model.predict_if_emotion('bilen er flot')=='Emotional')
         self.assertTrue(model.predict_if_emotion('bilen er rød')=='No emotion')
+        self.assertTrue(model.predict('bilen er rød')=='No emotion')
         self.assertTrue(model.predict('jeg er meget glad idag')=='Glæde/Sindsro')
+        self.assertTrue(model.predict('jeg er meget glad idag', no_emotion=True)=='Glæde/Sindsro')
         self.assertTrue(len(model.predict_proba('jeg er meget glad idag')[0])==8)
         self.assertTrue(len(model.predict_proba('jeg er meget glad idag', no_emotion=True)[1])==2)
         self.assertEqual(model._classes()[0], ['Glæde/Sindsro','Tillid/Accept','Forventning/Interrese','Overasket/Målløs','Vrede/Irritation','Foragt/Modvilje','Sorg/trist','Frygt/Bekymret'])
@@ -81,7 +83,7 @@ class TestBertNextSent(unittest.TestCase):
         
 class TestBertNer(unittest.TestCase):
     def test_bert_tagger(self):
-        bert = BertNer()
+        bert = load_bert_ner_model()
         tokens, prediction = bert.predict("Jeg var ude og gå i København")
 
         self.assertEqual(len(tokens), len(prediction))
