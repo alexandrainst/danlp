@@ -74,7 +74,7 @@ class BertNer:
                 tokens_mask.extend([1]+[0]*(len(word_tokens)-1))
             tokens_mask.extend([1])
 
-            inputs = self.tokenizer.encode(tokens, return_tensors="pt")
+            inputs = self.tokenizer.encode(text, return_tensors="pt", is_split_into_words=True)
             if len(inputs[0])>512:
                 warnings.warn('The Bert ner model can maximum take 512 tokens as input. Split instead you text before calling predict. Eg by using sentence boundary detection')
             
