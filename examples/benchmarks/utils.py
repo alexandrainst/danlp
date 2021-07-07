@@ -88,7 +88,7 @@ def f1_class(k, true, pred):
     fp = np.sum(np.logical_and(pred == k, true != k))
     fn = np.sum(np.logical_and(pred != k, true == k))
     if tp == 0:
-        return 0
+        return 0, 0, 0
     recall = tp / (tp + fp)
     precision = tp / (tp + fn)
     f1 = 2 * (precision * recall) / (precision + recall)
