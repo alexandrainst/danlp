@@ -29,7 +29,7 @@ For instance, the extraction of entities from text can be used for :
  * analysing feedback from customers (product reviews)
  * speeding up search engines 
  * extracting information (e.g from emails)
- * building a structured database or a knowledge graph from a corpus
+ * building a structured database or a knowledge graph (see our example [tutorial](https://github.com/alexandrainst/danlp/blob/master/examples/tutorials/example_knowledge_graph.ipynb)) from a corpus
  * anonymizing documents. 
 
 

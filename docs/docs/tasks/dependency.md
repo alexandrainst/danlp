@@ -38,7 +38,7 @@ See for example the [EPE](http://epe.nlpl.eu/index.php?page=3) shared task, wher
 * Fine-Grained Opinion Analysis
 * Negation Resolution
 
-It can also be used, for instance, for the extraction of keyphrases or for building a knowledge graph. 
+It can also be used, for instance, for the extraction of keyphrases or for building a knowledge graph (see our [tutorial](https://github.com/alexandrainst/danlp/blob/master/examples/tutorials/example_knowledge_graph.ipynb)).
 
 
 ## Models 

@@ -18,4 +18,5 @@ Jupyter notebooks :
 - Tutorial about how to perform data augmentation on Danish text, 
     here exemplified by augmenting Tweets and testing if the increased data 
     increases the performance of a sentiment model: `example_data_augmentation.ipynb`
-   
+- Tutorial about how to build a simple knowledge graph using NER, POS-tagging, 
+    dependency parsing and coreference resolution : `example_knowledge_graph.ipynb`

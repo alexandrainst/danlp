@@ -17,7 +17,7 @@ If you want to read more about coreference resolution and the DaNLP model, we al
 
 ### Use cases 
 
-Coreference resolution is an important subtask in NLP. It is used in particular for information extraction (e.g. for building a knowledge graph) and could help with other NLP tasks such as machine translation (e.g. in order to apply the right gender or number) or text summarization, or in dialog systems. 
+Coreference resolution is an important subtask in NLP. It is used in particular for information extraction (e.g. for building a knowledge graph, see our [tutorial](https://github.com/alexandrainst/danlp/blob/master/examples/tutorials/example_knowledge_graph.ipynb)) and could help with other NLP tasks such as machine translation (e.g. in order to apply the right gender or number) or text summarization, or in dialog systems. 
 
 ## Models
 
@@ -42,6 +42,15 @@ doc = [["Lotte", "arbejder", "med", "Mads", "."], ["Hun", "er", "tandlæge", "."
 # apply coreference resolution on the document
 preds = coref_model.predict(doc)
 ```
+
+The `preds` variable is a dictionary including the following entries :
+* `top_spans` : list of indices of all references (spans) in the document
+* `antecedent_indices` : list of antecedents indices
+* `predicted_antecedents` : list of indices of the antecedent span (from `top_spans`), i.e. previous reference
+* `document` : list of tokens' indices for the whole document
+* `clusters` : list of clusters
+The most relevant entry to use is the list of clusters. One cluster contains the indices of references (spans) that refer to the same entity.
+
 
 ## 📈 Benchmarks
 
