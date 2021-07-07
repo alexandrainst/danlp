@@ -17,7 +17,7 @@ Please, follow the **commit message style** described [here](https://chris.beams
 
 Before pushing a pull request, make sure that the tests pass running `python -m unittest discover` (or using `coverage run -m unittest discover`).
 
-## Adding new tutorials {#tutorials}
+## Adding new tutorials
 
 You're welcome to help us writing new jupyter notebook tutorials (in English) about how to use and apply Danish NLP. 
 
@@ -39,7 +39,7 @@ Steps for adding a tutorial to the DaNLP repo:
 * update the [README.md](examples/tutorials/README.md) in the same folder with adding to the list of tutorials: the name of the tutorial (with a brief description)
 
 
-## Benchmarking external models {#benchmarking}
+## Benchmarking external models
  
 We update our benchmark [scripts](https://github.com/alexandrainst/danlp/tree/master/examples/benchmarks) when :
 * we add a new dataset to DaNLP ;
@@ -56,7 +56,7 @@ Steps when evaluating a new model :
 * update our documentation with the results from benchmarking.
 
 
-## Adding new models or datasets {#models-datasets}
+## Adding new models or datasets
 
 If you want to add a new model or dataset to the DaNLP repository, contact us (danlp@alexandra.dk) first in order to:
 * make sure that the model or data is in line with our focus (i.e. industry friendly Danish NLP) ;

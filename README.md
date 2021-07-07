@@ -76,8 +76,6 @@ If you are new to NLP or want to know more about the project in a broader perspe
 **Next up**
 
 - the AngryTweets dataset will be added to the DaNLP package, as a result of the crowdsourcing game [AngryTweets](https://medium.com/danlp/angry-tweets-f%C3%B8lelser-og-annoteringer-er-p%C3%A5-spil-s%C3%A5-spil-med-eacade042c95)
-- the Danish Gigaword will be made available through the DaNLP package
-
 
 
 ## Installation
