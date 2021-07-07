@@ -24,7 +24,7 @@ It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) 
 
 The [CDT documentation](https://github.com/mbkromann/copenhagen-dependency-treebank/blob/master/manual/cdt-manual.pdf) contains description of the coreference classes as well as inter-annotator agreement and confusion matrices.
 
-For this resource, we used the annotation files from the annotator "Lotte" along with the UD syntax which is an automatic conversion og the CDT syntax annotation by Johansen et al. (2015). We provide the sentence ID from the UD resource as well as the document ID from CDT. The document ID has been prepended with a two letter domain code compatible with the domain codes of the Ontonotes corpus. This is a manually mapping of the sources listed in the CDT. Only nw (newswire), mz (magazine), and bn (broadcast news) were present:
+For this resource, we used the annotation files from the annotator "Lotte" along with the UD syntax which is an automatic conversion of the CDT syntax annotation by Johansen et al. (2015). We provide the sentence ID from the UD resource as well as the document ID from CDT. The document ID has been prepended with a two letter domain code compatible with the domain codes of the Ontonotes corpus. This is a manually mapping of the sources listed in the CDT. Only nw (newswire), mz (magazine), and bn (broadcast news) were present:
 * 299 nw documents
 * 41 mz documents
 * 1 bn
@@ -68,51 +68,53 @@ Weischedel, R., Palmer, M., Marcus, M., Hovy, E., Pradhan, S., Ramshaw, L., ... 
 
 #### Generic QIDs
 
-Family name Q101352
-Unisex nickname Q49614
-Female given name Q11879590
-Male given name Q12308941
-Unisex name Q3409032
-Artist name Q483501
-Magazine Q41298
-Hotel Q27686
-Work of art Q838948
-governmental administrative unit in Denmark	Q21268738
-Municipal Police Q1758690
-Road Q34442
-Cohousing Q1107167
-Postal address Q319608
-Museum Q33506
-Security (tradeable financial asset) Q169489
-Geographic location Q2221906
-Radio program Q1555508
-Tv program Q15416
-Product / goods Q2424752
-Department within organisation Q2366457
-Organization Q43229
-Sports venue Q1076486
-Dish Q746549 (only one instance)
-Event Q1656682
-Fleet Q189524
-University Q3918
-Disease Q12136
-Coast Q93352
-Ship Q11446
-Award Q618779
-Automobile model Q3231690
-Project (also Inquiry)  Q170584
-Hospital Q16917
-Amusement ride Q1144661
-Sports team Q12973014
-Building Q41176
-Bill (proposed law) Q686822
-Restaurant Q11707
-People / ethnic group Q2472587
-Educational institution Q2385804
-Shop Q213441
-Publication Q732577
-legislation Q49371
-Night club Q622425
-Newspaper Q11032
-Prison Q40357
-Army Q37726
+| Category | QID | 
+| -------- | --- |
+| Family name | Q101352 | 
+| Unisex nickname | Q49614 |
+| Female given name | Q11879590 |
+| Male given name | Q12308941 |
+| Unisex name | Q3409032 |
+| Artist name | Q483501 |
+| Magazine | Q41298 |
+| Hotel | Q27686 |
+| Work of art | Q838948 |
+| governmental administrative unit in Denmark | Q21268738 |
+| Municipal Police | Q1758690 |
+| Road | Q34442 |
+| Cohousing | Q1107167 |
+| Postal address | Q319608 |
+| Museum | Q33506 |
+| Security (tradeable financial asset) | Q169489 |
+| Geographic location | Q2221906 |
+| Radio program | Q1555508 |
+| Tv program | Q15416 |
+| Product / goods | Q2424752 |
+| Department within organisation | Q2366457 |
+| Organization | Q43229 |
+| Sports venue | Q1076486 |
+| Dish | Q746549 (only one instance) |
+| Event | Q1656682 |
+| Fleet | Q189524 |
+| University | Q3918 |
+| Disease | Q12136 |
+| Coast | Q93352 |
+| Ship | Q11446 |
+| Award | Q618779 |
+| Automobile model | Q3231690 |
+| Project (also Inquiry) | Q170584 |
+| Hospital | Q16917 |
+| Amusement ride | Q1144661 |
+| Sports team | Q12973014 |
+| Building | Q41176 |
+| Bill (proposed law) | Q686822 |
+| Restaurant | Q11707 |
+| People / ethnic group | Q2472587 |
+| Educational institution | Q2385804 |
+| Shop | Q213441 |
+| Publication | Q732577 |
+| legislation | Q49371 |
+| Night club | Q622425 |
+| Newspaper | Q11032 |
+| Prison | Q40357 |
+| Army | Q37726 |
