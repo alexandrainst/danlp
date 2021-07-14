@@ -88,11 +88,11 @@ def f1_class(k, true, pred):
     fp = np.sum(np.logical_and(pred == k, true != k))
     fn = np.sum(np.logical_and(pred != k, true == k))
     if tp == 0:
-        return 0, 0, 0
-    recall = tp / (tp + fp)
-    precision = tp / (tp + fn)
+        return 0, 0, 0, 0, 0, 0
+    recall = tp / (tp + fn)
+    precision = tp / (tp + fp)
     f1 = 2 * (precision * recall) / (precision + recall)
-    return precision, recall, f1
+    return tp, fp, fn, precision, recall, f1
 
 
 def f1_report(true, pred, modelname="", dataname="", word_level=False, bio=False):
@@ -118,7 +118,7 @@ def f1_report(true, pred, modelname="", dataname="", word_level=False, bio=False
     avg = 0
     wei = 0
     for c in np.unique(true):
-        precision, recall, f1 = f1_class(c, pred, true)
+        _, _, _, precision, recall, f1 = f1_class(c, true, pred)
         avg += f1 / n
         wei += f1 * (np.sum(true == c) / len(true))
 
