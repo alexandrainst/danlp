@@ -39,8 +39,11 @@ coref_model = load_xlmr_coref_model()
 # a document is a list of tokenized sentences
 doc = [["Lotte", "arbejder", "med", "Mads", "."], ["Hun", "er", "tandlæge", "."]]
 
-# apply coreference resolution on the document
+# apply coreference resolution to the document and get a list of features (see below)
 preds = coref_model.predict(doc)
+
+# apply coreference resolution to the document and get a list of clusters
+clusters = coref_model.predict_clusters(doc)
 ```
 
 The `preds` variable is a dictionary including the following entries :
@@ -48,8 +51,9 @@ The `preds` variable is a dictionary including the following entries :
 * `antecedent_indices` : list of antecedents indices
 * `predicted_antecedents` : list of indices of the antecedent span (from `top_spans`), i.e. previous reference
 * `document` : list of tokens' indices for the whole document
-* `clusters` : list of clusters
+* `clusters` : list of clusters (indices of tokens)
 The most relevant entry to use is the list of clusters. One cluster contains the indices of references (spans) that refer to the same entity.
+To make it easier, we provide the `predict_clusters` function that returns a list of the clusters with the references and their ids in the document.
 
 
 ## 📈 Benchmarks
