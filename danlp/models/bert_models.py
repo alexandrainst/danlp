@@ -487,6 +487,83 @@ class BertNextSent:
         # return the pobability of sentence B following sentence A
         return round(float(probs[0][0]),4)
 
+
+
+class BertOffensive():
+    """
+    BERT offensive language identification model.
+
+    For predicting whether a text is offensive or not.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    """
+
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        from transformers import BertTokenizer, BertForSequenceClassification
+        # download the model or load the model path
+        model_path = download_model('bert.offensive', cache_dir,
+                                      process_func=_unzip_process_func,
+                                      verbose=verbose)
+        
+        self.classes= ['NOT', 'OFF']
+        self.model = BertForSequenceClassification.from_pretrained(model_path, num_labels=len(self.classes))
+        self.tokenizer = BertTokenizer.from_pretrained(model_path)
+        self.max_length = self.model.bert.embeddings.position_embeddings.num_embeddings
+
+    def _classes(self):
+        return self.classes
+    
+    def _get_pred(self, sentence):
+        input1 = self.tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
+                                                max_length=self.max_length, truncation=True, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
+            warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(self.max_length))
+        pred = self.model(input1['input_ids'], token_type_ids=input1['token_type_ids'])[0]
+
+        return pred
+    
+    def predict(self, sentence: str):
+        """
+        Predict whether a text is offensive or not. 
+
+        :param str sentence: raw text
+        :return: a class -- `OFF` (offensive) or `NOT` (not offensive)
+        :rtype: str
+        """
+        
+        pred = self._get_pred(sentence)
+        pred = pred.argmax().item()
+        predclass = self.classes[pred]
+        
+        return predclass
+    
+    def predict_proba(self, sentence: str):
+        """
+        For a given sentence, 
+        return its probabilities of belonging to each class, 
+        i.e. `OFF` or `NOT`
+        """
+
+        pred=self._get_pred(sentence)
+        proba = torch.nn.functional.softmax(pred[0], dim=0).detach().numpy()
+
+        return proba
+
+
+
+def load_bert_offensive_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Loads a BERT offensive language identification model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a BERT offensive language identification model
+    """
+    return BertOffensive(cache_dir, verbose)
+
+
+
 def load_bert_nextsent_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
     Load BERT language model used for next sentence predictions.

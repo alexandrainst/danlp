@@ -166,6 +166,13 @@ MODELS = {
         'size': 410888897,
         'file_extension': ''
     },
+    'bert.offensive': {
+        'url': DANLP_STORAGE_URL + '/models/bert.offensive.zip',
+        'md5_checksum': '48786f272321e42ad8b2bb5ee4142f5c',
+        'size': 410733108,
+        'file_extension': ''
+    },
+    # XLMR models
     'xlmr.coref': {
         'url': DANLP_STORAGE_URL + '/models/xlmr.coref.zip',
         'md5_checksum': '7cb9032c6b3a6af9d22f372de5817b35',
