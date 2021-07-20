@@ -1,6 +1,6 @@
 
 import time
-from .utils import print_speed_performance
+from utils import print_speed_performance
 
 from danlp.datasets import Dacoref
 from danlp.models import load_xlmr_coref_model
