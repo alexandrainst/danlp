@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, DefaultDict
 from overrides import overrides
 
 from allennlp.common.file_utils import cached_path
-from allennlp.data.dataset_readers.dataset_reader import DatasetReader, AllennlpDataset
+from allennlp.data.dataset_readers.dataset_reader import DatasetReader
 from allennlp.data.instance import Instance
 from allennlp.data.tokenizers import PretrainedTransformerTokenizer
 from allennlp.data.token_indexers import SingleIdTokenIndexer, TokenIndexer
@@ -112,7 +112,7 @@ class ConllCorefReader(DatasetReader):
         if not isinstance(instances, list):
             instances = list(instances)
 
-        return AllennlpDataset(instances)
+        return instances
 
     def _process_sentences(self, sentences):
         clusters: DefaultDict[int, List[Tuple[int, int]]] = collections.defaultdict(list)

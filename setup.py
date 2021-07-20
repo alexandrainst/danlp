@@ -26,12 +26,12 @@ setup(
     ],
     extras_require={
         'all' : [
-            'transformers<=4.0.1',
+            'transformers<=4.3.3',
             'gensim<=3.8.1',
-            'torch<=1.6.0',
-            'flair<=0.4.5',
+            'torch<=1.7.1',
+            'flair<=0.8',
             'spacy<=2.2.3',
-            'allennlp<=1.3.0'
+            'allennlp<=2.5.0'
         ]
     },
     classifiers=[

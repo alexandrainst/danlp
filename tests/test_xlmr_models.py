@@ -1,10 +1,11 @@
+
 import unittest
 
 from danlp.models import load_xlmr_coref_model
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
-from allennlp.data import DataLoader
+from allennlp.data.data_loaders import SimpleDataLoader 
 from allennlp.training.util import evaluate
 
 import os
@@ -56,8 +57,8 @@ class TestXLMRCoref(unittest.TestCase):
             ]
         
         instances = xlmr_model.dataset_reader.load_dataset(sentences)
-        instances.index_with(xlmr_model.model.vocab)
-        data_loader = DataLoader.from_params(dataset=instances, params=data_loader_params)
+        data_loader = SimpleDataLoader(instances, 1)
+        data_loader.index_with(xlmr_model.model.vocab)
 
         metrics = evaluate(
             xlmr_model.model,
