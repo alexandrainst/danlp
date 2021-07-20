@@ -109,8 +109,9 @@ class DDT:
 
             for sentence in dataset.sentences:
                 for token in sentence.tokens:
-                    if 'ner' in token.tags:
-                        token.tags['ner'].value = token.tags['ner'].value.split("=")[1].replace("|SpaceAfter", "")
+                    if len(token.get_labels('ner')) != 0:
+                        label = token.get_tag('ner')
+                        token.set_label('ner', label.value.split("=")[1].replace("|SpaceAfter", ""), label.score)
 
         return corpus
 

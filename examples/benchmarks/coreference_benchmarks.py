@@ -5,6 +5,8 @@ from utils import print_speed_performance
 from danlp.datasets import Dacoref
 from danlp.models import load_xlmr_coref_model
 
+from allennlp.data.data_loaders import SimpleDataLoader
+
 import os
 
 # load the data
@@ -21,11 +23,10 @@ def benchmark_xlmr_mdl():
     from allennlp.training.util import evaluate
 
     xlmr = load_xlmr_coref_model()
-    data_loader_params = xlmr.config.pop("data_loader")
-
+    
     instances = xlmr.dataset_reader.load_dataset(testset)
-    instances.index_with(xlmr.model.vocab)
-    data_loader = DataLoader.from_params(dataset=instances, params=data_loader_params)
+    data_loader = SimpleDataLoader(instances, 1)
+    data_loader.index_with(xlmr.model.vocab)
 
     start = time.time()
 
