@@ -27,11 +27,13 @@ class TestXLMRCoref(unittest.TestCase):
 
         # prediction
         preds = xlmr_model.predict(doc)
+        clusters = xlmr_model.predict_clusters(doc)
 
         self.assertEqual(preds['top_spans'], [[0, 0], [1, 3], [5, 5]])
         self.assertEqual(preds['antecedent_indices'], [[0, 1, 2], [0, 1, 2], [0, 1, 2]])
         self.assertEqual(preds['predicted_antecedents'], [-1, -1, 0])
         self.assertEqual(preds['clusters'], [[[0, 0], [5, 5]]])
+        self.assertEqual(clusters, [[(['Lotte'], 0, 1), (['Hun'], 5, 6)]])
 
         # evaluation
         data_loader_params = xlmr_model.config.pop("data_loader")

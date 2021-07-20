@@ -8,7 +8,6 @@ from allennlp.common.util import prepare_environment
 import_module_and_submodules("danlp.models.allennlp_models")
 from danlp.models.allennlp_models.coref.predictors.coref import CorefPredictor
 
-import os
 from typing import List
 
 class XLMRCoref():
@@ -47,6 +46,34 @@ class XLMRCoref():
         preds = self.predictor.predict_tokenized(document)
 
         return preds
+
+    def predict_clusters(self, document: List[List[str]]):
+        """
+        Predict clusters of entities in the document. 
+        Each predicted cluster contains a list of references.
+        A reference is a tuple (ref text, start id, end id).
+        The ids refer to the token ids in the entire document. 
+        
+        :param List[List[str]] document: segmented and tokenized text
+        :return: a list of clusters
+        :rtype: List[List[Tuple]]
+        """
+    
+        preds = self.predict(document)
+        tokens = [t for d in document for t in d]
+        clusters = []
+
+        for idx in preds['clusters']:
+            cluster = []
+            for ref_idx in idx:
+                start_id = ref_idx[0]
+                end_id = ref_idx[1]+1
+                ref = tokens[start_id:end_id]
+                cluster.append((ref, start_id, end_id))
+            clusters.append(cluster)
+
+        return clusters
+
 
 
 def load_xlmr_coref_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
