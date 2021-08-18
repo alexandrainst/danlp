@@ -203,14 +203,16 @@ If you want to contribute to the DaNLP repository and make it better, your help 
 
 
 ## Who is behind?
-<img align="right" width="150" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/imgs/alexandra_logo.png">
+<img align="right" width="150" src="https://raw.githubusercontent.com/alexandrainst/danlp/master/docs/docs/imgs/alexandra_logo.png">
 
 The DaNLP repository is maintained by the [Alexandra Institute](https://alexandra.dk/uk) which is a Danish non-profit company 
 with a mission to create value, growth and welfare in society. The Alexandra Institute is a member of [GTS](https://gts-net.dk/), 
 a network of independent Danish research and technology organisations.
 
-The work on this repository is part of the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract 
-allocated to the Alexandra Institute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). The project runs in two years in 2019 and 2020, and an overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/). ````
+Between 2019 and 2020, the work on this repository was part of the [Dansk For Alle](https://bedreinnovation.dk/dansk-alle-0) performance contract (RK) allocated to the Alexandra Institute by the [Danish Ministry of Higher Education and Science](https://ufm.dk/en?set_language=en&cl=en). 
+Since 2021, the project is funded through the [Dansk NLP](http://bedreinnovation.dk/dansk-nlp) activity plan which is part of the [Digital sikkerhed, tillid og dataetik](http://bedreinnovation.dk/digital-sikkerhed-tillid-og-dataetik-0) performance contract.
+
+An overview  of the project can be found on our [microsite](https://danlp.alexandra.dk/).
 
 ## Cite
 
