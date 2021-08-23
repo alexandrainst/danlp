@@ -10,9 +10,10 @@ Here are definitions of the previous concepts:
  * hateful : targets a group or an individual with the intent to be harmful or to cause social chaos.
  
 
-| Model         | Train Data                      | License   | Trained by          | Tags      | DaNLP |
-|---------------|---------------------------------|-----------|---------------------|-----------|-------|
-| [BERT](#bert) | [DKHate](../datasets.md#dkhate) | CC BY 4.0 | Alexandra Instittut | OFF / NOT | ✔️    |
+| Model              | Train Data                      | License         | Trained by          | Tags      | DaNLP |
+|--------------------|---------------------------------|-----------------|---------------------|-----------|-------|
+| [BERT](#bert)      | [DKHate](../datasets.md#dkhate) | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️     |
+| [A&ttack](#attack) | Facebook comments               | CC BY-NC-SA 4.0 | Analyse & Tal       | OFF / NOT | ❌    |
 
 
 ### Use cases 
@@ -46,18 +47,24 @@ pred = offensive_model.predict(sentence)
 proba = offensive_model.predict_proba(sentence)
 ```
 
+### A&ttack (Analyse & Tal) {#attack}
+
+The A&ttack model detects whether a text is offensive or not. It has been developed by [Analyse & Tal](https://ogtal.dk/) and is based on the pretrained [Ælectra model](https://huggingface.co/Maltehb/-l-ctra-danish-electra-small-uncased). It has been trained on social media data (Facebook, 67,188 tokens). 
+See the [github repo](https://github.com/ogtal/A-ttack) for more details and the [report](https://strapi.ogtal.dk/uploads/966f1ebcfa9942d3aef338e9920611f4.pdf) of the project.
+
 
 ## 📈 Benchmarks
 
 See detailed scoring of the benchmarks in the [example](<https://github.com/alexandrainst/danlp/tree/master/examples>) folder.
 
-The benchmarks has been performed on the test part of the [DKHate](../datasets.md#dkhate) dataset.
+The benchmarking has been performed on the test part of the [DKHate](../datasets.md#dkhate) dataset.
 
-The scores presented here describe the performance of the models for the task of offensive language identification. 
+The scores presented here describe the performance (F1) of the models for the task of offensive language identification. 
 
-| Model | OFF  | NOT  | AVG F1 |
-|-------|------|------|--------|
-| BERT  | 61.9 | 95.4 | 78.7   |
+| Model         | OFF  | NOT  | AVG F1 |
+|---------------|------|------|--------|
+| BERT          | 61.9 | 95.4 | 78.7   |
+| A&ttack (A&T) | 34.2 | 91.4 | 62.8   |
 
 
 The evaluation script `hatespeech_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/hatespeech_benchmarks.py).
