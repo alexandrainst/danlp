@@ -31,6 +31,10 @@
       Coreference Resolution
       </a>
       <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/hatespeech.md">
+      Hatespeech Detection
+      </a>
+      <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/embeddings.md">
       Embeddings
       </a>
@@ -56,7 +60,6 @@ such as PyTorch.
 See our [documentation pages](https://danlp-alexandra.readthedocs.io/en/latest/index.html) 
 for more details about our models and datasets, and definitions of the modules provided 
 through the DaNLP package. 
-
 
 If you are new to NLP or want to know more about the project in a broader perspective, you can start on our [microsite](https://danlp.alexandra.dk/).
 
@@ -158,6 +161,8 @@ The repository is continuously evolving and here is the list of [NLP tasks](http
 -  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
 -  [Coreference resolution](docs/docs/tasks/coreference.md)
+- [Hatespeech](docs/docs/tasks/hatespeech.md)
+You can also find some of our [transformers](docs/docs/frameworks/transformers.md) models on [HuggingFace](https://huggingface.co/DaNLP). 
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 

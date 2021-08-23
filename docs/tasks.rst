@@ -11,3 +11,4 @@ Tasks
    docs/tasks/dependency.md
    docs/tasks/sentiment_analysis.md
    docs/tasks/coreference.md
+   docs/tasks/hatespeech.md

@@ -16,6 +16,7 @@ Through DaNLP, we provide fine-tuned BERT models for the following tasks:
 * Named Entity Recognition
 * Emotion detection
 * Tone and polarity detection
+* Hatespeech detection
 
 The  pre-trained  [Danish BERT](https://github.com/botxo/nordic_bert)  from BotXO can also be used for the following tasks without any further finetuning:
 
@@ -131,6 +132,13 @@ The first model detects the polarity of a sentence, i.e. whether it is perceived
 The second model detects the tone of a sentence, between `subjective` and `objective`. 
 
 Read more about it in the [sentiment docs](../tasks/sentiment_analysis.md).
+
+### Hatespeech detection
+
+The offensive language identification model predicts whether a text is offensive (`OFF`) or not (`NOT`). 
+The model is fine-tuned on the [DKHate](../datasets.md#dkhate) dataset. 
+
+Read more about it in the [hatespeech docs](../tasks/hatespeech.md).
 
 ## XLM-RoBERTa
 
