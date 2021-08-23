@@ -157,11 +157,12 @@ The DaNLP repository provides an overview of Danish models for some of the most 
 The repository is continuously evolving and here is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we currently cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
 -  [Part of speech](docs/docs/tasks/pos.md)
--  [Named Entity Recognition](docs/docs/tasks/ner.md)
--  [Sentiment Analysis](docs/docs/tasks/sentiment_analysis.md)
+-  [Named entity recognition](docs/docs/tasks/ner.md)
+-  [Sentiment analysis](docs/docs/tasks/sentiment_analysis.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
 -  [Coreference resolution](docs/docs/tasks/coreference.md)
-- [Hatespeech](docs/docs/tasks/hatespeech.md)
+- [Hatespeech detection](docs/docs/tasks/hatespeech.md)
+
 You can also find some of our [transformers](docs/docs/frameworks/transformers.md) models on [HuggingFace](https://huggingface.co/DaNLP). 
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
