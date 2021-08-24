@@ -70,16 +70,21 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **News**
 
-- :tada: Version 0.0.12 has been [released](https://github.com/alexandrainst/danlp/releases) with a new feature for finding the `domains` of a word with DanNet. One new dataset has been made available -- the DKHate -- for hate speech detection and one new model has been added for coreference resolution.  
+- :tada: Version 0.1.0 has been [released](https://github.com/alexandrainst/danlp/releases) with 
+  - a new dataset for sentiment analysis: [AngryTweets](docs/docs/datasets.md#angrytweets)
+  - the [Danish Unimorph](docs/docs/datasets.md#daunimorph) dataset, including lemmas and morphological features for many words in Danish
+  - a new [BERT model for hate speech detection](docs/docs/tasks/hatespeech.md#bert) trained on the [DKHate](docs/docs/datasets.md#dkhate) dataset
 
-- :blue_book: A jupyter notebook tutorial for quick starting
-- Benchmarking of the NERDA model for NER
-- Benchmarking of the Dacy model for PoS-tagging, NER and dependency parsing
+- :blue_book: A jupyter notebook tutorial for building a [knowledge graph](examples/tutorials/example_knowledge_graph.ipynb) using [NER](docs/docs/tasks/ner.md), [PoS-tagging](docs/docs/tasks/pos.md), [dependency parsing](docs/docs/tasks/dependency.md) and [coreference resolution](docs/docs/tasks/coreference.md)
+- Benchmarking of the Stanza model for [PoS-tagging](docs/docs/tasks/pos.md#stanza) and [dependency parsing](docs/docs/tasks/dependency.md#stanza)
+- Benchmarking of the A&ttack model for [hate speech detection](docs/docs/tasks/hatespeech.md#attack)
+- 🤗 Some of our transformers models are now available through [HuggingFace](https://huggingface.co/DaNLP)! More is coming, keep an eye open 
+
 
 
 **Next up**
 
-- the AngryTweets dataset will be added to the DaNLP package, as a result of the crowdsourcing game [AngryTweets](https://medium.com/danlp/angry-tweets-f%C3%B8lelser-og-annoteringer-er-p%C3%A5-spil-s%C3%A5-spil-med-eacade042c95)
+- dataset(s) and model(s) for Named Entity Disambiguation (NED)
 
 
 ## Installation
