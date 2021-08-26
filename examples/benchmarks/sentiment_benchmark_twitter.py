@@ -60,6 +60,19 @@ def sentida_benchmark():
 
     f1_report(df_val['polarity'], df_val['sentida'], 'Sentida', "twitter_sentiment(val)")
 
+def senda_benchmark():
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+    tokenizer = AutoTokenizer.from_pretrained("pin/senda")
+    model = AutoModelForSequenceClassification.from_pretrained("pin/senda")
+
+    # create 'senda' sentiment analysis pipeline 
+    senda_pipeline = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer)
+
+    start = time.time()
+    preds = df_val.text.map(lambda x: senda_pipeline(x)[0]['label'])
+    print_speed_performance(start, len(df_val))
+
+    f1_report(df_val['polarity'], preds, 'Senda', "twitter_sentiment(val)")
 
 def bert_sent_benchmark():
     model = load_bert_tone_model()       
@@ -93,6 +106,7 @@ if __name__ == '__main__':
     afinn_benchmark()
     bert_sent_benchmark()
     spacy_benchmark()
+    senda_benchmark()
         
         
         

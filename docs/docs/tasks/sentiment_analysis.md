@@ -83,7 +83,7 @@ classifier._classes()
 
 SpaCy sentiment is a text classification model trained using spacy built in command line interface. It uses the CoNLL2017 word vectors (read about it [here](embeddings.md)).
 
-The model is trained using hard distil of the [BERT Tone](#bert-tone) (beta) - Meaning,  the BERT Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classses: 'positiv', 'neutral' and 'negative'.
+The model is trained using hard distil of the [BERT Tone](#bert-tone) (beta) - Meaning,  the BERT Tone model is used to make predictions on 50.000 sentences from Twitter and 50.000 sentences from [Europarl7](http://www.statmt.org/europarl/). These data is then used to trained a spacy model. Notice the dataset has first been balanced between the classes by oversampling. The model recognizes the classes: 'positiv', 'neutral' and 'negative'.
 
 It is a first version. 
 
@@ -104,7 +104,10 @@ max(doc.cats.items(), key=operator.itemgetter(1))[0]
 '''positiv'''
 ```
 
+### Senda
 
+[Senda](https://github.com/ebanalyse/senda) is a python package developed by Ekstra Bladet which helps with fine-tuning transformers for text classification.
+A model trained on [DaNLP's sentiment datasets](../datasets.md) is available through [HuggingFace](https://huggingface.co/pin/senda). 
 
 
 
@@ -132,8 +135,9 @@ In the table we consider the accuracy and macro-f1 in brackets, but to get the s
 |-------------------------------------|--------------------|-----------------|------------------------------|
 | AFINN                               | 0.68 (0.68)        | 0.66 (0.61)     | 0.48 (0.46)                  |
 | Sentida (version 0.5.0)             | 0.67 (0.65)        | 0.58 (0.55)     | 0.44 (0.44)                  |
-| BERT Tone (polarity, version 0.0.1) | **0.79** (0.78)    | **0.74** (0.67) | **0.73** (0.70)              |
+| BERT Tone (polarity, version 0.0.1) | **0.79** (0.78)    | **0.74** (0.67) | 0.73 (0.70)                  |
 | spaCy sentiment (version 0.0.1)     | 0.74 (0.73)        | 0.66 (0.61)     | 0.66 (0.60)                  |
+| Senda                               | 0.75 (0.74)        | 0.68 (0.59)     | **0.76** (0.73)              |
 
 ### Benchmark of subjective versus objective classification
 

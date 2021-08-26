@@ -69,7 +69,30 @@ def sentida_benchmark(datasets):
 
 
         f1_report(df['valence'], df['pred'], 'Sentida', dataset)
-        
+
+def senda_benchmark(datasets):
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+    tokenizer = AutoTokenizer.from_pretrained("pin/senda")
+    model = AutoModelForSequenceClassification.from_pretrained("pin/senda")
+
+    # create 'senda' sentiment analysis pipeline 
+    senda_pipeline = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer)
+
+    for dataset in datasets:
+        if dataset == 'euparlsent':
+            data = EuroparlSentiment1()
+        if dataset == 'lccsent':
+            data = LccSentiment()
+
+        df = data.load_with_pandas()
+
+        df['valence'] = df['valence'].map(sentiment_score_to_label)
+        start = time.time()
+        df['pred'] = df.text.map(lambda x: senda_pipeline(x)[0]['label'])
+        print_speed_performance(start, len(df))
+
+        f1_report(df['valence'], df['pred'], 'Senda', dataset)
+
 def bert_sent_benchmark(datasets):
     model = load_bert_tone_model()
     
@@ -126,3 +149,4 @@ if __name__ == '__main__':
     afinn_benchmark(['euparlsent','lccsent'])
     bert_sent_benchmark(['euparlsent','lccsent'])
     spacy_sent_benchmark(['euparlsent','lccsent'])
+    senda_benchmark(['euparlsent','lccsent'])
