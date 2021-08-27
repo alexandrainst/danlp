@@ -27,4 +27,4 @@ For running the `sentiment_benchmarks_twitter` you need a twitter development ac
   
 - Benchmark script of Noun-phrase Chunking -- depending on the [Dependency Parsing model](<https://github.com/alexandrainst/danlp/blob/master/docs/models/dependency.md>) -- on [Danish Dependency Treebank](<https://github.com/alexandrainst/danlp/blob/master/docs/datasets.md#danish-dependency-treebank-dane>). The (convertion of the dependencies given by the) spaCy model is benchmarked `chunking_benchmarks.py`
 
-- Benchmark script for [Hate Speech Detection](<https://github.com/alexandrainst/danlp/blob/master/docs/models/hatespeech.md>) on [DKHate](<https://github.com/alexandrainst/danlp/blob/master/docs/docs/datasets.md#dkhate>). A BERT model for identification of offensive language is benchmarked `hatespeech_benchmarks.py`
+- Benchmark script for [Hate Speech Detection](<https://github.com/alexandrainst/danlp/blob/master/docs/models/hatespeech.md>) on [DKHate](<https://github.com/alexandrainst/danlp/blob/master/docs/docs/datasets.md#dkhate>). A BERT and an ELECTRA model for identification of offensive language are benchmarked `hatespeech_benchmarks.py`
