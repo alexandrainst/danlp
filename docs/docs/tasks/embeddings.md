@@ -112,7 +112,7 @@ stacked_embeddings.embed(sentence2)
 
 # Show that it is contextual in the sense 'bank' has different embedding after context
 print('{} dimensions out of {} is equal'.format(int(sum(sentence2[4].embedding==sentence1[2].embedding)), len(sentence1[2].embedding)))
-# 52 ud af 2364
+# 1332 ud af 2364
 ```
 
 
