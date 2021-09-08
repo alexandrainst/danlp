@@ -129,8 +129,3 @@ dmypy.json
 # readthedocs
 docs/_build
 docs/make.bat
-
-
-
-# .py
-/code_tester.py
