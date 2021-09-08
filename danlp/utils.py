@@ -70,6 +70,7 @@ def extract_single_file_from_zip(cache_dir: str, file_in_zip: str, dest_full_pat
     tmp_path = os.path.join(cache_dir, ''.join(random_string()))
 
     outpath = zip_file.extract(file_in_zip, path=tmp_path)
-    os.rename(outpath, dest_full_path)
+    if not os.path.exists(dest_full_path):
+        os.rename(outpath, dest_full_path)
 
     shutil.rmtree(tmp_path)
