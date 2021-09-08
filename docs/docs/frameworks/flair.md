@@ -107,8 +107,9 @@ from flair.data import Sentence, Token
 # loading the POS flair model
 tagger = load_flair_pos_model()
 
-# your sentences (list of lists of tokens)
-my_sentences = [[...], [...], ...]
+# add your own sentences as seen with two examples.
+my_sentences = [['Den', 'danske', 'kolonihavebevægelse', 'er', 'skyld', 'i', ',', 'at', 'vi', 'har', 'fri', 'om', 'lørdagen'], 
+                ['Møllehøj', 'er', 'det', 'højeste', 'punkt', 'i', 'Danmark']]
 
 flair_sentences = []
 for sent in my_sentences:
