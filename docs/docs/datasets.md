@@ -263,7 +263,7 @@ dannet.meanings(word)
 # part-of-speech (returns a list comprised in 'Noun', 'Verb' or 'Adjective')
 dannet.pos(word)
 # wordnet relations (EUROWORDNET or WORDNETOWL)
-dannet.wordnet_relations(word, eurowordnet=True))
+dannet.wordnet_relations(word, eurowordnet=True)
 # word ids
 dannet._word_ids(word)
 # synset ids
