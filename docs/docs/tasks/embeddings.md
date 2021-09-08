@@ -68,14 +68,14 @@ word_embeddings = load_wv_with_gensim('conll17.da.wv')
 word_embeddings.most_similar(positive=['københavn', 'england'], negative=['danmark'], topn=1)
 # [('london', 0.7156291604042053)]
 
-word_embeddings.doesnt_match("vand sodavand brød vin juice".split())
+word_embeddings.doesnt_match("sodavand brød vin juice".split())
 # 'brød'
 
 word_embeddings.similarity('københavn', 'århus')
-# 0.550142
+# 0.7677029
 
 word_embeddings.similarity('københavn', 'esbjerg')
-# 0.48161203
+# 0.59988254
 
 
 # Load with spacy
