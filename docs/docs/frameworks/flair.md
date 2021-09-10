@@ -73,9 +73,9 @@ flair_test = flair_corpus.test
 flair_dev = flair_corpus.dev
 
 # to get the list of UPOS tags for each sentence
-pos_tags = [[tok.tags['upos'].value for tok in fs] for fs in flair_test]
+pos_tags = [[tok.get_tag('upos').value for tok in fs] for fs in flair_test]
 # to get the list of NER tags for each sentence (BIO format)
-ner_tags = [[tok.tags['ner'].value for tok in fs] for fs in flair_test]
+ner_tags = [[tok.get_tag('ner').value for tok in fs] for fs in flair_test]
 # to get the list of tokens for each sentence
 tokens = [[tok.text for tok in fs] for fs in flair_test]
 
