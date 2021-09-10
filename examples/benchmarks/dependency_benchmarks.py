@@ -10,6 +10,7 @@ from danlp.models import load_spacy_model
 from utils import print_speed_performance, dependency_report
 
 import stanza
+stanza.download('Danish') # Download model (you can comment this line after download)
 
 # load the data
 ddt = DDT()
