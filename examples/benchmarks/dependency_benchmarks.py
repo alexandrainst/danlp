@@ -125,6 +125,10 @@ def benchmark_stanza_mdl():
 if __name__ == '__main__':
     benchmark_spacy_mdl()
     benchmark_stanza_mdl()
+
+    """
+    To run the following benchmarks, make a new env with spacy ~3.0.1, dacy and spacy-transformer.
+    """
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
