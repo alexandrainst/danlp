@@ -137,7 +137,7 @@ def benchmark_flair_mdl():
         flair_sentences.append(flair_sentence)
 
     tagger.predict(flair_sentences, verbose=True)
-    predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
+    predictions = [[tok.get_tag('ner').value for tok in fs] for fs in flair_sentences]
     print('Flair:')
     print_speed_performance(start, num_sentences, num_tokens)
 
@@ -200,12 +200,13 @@ def benchmark_nerda_electra_mdl():
 
 
 if __name__ == '__main__':
-    benchmark_polyglot_mdl()
-    benchmark_spacy_mdl()
-    benchmark_flair_mdl()
-    benchmark_bert_mdl()
-    benchmark_nerda_multi_mdl()
-    benchmark_nerda_electra_mdl()
+    #benchmark_polyglot_mdl()
+    #benchmark_spacy_mdl()
+    #benchmark_flair_mdl()
+    #benchmark_bert_mdl()
+    #benchmark_nerda_multi_mdl()
+    #benchmark_nerda_electra_mdl()
+
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
-    # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
+    benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
