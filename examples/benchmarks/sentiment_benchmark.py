@@ -48,6 +48,8 @@ def afinn_benchmark(datasets):
 def sentida_benchmark(datasets):
 
     from sentida import Sentida
+    import nltk
+    nltk.download('punkt')
     sentida =  Sentida()
     
     def sentida_score(sent):
