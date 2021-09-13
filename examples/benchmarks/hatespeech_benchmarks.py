@@ -1,7 +1,7 @@
 from danlp.datasets import DKHate
 from danlp.models import load_bert_offensive_model
 import time, os
-from .utils import *
+from utils import *
 
 ## Load the DKHate data
 dkhate = DKHate()
