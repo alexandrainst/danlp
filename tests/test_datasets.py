@@ -7,7 +7,8 @@ from flair.datasets import ColumnCorpus
 from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
-from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, TwitterSent, Dacoref, DanNet, DKHate, DaUnimorph
+from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, \
+    TwitterSent, Dacoref, DanNet, DKHate, DaUnimorph, DaNED, DaWikiNED
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -201,6 +202,36 @@ class TestUnimorphDataset(unittest.TestCase):
         self.assertEqual(unimorph.get_inflections('trolde', pos='V'), ['troldedes', 'troldede', 'trolder', 'troldes', 'trolde', 'trold'])
         self.assertEqual(unimorph.get_inflections('trolde', pos='N', with_features=True)[0], {'lemma': 'trold', 'form': 'troldene', 'feats': 'N;DEF;NOM;PL', 'pos': 'N'})
         self.assertEqual(unimorph.get_lemmas('papiret', with_features=True), [{'lemma': 'papir', 'form': 'papiret', 'feats': 'N;DEF;NOM;SG', 'pos': 'N'}])
+
+class TestDanedDatasets(unittest.TestCase):
+    def test_daned(self):
+        daned = DaNED() 
+        train, dev, test = daned.load_with_pandas()
+        self.assertEqual(len(train), 4626)
+        self.assertEqual(len(dev), 544)
+        self.assertEqual(len(test), 744)
+        self.assertEqual(set(test['class'].to_list()), {0, 1})
+
+        prop, desc = daned.get_kg_context_from_qid('Q303', dictionary=True)
+        self.assertEqual(desc, 'amerikansk sanger')
+        self.assertEqual(prop[1], ['fornavn', 'Elvis'])
+
+        prop_str, _ = daned.get_kg_context_from_qid('Q303')
+        self.assertEqual(len(prop_str), 6537)
+
+class TestDawikinedDatasets(unittest.TestCase):
+    def test_dawikined(self):
+        dawikined = DaWikiNED()
+        train = dawikined.load_with_pandas()
+        self.assertEqual(len(train), 21302)
+        self.assertEqual(set(train['class'].to_list()), {0, 1})
+
+        prop, desc = dawikined.get_kg_context_from_qid('Q1748', dictionary=True)
+        self.assertEqual(desc, 'Danmarks hovedstad')
+        self.assertEqual(prop[1], ['land', 'Danmark'])
+
+        prop_str, _ = dawikined.get_kg_context_from_qid('Q1748')
+        self.assertEqual(len(prop_str), 3758)
 
 if __name__ == '__main__':
     unittest.main()
