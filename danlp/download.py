@@ -234,6 +234,20 @@ DATASETS = {
         'size': 99725,
         'file_extension': '.tsv'
     },
+    # DaNED
+    'daned': {
+        'url': DANLP_STORAGE_URL + '/datasets/daned.zip',
+        'md5_checksum': 'ee2a89dc7ffe8cbc741558775d8daf06',
+        'size': 987042,
+        'file_extension': ''
+    },
+    # DaWikiNED
+    'dawikined': {
+        'url': DANLP_STORAGE_URL + '/datasets/dawikined.zip',
+        'md5_checksum': '8d7edd8b16e978ead4db686c033a4f08',
+        'size': 12244995,
+        'file_extension': ''
+    },
     
     # SENTIMENT EVALUATION
     'europarl.sentiment1': {

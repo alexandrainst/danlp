@@ -6,3 +6,5 @@ from .dacoref import *
 from .dannet import *
 from .dkhate import *
 from .unimorph import *
+from .daned import *
+from .dawikined import *
