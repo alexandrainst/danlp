@@ -239,14 +239,14 @@ DATASETS = {
         'url': DANLP_STORAGE_URL + '/datasets/daned.zip',
         'md5_checksum': 'ee2a89dc7ffe8cbc741558775d8daf06',
         'size': 987042,
-        'file_extension': ''
+        'file_extension': '.tsv'
     },
     # DaWikiNED
     'dawikined': {
         'url': DANLP_STORAGE_URL + '/datasets/dawikined.zip',
         'md5_checksum': '8d7edd8b16e978ead4db686c033a4f08',
         'size': 12244995,
-        'file_extension': ''
+        'file_extension': '.tsv'
     },
     
     # SENTIMENT EVALUATION
