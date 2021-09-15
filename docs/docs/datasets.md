@@ -23,8 +23,8 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [DanNet](#dannet)                                                                      | Wordnet                  | 66,308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)                                    | ✔️    |
 | [DKHate](#dkhate)                                                                      | Hate Speech Detection    | 61,967            | 3,289                  | CC BY 4.0                                                                                    | ✔️    |
 | [DaUnimorph](#daunimorph)                                                              | Morphological Inflection | 25,503            | -                      | CC BY-SA 3.0                                                                                 | ✔️    |
-| [DaNED](#daned)                                                                      | Named Entity Disambiguation    | --            | train:4,626 dev:2,376 test:1,488                  | CC BY-SA 4.0                                                                                    | ✔️    |
-| [DaWikiNED](#dawikined)                                                                      | Named Entity Disambiguation    | --            | 21,278                  | CC BY-SA 4.0                                                                                    | ✔️    |
+| [DaNED](#daned)                                                                      | Named Entity Disambiguation    | --            | train:4,626 dev:544 test:744                  | CC BY-SA 4.0                                                                                    | ✔️    |
+| [DaWikiNED](#dawikined)                                                                      | Named Entity Disambiguation    | --            | 21,302                  | CC BY-SA 4.0                                                                                    | ✔️    |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -334,13 +334,22 @@ daned = DaNED()
 train, dev, test = daned.load_with_pandas()
 ```
 
-To get the KG context (Wikidata properties and description) of a QID, you can use:
+To get the KG context (Wikidata properties and description) of a QID (from the DaNED database), you can use:
 
 ```python
 qid = "Q303"
 # Get Elvis Presley's Wikidata properties and description
 properties, description = get_kg_context_from_qid(qid)
 ```
+
+If the QID does not exist in the database, you can allow the search through Wikidata (online): 
+
+```python
+qid = "Q36620"
+# Get Tycho Brahe's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid, allow_online_search=True)
+```
+
 
 
 The dataset can also be downloaded directly:
@@ -363,13 +372,22 @@ dawikined = DaWikiNED()
 train, dev, test = dawikined.load_with_pandas()
 ```
 
-To get the KG context (Wikidata properties and description) of a QID, you can use:
+To get the KG context (Wikidata properties and description) of a QID (from the DaWikiNED database), you can use:
 
 ```python
 qid = "Q1748"
 # Get Copenhagen's Wikidata properties and description
 properties, description = get_kg_context_from_qid(qid, dictionary=True)
 ```
+
+If the QID does not exist in the database, you can allow the search through Wikidata (online): 
+
+```python
+qid = "Q36620"
+# Get Tycho Brahe's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid, allow_online_search=True)
+```
+
 
 The dataset can also be downloaded directly:
 
