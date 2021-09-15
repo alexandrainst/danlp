@@ -3,7 +3,7 @@ import pandas as pd
 import json
 
 from danlp.download import DEFAULT_CACHE_DIR, download_dataset, _unzip_process_func, DATASETS
-
+from danlp.utils import get_kg_context_from_wikidata_qid
 
 class DaNED:
     """
@@ -55,19 +55,23 @@ class DaNED:
         
         return data['train'], data['dev'], data['test']
 
-    def get_kg_context_from_qid(self, qid: str, dictionary=False):
+    def get_kg_context_from_qid(self, qid: str, output_as_dictionary=False, allow_online_search=False):
         """
         Return the knowledge context and the description of an entity from its QID.
 
         :param str qid: a wikidata QID
-        :param bool dictionary: whether the properties should be a dictionary or a string (default)
+        :param bool output_as_dictionary: whether the properties should be a dictionary or a string (default)
+        :param bool allow_online_search: whether searching Wikidata online when qid not in database (default False)
         :return: string (or dictionary) of properties and description
         """
 
         properties = self.properties.get(qid, [])
         description = self.descriptions.get(qid, "")
 
-        if not dictionary:
+        if qid not in self.properties and allow_online_search:
+            properties, description = get_kg_context_from_wikidata_qid(qid)
+
+        if not output_as_dictionary:
             properties = " ".join([" ".join([p if p != None else "", v if v != None else ""]) for (p,v) in properties])
 
         return properties, description

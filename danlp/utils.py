@@ -148,11 +148,10 @@ def get_kg_context_from_wikidata_qid(qid: str):
                     val = d['mainsnak']['datavalue']['value']['id']
                     label = get_label_from_wikidata_qid(val)
                 else:
-                    print(claim_type)
                     continue
                 knowledge_graph.append([prop, label])
             except KeyError:
                 continue
 
-    return description, knowledge_graph
+    return knowledge_graph, description
 

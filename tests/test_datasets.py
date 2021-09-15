@@ -212,9 +212,12 @@ class TestDanedDatasets(unittest.TestCase):
         self.assertEqual(len(test), 744)
         self.assertEqual(set(test['class'].to_list()), {0, 1})
 
-        prop, desc = daned.get_kg_context_from_qid('Q303', dictionary=True)
+        prop, desc = daned.get_kg_context_from_qid('Q303', output_as_dictionary=True)
         self.assertEqual(desc, 'amerikansk sanger')
         self.assertEqual(prop[1], ['fornavn', 'Elvis'])
+
+        prop, desc = daned.get_kg_context_from_qid('Q36620', output_as_dictionary=True, allow_online_search=True)
+        self.assertEqual(type(desc), str)
 
         prop_str, _ = daned.get_kg_context_from_qid('Q303')
         self.assertEqual(len(prop_str), 6537)
@@ -226,9 +229,12 @@ class TestDawikinedDatasets(unittest.TestCase):
         self.assertEqual(len(train), 21302)
         self.assertEqual(set(train['class'].to_list()), {0, 1})
 
-        prop, desc = dawikined.get_kg_context_from_qid('Q1748', dictionary=True)
+        prop, desc = dawikined.get_kg_context_from_qid('Q1748', output_as_dictionary=True)
         self.assertEqual(desc, 'Danmarks hovedstad')
         self.assertEqual(prop[1], ['land', 'Danmark'])
+
+        prop, desc = dawikined.get_kg_context_from_qid('Q19544104', output_as_dictionary=True, allow_online_search=True)
+        self.assertEqual(type(desc), str)
 
         prop_str, _ = dawikined.get_kg_context_from_qid('Q1748')
         self.assertEqual(len(prop_str), 3758)
