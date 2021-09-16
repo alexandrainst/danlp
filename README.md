@@ -11,10 +11,6 @@
 </div>
 <div align="center">
   <h5>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/ner.md">
-      Named Entity Recognition
-      </a>
-      <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/pos.md">
       Part of Speech Tagging
     </a>
@@ -22,31 +18,41 @@
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/dependency.md">
       Dependency Parsing
     </a>
+  </h5>
+  <h5>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/ner.md">
+      Named Entity Recognition
+    </a>
     <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/ned.md">
+      Named Entity Disambiguation
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/coreference.md">
+      Coreference Resolution
+    </a>
+  </h5>
+  <h5>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/sentiment_analysis.md">
       Sentiment Analysis
     </a>
-      <span> | </span>
-    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/coreference.md">
-      Coreference Resolution
-      </a>
-      <span> | </span>
+    <span> | </span>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/hatespeech.md">
       Hatespeech Detection
-      </a>
-      <span> | </span>
+    </a>
+  </h5>
+  <h5>
     <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/tasks/embeddings.md">
       Embeddings
-      </a>
-  </h5>
-    <h5>
-   	 <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/datasets.md">
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/blob/master/docs/docs/datasets.md">
       Datasets
-   	 </a>
-      <span> | </span>
-   	 <a href="https://github.com/alexandrainst/danlp/tree/master/examples/tutorials">
+    </a>
+    <span> | </span>
+    <a href="https://github.com/alexandrainst/danlp/tree/master/examples/tutorials">
       Tutorials
-   	 </a>
+    </a>
   </h5>
 </div>
 
@@ -161,12 +167,13 @@ The DaNLP repository provides an overview of Danish models for some of the most 
 
 The repository is continuously evolving and here is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we currently cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
--  [Part of speech](docs/docs/tasks/pos.md)
--  [Named entity recognition](docs/docs/tasks/ner.md)
--  [Sentiment analysis](docs/docs/tasks/sentiment_analysis.md)
+-  [Part of speech tagging](docs/docs/tasks/pos.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
+-  [Named entity recognition](docs/docs/tasks/ner.md)
+-  [Named entity disambiguation](docs/docs/tasks/ned.md)
 -  [Coreference resolution](docs/docs/tasks/coreference.md)
-- [Hatespeech detection](docs/docs/tasks/hatespeech.md)
+-  [Sentiment analysis](docs/docs/tasks/sentiment_analysis.md)
+-  [Hatespeech detection](docs/docs/tasks/hatespeech.md)
 
 You can also find some of our [transformers](docs/docs/frameworks/transformers.md) models on [HuggingFace](https://huggingface.co/DaNLP). 
 
@@ -201,7 +208,7 @@ To help you navigate we provide you with an overview of the structure in the git
     ├── examples	   			# Examples, tutorials and benchmark scripts
     │   ├── benchmarks 			# Scripts for reproducing benchmarks results
     │   └── tutorials 			# Jupyter notebook tutorials
-    └── tests   	   			# Tests for continuous integration with travis
+    └── tests   	   			# Tests for continuous integration with Travis
 
 ## How do I contribute?
 
@@ -243,3 +250,5 @@ If you want to cite this project, please use the following BibTeX entry:
 ```
 
 Read the paper [here](https://ep.liu.se/ecp/178/053/ecp2021178053.pdf). 
+
+See our [documentation pages](https://danlp-alexandra.readthedocs.io/en/latest/index.html) for references to specific models or datasets. 
