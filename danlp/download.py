@@ -179,6 +179,12 @@ MODELS = {
         'size': 853720929,
         'file_extension': '.tar.gz'
     },
+    'xlmr.ned': {
+        'url': DANLP_STORAGE_URL + '/models/xlmr.ned.zip',
+        'md5_checksum': 'e5fbe862580a5b479f1f35d109d28040',
+        'size': 872506245,
+        'file_extension': ''
+    },
 }
 
 DATASETS = {
