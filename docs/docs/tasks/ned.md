@@ -25,7 +25,7 @@ The result can be used for differentiating between well-known persons and anonym
 
 ### 🔧 XLMR {#xlmr}
 
-The XLM-R Coref model is based on the pre-trained XLM-Roberta, a transformer-based multilingual masked language model [(Conneau et al. 2020)](https://www.aclweb.org/anthology/2020.acl-main.747.pdf), and finetuned on the [DaNED](../datasets.md#daned) dataset. 
+The XLM-R NED model is based on the pre-trained XLM-Roberta, a transformer-based multilingual masked language model [(Conneau et al. 2020)](https://www.aclweb.org/anthology/2020.acl-main.747.pdf), and finetuned on the combination of the [DaWikiNED](../datasets.md#dawikined) dataset and the training part of the [DaNED](../datasets.md#daned) dataset. 
 The model has been developed as part of a Master student project (ITU) by Hiêu Trong Lâm and Martin Wu under the supervision of Maria Jung Barrett (ITU) and Ophélie Lacroix (DaNLP).
 
 The XLM-R NED model can be loaded with the `load_xlmr_ned_model()` method. 
@@ -34,14 +34,18 @@ Please note that the model take maximum 512 tokens as input at a time. Longer te
 
 ```python
 from danlp.models import load_xlmr_ned_model
+
 xlmr = load_xlmr_ned_model()
+
 sentence = "Karen Blixen vendte tilbage til Danmark, hvor hun boede resten af sit liv på Rungstedlund, som hun arvede efter sin mor i 1939"
+
 # to check if the entity "Karen Blixen" correspond to the QID Q182804
 # you have to first generate the knowledge graph (KG) context of this QID
 # use the get_kg_context_from_wikidata_qid function from danlp.utils to get the KG
 # or the DaNED or DaWikiNED dataset to get the corresponding KG string (see doc below)
 # (the following example has been truncated -- use the full KG)
 kg_context = "udmærkelser modtaget Kritikerprisen udmærkelser modtaget Tagea Brandts Rejselegat udmærkelser modtaget Ingenio ..."
+
 label = xlmr.predict(sentence, kg_context)
 ```
 
