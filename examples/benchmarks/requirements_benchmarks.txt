@@ -20,3 +20,4 @@ conllu
 NERDA
 allennlp==2.5.0
 stanza
+daluke==0.0.5

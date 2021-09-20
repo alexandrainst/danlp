@@ -199,6 +199,23 @@ def benchmark_nerda_electra_mdl():
     print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
+
+def benchmark_daluke_mdl():
+    from daluke import AutoNERDaLUKE, predict_ner
+    
+    model = AutoNERDaLUKE()
+    sents = [" ".join(s) for s in sentences_tokens]
+
+    start = time.time()
+    predictions = predict_ner(sents, model)
+    print('DaLUKE:')
+    print_speed_performance(start, num_sentences, num_tokens)
+    
+    assert len(predictions) == num_sentences
+
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+
+
 if __name__ == '__main__':
     benchmark_polyglot_mdl()
     benchmark_spacy_mdl()
@@ -206,6 +223,7 @@ if __name__ == '__main__':
     benchmark_bert_mdl()
     benchmark_nerda_multi_mdl()
     benchmark_nerda_electra_mdl()
+    benchmark_daluke_mdl()
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
