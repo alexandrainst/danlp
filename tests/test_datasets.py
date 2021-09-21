@@ -83,7 +83,7 @@ class TestNerDatasets(unittest.TestCase):
         asserted_ner_tags = [
             b'B-ORG', b'B-PER', b'B-LOC', b'B-MISC',
             b'I-ORG', b'I-PER', b'I-LOC', b'I-MISC',
-            b'O', b'<START>', b'<STOP>', b'<unk>'
+            b'O', b'<START>', b'<STOP>'
         ]
         self.assertCountEqual(ner_tags, asserted_ner_tags)
 
@@ -114,7 +114,7 @@ class TestNerDatasets(unittest.TestCase):
         asserted_ner_tags = [
             b'B-ORG', b'B-PER', b'B-LOC',
             b'I-ORG', b'I-PER', b'I-LOC',
-            b'O', b'<START>', b'<STOP>', b'<unk>'
+            b'O', b'<START>', b'<STOP>'
         ]
         self.assertCountEqual(ner_tags, asserted_ner_tags)
 
