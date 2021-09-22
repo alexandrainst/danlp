@@ -144,7 +144,13 @@ Read more about it in the [hatespeech docs](../tasks/hatespeech.md).
 
 XLM-Roberta is a transformer-based multilingual masked language model [(Conneau et al. 2020)](https://www.aclweb.org/anthology/2020.acl-main.747.pdf). It has shown better performance than mBERT (multilingual BERT) on a range of NLP tasks. 
 
-Through DaNLP, we provide a fine-tuned XLM-R model for the task of coreference resolution. 
+Through DaNLP, we provide fine-tuned XLM-R models for the tasks of named entity disambiguation and coreference resolution. 
+
+### Named Entity Disambiguation
+
+Named entity disambiguation is a binary classification task which is used to predict whether a specific instance of an entity is mentioned in a text. It is used for named entity linking.
+
+Read more about it in the [NED docs](../tasks/ned.md).
 
 ### Coreference resolution
 

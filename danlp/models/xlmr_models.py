@@ -4,6 +4,8 @@ from danlp.download import DEFAULT_CACHE_DIR, download_model, \
 from allennlp.models.archival import load_archive
 from allennlp.common.util import import_module_and_submodules
 from allennlp.common.util import prepare_environment
+import torch
+import os, warnings
 
 import_module_and_submodules("danlp.models.allennlp_models")
 from danlp.models.allennlp_models.coref.predictors.coref import CorefPredictor
@@ -76,6 +78,68 @@ class XLMRCoref():
 
 
 
+class XlmrNed():
+    """
+    XLM-Roberta for Named Entity Disambiguation.
+
+    For predicting whether or not a specific entity (QID) is mentioned in a sentence.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    """
+
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        from transformers import XLMRobertaTokenizer, XLMRobertaForSequenceClassification
+        #download the model or load the model path
+        model_path = download_model('xlmr.ned', cache_dir,
+                                     process_func=_unzip_process_func,
+                                     verbose=verbose)
+        self.classes = ['0', '1']
+
+        self.tokenizer = XLMRobertaTokenizer.from_pretrained(model_path)
+        self.model = XLMRobertaForSequenceClassification.from_pretrained(model_path, num_labels=len(self.classes))
+
+        self.max_length = self.model.roberta.embeddings.position_embeddings.num_embeddings - 2
+
+    def _classes(self):
+        return self.classes
+    
+    def _get_pred(self, sentence, kg_context):
+        input1 = self.tokenizer.encode_plus(sentence, kg_context, add_special_tokens=True, return_tensors='pt',
+                                                max_length=self.max_length, truncation=True, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
+            warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(self.max_length))
+        pred = self.model(input1['input_ids'])[0]
+
+        return pred
+    
+    def predict(self, sentence: str, kg_context: str):
+        """
+        Predict whether a QID is mentioned in a sentence or not.
+
+        :param str sentence: raw text
+        :param str kg_context: raw text
+        :return: 
+        :rtype: str
+        """
+
+        pred = self._get_pred(sentence, kg_context)
+        pred = pred.argmax().item()
+        predclass = self.classes[pred]
+    
+        return predclass
+    
+    def predict_proba(self, sentence: str, kg_context: str):
+        proba=[]
+        
+        pred=self._get_pred(sentence, kg_context)
+        proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
+
+        return proba
+        
+        
+
+
 def load_xlmr_coref_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
     Loads an XLM-R coreference model.
@@ -85,3 +149,16 @@ def load_xlmr_coref_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     :return: an XLM-R coreference model
     """
     return XLMRCoref(cache_dir, verbose)
+        
+
+def load_xlmr_ned_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Loads an XLM-R model for named entity disambiguation.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: an XLM-R NED model
+    """
+    return XlmrNed(cache_dir, verbose)
+
+        

@@ -19,10 +19,12 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [Danish Similarity Dataset](#danish-similarity-dataset)                                | Word Similarity          | 99                | -                      | [CC BY 4.0](https://github.com/fnielsen/dasem/blob/master/dasem/data/wordsim353-da/LICENSE)  | ✔️    |
 | [Twitter Sentiment](#twitter-sentiment)                                                | Sentiment                | -                 | train: 1,215 -- test: 512 | Twitter privacy policy applies                                                               | ✔️    |
 | [AngryTweets](#angrytweets)                                                            | Sentiment                | -                 | 1,266                  | Twitter privacy policy applies                                                               | ✔️    |
-| [Dacoref](#dacoref) | coreference resolution   | 64,076 (tokens)   | 3,403                  | CC BY-SA 4.0                                                                                 | ✔️    |
+| [DaCoref](#dacoref) | coreference resolution   | 64,076 (tokens)   | 3,403                  | CC BY-SA 4.0                                                                                 | ✔️    |
 | [DanNet](#dannet)                                                                      | Wordnet                  | 66,308 (concepts) | -                      | [license](https://cst.ku.dk/projekter/dannet/license.txt)                                    | ✔️    |
 | [DKHate](#dkhate)                                                                      | Hate Speech Detection    | 61,967            | 3,289                  | CC BY 4.0                                                                                    | ✔️    |
 | [DaUnimorph](#daunimorph)                                                              | Morphological Inflection | 25,503            | -                      | CC BY-SA 3.0                                                                                 | ✔️    |
+| [DaNED](#daned)                                                                      | Named Entity Disambiguation    | --            | train:4,626 dev:544 test:744                  | CC BY-SA 4.0                                                                                    | ✔️    |
+| [DaWikiNED](#dawikined)                                                                      | Named Entity Disambiguation    | --            | 21,302                  | CC BY-SA 4.0                                                                                    | ✔️    |
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -51,9 +53,9 @@ The dataset can also be downloaded directly in CoNLL-U format.
 
 [Download DDT](https://danlp.alexandra.dk/304bd159d5de/datasets/ddt.zip) 
 
-### Dacoref
+### DaCoref
 
-This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank  (Kromann and Lynge, 2004). It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. This work is conducted by Maria Jung Barrett. Read more about it in the dedicated [dacoref docs](dacoref_docs.md).
+This Danish coreference annotation contains parts of the Copenhagen Dependency Treebank  (Kromann and Lynge, 2004). It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) project but never finished. This resource extends the annotation by using different mapping techniques and by augmenting with Qcodes from Wiktionary. This work is conducted by Maria Jung Barrett. Read more about it in the dedicated [DaCoref docs](dacoref_docs.md).
 
 The dataset can be loaded with the DaNLP package:
 
@@ -66,7 +68,7 @@ corpus = dacoref.load_as_conllu(predefined_splits=True)
 
 The dataset can also be downloaded directly:
 
-[Download dacoref](http://danlp-downloads.alexandra.dk/datasets/dacoref.zip) 
+[Download DaCoref](http://danlp-downloads.alexandra.dk/datasets/dacoref.zip) 
 
 
 ### DKHate
@@ -314,6 +316,84 @@ unimorph.get_lemmas(word, pos='N', with_features=True)
 """ [{'lemma': 'trold', 'form': 'trolde', 'feats': 'N;INDF;NOM;PL', 'pos': 'N'}] """
 
 ```
+
+### DaNED
+
+The DaNED dataset is derived from the [DaCoref](#dacoref) (including only sentences that have at least one QID annotation) and annotated for named entity disambiguation. The dataset has been developed for DaNLP, through a Master student project, by Trong Hiêu Lâm and Martin Wu under the supervision of Maria Jung Barrett (ITU) and Ophélie Lacroix (DaNLP -- Alexandra Institute).
+Each entry in the dataset is a tuple (sentence, QID) associated with a label (0 or 1) which indicate whether the entity attached to the QID is mentioned in the sentence or not. 
+The same sentence occurs several times but only one of them as a label "1" because only one of the QIDs is correct.
+
+In addition, we provide -- through the dataset -- for each QID, its corresponding knowledge graqh (KG) context extracted from Wikidata. 
+For more details about the annotation process and extraction of KG context see the paper. 
+
+The dataset can be loaded with the DaNLP package:
+
+```python
+from danlp.datasets import DaNED
+daned = DaNED()
+train, dev, test = daned.load_with_pandas()
+```
+
+To get the KG context (Wikidata properties and description) of a QID (from the DaNED database), you can use:
+
+```python
+qid = "Q303"
+# Get Elvis Presley's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid)
+```
+
+If the QID does not exist in the database, you can allow the search through Wikidata (online): 
+
+```python
+qid = "Q36620"
+# Get Tycho Brahe's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid, allow_online_search=True)
+```
+
+
+
+The dataset can also be downloaded directly:
+
+[Download DaNED](http://danlp-downloads.alexandra.dk/datasets/daned.zip)
+
+
+
+### DaWikiNED
+
+The DaWikiNED is automatically constructed and intended to be used as a training set augmentation with the [DaNED](#daned) dataset.
+The dataset has been developed for DaNLP through a student project by Trong Hiêu Lâm and Martin Wu under the supervision of Maria Jung Barrett (ITU) and Ophélie Lacroix (DaNLP -- Alexandra Institute).
+Sentences come from the Danish Wikipedia. Knowledge graph contexts come from Wikidata (see [DaNED](#daned)).
+
+The dataset can be loaded with the DaNLP package:
+
+```python
+from danlp.datasets import DaWikiNED
+dawikined = DaWikiNED()
+train, dev, test = dawikined.load_with_pandas()
+```
+
+To get the KG context (Wikidata properties and description) of a QID (from the DaWikiNED database), you can use:
+
+```python
+qid = "Q1748"
+# Get Copenhagen's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid, dictionary=True)
+```
+
+If the QID does not exist in the database, you can allow the search through Wikidata (online): 
+
+```python
+qid = "Q36620"
+# Get Tycho Brahe's Wikidata properties and description
+properties, description = get_kg_context_from_qid(qid, allow_online_search=True)
+```
+
+
+The dataset can also be downloaded directly:
+
+[Download DaWikiNED](http://danlp-downloads.alexandra.dk/datasets/dawikined.zip)
+
+
 
 ## 🎓 References
 - Johannsen, Anders, Martínez Alonso, Héctor and Plank, Barbara. [Universal Dependencies for Danish](http://tlt14.ipipan.waw.pl/files/4914/4974/3227/TLT14_proceedings.pdf#page=164). TLT14, 2015.

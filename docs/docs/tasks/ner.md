@@ -114,7 +114,7 @@ and a [Danish Electra](https://github.com/MalteHB/-l-ctra).
 
 ### DaCy {#dacy}
 
-[DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v. 3.
+[DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v.3.
 its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
 
 ### Daner
@@ -123,6 +123,10 @@ is a wrapper around the [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP
 using data from [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) (not released).
 The tool is not available through DaNLP but it can be used from the [daner repository](https://github.com/ITUnlp/daner).
 
+### DaLUKE
+
+The [DaLUKE](https://github.com/peleiden/daluke) model is based on the knowledge-enhanced transformer LUKE. 
+It has been first pretrained as a language model on the Danish Wikipedia and then fine-tuned on [DaNE](../datasets.md#dane) for NER. 
 
 ## 📈 Benchmarks
 The benchmarks has been performed on the test part of the
@@ -130,16 +134,17 @@ The benchmarks has been performed on the test part of the
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model           | LOC       | ORG       | PER       | AVG       |
-|-----------------|-----------|-----------|-----------|-----------|
-| BERT            | 83.90     | 72.98 | 92.82     | 84.04 |
-| Flair           | 84.82 | 62.95     | 93.15 | 81.78     |
-| spaCy           | 75.96     | 59.57     | 87.87     | 75.73     |
-| Polyglot        | 64.95     | 39.3      | 78.74     | 64.18     |
-| NERDA (mBERT)   | 80.75     | 65.73     | 92.66     | 80.66     |
-| NERDA (electra) | 77.67     | 60.13     | 90.16     | 76.77     |
+| Model                | LOC       | ORG       | PER       | AVG       |
+|----------------------|-----------|-----------|-----------|-----------|
+| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |
+| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |
+| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |
+| Polyglot             | 64.95     | 39.3      | 78.74     | 64.18     |
+| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |
+| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |
 | DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |
-| DaCy (large) v0.0.0 | **85.29**     | **79.04**     |  **95.53**     | **86.64**     |
+| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |
+| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 
@@ -152,3 +157,4 @@ The evaluation script `ner_benchmarks.py` can be found [here](https://github.com
 - Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139/). In **COLING**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. [DaNE: A Named Entity Resource for Danish](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). In **LREC**.
 - Kevin Clark, Minh-Thang Luong, Quoc V. Le and Christopher D. Manning. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://nlp.stanford.edu/pubs/clark2020electra.pdf). In **ICLR**.
+- Ikuya Yamada, Akari Asai, Hiroyuki Shindo, Hideaki Takeda, Yuji Matsumoto. [LUKE: Deep Contextualized Entity Representations with Entity-aware Self-attention](https://aclanthology.org/2020.emnlp-main.523/)

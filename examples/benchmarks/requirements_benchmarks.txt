@@ -21,3 +21,4 @@ NERDA
 allennlp==2.5.0
 stanza
 wget
+daluke==0.0.5
