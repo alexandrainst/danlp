@@ -315,7 +315,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
             print(
                 "Decompressing raw {} embeddings".format(pretrained_embedding))
 
-        with gzip.open(tmp_file_path, 'rb', encoding='utf-8') as fin, open(vec_file_path,
+        with gzip.open(tmp_file_path, 'rb') as fin, open(vec_file_path,
                                                          'wb', encoding='utf-8') as fout:
             shutil.copyfileobj(fin, fout)
 
@@ -387,7 +387,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
             print(
                 "Decompressing raw {} embeddings".format(pretrained_embedding))
 
-        with gzip.open(tmp_file_path, 'rb', encoding='utf-8') as fin, open(bin_file_path,
+        with gzip.open(tmp_file_path, 'rb') as fin, open(bin_file_path,
                                                          'wb', encoding='utf-8') as fout:
             shutil.copyfileobj(fin, fout)
 
