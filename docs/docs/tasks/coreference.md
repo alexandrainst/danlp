@@ -65,7 +65,7 @@ The benchmarks has been performed on the test part of the [Dacoref](../datasets.
 
 | Model | Precision | Recall | F1    | Mention Recall | Sentences per second (CPU*) |
 |-------|-----------|--------|-------|----------------| --------------------------- |
-| XLM-R  | 69.86     | 59.17  | 64.02 | 88.01         | 1                           |
+| XLM-R  | 69.86     | 59.17  | 64.02 | 88.01         | ~1                           |
 
 *Sentences per second is based on a Macbook Pro with Apple M1 chip.
 

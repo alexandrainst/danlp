@@ -148,11 +148,11 @@ Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment
 
 | Model                | LA        | UAS       | LAS       | Sentences per second (CPU*) |
 |----------------------|-----------|-----------|-----------| --------------------------- |
-| SpaCy                | 87.68     | 81.36     | 77.46     | 270                         |
-| DaCy (small) v0.0.0  | 91.42     | 87.26     | 84.2      | 38                          |
-| DaCy (medium) v0.0.0 | 93.09     | 88.91     | 86.65     | 6                           |
-| DaCy (large) v0.0.0  | **93.64** | **90.49** | **88.42** | 1                           |
-| Stanza               | 91.82     | 87.13     | 84.42     | 9                           |
+| SpaCy                | 87.68     | 81.36     | 77.46     | ~270                         |
+| DaCy (small) v0.0.0  | 91.42     | 87.26     | 84.2      | ~38                          |
+| DaCy (medium) v0.0.0 | 93.09     | 88.91     | 86.65     | ~6                           |
+| DaCy (large) v0.0.0  | **93.64** | **90.49** | **88.42** | ~1                           |
+| Stanza               | 91.82     | 87.13     | 84.42     | ~9                           |
 
 ### Noun Phrase Chunking Scores
 
@@ -160,6 +160,6 @@ NP chunking scores (F1) are reported below :
 
 | Model | Precision | Recall | F1    | Sentences per second (CPU*) |
 | ----- | --------- | ------ | ----- | --------------------------  |
-| SpaCy | 91.32     | 91.79  | 91.56 | 240                         |
+| SpaCy | 91.32     | 91.79  | 91.56 | ~240                         |
 
 *Sentences per second is based on a Macbook Pro with Apple M1 chip.
