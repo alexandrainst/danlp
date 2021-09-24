@@ -63,9 +63,10 @@ See detailed scoring of the benchmarks in the [example](<https://github.com/alex
 The benchmarks has been performed on the test part of the [Dacoref](../datasets.md#dacoref) dataset.
 
 
-| Model | Precision | Recall | F1    | Mention Recall |
-|-------|-----------|--------|-------|----------------|
-| XLM-R  | 69.86     | 59.17  | 64.02 | 88.01          |
+| Model | Precision | Recall | F1    | Mention Recall | Sentences per second (CPU*) |
+|-------|-----------|--------|-------|----------------| --------------------------- |
+| XLM-R  | 69.86     | 59.17  | 64.02 | 88.01         | 1                           |
 
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 The evaluation script `coreference_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/coreference_benchmarks.py).
