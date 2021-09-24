@@ -97,7 +97,7 @@ def benchmark_attack_mdl():
         url = 'https://github.com/ogtal/A-ttack/blob/main/pytorch_model.bin'
         print("Cannot find the model", model_path, "\nDownload the model at", url, 'and place it in directory', mdir)
         exit()
-    model.load_state_dict(torch.load('pytorch_model.bin', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
 
     labels = {0:'NOT', 1:'OFF'}
