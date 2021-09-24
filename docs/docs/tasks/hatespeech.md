@@ -61,11 +61,12 @@ The benchmarking has been performed on the test part of the [DKHate](../datasets
 
 The scores presented here describe the performance (F1) of the models for the task of offensive language identification. 
 
-| Model         | OFF  | NOT  | AVG F1 |
-|---------------|------|------|--------|
-| BERT          | 61.9 | 95.4 | 78.7   |
-| A&ttack (A&T) | 34.2 | 91.4 | 62.8   |
+| Model         | OFF  | NOT  | AVG F1 | Sentences per second (CPU*) |
+|---------------|------|------|--------| --------------------------- |
+| BERT          | 61.9 | 95.4 | 78.7   | ~6                          |
+| A&ttack (A&T) | 34.2 | 91.4 | 62.8   | ~2                          |
 
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 The evaluation script `hatespeech_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/hatespeech_benchmarks.py).
 
