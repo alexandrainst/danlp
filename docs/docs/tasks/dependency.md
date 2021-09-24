@@ -161,3 +161,4 @@ NP chunking scores (F1) are reported below :
 | ----- | --------- | ------ | ----- | --------------------------  |
 | SpaCy | 91.32     | 91.79  | 91.56 | 240                         |
 
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
