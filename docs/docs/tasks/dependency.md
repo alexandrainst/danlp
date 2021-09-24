@@ -147,8 +147,8 @@ See detailed scoring of the benchmarks in the [example](<https://github.com/alex
 Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment Score) and LAS (Labelled Attachment Score) — are reported below :
 
 | Model                | LA        | UAS       | LAS       |
-|----------------------|-----------|-----------|-----------|
-| SpaCy                | 87.68     | 81.36     | 77.46     |
+|----------------------|-----------|-----------|-----------| 
+| SpaCy                | 87.68     | 81.36     | 77.46     | 
 | DaCy (medium) v0.0.0 | 93.09     | 88.91     | 86.65     |
 | DaCy (large) v0.0.0  | **93.64** | **90.49** | **88.42** |
 | Stanza               | 91.82     | 87.13     | 84.42     |
@@ -157,7 +157,7 @@ Dependency scores — LA (labelled attachment score), UAS (Unlabelled Attachment
 
 NP chunking scores (F1) are reported below :
 
-| Model | Precision | Recall | F1    |
-| ----- | --------- | ------ | ----- |
-| SpaCy | 91.32     | 91.79  | 91.56 |
+| Model | Precision | Recall | F1    | Sentences per second (CPU*) |
+| ----- | --------- | ------ | ----- | --------------------------  |
+| SpaCy | 91.32     | 91.79  | 91.56 | 240                         |
 
