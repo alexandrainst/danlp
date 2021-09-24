@@ -93,7 +93,7 @@ def benchmark_attack_mdl():
     model = ElectraClassifier(model_checkpoint,2)
     mdir = 'examples/benchmarks'
     model_path = os.path.join(mdir, 'pytorch_model.bin')
-    if not os.path.exists('pytorch_model.bin'):
+    if not os.path.exists(model_path):
         url = 'https://github.com/ogtal/A-ttack/blob/main/pytorch_model.bin'
         print("Cannot find the model", model_path, "\nDownload the model at", url, 'and place it in directory', mdir)
         exit()
@@ -118,6 +118,6 @@ def benchmark_attack_mdl():
 
 
 if __name__ == '__main__':
-    benchmark_bert_mdl()
+    # benchmark_bert_mdl()
     benchmark_attack_mdl()
 
