@@ -9,7 +9,7 @@ torch==1.7.1
 srsly==1.0.2
 sentida==0.5.0
 Morfessor==2.0.6
-PyICU==2.7.4
+PyICU==2.4.2
 pycld2==0.41
 nltk
 afinn
