@@ -29,6 +29,7 @@ The XLM-R NED model is based on the pre-trained XLM-Roberta, a transformer-based
 The model has been developed as part of a Master student project (ITU) by Hiêu Trong Lâm and Martin Wu under the supervision of Maria Jung Barrett (ITU) and Ophélie Lacroix (DaNLP).
 
 The XLM-R NED model can be loaded with the `load_xlmr_ned_model()` method. 
+(You can also find the model on our [HuggingFace page](https://huggingface.co/DaNLP/da-bert-ned).)
 Please note that the model take maximum 512 tokens as input at a time. Longer text sequences will be truncated.
 
 
