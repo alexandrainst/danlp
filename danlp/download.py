@@ -8,7 +8,7 @@ from tempfile import NamedTemporaryFile
 
 from tqdm import tqdm
 
-from danlp.utils import extract_single_file_from_zip
+from danlp.utils import extract_single_file_from_zip, ProgressBar
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
@@ -60,6 +60,7 @@ MODELS = {
     },
     'sketchengine.da.wv': {
         'url': 'https://embeddings.sketchengine.co.uk/static/models/word/datenten14_5.vec',
+
         'dimensions': 100,
         'vocab_size': 2360830,
         'size': 2053148194,
