@@ -118,6 +118,6 @@ def benchmark_attack_mdl():
 
 
 if __name__ == '__main__':
-    # benchmark_bert_mdl()
+    benchmark_bert_mdl()
     benchmark_attack_mdl()
 
