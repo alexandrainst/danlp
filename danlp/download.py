@@ -8,7 +8,7 @@ from tempfile import NamedTemporaryFile
 
 from tqdm import tqdm
 
-from danlp.utils import extract_single_file_from_zip
+from danlp.utils import extract_single_file_from_zip, ProgressBar
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
