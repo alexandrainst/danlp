@@ -60,9 +60,10 @@ def dependency_report(deps_true, deps_pred):
     headers = ["label", "LA", "UAS", "LAS", "total"]
     tab, la_score_per_label, uas_score_per_label, las_score_per_label = [], [], [], []
     for l in labels:
-        la_score_per_label.append(correct_deps[l]["rel"]/correct_deps[l]["total"])
-        uas_score_per_label.append(correct_deps[l]["head"]/correct_deps[l]["total"])
-        las_score_per_label.append(correct_deps[l]["both"]/correct_deps[l]["total"])
+        correct_deps_total_not_zero = bool(correct_deps[l]["total"])
+        la_score_per_label.append(correct_deps[l]["rel"]/correct_deps[l]["total"] if correct_deps_total_not_zero else 0)
+        uas_score_per_label.append(correct_deps[l]["head"]/correct_deps[l]["total"] if correct_deps_total_not_zero else 0)
+        las_score_per_label.append(correct_deps[l]["both"]/correct_deps[l]["total"] if correct_deps_total_not_zero else 0)
         tab.append([l, round(la_score_per_label[-1]*100,2), round(uas_score_per_label[-1]*100,2), round(las_score_per_label[-1]*100,2), correct_deps[l]["total"]])
     tab.append(['']*5)
 

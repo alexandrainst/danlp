@@ -1,6 +1,6 @@
 from danlp.datasets import DaNED
 from danlp.models import load_xlmr_ned_model
-from .utils import f1_report, print_speed_performance
+from utils import f1_report, print_speed_performance
 import time
 
 daned = DaNED()

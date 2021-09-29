@@ -1,7 +1,7 @@
 from danlp.datasets import DKHate
 from danlp.models import load_bert_offensive_model
 import time, os
-from .utils import *
+from utils import *
 
 ## Load the DKHate data
 dkhate = DKHate()
@@ -95,7 +95,7 @@ def benchmark_attack_mdl():
     model_path = os.path.join(mdir, 'pytorch_model.bin')
     if not os.path.exists(model_path):
         url = 'https://github.com/ogtal/A-ttack/blob/main/pytorch_model.bin'
-        print("Cannot find the model", model_path, "\nDownload the model at", url)
+        print("Cannot find the model", model_path, "\nDownload the model at", url, 'and place it in directory', mdir)
         exit()
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()

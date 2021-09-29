@@ -136,7 +136,7 @@ class DDT:
             json_path = os.path.join(self.dataset_dir, "ddt.{}.json".format(part))
 
             if not os.path.isfile(json_path):  # Convert the conllu files to json
-                with open(conll_path, 'r') as file:
+                with open(conll_path, 'r', encoding='utf-8') as file:
                     file_as_string = file.read()
                     file_as_string = file_as_string.replace("name=", "").replace("|SpaceAfter=No", "")
                     file_as_json = conllu2json(file_as_string)

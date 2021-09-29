@@ -137,7 +137,7 @@ def benchmark_flair_mdl():
         flair_sentences.append(flair_sentence)
 
     tagger.predict(flair_sentences, verbose=True)
-    predictions = [[tok.tags['ner'].value for tok in fs] for fs in flair_sentences]
+    predictions = [[tok.get_tag('ner').value for tok in fs] for fs in flair_sentences]
     print('Flair:')
     print_speed_performance(start, num_sentences, num_tokens)
 

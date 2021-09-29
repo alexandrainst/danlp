@@ -27,7 +27,7 @@ class Dacoref:
                 or a list of train, dev, test split parsed conllu list
                 depending on predefined_split
         """
-        with open('{}/CDT_coref.conllu'.format(self.dataset_dir)) as f:
+        with open('{}/CDT_coref.conllu'.format(self.dataset_dir), encoding='utf-8') as f:
             conlist = conllu.parse(f.read(), fields=["id", "form", "lemma", "upos", 'xpos', 'feats', 'head', 'deprel','deps', 'misc', 'coref_id', 'coref_rel', 'doc_id', 'qid'])
 
         if predefined_splits==False:
