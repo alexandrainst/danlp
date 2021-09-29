@@ -103,13 +103,16 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 
 ### DaNLP
 
-| Model                | Accuracy  |
-|----------------------|-----------|
-| Flair                | 97.97     |
-| SpaCy                | 96.15     |
-| DaCy (medium) v0.0.0 | 98.27     |
-| DaCy (large) v0.0.0  | **98.65** |
-| Stanza               | 97.73     |
+| Model                | Accuracy  | Sentences per second (CPU*) |
+|----------------------|-----------|-----------------------------|
+| Flair                | 97.97     |~9                           |
+| SpaCy                | 96.15     |~360                         |
+| DaCy (small) v0.0.0  | 97.87     |~39                          |
+| DaCy (medium) v0.0.0 | 98.27     |~6                           |
+| DaCy (large) v0.0.0  | **98.65** |~1                           |
+| Stanza               | 97.73     |~34                          |
+
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 ### Polyglot model
 

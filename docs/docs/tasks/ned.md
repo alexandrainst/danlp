@@ -58,9 +58,11 @@ The benchmarks has been performed on the test part of the [DaNED](../datasets.md
 None of the models have been trained on this test part. 
 See F1 scores below (QID is mentioned == label 1 -- QID is not mentioned == label 0) :
 
-| Model | QID is mentioned | QID is not mentioned | AVG   |
-|-------|------------------|----------------------|-------|
-| XLMR  | 83.77            | 91.02                | 87.40 |
+| Model | QID is mentioned | QID is not mentioned | AVG   | Sentences per second (CPU*) |
+|-------|------------------|----------------------|-------|-----------------------------|
+| XLMR  | 83.77            | 91.02                | 87.40 | ~1                          |
+
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 The evaluation script `ned_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ned_benchmarks.py).
 

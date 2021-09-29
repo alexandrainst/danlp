@@ -134,17 +134,19 @@ The benchmarks has been performed on the test part of the
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model                | LOC       | ORG       | PER       | AVG       |
-|----------------------|-----------|-----------|-----------|-----------|
-| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |
-| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |
-| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |
-| Polyglot             | 64.95     | 39.3      | 78.74     | 64.18     |
-| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |
-| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |
-| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |
-| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |
-| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |
+| Model                | LOC       | ORG       | PER       | AVG       |Sentences per second (CPU*) |
+|----------------------|-----------|-----------|-----------|-----------|----------------------------|
+| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |~6                          |
+| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |~9                          |
+| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |~420                        |
+| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |~1                          |
+| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |~10                         |
+| DaCy (small) v0.0.0  | 79.23     | 61.82     | 88.52     | 76.64     |~44                         |
+| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |~6                          |
+| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |~1                          |
+| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |~1                          |
+
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 
