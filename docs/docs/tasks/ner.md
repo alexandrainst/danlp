@@ -13,7 +13,6 @@ and made available through the DaNLP library.
 | [BERT](#bert)                                                                     | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [spaCy](#spacy)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/NamedEntityRecognition.html) | Wikipedia                                                             | Polyglot                       | PER, ORG, LOC | ❌     |
 | [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
 | [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
 | [DaCy](#dacy)                                      | [DaNE](../datasets.md#dane)                                           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com)                 | PER, ORG, LOC | (✔)    |
@@ -95,13 +94,6 @@ for tok in doc:
     print("{} {}".format(tok,tok.ent_type_))
 ```
 
-### Polyglot
-The Polyglot [(Al-Rfou et al. 2015)](https://arxiv.org/abs/1410.3791) NER model
-is  trained without any human annotation or language-specific knowledge but 
-by automatic generating a dataset using the link structure from Wikipedia.
-This model is not available through DaNLP but it can be used from the 
-[Polyglot](https://github.com/aboSamoor/polyglot) library.
-
 
 ### NERDA
 
@@ -154,7 +146,6 @@ The evaluation script `ner_benchmarks.py` can be found [here](https://github.com
 
 ## 🎓 References
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. 2019. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://www.aclweb.org/anthology/N19-1423/). In **NAACL**.
-- Rami Al-Rfou, Vivek Kulkarni, Bryan Perozzi and Steven Skiena. 2015. [POLYGLOT-NER: Massive Multilingual Named Entity Recognition](https://arxiv.org/abs/1410.3791). In **SDM**.
 - Leon Derczynski, Camilla V. Field and Kenneth S. Bøgh. 2014. [DKIE: Open Source Information Extraction for Danish](https://www.aclweb.org/anthology/E14-2016). In **EACL**.
 - Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139/). In **COLING**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. [DaNE: A Named Entity Resource for Danish](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). In **LREC**.
