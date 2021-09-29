@@ -435,7 +435,7 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
                 urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
         else:
             print("Downloading file {}".format(destination))
-            urllib.request.urlretrieve(url, destination)
+            urllib.request.urlretrieve(url, destination, ProgressBar())
 
     else:
         if verbose:
