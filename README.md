@@ -163,9 +163,9 @@ Read more in our [documentation pages](https://danlp-alexandra.readthedocs.io/en
 ## NLP Models
 
 Natural Language Processing is an active area of research and it consists of many different tasks. 
-The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks.
+The DaNLP repository provides an overview of Danish models for some of the most common NLP tasks (and is continuously evolving). 
 
-The repository is continuously evolving and here is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we currently cover in the repository.
+Here is the list of [NLP tasks](https://danlp-alexandra.readthedocs.io/en/latest/tasks.html) we currently cover in the repository.
 -  [Embedding of text](docs/docs/tasks/embeddings.md)
 -  [Part of speech tagging](docs/docs/tasks/pos.md)
 -  [Dependency parsing](docs/docs/tasks/dependency.md)
@@ -179,15 +179,17 @@ You can also find some of our [transformers](docs/docs/frameworks/transformers.m
 
 If you are interested in Danish support for any specific NLP task you are welcome to get in contact with us.
 
-We do also recommend to check out this awesome [list](https://github.com/fnielsen/awesome-danish) of Danish NLP stuff from Finn Årup Nielsen. 
+We also recommend to check out the [list](https://github.com/fnielsen/awesome-danish) of Danish NLP corpora/tools/models maintained by Finn Årup Nielsen (Warning: not all items are available for commercial use, check the licence).
 
 ## Datasets
-The number of datasets in the Danish language is limited. The DaNLP repository provides an overview of the available Danish datasets that can be used for commercial purposes.
+The number of datasets in the Danish language is limited. The DaNLP repository provides an overview of the available [Danish datasets](https://danlp-alexandra.readthedocs.io/en/latest/docs/datasets.html) that can be used for commercial purposes.
 
-The DaNLP package allows you to download and preprocess datasets. You can read about the datasets [here](https://danlp-alexandra.readthedocs.io/en/latest/docs/datasets.html).
+The DaNLP package allows you to download and preprocess datasets.
 
 ## Examples
-You will find examples that shows how to use NLP in Danish (using our models or others) in our [benchmark](/examples/benchmarks) scripts and jupyter notebook [tutorials](/examples/tutorials). This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies. 
+You will find examples that shows how to use NLP in Danish (using our models or others) in our [benchmark](/examples/benchmarks) scripts and jupyter notebook [tutorials](/examples/tutorials). 
+
+This project keeps a Danish written [blog](https://medium.com/danlp) on medium where we write about Danish NLP, and in time we will also provide some real cases of how NLP is applied in Danish companies. 
 
 ## Structure of the repo
 

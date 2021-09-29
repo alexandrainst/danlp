@@ -35,9 +35,18 @@ uses a lexicon based approach to sentiment analysis. The tool scores texts with 
 
 ### 🔧 BERT Emotion {#bert-emotion}
 
-The emotion classifier is developed in a collaboration with Danmarks Radio, which has granted access to a set of social media data. The data has been manual annotated first to distinguish between a binary problem of emotion or no emotion, and afterwards tagged with 8 emotions. The BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) emotion model is finetuned on this data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO . The model to classify the eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples. We do not have permission to distributing the data. 
+The emotion classifier has been developed in collaboration with Danmarks Radio, which has granted access to a set of social media data. 
+The data has been manually annotated for 2 tasks:  
+* to detect whether there is emotion or not in a text (binary classification)
+* to classify the text among 8 emotions (`Glæde/Sindsro`, `Tillid/Accept`, `Forventning/Interrese`, `Overasket/Målløs`, `Vrede/Irritation`, `Foragt/Modvilje`, `Sorg/trist`, `Frygt/Bekymret`).
+The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) emotion model(s) have been finetuned on this data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO. 
+The model classifying amongst eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples (we do not have permission to distributing the data). 
 
- Below is a small snippet for getting started using the BERT Emotion model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
+You can load the models (as one) through the load_bert_emotion_model. 
+Or you can find the models on our HuggingFace page: [detection of emotion](https://huggingface.co/DaNLP/da-bert-emotion-binary); [classification of emotion](https://huggingface.co/DaNLP/da-bert-emotion-classification).
+
+ Below is a small snippet for getting started using the BERT Emotion models. 
+ Please note that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
 
 ```python
 from danlp.models import load_bert_emotion_model
@@ -59,9 +68,17 @@ classifier._classes()
 
 ### 🔧 BERT Tone {#bert-tone}
 
-The tone analyzer consists of two BERT  [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/)  classification models, and the first is recognizing the following tags positive, neutral and negative and the  second model  the tags: subjective and objective. This is a first version of the models, and work should be done to improve performance. Both models is finetuned on annotated twitter data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO .  The data used is manually annotated data from [Twitter Sentiment](../datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](../datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
+The tone analyzer consists of two BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) classification models:
+* a polarity detection model (classifying between `positive`, `neutral` and `negative`);
+* a subjective/objective classification model. 
+Both models have been finetuned on annotated twitter data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO. 
+The data used for training is manually annotated data from [Twitter Sentiment](../datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](../datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
 
- Below is a small snippet for getting started using the BERT Tone model. Please notice that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
+You can load the models (as one) through the load_bert_tone_model method of DaNLP.
+Or you can find the models on our HuggingFace page: [polarity detection](https://huggingface.co/DaNLP/da-bert-tone-sentiment-polarity); [subjective/objective classification](https://huggingface.co/DaNLP/da-bert-tone-subjective-objective).
+
+Below is a small snippet for getting started using the BERT Tone models. 
+Please note that the BERT model can maximum take 512 tokens as input, however the code allows for overfloating tokens and will therefore not give an error but just a warning. 
 
 ```python
 from danlp.models import load_bert_tone_model

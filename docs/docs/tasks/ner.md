@@ -40,7 +40,8 @@ The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) NER 
 has been finetuned on the [DaNE](../datasets.md#dane) 
 dataset [(Hvingelby et al. 2020)](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). The finetuning has been done using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace.
 
-The BERT NER model can be loaded with the `load_bert_ner_model()` method. Please notice that it can maximum take 512 tokens as input at a time. For longer text sequences split before hand, for example using sentence boundary detection (e.g. by using the [spacy model](../frameworks/spacy.md ).) 
+The BERT NER model can be loaded with the `load_bert_ner_model()` method. Note that it can maximum take 512 tokens as input at a time. 
+For longer text sequences split before hand, for example using sentence boundary detection (e.g. by using the [spacy model](../frameworks/spacy.md ).) 
 
 ```python
 from danlp.models import load_bert_ner_model
@@ -60,6 +61,8 @@ bert.predict(tekst_tokenized, IOBformat=False)
   {'type': 'LOC', 'text': 'Århus C', 'start_pos': 40, 'end_pos': 47}]}
 """
 ```
+
+You can also find the BERT NER model on our [HuggingFace page](https://huggingface.co/DaNLP/da-bert-ner).
 
 
 ### 🔧 Flair {#flair}
