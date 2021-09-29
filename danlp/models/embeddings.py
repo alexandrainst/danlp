@@ -288,7 +288,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
 
         if verbose:
             print("Cleaning raw {} embeddings".format(pretrained_embedding))
-        with open(tmp_file_path, 'r', errors='replace') as fin, open(new_vec_file, 'w') as fout:
+        with open(tmp_file_path, 'r', errors='replace', encoding='utf-8') as fin, open(new_vec_file, 'w', encoding='utf-8') as fout:
             for line_no, line in enumerate(fin, 1):
                 if line_no == 1:
                     fout.write("2360830 100\n")
@@ -316,7 +316,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
                 "Decompressing raw {} embeddings".format(pretrained_embedding))
 
         with gzip.open(tmp_file_path, 'rb') as fin, open(vec_file_path,
-                                                         'wb') as fout:
+                                                         'wb', encoding='utf-8') as fout:
             shutil.copyfileobj(fin, fout)
 
         if verbose:
@@ -349,8 +349,8 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
 
         if verbose:
             print("Cleaning raw {} embeddings".format(pretrained_embedding))
-        with open(org_vec_file, 'r', errors='replace') as fin, open(
-                new_vec_file, 'w') as fout:
+        with open(org_vec_file, 'r', errors='replace', encoding='utf-8') as fin, open(
+                new_vec_file, 'w', encoding='utf-8') as fout:
             for line_no, line in enumerate(fin, 1):
                 if line_no == 1:
                     fout.write("1655870 100\n")
@@ -388,7 +388,7 @@ def _process_downloaded_embeddings(tmp_file_path: str, meta_info: dict,
                 "Decompressing raw {} embeddings".format(pretrained_embedding))
 
         with gzip.open(tmp_file_path, 'rb') as fin, open(bin_file_path,
-                                                         'wb') as fout:
+                                                         'wb', encoding='utf-8') as fout:
             shutil.copyfileobj(fin, fout)
 
     elif pretrained_embedding == 'sketchengine.da.swv':

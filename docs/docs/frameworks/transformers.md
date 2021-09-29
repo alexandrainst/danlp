@@ -35,7 +35,7 @@ A pytorch version of the  [Danish BERT](https://github.com/botxo/nordic_bert) tr
 For **predicting a masked word** in a sentence, you can after downloading the model through DaNLP, use the transformer library directly as described in the following snippet:
 
 ```python
-from transformer import pipeline
+from transformers import pipeline
 from danlp.models import load_bert_base_model
 # load the BERT model
 model = load_bert_base_model()

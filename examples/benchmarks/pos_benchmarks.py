@@ -20,7 +20,7 @@ import stanza
 ddt = DDT()
 
 corpus_flair = ddt.load_with_flair()
-tags_true = [[tok.tags['pos'].value for tok in fs] for fs in corpus_flair.test]
+tags_true = [[tok.get_tag('pos').value for tok in fs] for fs in corpus_flair.test]
 num_sentences = len(tags_true)
 num_tokens = sum([len(s) for s in tags_true])
 
@@ -36,7 +36,7 @@ def benchmark_flair_mdl():
 
     start = time.time()
     tagger.predict(corpus_flair.test)
-    tags_pred = [[tok.tags['upos'].value for tok in fs]
+    tags_pred = [[tok.get_tag('upos').value for tok in fs]
                  for fs in corpus_flair.test]
 
     print('**Flair model** ')
