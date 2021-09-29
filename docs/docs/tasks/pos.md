@@ -6,7 +6,6 @@ Part-of-speech tagging is the task of classifying words into their part-of-speec
 
 | Model                 | Train Data                                                                | License       | Trained by                                                                                                   | Tags                         | DaNLP |
 |-----------------------|---------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------|------------------------------|-------|
-| [Polyglot](#polyglot) | [Danish Dependency Treebank](../datasets.md#dane) [Al-Rfou et al. (2013)] | GPLv3 license | Polyglot                                                                                                     | 17  Universal part of speech | ❌     |
 | [Flair](#flair)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️    |
 | [SpaCy](#spacy)       | [Danish Dependency Treebank](../datasets.md#dane)                         | MIT           | Alexandra Instittut                                                                                          | 17  Universal part of speech | ✔️    |
 | [DaCy](#dacy)         | [Danish Dependency Treebank](../datasets.md#dane)                         | Apache v2     | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | 17  Universal part of speech | ❌  |
@@ -93,9 +92,6 @@ its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Dan
 
 [Stanza](https://stanfordnlp.github.io/stanza/) is a python library which provides a neural network pipeline for NLP in many languages. It has been developed by the [Stanford NLP Group](https://nlp.stanford.edu/). The Stanza part-of-speech tagger has been trained on the [DDT](../datasets.md#dane). 
 
-### Polyglot
-
-Read more about the polyglot model [here](<https://polyglot.readthedocs.io/en/latest/POS.html>), and in the original paper [Al-Rfou et al. (2013)](https://www.aclweb.org/anthology/W13-3520). 
 
 ## 📈 Benchmarks
 
@@ -113,21 +109,6 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 | Stanza               | 97.73     |~34                          |
 
 *Sentences per second is based on a Macbook Pro with Apple M1 chip.
-
-### Polyglot model
-
-The tags predicted with the polyglot model differ slightly from the universal PoS-tags. The model predicts :
-* `CONJ` instead of `CCONJ`
-* `VERB` instead of `AUX` for the auxiliary and modal verbs (i.e. `være`, `have`, `kunne`, `ville`, `skulle`, `måtte`, `burde`)
-
-We calculated the scores for the original predictions and for the corrected version.
-
-| Model                       | Accuracy |
-| --------------------------- | -------- |
-| Polyglot                    | 76.76    |
-| Polyglot (corrected output) | 83.4     |
-
-
 
 
 ## 🎓 References 
