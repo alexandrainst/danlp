@@ -4,6 +4,25 @@ import shutil
 import string
 from typing import Union
 import requests
+import progressbar
+
+class ProgressBar():
+    """
+    https://stackoverflow.com/questions/37748105/how-to-use-progressbar-module-with-urlretrieve
+    """
+    def __init__(self):
+        self.pbar = None
+
+    def __call__(self, block_num, block_size, total_size):
+        if not self.pbar:
+            self.pbar=progressbar.ProgressBar(maxval=total_size)
+            self.pbar.start()
+
+        downloaded = block_num * block_size
+        if downloaded < total_size:
+            self.pbar.update(downloaded)
+        else:
+            self.pbar.finish()
 
 def random_string(length: int = 12):
     letters = string.ascii_lowercase

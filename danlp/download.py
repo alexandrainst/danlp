@@ -8,7 +8,7 @@ from tempfile import NamedTemporaryFile
 
 from tqdm import tqdm
 
-from danlp.utils import extract_single_file_from_zip
+from danlp.utils import extract_single_file_from_zip, ProgressBar
 
 DEFAULT_CACHE_DIR = os.path.join(str(Path.home()), '.danlp')
 
@@ -435,7 +435,7 @@ def _download_file(meta_info: dict, destination: str, verbose: bool = False):
                 urllib.request.urlretrieve(url, destination, reporthook=t.update_to)
         else:
             print("Downloading file {}".format(destination))
-            urllib.request.urlretrieve(url, destination)
+            urllib.request.urlretrieve(url, destination, ProgressBar())
 
     else:
         if verbose:
