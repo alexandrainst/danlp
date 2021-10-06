@@ -13,7 +13,6 @@ and made available through the DaNLP library.
 | [BERT](#bert)                                                                     | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
 | [spaCy](#spacy)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [Polyglot](https://polyglot.readthedocs.io/en/latest/NamedEntityRecognition.html) | Wikipedia                                                             | Polyglot                       | PER, ORG, LOC | ❌     |
 | [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
 | [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
 | [DaCy](#dacy)                                      | [DaNE](../datasets.md#dane)                                           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com)                 | PER, ORG, LOC | (✔)    |
@@ -98,13 +97,6 @@ for tok in doc:
     print("{} {}".format(tok,tok.ent_type_))
 ```
 
-### Polyglot
-The Polyglot [(Al-Rfou et al. 2015)](https://arxiv.org/abs/1410.3791) NER model
-is  trained without any human annotation or language-specific knowledge but 
-by automatic generating a dataset using the link structure from Wikipedia.
-This model is not available through DaNLP but it can be used from the 
-[Polyglot](https://github.com/aboSamoor/polyglot) library.
-
 
 ### NERDA
 
@@ -137,17 +129,19 @@ The benchmarks has been performed on the test part of the
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model                | LOC       | ORG       | PER       | AVG       |
-|----------------------|-----------|-----------|-----------|-----------|
-| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |
-| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |
-| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |
-| Polyglot             | 64.95     | 39.3      | 78.74     | 64.18     |
-| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |
-| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |
-| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |
-| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |
-| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |
+| Model                | LOC       | ORG       | PER       | AVG       |Sentences per second (CPU*) |
+|----------------------|-----------|-----------|-----------|-----------|----------------------------|
+| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |~6                          |
+| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |~9                          |
+| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |~420                        |
+| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |~1                          |
+| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |~10                         |
+| DaCy (small) v0.0.0  | 79.23     | 61.82     | 88.52     | 76.64     |~44                         |
+| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |~6                          |
+| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |~1                          |
+| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |~1                          |
+
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 The evaluation script `ner_benchmarks.py` can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/ner_benchmarks.py).
 
@@ -155,7 +149,6 @@ The evaluation script `ner_benchmarks.py` can be found [here](https://github.com
 
 ## 🎓 References
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. 2019. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://www.aclweb.org/anthology/N19-1423/). In **NAACL**.
-- Rami Al-Rfou, Vivek Kulkarni, Bryan Perozzi and Steven Skiena. 2015. [POLYGLOT-NER: Massive Multilingual Named Entity Recognition](https://arxiv.org/abs/1410.3791). In **SDM**.
 - Leon Derczynski, Camilla V. Field and Kenneth S. Bøgh. 2014. [DKIE: Open Source Information Extraction for Danish](https://www.aclweb.org/anthology/E14-2016). In **EACL**.
 - Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139/). In **COLING**.
 - Rasmus Hvingelby, Amalie B. Pauli, Maria Barrett, Christina Rosted, Lasse M. Lidegaard and Anders Søgaard. 2020. [DaNE: A Named Entity Resource for Danish](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.565.pdf). In **LREC**.

@@ -148,13 +148,15 @@ A conversion of the continuous scores of the Sentida tool into three classes is 
 The scripts for the benchmarks can be found [here](https://github.com/alexandrainst/danlp/blob/master/examples/benchmarks/). There is one for the europarl sentiment and LCC sentiment data and another one for the twitter sentiment. This is due to the fact that downloading the twitter data requires login to a twitter API account. The scores below for the twitter data is reported for all the data, but if tweets are deleted in the mean time on twitter, not all tweets can be downloaded. 
 In the table we consider the accuracy and macro-f1 in brackets, but to get the scores per class we refer to our benchmark script.
 
-| Tool/Model                          | Europarl Sentiment | LCC Sentiment   | Twitter Sentiment (Polarity) |
-|-------------------------------------|--------------------|-----------------|------------------------------|
-| AFINN                               | 0.68 (0.68)        | 0.66 (0.61)     | 0.48 (0.46)                  |
-| Sentida (version 0.5.0)             | 0.67 (0.65)        | 0.58 (0.55)     | 0.44 (0.44)                  |
-| BERT Tone (polarity, version 0.0.1) | **0.79** (0.78)    | **0.74** (0.67) | 0.73 (0.70)                  |
-| spaCy sentiment (version 0.0.1)     | 0.74 (0.73)        | 0.66 (0.61)     | 0.66 (0.60)                  |
-| Senda                               | 0.75 (0.74)        | 0.68 (0.59)     | **0.76** (0.73)              |
+| Tool/Model                          | Europarl Sentiment | LCC Sentiment   | Twitter Sentiment (Polarity) | Sentences per second (CPU*) |
+|-------------------------------------|--------------------|-----------------|------------------------------|-----------------------------|
+| AFINN                               | 0.68 (0.68)        | 0.66 (0.61)     | 0.48 (0.46)                  |~1707                        |
+| Sentida (version 0.5.0)             | 0.67 (0.65)        | 0.58 (0.55)     | 0.44 (0.44)                  |~751                         |
+| BERT Tone (polarity, version 0.0.1) | **0.79** (0.78)    | **0.74** (0.67) | 0.73 (0.70)                  |~5                           |
+| spaCy sentiment (version 0.0.1)     | 0.74 (0.73)        | 0.66 (0.61)     | 0.66 (0.60)                  |~139                         |
+| Senda                               | 0.75 (0.74)        | 0.68 (0.59)     | **0.76** (0.73)              |~5                           |
+
+*Sentences per second is based on a Macbook Pro with Apple M1 chip.
 
 ### Benchmark of subjective versus objective classification
 
