@@ -1,5 +1,6 @@
 Named Entity Recognition
 ========================
+
 Named Entity Recognition (NER) is the task of extracting named entities in a raw text. 
 Common entity types are locations, organizations and persons. Currently a few
 tools are available for NER in Danish. Popular models for NER
@@ -8,14 +9,17 @@ tools are available for NER in Danish. Popular models for NER
 are continuously trained on the newest available named entity datasets such as DaNE
 and made available through the DaNLP library.
 
-| Model                                                                             | Train Data                                                            | Maintainer                     | Tags          | DaNLP |
-|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------------------|---------------|-------|
-| [BERT](#bert)                                                                     | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [Flair](#flair)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [spaCy](#spacy)                                                                   | [DaNE](../datasets.md#dane)                                           | Alexandra Institute            | PER, ORG, LOC | ✔     |
-| [daner](https://github.com/ITUnlp/daner)                                          | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | [ITU NLP](https://nlp.itu.dk/) | PER, ORG, LOC | ❌     |
-| [NERDA](https://github.com/ebanalyse/NERDA/)                                      | [DaNE](../datasets.md#dane)                                           | Ekstra Bladet                  | PER, ORG, LOC | ❌     |
-| [DaCy](#dacy)                                      | [DaNE](../datasets.md#dane)                                           | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com)                 | PER, ORG, LOC | (✔)    |
+| Model             | Train Data                                                            | License    | Maintainer                              | Tags          | DaNLP |
+|-------------------|-----------------------------------------------------------------------|------------|-----------------------------------------|---------------|-------|
+| [BERT](#bert)     | [DaNE](../datasets.md#dane)                                           | CC BY 4.0  | Alexandra Institute                     | PER, ORG, LOC | ✔     |
+| [Flair](#flair)   | [DaNE](../datasets.md#dane)                                           | MIT        | Alexandra Institute                     | PER, ORG, LOC | ✔     |
+| [spaCy](#spacy)   | [DaNE](../datasets.md#dane)                                           | MIT        | Alexandra Institute                     | PER, ORG, LOC | ✔     |
+| [daner](#daner)   | [Derczynski et al. (2014)](https://www.aclweb.org/anthology/E14-2016) | GNU GPL v3 | [ITU NLP](https://nlp.itu.dk/)          | PER, ORG, LOC | ❌     |
+| [NERDA](#nerda)   | [DaNE](../datasets.md#dane)                                           | MIT        | Ekstra Bladet                           | PER, ORG, LOC | ❌     |
+| [DaLUKE](#daluke) | [DaNE](../datasets.md#dane)                                           | MIT        | [Peleiden](https://github.com/peleiden) | PER, ORG, LOC | ❌     |
+| [DaCy](#dacy) | [DaNE](../datasets.md#dane) | Apache License 2.0 | [Center for Humanities Computing Aarhus](http://chcaa.io/#/), [K. Enevoldsen ](http://kennethenevoldsen.com) | PER, ORG, LOC | (✔) |
+| [ScandiNER](#scandiner) | [DaNE](../datasets.md#dane), NorNE, SUC 3.0, WikiANN  | MIT | [Dan Saattrup Nielsen](https://huggingface.co/saattrupdan) | PER, ORG, LOC | ❌ |
+
 
 ### Use cases
 
@@ -112,16 +116,27 @@ and a [Danish Electra](https://github.com/MalteHB/-l-ctra).
 [DaCy](https://github.com/KennethEnevoldsen/DaCy) is a multi-task transformer trained using SpaCy v.3.
 its models is fine-tuned (on [DaNE](../datasets.md#dane)) and based upon the Danish BERT (v2) by [botXO](https://github.com/botxo/nordic_bert) and the [XLM Roberta large](https://huggingface.co/xlm-roberta-large). For more on DaCy see the github [repository](https://github.com/KennethEnevoldsen/DaCy) or the [blog post](https://www.kennethenevoldsen.com/post/new-fast-and-efficient-state-of-the-art-in-danish-nlp/) describing the training procedure. 
 
+
 ### Daner
-The daner [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) NER tool
+
+The [daner](https://github.com/ITUnlp/daner) [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) NER tool
 is a wrapper around the [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 
 using data from [(Derczynski et al. 2014)](https://www.aclweb.org/anthology/E14-2016) (not released).
 The tool is not available through DaNLP but it can be used from the [daner repository](https://github.com/ITUnlp/daner).
+
 
 ### DaLUKE
 
 The [DaLUKE](https://github.com/peleiden/daluke) model is based on the knowledge-enhanced transformer LUKE. 
 It has been first pretrained as a language model on the Danish Wikipedia and then fine-tuned on [DaNE](../datasets.md#dane) for NER. 
+
+
+### ScandiNER
+
+The [ScandiNER](https://huggingface.co/saattrupdan/nbailab-base-ner-scandi) model can tag text for NER in Danish, Norwegian (Bokmål and Nynorsk), Swedish, Icelandic and Faroese. 
+It is a fine-tuned version of [NB-BERT-base](https://huggingface.co/NbAiLab/nb-bert-base), a language model for Norwegian. 
+A combination of NER datasets have been used for training: [DaNE](../datasets.md#dane), [NorNE](https://arxiv.org/abs/1911.12146), [SUC 3.0](https://spraakbanken.gu.se/en/resources/suc3), [WikiANN](https://aclanthology.org/P17-1178/) (for Icelandic and Faroese). 
+
 
 ## 📈 Benchmarks
 The benchmarks has been performed on the test part of the
@@ -129,17 +144,18 @@ The benchmarks has been performed on the test part of the
 None of the models have been trained on this test part. We are only reporting the scores on the `LOC`, `ORG` and `PER` entities as the `MISC` category has limited practical use.
 The table below has the achieved F1 score on the test set:
 
-| Model                | LOC       | ORG       | PER       | AVG       |Sentences per second (CPU*) |
-|----------------------|-----------|-----------|-----------|-----------|----------------------------|
-| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     |~6                          |
-| Flair                | 84.82     | 62.95     | 93.15     | 81.78     |~9                          |
-| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     |~420                        |
-| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     |~1                          |
-| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     |~10                         |
-| DaCy (small) v0.0.0  | 79.23     | 61.82     | 88.52     | 76.64     |~44                         |
-| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.09     |~6                          |
-| DaCy (large) v0.0.0  | **85.29** | **79.04** | **95.53** | **86.64** |~1                          |
-| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     |~1                          |
+| Model                | LOC       | ORG       | PER       | micro AVG | macro AVG | Sentences per second (CPU*) |
+|----------------------|-----------|-----------|-----------|-----------|-----------|-----------------------------|
+| BERT                 | 83.90     | 72.98     | 92.82     | 84.04     | 83.23     | ~6                          |
+| Flair                | 84.82     | 62.95     | 93.15     | 81.78     | 80.31     | ~9                          |
+| spaCy                | 75.96     | 59.57     | 87.87     | 75.73     | 74.47     | ~420                        |
+| NERDA (mBERT)        | 80.75     | 65.73     | 92.66     | 80.66     | 79.71     | ~1                          |
+| NERDA (electra)      | 77.67     | 60.13     | 90.16     | 76.77     | 75.99     | ~10                         |
+| DaCy (small) v0.0.0  | 79.23     | 61.82     | 88.52     | 77.59     | 76.52     | ~44                         |
+| DaCy (medium) v0.0.0 | 83.96     | 66.23     | 90.41     | 80.50     | 80.20     | ~6                          |
+| DaCy (large) v0.0.0  | 85.29     | 79.04     | 94.15     | 86.89     | 86.16     | ~1                          |
+| DaLUKE v0.0.5        | 86.43     | 74.58     | 92.52     | 84.91     | 84.51     | ~1                          |
+| ScandiNER            | **88.32** | **82.58** | **95.53** | **89.25** | **88.81** | ~5                          |
 
 *Sentences per second is based on a Macbook Pro with Apple M1 chip.
 

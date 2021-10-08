@@ -36,31 +36,31 @@ num_sentences = len(sentences_tokens)
 num_tokens = sum([len(s) for s in sentences_tokens])
 
 
-def benchmark_polyglot_mdl():
-    """
-    Running ployglot requires these packages:
-    # Morfessor==2.0.6
-    # PyICU==2.4.2
-    # pycld2==0.41
-    # polyglot
-    """
-    from polyglot.tag import NEChunker
-    from polyglot.text import WordList
+# def benchmark_polyglot_mdl():
+#     """
+#     Running ployglot requires these packages:
+#     # Morfessor==2.0.6
+#     # PyICU==2.4.2
+#     # pycld2==0.41
+#     # polyglot
+#     """
+#     from polyglot.tag import NEChunker
+#     from polyglot.text import WordList
 
-    start = time.time()
+#     start = time.time()
 
-    predictions = []
-    for tokens in sentences_tokens:
-        word_list = WordList(tokens, language='da')
-        ne_chunker = NEChunker(lang='da')
-        word_ent_tuples = list(ne_chunker.annotate(word_list))
+#     predictions = []
+#     for tokens in sentences_tokens:
+#         word_list = WordList(tokens, language='da')
+#         ne_chunker = NEChunker(lang='da')
+#         word_ent_tuples = list(ne_chunker.annotate(word_list))
 
-        predictions.append([entity for word, entity in word_ent_tuples])
-    print('polyglot:')
-    print_speed_performance(start, num_sentences, num_tokens)
-    assert len(predictions) == len(sentences_entities)
+#         predictions.append([entity for word, entity in word_ent_tuples])
+#     print('polyglot:')
+#     print_speed_performance(start, num_sentences, num_tokens)
+#     assert len(predictions) == len(sentences_entities)
 
-    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+#     print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 def benchmark_spacy_mdl():
     nlp = load_spacy_model()
@@ -115,7 +115,7 @@ def benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0"):
                 ents.append(t.ent_iob_ + "-" + t.ent_type_)
 
         predictions.append(ents)
-    print('spaCy:')
+    print('DaCy ({}):'.format(dacy_model))
     print_speed_performance(start, num_sentences, num_tokens)
 
     assert len(predictions) == num_sentences
@@ -216,14 +216,55 @@ def benchmark_daluke_mdl():
     print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
 
 
+def benchmark_scandiner_mdl():
+
+    from transformers import AutoModelForTokenClassification
+    from transformers import AutoTokenizer
+    import torch
+
+    model_name = "saattrupdan/nbailab-base-ner-scandi"
+    model = AutoModelForTokenClassification.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    id2labels = model.config.id2label
+
+    tokenized_sents = []
+    for sentence in sentences_tokens:
+        tok_mask = []
+        for tok in sentence:
+            t = tokenizer.tokenize(tok)
+            tok_mask += [1]+[0]*(len(t)-1)
+        inputs = tokenizer.encode(sentence, return_tensors="pt", is_split_into_words=True)
+        assert(len(inputs[0]) == len(tok_mask)+2)
+        tokenized_sents.append((inputs, tok_mask))
+
+    start = time.time()
+    predictions = []
+    for (input, mask) in tokenized_sents:
+        preds = model(input)[0]
+        preds = torch.argmax(preds, dim=2)
+        preds = preds[0].tolist()[1:-1]
+        assert(len(preds) == len(mask))
+        pred_ents = [id2labels[p] for p, m in zip(preds, mask) if m]
+        assert(len(pred_ents) == sum(mask))
+        predictions.append(pred_ents)
+    print('ScandiNER:')
+    print_speed_performance(start, num_sentences, num_tokens)
+    
+    assert len(predictions) == num_sentences
+
+    print(f1_report(sentences_entities, remove_miscs(predictions), bio=True))
+
+
+
 if __name__ == '__main__':
-    benchmark_polyglot_mdl()
+    # benchmark_polyglot_mdl()
     benchmark_spacy_mdl()
     benchmark_flair_mdl()
     benchmark_bert_mdl()
     benchmark_nerda_multi_mdl()
     benchmark_nerda_electra_mdl()
     benchmark_daluke_mdl()
+    benchmark_scandiner_mdl()
     # benchmark_dacy_mdl(dacy_model="da_dacy_small_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_medium_tft-0.0.0")
     # benchmark_dacy_mdl(dacy_model="da_dacy_large_tft-0.0.0")
