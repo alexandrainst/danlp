@@ -76,21 +76,21 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **News**
 
-- :tada: Version 0.1.0 has been [released](https://github.com/alexandrainst/danlp/releases) with 
-  - a new dataset for sentiment analysis: [AngryTweets](docs/docs/datasets.md#angrytweets)
-  - the [Danish Unimorph](docs/docs/datasets.md#daunimorph) dataset, including lemmas and morphological features for many words in Danish
-  - a new [BERT model for hate speech detection](docs/docs/tasks/hatespeech.md#bert) trained on the [DKHate](docs/docs/datasets.md#dkhate) dataset
+- :tada: Version 0.1.1 has been [released](https://github.com/alexandrainst/danlp/releases) with 
+  - 2 new datasets for named entity disambiguation: [DaNED](docs/docs/datasets.md#daned) and [DaWikiNED](docs/docs/datasets.md#dawikined)
+  - a new model for named entity disambiguation ([NED](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ned.html)) based on the multilingual XLM-Roberta
 
-- :blue_book: A jupyter notebook tutorial for building a [knowledge graph](examples/tutorials/example_knowledge_graph.ipynb) using [NER](docs/docs/tasks/ner.md), [PoS-tagging](docs/docs/tasks/pos.md), [dependency parsing](docs/docs/tasks/dependency.md) and [coreference resolution](docs/docs/tasks/coreference.md)
-- Benchmarking of the Stanza model for [PoS-tagging](docs/docs/tasks/pos.md#stanza) and [dependency parsing](docs/docs/tasks/dependency.md#stanza)
-- Benchmarking of the A&ttack model for [hate speech detection](docs/docs/tasks/hatespeech.md#attack)
-- 🤗 Some of our transformers models are now available through [HuggingFace](https://huggingface.co/DaNLP)! More is coming, keep an eye open 
+- Benchmarking of 2 new models for [NER](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html):
+  - [DaLUKE](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html#daluke)
+  - [ScandiNER](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html#scandiner)
+- Benchmarking of 1 new model for [sentiment analysis](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/sentiment_analysis.html):
+  - [Senda](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/sentiment_analysis.html#senda)
 
 
 
 **Next up**
 
-- dataset(s) and model(s) for Named Entity Disambiguation (NED)
+- new models for hate speech detection
 
 
 ## Installation
