@@ -5,13 +5,14 @@ Sentiment analysis is a broad term for a set of tasks with the purpose of identi
 
 In this repository we provide an overview of open sentiment analysis models and dataset for Danish. 
 
-| Model                                                        | Model    | License                                                      | Trained by                                                | Dimension          | Tags                                                         | DaNLP |
+| Model                                                        | Model type    | License                                                      | Trained by                                                | Dimension          | Tags                                                         | DaNLP |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | --------------------------------------------------------- | ------------------ | ------------------------------------------------------------ | ----- |
 | [AFINN](#afinn) | Wordlist | [Apache 2.0](https://github.com/fnielsen/afinn/blob/master/LICENSE) | Finn Årup Nielsen                                         | Polarity           | Score (integers)                                             | ❌     |
 | [Sentida](#sentida) | Wordlist | [GPL-3.0](https://github.com/esbenkc/emma/blob/master/LICENSE) | Jacob Dalsgaard, Lars Kjartan Svenden og Gustav Lauridsen | Polarity           | Score (continuous)                                           | ❌     |
 | [BERT Emotion](#bert-emotion) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Emotions           | glæde/sindsro, forventning/interesse, tillid/accept,  overraskelse/forundring, vrede/irritation, foragt/modvilje, sorg/skuffelse, frygt/bekymring, No emotion | ✔     |
 | [BERT Tone](#bert-tone) (beta) | BERT     | CC-BY_4.0                                                    | Alexandra Institute                                       | Polarity, Analytic | ['postive', 'neutral', 'negative'] and ['subjective', 'objective] | ✔     |
 | [SpaCy Sentiment](#spacy-sentiment) (beta) | spaCy    | MIT                                                          | Alexandra Institute                                       | Polarity           | 'postive', 'neutral', 'negative'                             | ✔     |
+| [Senda](#senda) | BERT | MIT | Ekstra Bladet | Polarity | 'postive', 'neutral', 'negative'  | ❌ | 
 
 ### Use cases 
 
@@ -172,20 +173,13 @@ The script for the benchmarks can be found [here](https://github.com/alexandrain
 
 
 
-## **👷** Construction of a new dataset  in process
-
-This project is in the process of creating a manual annotating dataset to use in training of new sentiment analysis models. The dataset will be open source and therefore it is using data from varied source such as twitter and [europarl data](<http://www.statmt.org/europarl/>). 
-
-Another approach is to use a "silver" annotated corpus e.g. by using user-reviews and ratings. An example os this is The NoReC corpus [(Velldal et al. 2018)](http://www.lrec-conf.org/proceedings/lrec2018/pdf/851.pdf)  which is a dataset for sentiment analysis in Norwegian based on reviews from many Norwegian news organizations.
-The DaNLP project hope to create a similar dataset in Danish with permission from the copyright holders.
-So if you manage a site containing user reviews for example movie reviews and would like to contribute then please contact us.
 
 ## Zero-shot Cross-lingual transfer example
 
 An example of utilizing a dataset in another language to be able to make predictions on Danish without seeing Danish training data is shown in this 
-[notebook](<https://github.com/alexandrainst/danlp/blob/master/examples/example_zero_shot_sentiment.ipynb>). It is trained on English movie reviews from IMDB, and
-it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf/1812.10464.pdf) called 
-[LASER](<https://github.com/facebookresearch/LASER>)(Language-Agnostic SEntence Representations).
+[notebook](<https://github.com/alexandrainst/danlp/blob/master/examples/example_zero_shot_sentiment.ipynb>). 
+It is trained on English movie reviews from IMDB, and it uses multilingual embeddings from [Artetxe et al. 2019](https://arxiv.org/pdf/1812.10464.pdf) 
+called [LASER](<https://github.com/facebookresearch/LASER>)(Language-Agnostic SEntence Representations).
 
 
 ## 🎓 References 
