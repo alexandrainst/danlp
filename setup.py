@@ -22,14 +22,15 @@ setup(
         'pandas',
         'pyconll', 
         'tqdm', 
-        'tweepy'
+        'tweepy',
+        'progressbar'
     ],
     extras_require={
         'all' : [
             'transformers<=4.3.3',
-            'gensim<=3.8.1',
+            'gensim<=3.8.3',
             'torch<=1.7.1',
-            'flair<=0.8',
+            'flair<=0.9',
             'spacy<=2.2.3',
             'allennlp<=2.5.0'
         ]
