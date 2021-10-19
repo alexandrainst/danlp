@@ -23,6 +23,7 @@ Chunking is the task of grouping words of a sentence into syntactic phrases (e.g
 Here, we focus on the prediction of noun-phrases (NP). Noun phrases can be pronouns (`PRON`), proper nouns (`PROPN`) or nouns (`NOUN`)  -- potentially bound with other tokens that act as modifiers, e.g., adjectives (`ADJ`) or other nouns. 
 In sentences, noun phrases are generally used as subjects (`nsubj`) or objects (`obj`) (or complements of prepositions).
 Examples of noun-phrases :
+
  * en `bog` (NOUN)
  * en `god bog` (ADJ+NOUN)
  * `Lines bog` (PROPN+NOUN)
@@ -34,6 +35,7 @@ We provide a convertion function -- from dependencies to NP-chunks -- thus depen
 
 Dependency parsing and chunking can be used as preprocessing steps for other NLP tasks. 
 See for example the [EPE](http://epe.nlpl.eu/index.php?page=3) shared task, where the performance of dependency parsers is evaluated through the ouput of downstream tasks such as: 
+
 * Biological Event Extraction
 * Fine-Grained Opinion Analysis
 * Negation Resolution

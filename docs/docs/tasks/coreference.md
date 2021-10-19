@@ -47,6 +47,7 @@ clusters = coref_model.predict_clusters(doc)
 ```
 
 The `preds` variable is a dictionary including the following entries :
+
 * `top_spans` : list of indices of all references (spans) in the document
 * `antecedent_indices` : list of antecedents indices
 * `predicted_antecedents` : list of indices of the antecedent span (from `top_spans`), i.e. previous reference

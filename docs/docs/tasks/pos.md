@@ -112,6 +112,7 @@ Accuracy scores are reported below and can be reproduced using `pos_benchmarks.p
 
 
 ## 🎓 References 
+
 - Rami Al-Rfou, Bryan Perozzi, and Steven Skiena. 2013. [Polyglot: Distributed Word Representations for Multilingual NLP](https://www.aclweb.org/anthology/W13-3520). In **CoNLL**.
 - Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://alanakbik.github.io/papers/coling2018.pdf). In **COLING**.
 

@@ -25,6 +25,7 @@ It was originally annotated as part of the Copenhagen Dependency Treebank (CDT) 
 The [CDT documentation](https://github.com/mbkromann/copenhagen-dependency-treebank/blob/master/manual/cdt-manual.pdf) contains description of the coreference classes as well as inter-annotator agreement and confusion matrices.
 
 For this resource, we used the annotation files from the annotator "Lotte" along with the UD syntax which is an automatic conversion of the CDT syntax annotation by Johansen et al. (2015). We provide the sentence ID from the UD resource as well as the document ID from CDT. The document ID has been prepended with a two letter domain code compatible with the domain codes of the Ontonotes corpus. This is a manually mapping of the sources listed in the CDT. Only nw (newswire), mz (magazine), and bn (broadcast news) were present:
+
 * 299 nw documents
 * 41 mz documents
 * 1 bn

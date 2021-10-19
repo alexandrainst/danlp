@@ -26,6 +26,7 @@ and made available through the DaNLP library.
 NER is one of the most famous NLP tasks used in the industry, probably because its use cases are pretty straightforward. 
 It can be used in many systems, by itself or in combination with other NLP models. 
 For instance, the extraction of entities from text can be used for : 
+
  * classifying / indexing documents (e.g articles for news providers) and then
  * recommending similar content (e.g. news articles)
  * customer support (e.g. for tagging tickets)
@@ -164,6 +165,7 @@ The evaluation script `ner_benchmarks.py` can be found [here](https://github.com
 
 
 ## 🎓 References
+
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. 2019. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://www.aclweb.org/anthology/N19-1423/). In **NAACL**.
 - Leon Derczynski, Camilla V. Field and Kenneth S. Bøgh. 2014. [DKIE: Open Source Information Extraction for Danish](https://www.aclweb.org/anthology/E14-2016). In **EACL**.
 - Alan Akbik, Duncan Blythe and Roland Vollgraf. 2018. [Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139/). In **COLING**.

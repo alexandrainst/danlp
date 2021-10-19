@@ -17,6 +17,7 @@ In this repository we provide an overview of open sentiment analysis models and 
 ### Use cases 
 
 Sentiment analysis is a very useful tool for a company which wants to gain insight about its brand or products as it can be used, for example, for : 
+
  * monitoring social media (e.g. quickly identifying posts that generate strong emotions)
  * monitoring brand and managing reputation (e.g. analysing the global sentiment of people tweeting about a brand or a product)
  * customer support (e.g. identifying happy or angry customers for better adapted responses)
@@ -38,8 +39,10 @@ uses a lexicon based approach to sentiment analysis. The tool scores texts with 
 
 The emotion classifier has been developed in collaboration with Danmarks Radio, which has granted access to a set of social media data. 
 The data has been manually annotated for 2 tasks:  
+
 * to detect whether there is emotion or not in a text (binary classification)
 * to classify the text among 8 emotions (`Glæde/Sindsro`, `Tillid/Accept`, `Forventning/Interrese`, `Overasket/Målløs`, `Vrede/Irritation`, `Foragt/Modvilje`, `Sorg/trist`, `Frygt/Bekymret`).
+
 The BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) emotion model(s) have been finetuned on this data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO. 
 The model classifying amongst eight emotions achieves an accuracy on 0.65 and a macro-f1 on 0.64 on the social media test set from DR's Facebook containing 999 examples (we do not have permission to distributing the data). 
 
@@ -70,8 +73,10 @@ classifier._classes()
 ### 🔧 BERT Tone {#bert-tone}
 
 The tone analyzer consists of two BERT [(Devlin et al. 2019)](https://www.aclweb.org/anthology/N19-1423/) classification models:
+
 * a polarity detection model (classifying between `positive`, `neutral` and `negative`);
 * a subjective/objective classification model. 
+
 Both models have been finetuned on annotated twitter data using the [Transformers](https://github.com/huggingface/transformers) library from HuggingFace, and it is based on a pretrained  [Danish BERT](https://github.com/botxo/nordic_bert) representations by BotXO. 
 The data used for training is manually annotated data from [Twitter Sentiment](../datasets.md#twitter-sentiment) (train part) and [EuroParl sentiment 2](../datasets.md#europarl-sentiment2)), both datasets can be loaded with the DaNLP package.  
 
@@ -183,6 +188,7 @@ called [LASER](<https://github.com/facebookresearch/LASER>)(Language-Agnostic SE
 
 
 ## 🎓 References 
+
 - Mikel Artetxe, and Holger Schwenk. 2019. 
   [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond.](https://arxiv.org/pdf/1812.10464.pdf). 
   In **TACL**.
