@@ -1,5 +1,5 @@
 from danlp.datasets import DKHate
-from danlp.models import load_bert_offensive_model
+from danlp.models import load_bert_offensive_model, load_bert_hatespeech_model
 import time, os
 from utils import *
 
@@ -12,7 +12,7 @@ labels_true = df_test["subtask_a"].tolist()
 num_sentences = len(sentences)
 
 
-def benchmark_bert_mdl():
+def benchmark_bert_offensive_mdl():
     bert_model = load_bert_offensive_model()
 
     start = time.time()
@@ -117,7 +117,25 @@ def benchmark_attack_mdl():
     print(f1_report(labels_true, preds, "OgTal", "DR Data"))   
 
 
+def benchmark_bert_hatespeech_mdl():
+    bert_model = load_bert_hatespeech_model()
+
+    start = time.time()
+
+    preds = []
+    for sentence in sentences:
+        pred = bert_model.predict(sentence, offensive=True, hatespeech=False)
+        preds.append(pred['offensive'])
+    print('BERT Hatespeech:')
+    print_speed_performance(start, num_sentences)
+    
+    assert len(preds) == num_sentences
+
+    print(f1_report(labels_true, preds, "BERT", "DKHate"))
+
+
 if __name__ == '__main__':
-    benchmark_bert_mdl()
+    benchmark_bert_offensive_mdl()
     benchmark_attack_mdl()
+    benchmark_bert_hatespeech_mdl()
 
