@@ -551,6 +551,105 @@ class BertOffensive():
         return proba
 
 
+class BertHateSpeech():
+    """
+    BERT HateSpeech Model.
+
+    For detecting whether a comment is offensive or not and, if offensive, predicting what type of hate speech it is. 
+    The model is meant to be used for helping moderating online comments 
+    (thus, including the detection and categorization of spams). 
+    Following are the categories that can be predicted by the model: 
+    * Særlig opmærksomhed 
+    * Personangreb 
+    * Sprogbrug 
+    * Spam & indhold
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    """
+    def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+        from transformers import BertTokenizer, BertForSequenceClassification
+        # download the model or load the model path
+        path_off = download_model('bert.hatespeech.detection', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        path_hate = download_model('bert.hatespeech.classification', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        
+        self.classes_off= ['NOT', 'OFF']
+        self.classes_hate= ['Særlig opmærksomhed', 'Personangreb', 'Sprogbrug', 'Spam & indhold']
+
+        self.tokenizer_off = BertTokenizer.from_pretrained(path_off)
+        self.model_off = BertForSequenceClassification.from_pretrained(path_off, num_labels=len(self.classes_off))
+        self.tokenizer_hate = BertTokenizer.from_pretrained(path_hate)
+        self.model_hate = BertForSequenceClassification.from_pretrained(path_hate, num_labels=len(self.classes_hate))
+        
+        # save embbeding dim, to later ensure the sequenze is no longer the embeddings 
+        self.max_length_hate = self.model_hate.bert.embeddings.position_embeddings.num_embeddings
+        self.max_length_off = self.model_off.bert.embeddings.position_embeddings.num_embeddings
+
+
+    def _classes(self):
+        return self.classes_off, self.classes_hate
+    
+
+    def _get_pred(self, tokenizer, model, max_length, sentence):
+        input1 = tokenizer.encode_plus(sentence, add_special_tokens=True, return_tensors='pt',
+                                                max_length=max_length, truncation=True, return_overflowing_tokens=True)
+        if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
+            warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(max_length))
+        pred = model(input1['input_ids'])[0] #, token_type_ids=input1['token_type_ids'])[0]
+
+        return pred
+    
+    def predict(self, sentence: str, offensive: bool = True, hatespeech: bool = True):
+        """
+        Predict whether a sentence is offensive or not and/or the class of the sentence [Særlig opmærksomhed, Personangreb, Sprogbrug, Spam & indhold]
+
+        :param str sentence: raw text
+        :param bool offensive: if `True` returns whether the sentence is offensive or not
+        :param bool hatespeech: if `True` returns the type of hate speech the sentence belongs to
+        :return: a dictionary for offensive language and hate speech detection results
+        :rtype: Dict
+        """
+        
+        predDict = {'offensive': None, 'hatespeech': None}
+        
+        if offensive:
+            pred = self._get_pred(self.tokenizer_off, self.model_off, self.max_length_off, sentence)
+            pred = pred.argmax().item()
+            predDict['offensive'] = self.classes_off[pred]
+        
+        if hatespeech:
+            pred = self._get_pred(self.tokenizer_hate, self.model_hate, self.max_length_hate, sentence)
+            pred = pred.argmax().item()
+            predDict['hatespeech'] = self.classes_hate[pred]
+
+        return predDict
+
+    def predict_proba(self, sentence: str, offensive: bool = True, hatespeech: bool = True):
+        proba=[]
+        
+        # predict offensive
+        if offensive:
+            pred = self._get_pred(self.tokenizer_off, self.model_off, self.max_length_off, sentence)
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
+        
+        # predict hatespeech
+        if hatespeech:  
+            pred = self._get_pred(self.tokenizer_hate, self.model_hate, self.max_length_hate, sentence)
+            proba.append(torch.nn.functional.softmax(pred[0], dim=0).detach().numpy())
+
+        return proba
+
+
+def load_bert_hatespeech_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+    """
+    Loads a BERT HateSpeech model.
+
+    :param str cache_dir: the directory for storing cached models
+    :param bool verbose: `True` to increase verbosity
+    :return: a BERT HateSpeech model
+    """
+    return BertHateSpeech(cache_dir, verbose)
+
 
 def load_bert_offensive_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
