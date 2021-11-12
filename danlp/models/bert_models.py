@@ -571,7 +571,9 @@ class BertHateSpeech():
         from transformers import BertTokenizer, BertForSequenceClassification
         # download the model or load the model path
         path_off = download_model('bert.hatespeech.detection', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        path_off = os.path.join(path_off, 'bert.hatespeech.detection')
         path_hate = download_model('bert.hatespeech.classification', cache_dir, process_func=_unzip_process_func,verbose=verbose)
+        path_hate = os.path.join(path_hate, 'bert.hatespeech.classification')
         
         self.classes_off= ['NOT', 'OFF']
         self.classes_hate= ['Særlig opmærksomhed', 'Personangreb', 'Sprogbrug', 'Spam & indhold']

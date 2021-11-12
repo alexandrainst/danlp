@@ -136,7 +136,7 @@ class TestBertHatespeech(unittest.TestCase):
             model_path = download_model(model, DEFAULT_CACHE_DIR,
                                         process_func=_unzip_process_func,
                                         verbose=True)
-            
+            model_path = os.path.join(model_path,model)
             # check if path to model excist
             self.assertTrue(os.path.exists(model_path))
 
