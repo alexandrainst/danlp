@@ -597,7 +597,7 @@ class BertHateSpeech():
                                                 max_length=max_length, truncation=True, return_overflowing_tokens=True)
         if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(max_length))
-        pred = model(input1['input_ids'])[0] #, token_type_ids=input1['token_type_ids'])[0]
+        pred = model(input1['input_ids'])[0]
 
         return pred
     
