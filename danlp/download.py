@@ -172,6 +172,18 @@ MODELS = {
         'size': 410733108,
         'file_extension': ''
     },
+    'bert.hatespeech.detection': {
+        'url': DANLP_STORAGE_URL + '/models/bert.hatespeech.detection.zip',
+        'md5_checksum': '8d8d29576d1f12ed9374cc5d0b78cd22',
+        'size': 410729132,
+        'file_extension': ''
+    },
+    'bert.hatespeech.classification': {
+        'url': DANLP_STORAGE_URL + '/models/bert.hatespeech.classification.zip',
+        'md5_checksum': 'bea5f1fec9591cc7df349c55259d3dd5',
+        'size': 410744710,
+        'file_extension': ''
+    },
     # XLMR models
     'xlmr.coref': {
         'url': DANLP_STORAGE_URL + '/models/xlmr.coref.zip',
@@ -214,14 +226,14 @@ DATASETS = {
     },
     # coreference dataset 
     'dacoref': {
-        'url': 'http://danlp-downloads.alexandra.dk/datasets/dacoref.zip',
+        'url': DANLP_STORAGE_URL + '/datasets/dacoref.zip',
         'md5_checksum': 'e6f2707f4f600a0d357dc7afa1b01f92',
         'size': 1005278,
         'file_extension': ''
     },
     # DKHate 
     'dkhate': {
-        'url': 'http://danlp-downloads.alexandra.dk/datasets/dkhate.zip',
+        'url': DANLP_STORAGE_URL + '/datasets/dkhate.zip',
         'md5_checksum': '79d5abc0492637701edd0ca08154eb58',
         'size': 170933,
         'file_extension': '.tsv'
