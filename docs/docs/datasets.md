@@ -369,7 +369,7 @@ The dataset can be loaded with the DaNLP package:
 ```python
 from danlp.datasets import DaWikiNED
 dawikined = DaWikiNED()
-train, dev, test = dawikined.load_with_pandas()
+train = dawikined.load_with_pandas()
 ```
 
 To get the KG context (Wikidata properties and description) of a QID (from the DaWikiNED database), you can use:
