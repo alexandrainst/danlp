@@ -27,7 +27,7 @@ class DaUnimorph():
         self.database = pd.read_csv(self.file_path, 
                                 sep='\t', 
                                 names=['lemma', 'form', 'feats'], 
-                                encoding='unicode_escape', 
+                                encoding='utf-8',
                                 usecols=[0,1,2],
                                 dtype={'lemma':str, 'form':str, 'feats':str})
 
