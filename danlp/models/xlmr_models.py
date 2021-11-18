@@ -106,7 +106,7 @@ class XlmrNed():
     
     def _get_pred(self, sentence, kg_context):
         input1 = self.tokenizer.encode_plus(sentence, kg_context, add_special_tokens=True, return_tensors='pt',
-                                                max_length=self.max_length, truncation=True, return_overflowing_tokens=True)
+                                                max_length=self.max_length, truncation='only_second', return_overflowing_tokens=True)
         if 'overflowing_tokens' in input1 and input1['overflowing_tokens'].shape[1]>0:
             warnings.warn('Maximum length for sequence exceeded, truncation may result in unexpected results. Consider running the model on a shorter sequence than {} tokens'.format(self.max_length))
         pred = self.model(input1['input_ids'])[0]
@@ -137,7 +137,6 @@ class XlmrNed():
 
         return proba
         
-        
 
 
 def load_xlmr_coref_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
@@ -161,4 +160,3 @@ def load_xlmr_ned_model(cache_dir=DEFAULT_CACHE_DIR, verbose=False):
     """
     return XlmrNed(cache_dir, verbose)
 
-        
