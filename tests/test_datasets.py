@@ -201,7 +201,7 @@ class TestUnimorphDataset(unittest.TestCase):
         self.assertEqual(unimorph.get_inflections('svar'), ['svaredes', 'svarede', 'svarer', 'svares', 'svare', 'svar'])
         self.assertEqual(unimorph.get_inflections('trolde', pos='V'), ['troldedes', 'troldede', 'trolder', 'troldes', 'trolde', 'trold'])
         self.assertEqual(unimorph.get_inflections('trolde', pos='N', with_features=True)[0], {'lemma': 'trold', 'form': 'troldene', 'feats': 'N;DEF;NOM;PL', 'pos': 'N'})
-        self.assertEqual(unimorph.get_lemmas('papiret', with_features=True), [{'lemma': 'papir', 'form': 'papiret', 'feats': 'N;DEF;NOM;SG', 'pos': 'N'}])
+        self.assertEqual(unimorph.get_lemmas('nytårsaftens', with_features=True), [{'lemma': 'nytårsaften', 'form': 'nytårsaftens', 'feats': 'N;INDF;GEN;SG', 'pos': 'N'}])
 
 class TestDanedDatasets(unittest.TestCase):
     def test_daned(self):
