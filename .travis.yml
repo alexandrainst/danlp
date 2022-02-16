@@ -1,14 +1,12 @@
 language: python
 python:
   - "3.8"
-before_install:
-  # See https://github.com/travis-ci/travis-ci/issues/7940
-  - sudo rm -f /etc/boto.cfg
 cache: pip
 install:
   - pip install coverage --quiet
   - pip install coveralls --quiet
   - pip install -r requirements.txt --quiet
+  - python -c "import nltk; nltk.download('omw-1.4')"
 script:
   - bash -e tests/build.sh
 after_success:
