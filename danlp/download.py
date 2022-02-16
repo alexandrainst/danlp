@@ -197,6 +197,13 @@ MODELS = {
         'size': 872506245,
         'file_extension': ''
     },
+    # Electra models
+    'electra.offensive': {
+        'url': DANLP_STORAGE_URL + '/models/electra.offensive.zip',
+        'md5_checksum': '78986b19d70725dea8ccdf552cc027c5',
+        'size': 51230601,
+        'file_extension': ''
+    }
 }
 
 DATASETS = {

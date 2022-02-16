@@ -11,11 +11,12 @@ Here are definitions of the previous concepts:
  * hateful : targets a group or an individual with the intent to be harmful or to cause social chaos.
  
 
-| Model                      | Train Data                      | License         | Trained by          | Tags      | DaNLP |
-|----------------------------|---------------------------------|-----------------|---------------------|-----------|-------|
-| [BERT Offensive](#bertdk)  | [DKHate](../datasets.md#dkhate) | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️    |
-| [A&ttack](#attack)         | Facebook comments               | CC BY-NC-SA 4.0 | Analyse & Tal       | OFF / NOT | ❌     |
-| [BERT Hatespeech](#bertdr) | Facebook comments               | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️    |
+| Model                         | Train Data                      | License         | Trained by          | Tags      | DaNLP |
+|-------------------------------|---------------------------------|-----------------|---------------------|-----------|-------|
+| [BERT Offensive](#bertdk)     | [DKHate](../datasets.md#dkhate) | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️    |
+| [A&ttack](#attack)            | Facebook comments               | CC BY-NC-SA 4.0 | Analyse & Tal       | OFF / NOT | ❌     |
+| [BERT Hatespeech](#bertdr)    | Facebook comments               | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️    |
+| [ELECTRA Offensive](#electra) | Facebook comments               | CC BY 4.0       | Alexandra Instittut | OFF / NOT | ✔️    |
 
 ### Use cases 
 
@@ -79,6 +80,33 @@ pred = hatespeech_model.predict(sentence)
 proba = hatespeech_model.predict_proba(sentence)
 ```
 
+### 🔧 ELECTRA Offensive {#electra}
+
+The ELECTRA Offensive model can detect offensive language. 
+
+It has been developed in collaboration with Danmarks Radio (DR). 
+It is based on the pre-trained [Danish Ælæctra](Maltehb/aelaectra-danish-electra-small-cased), and finetuned on facebook data (non publicly available) annotated by DR. 
+
+It can predict whether a text is offensive or not : `OFF` (offensive) or `NOT` (not offensive).
+
+The ELECTRA Offensive model can be loaded with the `load_electra_offensive_model()` method. 
+Please note that it can maximum take 512 tokens as input at a time. The sentences are automatically truncated if longer.
+
+Below is a small snippet for getting started using the ELECTRA Offensive model. 
+
+```python
+from danlp.models import load_electra_offensive_model
+
+# load the model
+offensive_model = load_electra_offensive_model()
+
+sentence = "Han ejer ikke respekt for nogen eller noget... han er megaloman og psykopat"
+
+# apply the model on the sentence to get the class in which it belongs
+pred = offensive_model.predict(sentence)
+# or to get its probability of being part of each class
+proba = offensive_model.predict_proba(sentence)
+```
 
 ### A&ttack (Analyse & Tal) {#attack}
 
@@ -94,11 +122,12 @@ The benchmarking has been performed on the test part of the [DKHate](../datasets
 
 The scores presented here describe the performance (F1) of the models for the task of offensive language identification. 
 
-| Model           | OFF  | NOT  | AVG F1 | Sentences per second (CPU*) |
-|-----------------|------|------|--------|-----------------------------|
-| BERT Offensive  | 61.9 | 95.4 | 78.7   | ~6                          |
-| A&ttack (A&T)   | 34.2 | 91.4 | 62.8   | ~2                          |
-| BERT HateSpeech | 46.2 | 92.8 | 69.5   | ~10                         |
+| Model             | OFF  | NOT  | AVG F1 | Sentences per second (CPU*) |
+|-------------------|------|------|--------|-----------------------------|
+| BERT Offensive    | 61.9 | 95.4 | 78.7   | ~6                          |
+| A&ttack (A&T)     | 34.2 | 91.4 | 62.8   | ~2                          |
+| BERT HateSpeech   | 46.2 | 92.8 | 69.5   | ~10                         |
+| ELECTRA Offensive | 48.6 | 93.9 | 71.2   | ~60                         |
 
 *Sentences per second is based on a Macbook Pro with Apple M1 chip.
 

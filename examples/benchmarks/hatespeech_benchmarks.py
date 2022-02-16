@@ -1,5 +1,5 @@
 from danlp.datasets import DKHate
-from danlp.models import load_bert_offensive_model, load_bert_hatespeech_model
+from danlp.models import load_bert_offensive_model, load_bert_hatespeech_model, load_electra_offensive_model
 import time, os
 from utils import *
 
@@ -134,8 +134,25 @@ def benchmark_bert_hatespeech_mdl():
     print(f1_report(labels_true, preds, "BERT", "DKHate"))
 
 
+def benchmark_electra_offensive_mdl():
+    electra_model = load_electra_offensive_model()
+
+    start = time.time()
+
+    preds = []
+    for sentence in sentences:
+        pred = electra_model.predict(sentence)
+        preds.append(pred)
+    print('Electra Offensive:')
+    print_speed_performance(start, num_sentences)
+    
+    assert len(preds) == num_sentences
+
+    print(f1_report(labels_true, preds, "electra", "DKHate"))
+
 if __name__ == '__main__':
     benchmark_bert_offensive_mdl()
     benchmark_attack_mdl()
     benchmark_bert_hatespeech_mdl()
+    benchmark_electra_offensive_mdl()
 
