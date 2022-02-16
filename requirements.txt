@@ -11,3 +11,4 @@ srsly==1.0.2
 tweepy
 allennlp==2.5.0
 progressbar
+nltk<=3.6
