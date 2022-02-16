@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.8.7"
+  - "3.10"
 cache: pip
 install:
   - pip install coverage --quiet
