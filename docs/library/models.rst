@@ -10,13 +10,19 @@ Embeddings
     :show-inheritance:
 
 
-spaCy models
-------------
+BERT models
+-----------
 
-.. automodule:: danlp.models.spacy_models
+.. automodule:: danlp.models.bert_models
     :members:
     :show-inheritance:
 
+ELECTRA models
+-----------
+
+.. automodule:: danlp.models.electra_models
+    :members:
+    :show-inheritance:
 
 flair models
 ------------
@@ -25,11 +31,10 @@ flair models
     :members:
     :show-inheritance:
 
+spaCy models
+------------
 
-BERT models
------------
-
-.. automodule:: danlp.models.bert_models
+.. automodule:: danlp.models.spacy_models
     :members:
     :show-inheritance:
 
