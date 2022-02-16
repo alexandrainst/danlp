@@ -1,14 +1,8 @@
 from danlp.download import DEFAULT_CACHE_DIR, download_model, \
     _unzip_process_func
 
-from allennlp.models.archival import load_archive
-from allennlp.common.util import import_module_and_submodules
-from allennlp.common.util import prepare_environment
 import torch
-import os, warnings
-
-import_module_and_submodules("danlp.models.allennlp_models")
-from danlp.models.allennlp_models.coref.predictors.coref import CorefPredictor
+import warnings
 
 from typing import List
 
@@ -23,6 +17,12 @@ class XLMRCoref():
     :param bool verbose: `True` to increase verbosity
     """
     def __init__(self, cache_dir=DEFAULT_CACHE_DIR, verbose=False):
+
+        from allennlp.models.archival import load_archive
+        from allennlp.common.util import import_module_and_submodules
+        from allennlp.common.util import prepare_environment
+        import_module_and_submodules("danlp.models.allennlp_models")
+        from danlp.models.allennlp_models.coref.predictors.coref import CorefPredictor
 
         # download the model or load the model path
         model_path = download_model('xlmr.coref', cache_dir,
