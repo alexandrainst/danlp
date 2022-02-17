@@ -76,21 +76,14 @@ If you are new to NLP or want to know more about the project in a broader perspe
 
 **News**
 
-- :tada: Version 0.1.1 has been [released](https://github.com/alexandrainst/danlp/releases) with 
-  - 2 new datasets for named entity disambiguation: [DaNED](docs/docs/datasets.md#daned) and [DaWikiNED](docs/docs/datasets.md#dawikined)
-  - a new model for named entity disambiguation ([NED](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ned.html)) based on the multilingual XLM-Roberta
-
-- Benchmarking of 2 new models for [NER](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html):
-  - [DaLUKE](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html#daluke)
-  - [ScandiNER](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/ner.html#scandiner)
-- Benchmarking of 1 new model for [sentiment analysis](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/sentiment_analysis.html):
-  - [Senda](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/sentiment_analysis.html#senda)
-
+- :tada: Version 0.1.2 has been [released](https://github.com/alexandrainst/danlp/releases) with 
+  - 2 new models for hate speech detection ([Hatespeech](https://danlp-alexandra.readthedocs.io/en/latest/docs/tasks/hatespeech.html)) based on BERT and ELECTRA
+  - 1 new model for hate speech classification 
 
 
 **Next up**
 
-- new models for hate speech detection
+- new model and data for discourse coherence 
 
 
 ## Installation
