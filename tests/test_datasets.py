@@ -8,7 +8,7 @@ from pyconll.unit import Conll
 from spacy.gold import GoldCorpus
 
 from danlp.datasets import DDT, WikiAnn, DATASETS, DSD, EuroparlSentiment1,EuroparlSentiment2, LccSentiment, \
-    TwitterSent, Dacoref, DanNet, DKHate, DaUnimorph, DaNED, DaWikiNED
+    TwitterSent, Dacoref, DanNet, DKHate, DaUnimorph, DaNED, DaWikiNED, DDisco
 from danlp.datasets.word_sim import WordSim353Da
 from danlp.utils import write_simple_ner_dataset, read_simple_ner_dataset
 
@@ -238,6 +238,14 @@ class TestDawikinedDatasets(unittest.TestCase):
 
         prop_str, _ = dawikined.get_kg_context_from_qid('Q1748')
         self.assertEqual(len(prop_str), 3758)
+
+class TestDDiscoDatasets(unittest.TestCase):
+    def test_ddisco(self):
+        ddisco = DDisco() 
+        train, test = ddisco.load_with_pandas()
+        self.assertEqual(len(test), 201)
+        self.assertEqual(len(train), 801)
+        self.assertEqual(set(test['rating'].to_list()), {1, 2, 3})
 
 if __name__ == '__main__':
     unittest.main()
