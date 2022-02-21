@@ -8,3 +8,4 @@ from .dkhate import *
 from .unimorph import *
 from .daned import *
 from .dawikined import *
+from .ddisco import *

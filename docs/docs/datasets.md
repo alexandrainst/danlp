@@ -25,6 +25,8 @@ This section keeps a list of Danish NLP datasets publicly available.
 | [DaUnimorph](#daunimorph)                                                              | Morphological Inflection | 25,503            | -                      | CC BY-SA 3.0                                                                                 | ✔️    |
 | [DaNED](#daned)                                                                      | Named Entity Disambiguation    | --            | train:4,626 dev:544 test:744                  | CC BY-SA 4.0                                                                                    | ✔️    |
 | [DaWikiNED](#dawikined)                                                                      | Named Entity Disambiguation    | --            | 21,302                  | CC BY-SA 4.0                                                                                    | ✔️    |
+| [DDisco](#ddisco)                                                                      | Discourse Coherence    | --            | -                  | CC BY-SA 4.0                                                                                    | ✔️    |
+
 
 It is also recommend to check out Finn Årup Nielsen's [dasem github](https://github.com/fnielsen/dasem) which also provides script for loading different Danish corpus. 
 
@@ -392,6 +394,30 @@ properties, description = get_kg_context_from_qid(qid, allow_online_search=True)
 The dataset can also be downloaded directly:
 
 [Download DaWikiNED](http://danlp-downloads.alexandra.dk/datasets/dawikined.zip)
+
+
+### DDisco
+
+The DDisco dataset has been developed for DaNLP, through a Master student project.
+Each entry in the dataset is annotated with a discourse coherence label (rating from 1 to 3): 
+
+ * 1: low coherence (difficult to understand, unorganized, contained unnecessary details and can not be summarized briefly and easily)
+ * 2: medium coherence
+ * 3: high coherence (easy to understand, well organized, only contain details that support the main point and can be summarized briefly and easily).
+
+Grammatical and typing errors are ignored (i.e. they do not affect the coherency score) and the coherence of a text is considered within its own domain.
+
+The dataset can be loaded with the DaNLP package:
+
+```python
+from danlp.datasets import DDisco
+ddisco = DDisco()
+train, test = ddisco.load_with_pandas()
+```
+
+The dataset can also be downloaded directly:
+
+[Download DDisco](http://danlp-downloads.alexandra.dk/datasets/ddisco.zip)
 
 
 
