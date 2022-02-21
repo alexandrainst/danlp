@@ -273,6 +273,13 @@ DATASETS = {
         'size': 12244995,
         'file_extension': '.tsv'
     },
+    # DDisco
+    'ddisco': {
+        'url': DANLP_STORAGE_URL + '/datasets/ddisco.zip',
+        'md5_checksum': 'd55d145456699fa8be77fd0939324599',
+        'size': 421885,
+        'file_extension': '.tsv'
+    },
     
     # SENTIMENT EVALUATION
     'europarl.sentiment1': {
