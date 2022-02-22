@@ -398,7 +398,7 @@ The dataset can also be downloaded directly:
 
 ### DDisco
 
-The DDisco dataset has been developed for DaNLP, through a Master student project.
+The DDisco dataset has been developed for DaNLP by Linea Flansmose, through a Master student project, under the supervision of Ophélie Lacroix (DaNLP -- Alexandra Institute).
 Each entry in the dataset is annotated with a discourse coherence label (rating from 1 to 3): 
 
  * 1: low coherence (difficult to understand, unorganized, contained unnecessary details and can not be summarized briefly and easily)
