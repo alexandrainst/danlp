@@ -27,7 +27,7 @@ setup(
     ],
     extras_require={
         'all' : [
-            'transformers<=4.3.3',
+            'transformers<=4.36.0',
             'gensim<=3.8.3',
             'torch<=1.7.1',
             'flair<=0.9',
