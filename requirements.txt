@@ -6,7 +6,7 @@ flair==0.9
 pyconll==2.2.1
 conllu==4.4
 pandas==1.0.1
-transformers==4.3.3
+transformers==4.36.0
 srsly==1.0.2
 tweepy
 allennlp==2.5.0
