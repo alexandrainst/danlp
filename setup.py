@@ -27,10 +27,10 @@ setup(
     ],
     extras_require={
         'all' : [
-            'transformers<=4.36.0',
+            'transformers<=4.48.0',
             'gensim<=3.8.3',
-            'torch<=1.7.1',
-            'flair<=0.9',
+            'torch<=2.2.0',
+            'flair<=0.15.0',
             'spacy<=2.2.3',
             'allennlp<=2.5.0'
         ]

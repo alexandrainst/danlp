@@ -1,12 +1,12 @@
-tqdm==4.42.1
+tqdm==4.66.3
 spacy==2.2.3
 gensim==3.8.3
-torch==1.7.1
-flair==0.9
+torch==2.2.0
+flair==0.15.0
 pyconll==2.2.1
 conllu==4.4
 pandas==1.0.1
-transformers==4.36.0
+transformers==4.48.0
 srsly==1.0.2
 tweepy
 allennlp==2.5.0

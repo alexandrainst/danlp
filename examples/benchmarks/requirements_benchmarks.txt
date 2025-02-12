@@ -1,11 +1,11 @@
-tqdm==4.42.1
+tqdm==4.66.3
 spacy==2.2.3
 gensim==3.8.1
-flair==0.8
+flair==0.15.0
 pyconll==2.2.1
 pandas==1.0.1
-transformers==4.48.0
-torch==1.7.1
+transformers==4.48.3
+torch==2.2.0
 srsly==1.0.2
 sentida==0.5.0
 Morfessor==2.0.6
